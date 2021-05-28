@@ -11,22 +11,22 @@ struct RecordView: View {
     @ObservedObject var record: Record
     var body: some View {
         HStack {
-            Text(Event.DF.string(from: record.transaction.date))
+            Text(Event.DF.string(from: record.event.date))
             
-            if let checkNumber = record.transaction.checkNumber {
+            if let checkNumber = record.event.checkNumber {
                 Text("\(checkNumber)")
             }
             
-            Text(record.transaction.isReconciled ? "Y" : "N")
+            Text(record.event.isReconciled ? "Y" : "N")
             
             VStack {
-                Text(record.transaction.vendor)
-                Text(record.transaction.memo)
+                Text(record.event.vendor)
+                Text(record.event.memo)
             }
             
-            switch record.transaction.type {
+            switch record.event.type {
             case .deposit:
-                if let value = Event.CURRENCY_FORMAT.string(from: record.transaction.amount as NSNumber) {
+                if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                     Text(value)
                 }
                 
@@ -34,7 +34,7 @@ struct RecordView: View {
             case .withdrawal:
                 Text("N/A")
                 
-                if let value = Event.CURRENCY_FORMAT.string(from: record.transaction.amount as NSNumber) {
+                if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                     Text(value)
                 }
             }

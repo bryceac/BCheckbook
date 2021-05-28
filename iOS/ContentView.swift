@@ -13,8 +13,9 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(records.items.indices, id: \.self) { index in
+                    
                     NavigationLink(
-                        destination: EventView(transaction: $records.items[index]),
+                        destination: EventView(transaction: $records.items[index].event),
                         label: {
                             RecordView(record: records.items[index])
                         })

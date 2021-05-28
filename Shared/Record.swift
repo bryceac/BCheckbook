@@ -9,11 +9,11 @@ import Foundation
 
 class Record: Identifiable, ObservableObject, Codable {
     let id: String
-    @Published var transaction: Event {
+    @Published var event: Event {
         didSet {
-            switch transaction.type {
-            case .deposit: balance += transaction.amount
-            case .withdrawal: balance -= transaction.amount
+            switch event.type {
+            case .deposit: balance += event.amount
+            case .withdrawal: balance -= event.amount
             }
         }
     }
@@ -25,7 +25,7 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     init(withID id: String = UUID().uuidString, transaction: Event = Event()) {
-        (self.id, self.transaction) = (id, transaction)
+        (self.id, self.event) = (id, transaction)
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -42,7 +42,7 @@ class Record: Identifiable, ObservableObject, Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encode(id, forKey: .id)
-        try container.encode(transaction, forKey: .transaction)
+        try container.encode(event, forKey: .transaction)
     }
     
     class func load(from path: URL) throws -> [Record] {
@@ -61,14 +61,14 @@ extension Record: Comparable {
     }
     
     static func < (lhs: Record, rhs: Record) -> Bool {
-        return lhs.id < rhs.id || lhs.transaction < rhs.transaction
+        return lhs.id < rhs.id || lhs.event < rhs.event
     }
 }
 
 extension Record: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(transaction)
+        hasher.combine(event)
     }
 }
 
