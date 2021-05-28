@@ -23,6 +23,8 @@
 		02A2ADD22660A06A00774151 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD02660A06A00774151 /* Event.swift */; };
 		02A2ADD42660A07B00774151 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD32660A07B00774151 /* Record.swift */; };
 		02A2ADD52660A07B00774151 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD32660A07B00774151 /* Record.swift */; };
+		02A2ADD72660AF3A00774151 /* GetRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD62660AF3A00774151 /* GetRecords.swift */; };
+		02A2ADD82660AF3A00774151 /* GetRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD62660AF3A00774151 /* GetRecords.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,7 @@
 		02A2ADCD2660A05900774151 /* EventTypeError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTypeError.swift; sourceTree = "<group>"; };
 		02A2ADD02660A06A00774151 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		02A2ADD32660A07B00774151 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		02A2ADD62660AF3A00774151 /* GetRecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRecords.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,7 @@
 				02A2ADCD2660A05900774151 /* EventTypeError.swift */,
 				02A2ADD02660A06A00774151 /* Event.swift */,
 				02A2ADD32660A07B00774151 /* Record.swift */,
+				02A2ADD62660AF3A00774151 /* GetRecords.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -326,6 +330,7 @@
 			files = (
 				02A2ADCB2660A04900774151 /* EvenType.swift in Sources */,
 				02A2ADCE2660A05900774151 /* EventTypeError.swift in Sources */,
+				02A2ADD72660AF3A00774151 /* GetRecords.swift in Sources */,
 				02A2ADD42660A07B00774151 /* Record.swift in Sources */,
 				02A2ADB82660A02E00774151 /* ContentView.swift in Sources */,
 				02A2ADB62660A02E00774151 /* CheckbookApp.swift in Sources */,
@@ -339,6 +344,7 @@
 			files = (
 				02A2ADCC2660A04900774151 /* EvenType.swift in Sources */,
 				02A2ADCF2660A05900774151 /* EventTypeError.swift in Sources */,
+				02A2ADD82660AF3A00774151 /* GetRecords.swift in Sources */,
 				02A2ADD52660A07B00774151 /* Record.swift in Sources */,
 				02A2ADB92660A02E00774151 /* ContentView.swift in Sources */,
 				02A2ADB72660A02E00774151 /* CheckbookApp.swift in Sources */,
