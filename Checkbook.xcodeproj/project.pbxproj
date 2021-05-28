@@ -24,7 +24,6 @@
 		02A2ADD72660AF3A00774151 /* GetRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD62660AF3A00774151 /* GetRecords.swift */; };
 		02A2ADD82660AF3A00774151 /* GetRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD62660AF3A00774151 /* GetRecords.swift */; };
 		02A2ADDA2660AFBD00774151 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD92660AFBD00774151 /* ContentView.swift */; };
-		02A2ADDB2660AFBD00774151 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD92660AFBD00774151 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -344,7 +343,6 @@
 			files = (
 				02A2ADCC2660A04900774151 /* EvenType.swift in Sources */,
 				02A2ADCF2660A05900774151 /* EventTypeError.swift in Sources */,
-				02A2ADDB2660AFBD00774151 /* ContentView.swift in Sources */,
 				02A2ADD82660AF3A00774151 /* GetRecords.swift in Sources */,
 				02A2ADD52660A07B00774151 /* Record.swift in Sources */,
 				02A2ADB72660A02E00774151 /* CheckbookApp.swift in Sources */,
