@@ -10,7 +10,17 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var records: GetRecords
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List {
+                ForEach(records.items.indices, id: \.self) { index in
+                    NavigationLink(
+                        destination: EventView(transaction: $records.items[index]),
+                        label: {
+                            RecordView(record: records.items[index])
+                        })
+                }
+            }
+        }
     }
 }
 
