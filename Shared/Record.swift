@@ -44,6 +44,15 @@ class Record: Identifiable, ObservableObject, Codable {
         try container.encode(id, forKey: .id)
         try container.encode(transaction, forKey: .transaction)
     }
+    
+    class func load(from path: URL) throws -> [Record] {
+        let JSON_DECODER = JSONDecoder()
+        
+        let RECORD_DATA = try Data(contentsOf: path)
+        let DECODED_RECORDS = try JSON_DECODER.decode([Record].self, from: RECORD_DATA)
+        
+        return DECODED_RECORDS
+    }
 }
 
 extension Record: Comparable {
@@ -60,5 +69,20 @@ extension Record: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(transaction)
+    }
+}
+
+extension Array where Element == Record {
+    func save(to path: URL) throws {
+        let JSON_ENCODER = JSONEncoder()
+        JSON_ENCODER.outputFormatting = .prettyPrinted
+        
+        let ENCODED_RECORDS = try JSON_ENCODER.encode(self)
+        
+        #if os(iOS)
+        try ENCODED_RECORDS.write(to: path, options: .noFileProtection)
+        #else
+        try ENCODED_RECORDS.write(to: path, options: .atomic)
+        #endif
     }
 }
