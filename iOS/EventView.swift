@@ -8,13 +8,31 @@
 import SwiftUI
 
 struct EventView: View {
+    @Binding var transaction: Event
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            DatePicker("Date", selection: $transaction.date, displayedComponents: [.date])
+            
+            TextField("Check No.", value: $transaction.checkNumber, formatter: NumberFormatter())
+            
+            TextField("Vendor", text: $transaction.vendor)
+            TextField("Memo", text: $transaction.memo)
+            TextField("Amount", value: $transaction.amount, formatter: NumberFormatter())
+            
+            Picker("Type", selection: $transaction.type) {
+                ForEach(EventType.allCases, id: \.self) { type in
+                    Text(type.rawValue)
+                }
+            }
+            
+            Toggle("Reconciled", isOn: $transaction.isReconciled)
+        }
     }
 }
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView()
+        EventView(transaction: .constant(Event()))
     }
 }
