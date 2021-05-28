@@ -31,6 +31,12 @@ struct ContentView: View {
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                     Button("+") {
                         records.items.append(Record())
+                        
+                        let LAST_RECORD = records.items.last!
+                        
+                        if let PREVIOUS_RECORD = records.items.element(before: LAST_RECORD) {
+                            LAST_RECORD.balance += PREVIOUS_RECORD.balance
+                        }
                     }
                 }
             })
