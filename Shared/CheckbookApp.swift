@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct CheckbookApp: App {
+    @StateObject var records: GetRecords = GetRecords()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(records)
         }
     }
 }
