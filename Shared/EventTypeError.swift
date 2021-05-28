@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+enum EventTypeError: LocalizedError {
+    case invalidType
+    
+    var errorDescription: String? {
+        var error: String? = nil
+        
+        switch self {
+        case .invalidType: error = "Specified type is not valid."
+        }
+        
+        return error
+    }
+}
