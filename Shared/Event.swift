@@ -87,3 +87,23 @@ extension Event: Codable {
         }
     }
 }
+
+extension Event: Comparable {
+    static func ==(lhs: Event, rhs: Event) -> Bool {
+        return lhs.date == rhs.date && lhs.checkNumber == rhs.checkNumber && lhs.vendor == rhs.vendor && lhs.memo == rhs.memo && lhs.amount == rhs.amount && lhs.type == rhs.type && lhs.isReconciled == rhs.isReconciled
+    }
+    
+    static func < (lhs: Event, rhs: Event) -> Bool {
+        var isLessThanOther = false
+        
+        if let firstznumber = lhs.checkNumber, let secondNumber = rhs.checkNumber {
+            isLessThanOther = lhs.date < rhs.date || firstznumber < secondNumber || lhs.vendor < rhs.vendor || lhs.amount < rhs.amount
+        } else {
+            isLessThanOther = lhs.date < rhs.date || lhs.vendor < rhs.vendor || lhs.amount < rhs.amount
+        }
+        
+        return isLessThanOther
+    }
+}
+
+extension Event: Hashable {}
