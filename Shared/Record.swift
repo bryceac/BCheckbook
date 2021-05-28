@@ -21,7 +21,7 @@ class Record: Identifiable, ObservableObject, Codable {
     @Published var balance: Double = 0
     
     private enum CodingKeys: String, CodingKey {
-        case id, transaction
+        case id, event = "transaction"
     }
     
     init(withID id: String = UUID().uuidString, transaction: Event = Event()) {
@@ -33,7 +33,7 @@ class Record: Identifiable, ObservableObject, Codable {
         
         let ID = CONTAINER.contains(.id) ? try CONTAINER.decode(String.self, forKey: .id) : UUID().uuidString
         
-        let TRANSACTION = try CONTAINER.decode(Event.self, forKey: .transaction)
+        let TRANSACTION = try CONTAINER.decode(Event.self, forKey: .event)
         
         self.init(withID: ID, transaction: TRANSACTION)
     }
@@ -42,7 +42,7 @@ class Record: Identifiable, ObservableObject, Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encode(id, forKey: .id)
-        try container.encode(event, forKey: .transaction)
+        try container.encode(event, forKey: .event)
     }
     
     class func load(from path: URL) throws -> [Record] {
