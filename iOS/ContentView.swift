@@ -19,7 +19,7 @@ struct ContentView: View {
                         label: {
                             RecordView(record: records.items[index])
                         })
-                }
+                }.onDelete(perform: delete)
             }.toolbar(content: {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                     Button("Save") {
@@ -40,6 +40,12 @@ struct ContentView: View {
                     }
                 }
             })
+        }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        offsets.forEach { index in
+            records.items.remove(at: index)
         }
     }
 }
