@@ -24,6 +24,8 @@
 		02A2ADD72660AF3A00774151 /* GetRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD62660AF3A00774151 /* GetRecords.swift */; };
 		02A2ADD82660AF3A00774151 /* GetRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD62660AF3A00774151 /* GetRecords.swift */; };
 		02A2ADDA2660AFBD00774151 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD92660AFBD00774151 /* ContentView.swift */; };
+		02A2ADDD2660B01F00774151 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADDC2660B01F00774151 /* RecordView.swift */; };
+		02A2ADDF2660B03200774151 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADDE2660B03200774151 /* EventView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		02A2ADD32660A07B00774151 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		02A2ADD62660AF3A00774151 /* GetRecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRecords.swift; sourceTree = "<group>"; };
 		02A2ADD92660AFBD00774151 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		02A2ADDC2660B01F00774151 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		02A2ADDE2660B03200774151 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,8 @@
 			children = (
 				02A2AD972660A02E00774151 /* Info.plist */,
 				02A2ADD92660AFBD00774151 /* ContentView.swift */,
+				02A2ADDC2660B01F00774151 /* RecordView.swift */,
+				02A2ADDE2660B03200774151 /* EventView.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -330,8 +336,10 @@
 				02A2ADCB2660A04900774151 /* EvenType.swift in Sources */,
 				02A2ADCE2660A05900774151 /* EventTypeError.swift in Sources */,
 				02A2ADDA2660AFBD00774151 /* ContentView.swift in Sources */,
+				02A2ADDF2660B03200774151 /* EventView.swift in Sources */,
 				02A2ADD72660AF3A00774151 /* GetRecords.swift in Sources */,
 				02A2ADD42660A07B00774151 /* Record.swift in Sources */,
+				02A2ADDD2660B01F00774151 /* RecordView.swift in Sources */,
 				02A2ADB62660A02E00774151 /* CheckbookApp.swift in Sources */,
 				02A2ADD12660A06A00774151 /* Event.swift in Sources */,
 			);
