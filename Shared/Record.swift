@@ -18,7 +18,7 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    @Published var balance: Double = 0
+    var balance: Double = 0
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
