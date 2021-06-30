@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct RecordView: View {
+    @Binding var record: Record
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            DatePicker("", selection: $record.event.date, displayedComponents: [.date])
+        }
     }
 }
 
 struct RecordView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordView()
+        RecordView(record: .constant(Record()))
     }
 }
