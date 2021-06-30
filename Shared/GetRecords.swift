@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GetRecords: ObservableObject {
+class Records: ObservableObject {
     @Published var items: [Record]
     
     init(withRecords records: [Record] = []) {

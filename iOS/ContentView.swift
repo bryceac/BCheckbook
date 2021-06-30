@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var records: GetRecords
+    @EnvironmentObject var records: Records
     var body: some View {
         NavigationView {
             List {
@@ -47,7 +47,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(GetRecords(withRecords: [
+        ContentView().environmentObject(Records(withRecords: [
         Record()
         ]))
     }

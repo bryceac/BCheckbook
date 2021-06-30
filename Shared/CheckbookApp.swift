@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct CheckbookApp: App {
-    @StateObject var records: GetRecords = GetRecords()
+    @StateObject var records: Records = Records()
     
     var body: some Scene {
         WindowGroup {
