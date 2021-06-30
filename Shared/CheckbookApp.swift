@@ -66,7 +66,11 @@ struct CheckbookApp: App {
         OPEN_PANEL.directoryURL = DOCUMENTS_DIRECTORY
         OPEN_PANEL.begin { result in
             if case NSApplication.ModalResponse.OK = result, let filePath = OPEN_PANEL.url, let SAVED_RECORDS = try? Record.load(from: filePath) {
-                records.items = SAVED_RECORDS
+                
+                for record in SAVED_RECORDS {
+                    records.add(record)
+                }
+                
                 file = filePath
             }
         }
