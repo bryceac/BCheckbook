@@ -46,7 +46,7 @@ struct CheckbookApp: App {
         SAVE_PANEL.showsResizeIndicator = true
         SAVE_PANEL.canCreateDirectories = true
         SAVE_PANEL.directoryURL = DOCUMENTS_DIRECTORY
-        SAVE_PANEL.nameFieldStringValue = "transaction"
+        SAVE_PANEL.nameFieldStringValue = "transactions"
         SAVE_PANEL.begin { result in
             if case NSApplication.ModalResponse.OK = result, let filePath = SAVE_PANEL.url {
                 try? records.items.save(to: filePath)
