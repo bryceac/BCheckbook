@@ -21,4 +21,16 @@ class Records: ObservableObject {
             records[index].previousRecord = records[PREVIOUS_INDEX]
         }
     }
+    
+    func add(_ record: Record) {
+        if let PREVIOUS_RECORD = items.last {
+            items.append(record)
+            
+            let NEWEST_INDEX = items.indices.last!
+            
+            items[NEWEST_INDEX].previousRecord = PREVIOUS_RECORD
+        } else {
+            items.append(record)
+        }
+    }
 }
