@@ -8,16 +8,9 @@
 import SwiftUI
 
 struct RecordView: View {
-    @ObservedObject var record: Record {
-        didSet {
-            switch record.event.type {
-            case .deposit: credit = record.event.amount
-            case .withdrawal: debit = record.event.amount
-            }
-        }
-    }
+    @ObservedObject var record: Record
     
-    @State var credit: Double = 0 {
+    @State var credit: Double {
         willSet {
             if newValue > 0 {
                 debit = 0
@@ -26,7 +19,7 @@ struct RecordView: View {
         }
     }
     
-    @State var debit: Double = 0 {
+    @State var debit: Double {
         willSet {
             if newValue > 0 {
                 credit = 0
@@ -56,6 +49,14 @@ struct RecordView: View {
             }
             
         }
+    }
+    
+    init(record: Record) {
+        self.record = record
+        
+        self._credit = EventType.deposit ~= record.event.type ? State(initialValue: record.event.amount) : State(initialValue: 0)
+        
+        self._debit = EventType.deposit ~= record.event.type ? State(initialValue: record.event.amount) : State(initialValue: 0)
     }
 }
 
