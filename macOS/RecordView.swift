@@ -11,8 +11,8 @@ struct RecordView: View {
     @ObservedObject var record: Record
     
     @State var credit: Double {
-        willSet {
-            if newValue > 0 {
+        didSet {
+            if credit > 0 {
                 debit = 0
                 record.event.type = .deposit
             }
@@ -20,8 +20,8 @@ struct RecordView: View {
     }
     
     @State var debit: Double {
-        willSet {
-            if newValue > 0 {
+        didSet {
+            if debit > 0 {
                 credit = 0
                 record.event.type = .withdrawal
             }
