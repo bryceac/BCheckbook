@@ -12,5 +12,13 @@ class GetRecords: ObservableObject {
     
     init(withRecords records: [Record] = []) {
         items = records
+        
+        guard !records.isEmpty && records.count > 1 else { return }
+        
+        for index in records.indices where index != records.startIndex {
+            let PREVIOUS_INDEX = records.index(before: index)
+            
+            records[index].previousRecord = records[PREVIOUS_INDEX]
+        }
     }
 }
