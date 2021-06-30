@@ -13,7 +13,7 @@ class Record: Identifiable, ObservableObject, Codable {
     var previousRecord: Record? = nil
     
     var balance: Double {
-        var value: Double = 0
+        var value = previousRecord?.balance ?? 0
         
         switch event.type {
         case .deposit: value += event.amount
