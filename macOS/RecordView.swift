@@ -62,6 +62,6 @@ struct RecordView: View {
 
 struct RecordView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordView(record: Record())
+        RecordView(record: Record( transaction: Event(amount: 200)))
     }
 }
