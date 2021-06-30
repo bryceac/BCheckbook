@@ -14,11 +14,21 @@ struct ContentView: View {
             List {
                 ForEach(records.items.indices, id: \.self) { index in
                     
-                    NavigationLink(
-                        destination: EventView(transaction: $records.items[index].event),
-                        label: {
-                            RecordView(record: records.items[index])
-                        })
+                    let PREVIOUS_INDEX = index != records.items.startIndex ? records.items.index(before: index) : nil
+                    
+                    if let PREVIOUS_INDEX = PREVIOUS_INDEX {
+                        NavigationLink(
+                            destination: EventView(transaction: $records.items[index].event),
+                            label: {
+                                RecordView(record: records.items[index], previousRecord: records.items[PREVIOUS_INDEX])
+                            })
+                    } else {
+                        NavigationLink(
+                            destination: EventView(transaction: $records.items[index].event),
+                            label: {
+                                RecordView(record: records.items[index])
+                            })
+                    }
                 }.onDelete(perform: delete)
             }.toolbar(content: {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
