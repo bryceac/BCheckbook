@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var records: Records
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(records.items.indices, id: \.self) { index in
+                RecordView(record: $records.items[index])
+            }
+        }.toolbar(content: {
+            ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
+                Button("+") {
+                    records.add(Record())
+                }
+            }
+        })
     }
 }
 
