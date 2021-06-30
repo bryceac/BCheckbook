@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecordView: View {
-    @Binding var record: Record {
+    @ObservedObject var record: Record {
         didSet {
             switch record.event.type {
             case .deposit: credit = record.event.amount
@@ -61,6 +61,6 @@ struct RecordView: View {
 
 struct RecordView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordView(record: .constant(Record()))
+        RecordView(record: Record())
     }
 }

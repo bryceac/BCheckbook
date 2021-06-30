@@ -12,7 +12,7 @@ struct ContentView: View {
     var body: some View {
         List {
             ForEach(records.items.indices, id: \.self) { index in
-                RecordView(record: $records.items[index])
+                RecordView(record: records.items[index])
             }
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
