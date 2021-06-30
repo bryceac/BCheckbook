@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RecordView: View {
     @ObservedObject var record: Record
-    var previousRecord: Record? = nil
     
     var body: some View {
         HStack {
@@ -41,13 +40,7 @@ struct RecordView: View {
                 }
             }
             
-            if let previousRecord = previousRecord {
-                let MODIFIED_BALANCE = previousRecord.balance + record.balance
-                
-                if let BALANCE_STRING = Event.CURRENCY_FORMAT.string(from: NSNumber(value: MODIFIED_BALANCE)) {
-                    Text(BALANCE_STRING)
-                }
-            } else if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
+            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
                 Text(VALUE)
             }
         }
