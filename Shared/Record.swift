@@ -10,6 +10,7 @@ import Foundation
 class Record: Identifiable, ObservableObject, Codable {
     let id: String
     @Published var event: Event
+    var previousRecord: Record? = nil
     
     var balance: Double {
         var value: Double = 0
@@ -26,8 +27,8 @@ class Record: Identifiable, ObservableObject, Codable {
         case id, event = "transaction"
     }
     
-    init(withID id: String = UUID().uuidString, transaction: Event = Event()) {
-        (self.id, self.event) = (id, transaction)
+    init(withID id: String = UUID().uuidString, transaction: Event = Event(), previousRecord: Record? = nil) {
+        (self.id, self.event, self.previousRecord) = (id, transaction, previousRecord)
     }
     
     required convenience init(from decoder: Decoder) throws {
