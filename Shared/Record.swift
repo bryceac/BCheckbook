@@ -9,16 +9,18 @@ import Foundation
 
 class Record: Identifiable, ObservableObject, Codable {
     let id: String
-    @Published var event: Event {
-        didSet {
-            switch event.type {
-            case .deposit: balance += event.amount
-            case .withdrawal: balance -= event.amount
-            }
-        }
-    }
+    @Published var event: Event
     
-    var balance: Double = 0
+    var balance: Double {
+        var value: Double = 0
+        
+        switch event.type {
+        case .deposit: value += event.amount
+        case .withdrawal: value -= event.amount
+        }
+        
+        return value
+    }
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
