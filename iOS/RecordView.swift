@@ -42,7 +42,7 @@ struct RecordView: View {
             }
             
             if let previousRecord = previousRecord {
-                let MODIFIED_BALANCE = record.event.type == .deposit ? previousRecord.balance + record.balance : previousRecord.balance - record.balance
+                let MODIFIED_BALANCE = previousRecord.balance + record.balance
                 
                 if let BALANCE_STRING = Event.CURRENCY_FORMAT.string(from: NSNumber(value: MODIFIED_BALANCE)) {
                     Text(BALANCE_STRING)
