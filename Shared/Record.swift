@@ -88,13 +88,4 @@ extension Array where Element == Record {
         try ENCODED_RECORDS.write(to: path, options: .atomic)
         #endif
     }
-    
-    func element(before item: Element) -> Element? {
-        guard let INDEX = self.firstIndex(of: item) else { return nil }
-        guard INDEX > self.startIndex else { return nil }
-        
-        let PREVIOUS_INDEX = self.index(before: INDEX)
-        
-        return self[PREVIOUS_INDEX]
-    }
 }
