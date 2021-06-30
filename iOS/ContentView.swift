@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                     Button("+") {
-                        records.items.append(Record())
+                        records.add(Record())
                     }
                 }
             })
