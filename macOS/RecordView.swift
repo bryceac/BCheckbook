@@ -14,6 +14,11 @@ struct RecordView: View {
         didSet {
             if credit > 0 {
                 debit = 0
+                
+                if credit != record.event.amount {
+                    record.event.amount = credit
+                }
+                
                 record.event.type = .deposit
             }
         }
@@ -23,6 +28,11 @@ struct RecordView: View {
         didSet {
             if debit > 0 {
                 credit = 0
+                
+                if debit != record.event.amount {
+                    record.event.amount = debit
+                }
+                
                 record.event.type = .withdrawal
             }
         }
@@ -53,10 +63,6 @@ struct RecordView: View {
     
     init(record: Record) {
         self.record = record
-        
-        self._credit = EventType.deposit ~= record.event.type ? State(initialValue: record.event.amount) : State(initialValue: 0)
-        
-        self._debit = EventType.withdrawal ~= record.event.type ? State(initialValue: record.event.amount) : State(initialValue: 0)
     }
 }
 
