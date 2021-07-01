@@ -12,11 +12,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(records.items.indices, id: \.self) { index in
+                ForEach(records.sortedRecords.indices, id: \.self) { index in
                     
                     
                         NavigationLink(
-                            destination: EventView(transaction: $records.items[index].event),
+                            destination: EventView(transaction: $records.sortedRecords[index].event),
                             label: {
                                 RecordView(record: records.items[index])
                             })
