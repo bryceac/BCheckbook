@@ -20,6 +20,13 @@ struct CheckbookApp: App {
             ContentView().environmentObject(records)
         }.commands {
             #if os (macOS)
+            CommandGroup(replacing: CommandGroupPlacement.newItem) {
+                Button("New") {
+                    file = nil
+                    records.items = [Record]()
+                }.keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
+            }
+            
             CommandGroup(before: CommandGroupPlacement.newItem) {
                 Button("Open") {
                     open()
@@ -40,12 +47,7 @@ struct CheckbookApp: App {
                 }.keyboardShortcut(KeyEquivalent("s"), modifiers: [.option, .command, .shift])
             }
             
-            CommandGroup(replacing: CommandGroupPlacement.newItem) {
-                Button("New") {
-                    file = nil
-                    records.items = [Record]()
-                }.keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
-            }
+            
             #endif
         }
     }
