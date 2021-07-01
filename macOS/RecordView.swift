@@ -35,6 +35,8 @@ struct RecordView: View {
                         record.event.amount = value
                     }
                     
+                    debit = 0
+                    
                     record.event.type = .deposit
                 }
                 
@@ -48,6 +50,8 @@ struct RecordView: View {
                     if value != record.event.amount {
                         record.event.amount = value
                     }
+                    
+                    credit = 0
                     
                     record.event.type = .withdrawal
                 }
