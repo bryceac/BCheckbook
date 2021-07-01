@@ -38,6 +38,8 @@ struct RecordView: View {
                     record.event.type = .deposit
                 }
                 
+                credit = value
+                
             })
             
             TextField("Withdrawal", value: $debit, formatter: NumberFormatter()).onChange(of: debit, perform: { value in
@@ -49,6 +51,8 @@ struct RecordView: View {
                     
                     record.event.type = .withdrawal
                 }
+                
+                debit = value
             })
             
             if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
