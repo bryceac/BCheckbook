@@ -13,7 +13,7 @@ class Records: ObservableObject {
             items.sort()
             
             items.forEach { record in
-                <#code#>
+                record.previousRecord = items.element(before: record)
             }
         }
     }
