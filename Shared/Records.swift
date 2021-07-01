@@ -44,7 +44,7 @@ class Records: ObservableObject {
             let PREVIOUS_INDEX = items.index(before: index)
             
             items[NEXT_INDEX].previousRecord = items[PREVIOUS_INDEX]
-        } else if index == items.startIndex {
+        } else if index == items.startIndex && items.count > 1 {
             items[NEXT_INDEX].previousRecord = nil
         } else {
             items.remove(at: index)
