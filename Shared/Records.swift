@@ -33,4 +33,21 @@ class Records: ObservableObject {
             items.append(record)
         }
     }
+    
+    func remove(at index: Int) {
+        guard index < items.endIndex else { return }
+        
+        let NEXT_INDEX = items.index(after: index)
+        
+        if index < items.indices.last! && index > items.startIndex {
+            
+            let PREVIOUS_INDEX = items.index(before: index)
+            
+            items[NEXT_INDEX].previousRecord = items[PREVIOUS_INDEX]
+        } else if index == items.startIndex {
+            items[NEXT_INDEX].previousRecord = nil
+        } else {
+            items.remove(at: index)
+        }
+    }
 }
