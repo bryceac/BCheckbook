@@ -13,7 +13,7 @@ struct ContentView: View {
         List {
             ForEach(records.items.indices, id: \.self) { index in
                 RecordView(record: records.items[index]).contextMenu(ContextMenu(menuItems: {
-                    Button("Dlete") {
+                    Button("Delete") {
                         records.remove(at: index)
                     }
                 }))
