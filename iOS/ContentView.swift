@@ -49,7 +49,7 @@ struct ContentView: View {
     
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
-            records.items.remove(at: index)
+            records.remove(at: index)
         }
     }
 }
