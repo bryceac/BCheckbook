@@ -14,14 +14,14 @@ struct ContentView: View {
             ForEach(records.items.indices, id: \.self) { index in
                 RecordView(record: records.items[index]).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
-                        records.remove(at: index)
+                        records.items.remove(at: index)
                     }
                 }))
             }
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
-                    records.add(Record())
+                    records.items.append(Record())
                 }
             }
         })
