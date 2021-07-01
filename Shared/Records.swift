@@ -45,4 +45,10 @@ class Records: ObservableObject {
     func clear() {
         items.removeAll()
     }
+    
+    func element(matching record: Record) -> Record? {
+        guard items.contains(record) else { return nil }
+        
+        return items.first(where: { $0 == record })
+    }
 }
