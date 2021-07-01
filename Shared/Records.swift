@@ -47,14 +47,14 @@ class Records: ObservableObject {
             
             items[NEXT_INDEX].previousRecord = items[PREVIOUS_INDEX]
             
-            /* let ITEM = items.remove(at: NEXT_INDEX)
+            let ITEM = items.remove(at: NEXT_INDEX)
             
-            items.insert(ITEM, at: index) */
+            items.insert(ITEM, at: index)
         } else if index == items.startIndex && items.count > 1 {
             items[NEXT_INDEX].previousRecord = nil
             
-            /* let ITEM = items.remove(at: NEXT_INDEX)
-            items.insert(ITEM, at: index) */
+            let ITEM = items.remove(at: NEXT_INDEX)
+            items.insert(ITEM, at: index)
         }
     }
 }
