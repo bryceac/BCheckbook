@@ -12,7 +12,11 @@ struct ContentView: View {
     var body: some View {
         List {
             ForEach(records.items.indices, id: \.self) { index in
-                RecordView(record: records.items[index])
+                RecordView(record: records.items[index]).contextMenu(ContextMenu(menuItems: {
+                    Button("Dlete") {
+                        records.remove(at: index)
+                    }
+                }))
             }
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
