@@ -23,7 +23,7 @@ struct CheckbookApp: App {
             CommandGroup(before: CommandGroupPlacement.newItem) {
                 Button("Open") {
                     open()
-                }
+                }.keyboardShortcut(KeyEquivalent("o"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
             }
             
             CommandGroup(after: CommandGroupPlacement.newItem) {
@@ -33,7 +33,11 @@ struct CheckbookApp: App {
                     } else {
                         saveAs()
                     }
-                }
+                }.keyboardShortcut(KeyEquivalent("s"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
+                
+                Button("Save As") {
+                    saveAs()
+                }.keyboardShortcut(KeyEquivalent("s"), modifiers: [.option, .command, .shift])
             }
             #endif
         }
