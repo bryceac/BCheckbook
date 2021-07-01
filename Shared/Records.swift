@@ -17,7 +17,7 @@ class Records: ObservableObject {
     }
     
     var sortedRecords: [Record] {
-        return items.sorted()
+        return items.sorted(by: >)
     }
     
     init(withRecords records: [Record] = []) {
