@@ -16,6 +16,10 @@ class Records: ObservableObject {
         }
     }
     
+    var sortedRecords: [Record] {
+        return items.sorted()
+    }
+    
     init(withRecords records: [Record] = []) {
         items = records
         
