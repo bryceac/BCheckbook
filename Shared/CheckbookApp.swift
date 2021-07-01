@@ -23,7 +23,7 @@ struct CheckbookApp: App {
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 Button("New") {
                     file = nil
-                    records.items = [Record]()
+                    records.clear()
                 }.keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
             }
             
@@ -36,7 +36,7 @@ struct CheckbookApp: App {
             CommandGroup(after: CommandGroupPlacement.newItem) {
                 Button("Save") {
                     if let file = file {
-                        try? records.items.save(to: file)
+                        try? records.sortedRecords.save(to: file)
                     } else {
                         saveAs()
                     }
@@ -63,7 +63,7 @@ struct CheckbookApp: App {
         SAVE_PANEL.nameFieldStringValue = "transactions"
         SAVE_PANEL.begin { result in
             if case NSApplication.ModalResponse.OK = result, let filePath = SAVE_PANEL.url {
-                try? records.items.save(to: filePath)
+                try? records.sortedRecords.save(to: filePath)
                 
                 file = filePath
             }
@@ -73,6 +73,7 @@ struct CheckbookApp: App {
     
     func open() {
         #if os(macOS)
+        records.clear()
         let OPEN_PANEL = NSOpenPanel()
         OPEN_PANEL.allowedFileTypes = ["json"]
         OPEN_PANEL.showsHiddenFiles = true
@@ -83,7 +84,9 @@ struct CheckbookApp: App {
         OPEN_PANEL.begin { result in
             if case NSApplication.ModalResponse.OK = result, let filePath = OPEN_PANEL.url, let SAVED_RECORDS = try? Record.load(from: filePath) {
                 
-                records.items = SAVED_RECORDS
+                for record in SAVED_RECORDS {
+                    records.add(record)
+                }
                 
                 file = filePath
             }

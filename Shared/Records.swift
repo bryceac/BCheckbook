@@ -39,4 +39,8 @@ class Records: ObservableObject {
     func remove(at index: Int) {
         items.remove(at: index)
     }
+    
+    func clear() {
+        items.removeAll()
+    }
 }
