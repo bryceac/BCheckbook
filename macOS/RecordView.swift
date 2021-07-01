@@ -10,33 +10,9 @@ import SwiftUI
 struct RecordView: View {
     @ObservedObject var record: Record
     
-    @State var credit: Double {
-        didSet {
-            if credit > 0 {
-                debit = 0
-                
-                if credit != record.event.amount {
-                    record.event.amount = credit
-                }
-                
-                record.event.type = .deposit
-            }
-        }
-    }
+    @State var credit: Double
     
-    @State var debit: Double {
-        didSet {
-            if debit > 0 {
-                credit = 0
-                
-                if debit != record.event.amount {
-                    record.event.amount = debit
-                }
-                
-                record.event.type = .withdrawal
-            }
-        }
-    }
+    @State var debit: Double
     
     var body: some View {
         HStack {
@@ -50,9 +26,28 @@ struct RecordView: View {
                 TextField("Memo", text: $record.event.memo)
             }
             
-            TextField("Credit", value: $credit, formatter: NumberFormatter())
+            TextField("Credit", value: $credit, formatter: NumberFormatter()).onChange(of: credit, perform: { value in
+                
+                if value > 0 {
+                    if value != record.event.amount {
+                        record.event.amount = value
+                    }
+                    
+                    record.event.type = .deposit
+                }
+                
+            })
             
-            TextField("Withdrawal", value: $debit, formatter: NumberFormatter())
+            TextField("Withdrawal", value: $debit, formatter: NumberFormatter()).onChange(of: debit, perform: { value in
+                
+                if value > 0 {
+                    if value != record.event.amount {
+                        record.event.amount = value
+                    }
+                    
+                    record.event.type = .withdrawal
+                }
+            })
             
             if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
                 Text(BALANCE_VALUE)
