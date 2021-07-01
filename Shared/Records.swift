@@ -8,7 +8,15 @@
 import Foundation
 
 class Records: ObservableObject {
-    @Published var items: [Record]
+    @Published var items: [Record] {
+        didSet {
+            items.sort()
+            
+            items.forEach { record in
+                <#code#>
+            }
+        }
+    }
     
     init(withRecords records: [Record] = []) {
         items = records
