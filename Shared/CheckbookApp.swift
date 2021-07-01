@@ -57,6 +57,8 @@ struct CheckbookApp: App {
     }
     
     func open() {
+        records.items.removeAll()
+        
         let OPEN_PANEL = NSOpenPanel()
         OPEN_PANEL.allowedFileTypes = ["json"]
         OPEN_PANEL.showsHiddenFiles = true
