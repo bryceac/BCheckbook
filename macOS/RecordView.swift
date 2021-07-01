@@ -20,13 +20,13 @@ struct RecordView: View {
             
             TextField("Check No.", value: $record.event.checkNumber, formatter: NumberFormatter())
             
+            Toggle("Reconciled", isOn: $record.event.isReconciled)
+            
             VStack {
                 TextField("Vendor", text: $record.event.vendor)
                 
                 TextField("Memo", text: $record.event.memo)
             }
-            
-            Toggle("Reconciled", isOn: $record.event.isReconciled)
             
             TextField("Credit", value: $credit, formatter: NumberFormatter()).onChange(of: credit, perform: { value in
                 
