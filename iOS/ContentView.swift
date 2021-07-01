@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                     Button("+") {
-                        records.items.append(Record())
+                        records.add(Record())
                     }
                 }
             })
@@ -40,14 +40,16 @@ struct ContentView: View {
 
             if let SAVED_RECORDS = try? Record.load(from: DOCUMENTS_DIECTORY.appendingPathComponent("transactions").appendingPathExtension("json")) {
                 
-                records.items = SAVED_RECORDS
+                for record in SAVED_RECORDS {
+                    records.add(record)
+                }
             }
         }
     }
     
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
-            records.items.remove(at: index)
+            records.remove(at: index)
         }
     }
 }

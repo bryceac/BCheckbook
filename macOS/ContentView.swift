@@ -11,17 +11,17 @@ struct ContentView: View {
     @EnvironmentObject var records: Records
     var body: some View {
         List {
-            ForEach(records.items.indices, id: \.self) { index in
-                RecordView(record: records.items[index]).contextMenu(ContextMenu(menuItems: {
+            ForEach(records.sortedRecords.indices, id: \.self) { index in
+                RecordView(record: records.sortedRecords[index]).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
-                        records.items.remove(at: index)
+                        records.remove(at: index)
                     }
                 }))
             }
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
-                    records.items.append(Record())
+                    records.add(Record())
                 }
             }
         })
