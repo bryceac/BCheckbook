@@ -26,6 +26,8 @@ struct RecordView: View {
                 TextField("Memo", text: $record.event.memo)
             }
             
+            Toggle("Reconciled", isOn: $record.event.isReconciled)
+            
             TextField("Credit", value: $credit, formatter: NumberFormatter()).onChange(of: credit, perform: { value in
                 
                 if value > 0 {
