@@ -29,40 +29,4 @@ class Records: ObservableObject {
             records[index].previousRecord = records[PREVIOUS_INDEX]
         }
     }
-    
-    func add(_ record: Record) {
-        if let PREVIOUS_RECORD = items.last {
-            items.append(record)
-            
-            let NEWEST_INDEX = items.indices.last!
-            
-            items[NEWEST_INDEX].previousRecord = PREVIOUS_RECORD
-        } else {
-            items.append(record)
-        }
-    }
-    
-    func remove(at index: Int) {
-        guard index < items.endIndex else { return }
-        
-        items.remove(at: index)
-        
-        let NEXT_INDEX = items.index(after: index)
-        
-        if index < items.indices.last! && index > items.startIndex {
-            
-            let PREVIOUS_INDEX = items.index(before: index)
-            
-            items[NEXT_INDEX].previousRecord = items[PREVIOUS_INDEX]
-            
-            let ITEM = items.remove(at: NEXT_INDEX)
-            
-            items.insert(ITEM, at: index)
-        } else if index == items.startIndex && items.count > 1 {
-            items[NEXT_INDEX].previousRecord = nil
-            
-            let ITEM = items.remove(at: NEXT_INDEX)
-            items.insert(ITEM, at: index)
-        }
-    }
 }
