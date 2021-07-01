@@ -10,7 +10,9 @@ import Foundation
 class Records: ObservableObject {
     @Published var items: [Record] {
         didSet {
-            items.sort()
+            if items.count > 1 {
+                items.sort()
+            }
             
             items.forEach { record in
                 record.previousRecord = items.element(before: record)
