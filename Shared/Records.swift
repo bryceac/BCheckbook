@@ -8,7 +8,7 @@
 import Foundation
 
 class Records: ObservableObject {
-    @Published var items: [Record] {
+    @Published private var items: [Record] {
         didSet {
             items.sorted().forEach { record in
                 record.previousRecord = items.element(before: record)
@@ -30,5 +30,13 @@ class Records: ObservableObject {
             
             records[index].previousRecord = records[PREVIOUS_INDEX]
         }
+    }
+    
+    func add(_ record: Record) {
+        items.append(record)
+    }
+    
+    func remove(at index: Int) {
+        items.remove(at: index)
     }
 }
