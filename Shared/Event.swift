@@ -97,9 +97,9 @@ extension Event: Comparable {
         var isLessThanOther = false
         
         if let firstNumber = lhs.checkNumber, let secondNumber = rhs.checkNumber {
-            isLessThanOther = !(lhs.date == rhs.date || firstNumber == secondNumber || lhs.vendor == rhs.vendor || lhs.amount == rhs.amount) && lhs.date < rhs.date || firstNumber < secondNumber || lhs.vendor < rhs.vendor || lhs.amount < rhs.amount
+            isLessThanOther = lhs.date < rhs.date || firstNumber < secondNumber || lhs.vendor < rhs.vendor || lhs.amount < rhs.amount
         } else {
-            isLessThanOther = !(lhs.date == rhs.date || lhs.vendor == rhs.vendor || lhs.amount < rhs.amount) && (lhs.date < rhs.date || lhs.vendor < rhs.vendor || lhs.amount < rhs.amount)
+            isLessThanOther = lhs.date < rhs.date || lhs.vendor < rhs.vendor || lhs.amount < rhs.amount
         }
         
         return isLessThanOther
