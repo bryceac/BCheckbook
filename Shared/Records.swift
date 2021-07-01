@@ -10,10 +10,6 @@ import Foundation
 class Records: ObservableObject {
     @Published var items: [Record] {
         didSet {
-            items.sort { firstRecord, secondRecord in
-                firstRecord.event.date < secondRecord.event.date
-            }
-            
             items.forEach { record in
                 record.previousRecord = items.element(before: record)
             }
