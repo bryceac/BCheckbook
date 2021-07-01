@@ -44,7 +44,7 @@ struct CheckbookApp: App {
                 Button("New") {
                     file = nil
                     records.items = [Record]()
-                }
+                }.keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
             }
             #endif
         }
