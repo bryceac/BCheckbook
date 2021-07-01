@@ -53,6 +53,7 @@ struct CheckbookApp: App {
     }
     
     func saveAs() {
+        #if os(macOS)
         let SAVE_PANEL = NSSavePanel()
         SAVE_PANEL.allowedFileTypes = ["json"]
         SAVE_PANEL.showsHiddenFiles = true
@@ -67,9 +68,11 @@ struct CheckbookApp: App {
                 file = filePath
             }
         }
+        #endif
     }
     
     func open() {
+        #if os(macOS)
         records.items.removeAll()
         
         let OPEN_PANEL = NSOpenPanel()
@@ -89,6 +92,7 @@ struct CheckbookApp: App {
                 file = filePath
             }
         }
+        #endif
     }
 }
 
