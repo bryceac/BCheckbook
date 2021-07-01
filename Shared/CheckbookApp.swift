@@ -39,6 +39,13 @@ struct CheckbookApp: App {
                     saveAs()
                 }.keyboardShortcut(KeyEquivalent("s"), modifiers: [.option, .command, .shift])
             }
+            
+            CommandGroup(replacing: CommandGroupPlacement.newItem) {
+                Button("New") {
+                    file = nil
+                    records.items = [Record]()
+                }
+            }
             #endif
         }
     }
