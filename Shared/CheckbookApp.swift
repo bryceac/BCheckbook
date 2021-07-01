@@ -73,8 +73,6 @@ struct CheckbookApp: App {
     
     func open() {
         #if os(macOS)
-        records.items.removeAll()
-        
         let OPEN_PANEL = NSOpenPanel()
         OPEN_PANEL.allowedFileTypes = ["json"]
         OPEN_PANEL.showsHiddenFiles = true
@@ -85,9 +83,7 @@ struct CheckbookApp: App {
         OPEN_PANEL.begin { result in
             if case NSApplication.ModalResponse.OK = result, let filePath = OPEN_PANEL.url, let SAVED_RECORDS = try? Record.load(from: filePath) {
                 
-                for record in SAVED_RECORDS {
-                    records.add(record)
-                }
+                records.items = SAVED_RECORDS
                 
                 file = filePath
             }
