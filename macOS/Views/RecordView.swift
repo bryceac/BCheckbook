@@ -28,7 +28,7 @@ struct RecordView: View {
                 TextField("Memo", text: $record.event.memo)
             }
             
-            TextField("Credit", value: $credit, formatter: NumberFormatter()).onChange(of: credit, perform: { value in
+            TextField("Credit", value: $credit, formatter: Event.CURRENCY_FORMAT).onChange(of: credit, perform: { value in
                 
                 if value > 0 {
                     if value != record.event.amount {
@@ -44,7 +44,7 @@ struct RecordView: View {
                 
             })
             
-            TextField("Withdrawal", value: $debit, formatter: NumberFormatter()).onChange(of: debit, perform: { value in
+            TextField("Withdrawal", value: $debit, formatter: Event.CURRENCY_FORMAT).onChange(of: debit, perform: { value in
                 
                 if value > 0 {
                     if value != record.event.amount {

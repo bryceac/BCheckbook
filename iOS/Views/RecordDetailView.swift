@@ -18,7 +18,7 @@ struct RecordDetailView: View {
             
             TextField("Vendor", text: $record.event.vendor)
             TextField("Memo", text: $record.event.memo)
-            TextField("Amount", value: $record.event.amount, formatter: NumberFormatter())
+            TextField("Amount", value: $record.event.amount, formatter: Event.CURRENCY_FORMAT)
             
             Picker("Type", selection: $record.event.type) {
                 ForEach(EventType.allCases, id: \.self) { type in
