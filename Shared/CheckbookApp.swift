@@ -21,7 +21,7 @@ struct CheckbookApp: App {
             let APP_NAME = CFBundleGetValueForInfoDictionaryKey(Bundle.main as! CFBundle, "CFBundleDisplayName" as CFString) as? String
             
             if let filePath = file, let displayName = APP_NAME {
-                ContentView().environmentObject(records).navigationTitle("\(filePath.absoluteString) - \(APP_NAME)")
+                ContentView().environmentObject(records).navigationTitle("\(filePath.absoluteString) - \(displayName)")
             } else {
                 ContentView().environmentObject(records)
             }
