@@ -16,7 +16,7 @@ struct ContentView: View {
                     
                     
                         NavigationLink(
-                            destination: EventView(transaction: $records.sortedRecords[index].event),
+                            destination: RecordDetailView(transaction: $records.sortedRecords[index]),
                             label: {
                                 RecordView(record: records.items[index])
                             })

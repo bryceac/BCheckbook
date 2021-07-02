@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EventView: View {
+struct RecordDetailView: View {
     @Binding var transaction: Event
     
     var body: some View {
@@ -31,8 +31,8 @@ struct EventView: View {
     }
 }
 
-struct EventView_Previews: PreviewProvider {
+struct RecordDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(transaction: .constant(Event()))
+        RecordDetailView(transaction: .constant(Event()))
     }
 }
