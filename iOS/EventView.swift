@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct RecordDetailView: View {
-    @Binding var transaction: Event
+    @Binding var record: Record
     
     var body: some View {
         Form {
-            DatePicker("Date", selection: $transaction.date, displayedComponents: [.date])
+            DatePicker("Date", selection: $record.event.date, displayedComponents: [.date])
             
-            TextField("Check No.", value: $transaction.checkNumber, formatter: NumberFormatter())
+            TextField("Check No.", value: $record.event.checkNumber, formatter: NumberFormatter())
             
-            TextField("Vendor", text: $transaction.vendor)
-            TextField("Memo", text: $transaction.memo)
-            TextField("Amount", value: $transaction.amount, formatter: NumberFormatter())
+            TextField("Vendor", text: $record.event.vendor)
+            TextField("Memo", text: $record.event.memo)
+            TextField("Amount", value: $record.event.amount, formatter: NumberFormatter())
             
-            Picker("Type", selection: $transaction.type) {
+            Picker("Type", selection: $record.event.type) {
                 ForEach(EventType.allCases, id: \.self) { type in
                     Text(type.rawValue)
                 }
             }
             
-            Toggle("Reconciled", isOn: $transaction.isReconciled)
+            Toggle("Reconciled", isOn: $record.event.isReconciled)
         }
     }
 }
