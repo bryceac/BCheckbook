@@ -16,9 +16,9 @@ struct ContentView: View {
                     
                     
                         NavigationLink(
-                            destination: RecordDetailView(transaction: $records.sortedRecords[index]),
+                            destination: RecordDetailView(record: records.sortedRecords[index]),
                             label: {
-                                RecordView(record: records.items[index])
+                                RecordView(record: records.sortedRecords[index])
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
@@ -26,7 +26,7 @@ struct ContentView: View {
                     Button("Save") {
                         let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                         
-                        try? records.items.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("json"))
+                        try? records.sortedRecords.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("json"))
                     }
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {

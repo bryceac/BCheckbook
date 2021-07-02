@@ -33,6 +33,6 @@ struct RecordDetailView: View {
 
 struct RecordDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordDetailView(record: .constant(Record()))
+        RecordDetailView(record: Record())
     }
 }
