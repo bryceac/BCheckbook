@@ -143,6 +143,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		0246E5E2268F83AA0047A663 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				02A2ADD92660AFBD00774151 /* ContentView.swift */,
+				02A2ADDC2660B01F00774151 /* RecordView.swift */,
+				02A2ADDE2660B03200774151 /* RecordDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		02A2AD872660A02D00774151 = {
 			isa = PBXGroup;
 			children = (
@@ -182,9 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				02A2AD972660A02E00774151 /* Info.plist */,
-				02A2ADD92660AFBD00774151 /* ContentView.swift */,
-				02A2ADDC2660B01F00774151 /* RecordView.swift */,
-				02A2ADDE2660B03200774151 /* RecordDetailView.swift */,
+				0246E5E2268F83AA0047A663 /* Views */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
