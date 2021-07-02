@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecordDetailView: View {
-    @Binding var record: Record
+    @ObservedObject var record: Record
     
     var body: some View {
         Form {
@@ -33,6 +33,6 @@ struct RecordDetailView: View {
 
 struct RecordDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordDetailView(transaction: .constant(Event()))
+        RecordDetailView(record: .constant(Record()))
     }
 }
