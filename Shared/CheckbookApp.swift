@@ -18,9 +18,7 @@ struct CheckbookApp: App {
     var body: some Scene {
         WindowGroup {
             #if os(macOS)
-            let APP_NAME = CFBundleGetValueForInfoDictionaryKey(Bundle.main as! CFBundle, "CFBundleDisplayName" as CFString) as? String
-            
-            if let filePath = file, let displayName = APP_NAME {
+            if let filePath = file, let displayName = Bundle.main.displayName {
                 ContentView().environmentObject(records).navigationTitle("\(filePath.absoluteString) - \(displayName)")
             } else {
                 ContentView().environmentObject(records)
