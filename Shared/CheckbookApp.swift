@@ -19,7 +19,7 @@ struct CheckbookApp: App {
         WindowGroup {
             #if os(macOS)
             if let filePath = file, let displayName = Bundle.main.displayName {
-                ContentView().environmentObject(records).navigationTitle("\(filePath.absoluteString) - \(displayName)")
+                ContentView().environmentObject(records).navigationTitle("\(filePath.path) - \(displayName)")
             } else {
                 ContentView().environmentObject(records)
             }
