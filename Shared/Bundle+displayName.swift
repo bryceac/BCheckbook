@@ -9,6 +9,6 @@ import Foundation
 
 extension Bundle {
     var displayName: String? {
-        return Bundle.main.infoDictionary?["Bundle name"] as? String
+        return Bundle.main.infoDictionary?["CFBundleName"] as? String
     }
 }
