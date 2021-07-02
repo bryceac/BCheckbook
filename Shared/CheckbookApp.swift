@@ -17,7 +17,15 @@ struct CheckbookApp: App {
     
     var body: some Scene {
         WindowGroup {
+            #if os(macOS)
+            if let filePath = file {
+                ContentView().environmentObject(records).navigationTitle("\(filePath.absoluteString)")
+            } else {
+                ContentView().environmentObject(records)
+            }
+            #else
             ContentView().environmentObject(records)
+            #endif
         }.commands {
             #if os (macOS)
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
