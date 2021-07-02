@@ -55,9 +55,9 @@
 		02115E90268CF58500085138 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		02A2AD8D2660A02E00774151 /* CheckbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
 		02A2AD8F2660A02E00774151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		02A2AD942660A02E00774151 /* Checkbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02A2AD942660A02E00774151 /* BCheckbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BCheckbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02A2AD972660A02E00774151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		02A2AD9C2660A02E00774151 /* Checkbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checkbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02A2AD9C2660A02E00774151 /* BCheckbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BCheckbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02A2AD9E2660A02E00774151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02A2AD9F2660A02E00774151 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		02A2ADA42660A02E00774151 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,8 +138,8 @@
 		02A2AD952660A02E00774151 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				02A2AD942660A02E00774151 /* Checkbook.app */,
-				02A2AD9C2660A02E00774151 /* Checkbook.app */,
+				02A2AD942660A02E00774151 /* BCheckbook.app */,
+				02A2AD9C2660A02E00774151 /* BCheckbook.app */,
 				02A2ADA42660A02E00774151 /* Tests iOS.xctest */,
 				02A2ADAF2660A02E00774151 /* Tests macOS.xctest */,
 			);
@@ -189,9 +189,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		02A2AD932660A02E00774151 /* Checkbook (iOS) */ = {
+		02A2AD932660A02E00774151 /* BCheckbook (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02A2ADBE2660A02E00774151 /* Build configuration list for PBXNativeTarget "Checkbook (iOS)" */;
+			buildConfigurationList = 02A2ADBE2660A02E00774151 /* Build configuration list for PBXNativeTarget "BCheckbook (iOS)" */;
 			buildPhases = (
 				02A2AD902660A02E00774151 /* Sources */,
 				02A2AD912660A02E00774151 /* Frameworks */,
@@ -201,14 +201,14 @@
 			);
 			dependencies = (
 			);
-			name = "Checkbook (iOS)";
+			name = "BCheckbook (iOS)";
 			productName = "Checkbook (iOS)";
-			productReference = 02A2AD942660A02E00774151 /* Checkbook.app */;
+			productReference = 02A2AD942660A02E00774151 /* BCheckbook.app */;
 			productType = "com.apple.product-type.application";
 		};
-		02A2AD9B2660A02E00774151 /* Checkbook (macOS) */ = {
+		02A2AD9B2660A02E00774151 /* BCheckbook (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02A2ADC12660A02E00774151 /* Build configuration list for PBXNativeTarget "Checkbook (macOS)" */;
+			buildConfigurationList = 02A2ADC12660A02E00774151 /* Build configuration list for PBXNativeTarget "BCheckbook (macOS)" */;
 			buildPhases = (
 				02A2AD982660A02E00774151 /* Sources */,
 				02A2AD992660A02E00774151 /* Frameworks */,
@@ -218,9 +218,9 @@
 			);
 			dependencies = (
 			);
-			name = "Checkbook (macOS)";
+			name = "BCheckbook (macOS)";
 			productName = "Checkbook (macOS)";
-			productReference = 02A2AD9C2660A02E00774151 /* Checkbook.app */;
+			productReference = 02A2AD9C2660A02E00774151 /* BCheckbook.app */;
 			productType = "com.apple.product-type.application";
 		};
 		02A2ADA32660A02E00774151 /* Tests iOS */ = {
@@ -284,7 +284,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 02A2AD8B2660A02D00774151 /* Build configuration list for PBXProject "Checkbook" */;
+			buildConfigurationList = 02A2AD8B2660A02D00774151 /* Build configuration list for PBXProject "BCheckbook" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -297,8 +297,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				02A2AD932660A02E00774151 /* Checkbook (iOS) */,
-				02A2AD9B2660A02E00774151 /* Checkbook (macOS) */,
+				02A2AD932660A02E00774151 /* BCheckbook (iOS) */,
+				02A2AD9B2660A02E00774151 /* BCheckbook (macOS) */,
 				02A2ADA32660A02E00774151 /* Tests iOS */,
 				02A2ADAE2660A02E00774151 /* Tests macOS */,
 			);
@@ -393,12 +393,12 @@
 /* Begin PBXTargetDependency section */
 		02A2ADA62660A02E00774151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 02A2AD932660A02E00774151 /* Checkbook (iOS) */;
+			target = 02A2AD932660A02E00774151 /* BCheckbook (iOS) */;
 			targetProxy = 02A2ADA52660A02E00774151 /* PBXContainerItemProxy */;
 		};
 		02A2ADB12660A02E00774151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 02A2AD9B2660A02E00774151 /* Checkbook (macOS) */;
+			target = 02A2AD9B2660A02E00774151 /* BCheckbook (macOS) */;
 			targetProxy = 02A2ADB02660A02E00774151 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -530,7 +530,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bryce.Checkbook;
-				PRODUCT_NAME = Checkbook;
+				PRODUCT_NAME = BCheckbook;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -552,7 +552,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bryce.Checkbook;
-				PRODUCT_NAME = Checkbook;
+				PRODUCT_NAME = BCheckbook;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -578,7 +578,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bryce.Checkbook;
-				PRODUCT_NAME = Checkbook;
+				PRODUCT_NAME = BCheckbook;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -602,7 +602,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bryce.Checkbook;
-				PRODUCT_NAME = Checkbook;
+				PRODUCT_NAME = BCheckbook;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -700,7 +700,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		02A2AD8B2660A02D00774151 /* Build configuration list for PBXProject "Checkbook" */ = {
+		02A2AD8B2660A02D00774151 /* Build configuration list for PBXProject "BCheckbook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				02A2ADBC2660A02E00774151 /* Debug */,
@@ -709,7 +709,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02A2ADBE2660A02E00774151 /* Build configuration list for PBXNativeTarget "Checkbook (iOS)" */ = {
+		02A2ADBE2660A02E00774151 /* Build configuration list for PBXNativeTarget "BCheckbook (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				02A2ADBF2660A02E00774151 /* Debug */,
@@ -718,7 +718,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02A2ADC12660A02E00774151 /* Build configuration list for PBXNativeTarget "Checkbook (macOS)" */ = {
+		02A2ADC12660A02E00774151 /* Build configuration list for PBXNativeTarget "BCheckbook (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				02A2ADC22660A02E00774151 /* Debug */,
