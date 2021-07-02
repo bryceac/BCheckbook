@@ -153,6 +153,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0246E5E3268F83CD0047A663 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				02115E8E268CF50400085138 /* ContentView.swift */,
+				02115E90268CF58500085138 /* RecordView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		02A2AD872660A02D00774151 = {
 			isa = PBXGroup;
 			children = (
@@ -202,8 +211,7 @@
 			children = (
 				02A2AD9E2660A02E00774151 /* Info.plist */,
 				02A2AD9F2660A02E00774151 /* macOS.entitlements */,
-				02115E8E268CF50400085138 /* ContentView.swift */,
-				02115E90268CF58500085138 /* RecordView.swift */,
+				0246E5E3268F83CD0047A663 /* Views */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
