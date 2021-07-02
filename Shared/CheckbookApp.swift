@@ -63,7 +63,7 @@ struct CheckbookApp: App {
     func saveAs() {
         #if os(macOS)
         let SAVE_PANEL = NSSavePanel()
-        SAVE_PANEL.allowedFileTypes = ["json"]
+        SAVE_PANEL.allowedFileTypes = ["bcheck"]
         SAVE_PANEL.showsHiddenFiles = true
         SAVE_PANEL.showsResizeIndicator = true
         SAVE_PANEL.canCreateDirectories = true
@@ -83,7 +83,7 @@ struct CheckbookApp: App {
         #if os(macOS)
         records.clear()
         let OPEN_PANEL = NSOpenPanel()
-        OPEN_PANEL.allowedFileTypes = ["json"]
+        OPEN_PANEL.allowedFileTypes = ["bcheck"]
         OPEN_PANEL.showsHiddenFiles = true
         OPEN_PANEL.canChooseDirectories = true
         OPEN_PANEL.showsResizeIndicator = true
