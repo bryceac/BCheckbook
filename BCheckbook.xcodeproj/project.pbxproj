@@ -529,7 +529,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bryce.Checkbook;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = me.brycecampbell.bcheckbook;
 				PRODUCT_NAME = BCheckbook;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -551,7 +552,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bryce.Checkbook;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = me.brycecampbell.bcheckbook;
 				PRODUCT_NAME = BCheckbook;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -577,7 +579,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bryce.Checkbook;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = me.brycecampbell.bcheckbook;
 				PRODUCT_NAME = BCheckbook;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
@@ -601,7 +604,8 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bryce.Checkbook;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = me.brycecampbell.bcheckbook;
 				PRODUCT_NAME = BCheckbook;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
