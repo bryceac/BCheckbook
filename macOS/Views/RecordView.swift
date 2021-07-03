@@ -20,7 +20,7 @@ struct RecordView: View {
             
             VStack {
                 Text("Check No.")
-                TextField("", value: $record.event.checkNumber, formatter: NumberFormatter())
+                TextField("", value: $record.event.checkNumber, formatter: NumberFormatter()).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack {
@@ -30,10 +30,10 @@ struct RecordView: View {
             
             VStack {
                 Text("Vendor")
-                TextField("", text: $record.event.vendor)
+                TextField("", text: $record.event.vendor).background(Color(red: 255/255, green: 255/255, blue: 255/255))
                 
                 Text("Memo")
-                TextField("", text: $record.event.memo)
+                TextField("", text: $record.event.memo).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack {
@@ -52,7 +52,7 @@ struct RecordView: View {
                 
                     credit = value
                 
-                })
+                }).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack {
@@ -70,7 +70,7 @@ struct RecordView: View {
                     }
                 
                     debit = value
-                })
+                }).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack(spacing: 10) {
