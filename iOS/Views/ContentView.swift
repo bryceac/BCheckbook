@@ -26,7 +26,7 @@ struct ContentView: View {
                     Button("Save") {
                         let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                         
-                        try? records.sortedRecords.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("json"))
+                        try? records.sortedRecords.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck"))
                     }
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
