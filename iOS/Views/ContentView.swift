@@ -38,7 +38,7 @@ struct ContentView: View {
         }.onAppear() {
             let DOCUMENTS_DIECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 
-            if let SAVED_RECORDS = try? Record.load(from: DOCUMENTS_DIECTORY.appendingPathComponent("transactions").appendingPathExtension("json")) {
+            if let SAVED_RECORDS = try? Record.load(from: DOCUMENTS_DIECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
                 
                 for record in SAVED_RECORDS {
                     records.add(record)
