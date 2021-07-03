@@ -20,25 +20,25 @@ struct RecordView: View {
             
             VStack {
                 Text("Check No.")
-                TextField("Check No.", value: $record.event.checkNumber, formatter: NumberFormatter())
+                TextField("", value: $record.event.checkNumber, formatter: NumberFormatter())
             }
             
             VStack {
                 Text("Reconciled")
-                Toggle("Reconciled", isOn: $record.event.isReconciled)
+                Toggle("", isOn: $record.event.isReconciled)
             }
             
             VStack {
                 Text("Vendor")
-                TextField("Vendor", text: $record.event.vendor)
+                TextField("", text: $record.event.vendor)
                 
                 Text("Memo")
-                TextField("Memo", text: $record.event.memo)
+                TextField("", text: $record.event.memo)
             }
             
             VStack {
                 Text("Credit")
-                TextField("Credit", value: $credit, formatter: Event.CURRENCY_FORMAT).onChange(of: credit, perform: { value in
+                TextField("", value: $credit, formatter: Event.CURRENCY_FORMAT).onChange(of: credit, perform: { value in
                 
                         if value > 0 {
                             if value != record.event.amount {
@@ -57,7 +57,7 @@ struct RecordView: View {
             
             VStack {
                 Text("Withdrawal")
-                TextField("Withdrawal", value: $debit, formatter: Event.CURRENCY_FORMAT).onChange(of: debit, perform: { value in
+                TextField("", value: $debit, formatter: Event.CURRENCY_FORMAT).onChange(of: debit, perform: { value in
                 
                     if value > 0 {
                         if value != record.event.amount {
@@ -73,7 +73,7 @@ struct RecordView: View {
                 })
             }
             
-            VStack {
+            VStack(spacing: 10) {
                 Text("Balance")
                 if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
                     Text(BALANCE_VALUE)
