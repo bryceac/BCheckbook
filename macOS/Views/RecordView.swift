@@ -18,9 +18,13 @@ struct RecordView: View {
         HStack {
             DatePicker("", selection: $record.event.date, displayedComponents: [.date])
             
-            TextField("Check No.", value: $record.event.checkNumber, formatter: NumberFormatter())
+            VStack {
+                TextField("Check No.", value: $record.event.checkNumber, formatter: NumberFormatter())
+            }
             
+            VStack {
             Toggle("Reconciled", isOn: $record.event.isReconciled)
+            }
             
             VStack {
                 TextField("Vendor", text: $record.event.vendor)
@@ -28,6 +32,7 @@ struct RecordView: View {
                 TextField("Memo", text: $record.event.memo)
             }
             
+            VStack {
             TextField("Credit", value: $credit, formatter: Event.CURRENCY_FORMAT).onChange(of: credit, perform: { value in
                 
                 if value > 0 {
@@ -43,7 +48,9 @@ struct RecordView: View {
                 credit = value
                 
             })
+            }
             
+            VStack {
             TextField("Withdrawal", value: $debit, formatter: Event.CURRENCY_FORMAT).onChange(of: debit, perform: { value in
                 
                 if value > 0 {
@@ -58,9 +65,12 @@ struct RecordView: View {
                 
                 debit = value
             })
+            }
             
+            VStack {
             if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
                 Text(BALANCE_VALUE)
+            }
             }
             
         }
