@@ -77,11 +77,29 @@ the changes that are expected have indeed been made and are correct.</p>
 
 ===Saves & Loading===
 
-The Mac version and iOS versions may use the same file extension <strong>bcheck</strong>, but are very different in terms of how they work.
+The Mac version and iOS versions may use the same file extension, <strong>bcheck</strong>, but are very different in terms of how they work.
 
 While the macOS application can have data saved under any name, and will pnly read bcheck files, which are just JSON files with a different extension, to not 
 give users the impression that any JSON file will be loadable, the iOS version does not allow such freedom. 
 This difference was by design, so that automatically loading data upon launch will work properly, though it tends to be annoying.
 
 It is recommended to save your data as <strong>transactions.bcheck</strong> if you want to send your save to your iPhone or iPad, 
-as that is what the iOS app looks for
+as that is what the iOS app looks for when it runs.
+
+===Support===
+
+If you have any problems not listed under Known Issues, I will try my best to help you. Depending on where you are seeing the problem, send me an email at either of the following:
+
+ios@brycecampbell.me
+
+mac@brycecampbell.me
+
+Use iOS email for issues that only exist in iOS and the Msc email for issues that only exist in the Mac app.
+
+If the problems exists in both versions, choose ether one and be sure to note in the subject that it is both systems, otherwise I will assume the issue is only on the platform associate with the email you used.
+
+===Other===
+
+This program will only work on macOS 11. When I tried deploying the Yahtzee program to an older version of macOS, XCode would complain about the code being used only being available on macOS 10.15 and later and other stuff was only available in macOS 11.
+
+The iOS version <strong>should</strong> be deployable to older versions of iOS that support SwiftUI, but I am not sure if there is any code that requires iOS 14, though that is the deployment target.
