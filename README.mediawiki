@@ -1,0 +1,87 @@
+=BCheckbook=
+
+'''Version:''' 0.1
+
+'''Author:''' Bryce Campbell
+
+'''Copyright:''' 2021
+
+'''Description:''' A simple checkbook ledger that can be used to keep track on finances on your computer and on the go without an Internet connection.
+
+'''License:''' See LICENSE
+
+==Notes==
+
+This application has only been tested on macOS 11 and iOS 14.6.
+
+===Questions===
+
+<ol>
+<li>
+<dl>
+<dt style="font-weight-bold">Why create this application when there are so many other applicatios that do the same thing?</dt>
+<dd>
+<p>At the time of writing this README, I have been using <a href="https://gnucash.org/">GnuCash</a> to keep track of finances 
+and I wanted something that could be utilized to help keep track of that on other devices.</p>
+<p>In that that time, I tried looking for something kind of like GnuCash for Android, 
+so I could just transfer my transactions easily and came up empty, or finding apps with features I did not need, 
+such as multiple accounts and charts.</p>
+<p>In light of the situation, and to challenge myself further, after coding my own implementation of Yahtzee in Swift using SwiftUI 
+(application is not available anywhere at this time), I decided to make this app myself.</p>
+</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt style="font-weight:bold">Can I import my transactions from X?</dt>
+<dd>
+<p>I have been looking at a possibility of importing from GnuCash via CSV, but because of the way I modeled things and how many programs 
+and users have different ways of putting down notes for transactions, I decided it was not worth it to allow importing files from other apps at this time, 
+but you are definitely free to help me add in that functionality in future versions of the application.</p>
+</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt style="font-weight:bold">Can I pull data in from my bank account?</dt>
+<dd>
+<p>I might implement this in the future, but this application cannot do that at this time. I understand that it is a neat feature 
+and something that may be considered a <strong>must</strong> for apps dealing in finances, but because some banks are either ditching OFX or 
+only allowing certain entities access via OFX, GnuCash was unable to do online banking and many such banks want people to use their APIs instead.</p>
+<p>If I am in a position to investigate these APIs, seeing as there might be some cost involved, I may look into the details and see how they relay the data, 
+as figuring out those patterns would be easier than trying to deal with user habits that may import from applications like GnuCash difficult.</p>
+</dd>
+</dl>
+</li>
+</ol>
+
+===Known Issues===
+
+<dl>
+<dt style="font-weight:bold">Transactions will not automatically sort by date</dt>
+<dd>
+<p>To make things easier on me, I have the program automatically pull the preceding trasaction from the list, 
+which help make sure the numbers are right, which sorts the transactions by date, and the computed property used to facilitate it 
+is also used in displaying the data.</p>
+<p>However, when testing things out on my Mac and in the iOS simulator, the views will not sort when the view refreshes.</p>
+<p>Upon looking through the JSON contents, which is pretty much what the save format for this application is things are indeed sorted correctly, 
+so there is not much I can do, though there may be a fix in the future, if there is indeed a fix that I can apply.</p>
+</dd>
+<dt style="font-weight:bold">Transaction amount is wrong, but the balance info is right</dt>
+<dd>
+<p>This is yet another problem I have yet to figure out. All signs point to something being wrong, but from the details of the JSON saves, 
+the changes that are expected have indeed been made and are correct.</p>
+<p>If there is something I can do to fix it, I will try to deal with it, but for now, there is not much I can do about this.</p>
+</dd>
+</dl>
+
+===Saves & Loading===
+
+The Mac version and iOS versions may use the same file extension <strong>bcheck</strong>, but are very different in terms of how they work.
+
+While the macOS application can have data saved under any name, and will pnly read bcheck files, which are just JSON files with a different extension, to not 
+give users the impression that any JSON file will be loadable, the iOS version does not allow such freedom. 
+This difference was by design, so that automatically loading data upon launch will work properly, though it tends to be annoying.
+
+It is recommended to save your data as <strong>transactions.bcheck</strong> if you want to send your save to your iPhone or iPad, 
+as that is what the iOS app looks for
