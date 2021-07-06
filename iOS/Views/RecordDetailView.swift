@@ -10,11 +10,25 @@ import SwiftUI
 struct RecordDetailView: View {
     @ObservedObject var record: Record
     
+    var checkNumberProxy: Binding<String> {
+        Binding<String>(get: {
+            var value = ""
+            
+            if let checkNumber = record.event.checkNumber {
+                value = "\(checkNumber)"
+            }
+            
+            return value
+        }) { value in
+            record.event.checkNumber = Int(value)
+        }
+    }
+    
     var body: some View {
         Form {
             DatePicker("Date", selection: $record.event.date, displayedComponents: [.date])
             
-            TextField("Check No.", value: $record.event.checkNumber, formatter: NumberFormatter())
+            TextField("Check No.", text: checkNumberProxy).keyboardType(.numberPad)
             
             TextField("Vendor", text: $record.event.vendor)
             TextField("Memo", text: $record.event.memo)
