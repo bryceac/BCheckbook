@@ -14,13 +14,29 @@ struct RecordView: View {
     
     @State var debit: Double
     
+    var checkProxy: Binding<String> {
+        Binding<String>(get: {
+            var value = ""
+            
+            if let checkNumber = record.event.checkNumber {
+                value = "\(checkNumber)"
+            }
+            
+            return value
+        }) { value in
+            if let numberValue = Int(value) {
+                record.event.checkNumber = numberValue
+            }
+        }
+    }
+    
     var body: some View {
         HStack {
             DatePicker("", selection: $record.event.date, displayedComponents: [.date])
             
             VStack {
                 Text("Check No.")
-                TextField("", value: $record.event.checkNumber, formatter: NumberFormatter()).background(Color(red: 255/255, green: 255/255, blue: 255/255))
+                TextField("", text: checkProxy).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack {
