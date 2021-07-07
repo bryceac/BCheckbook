@@ -55,6 +55,25 @@ as figuring out those patterns would be easier than trying to deal with user hab
 </li>
 </ol>
 
+===Usage===
+
+The program is simple enough to use, aside from quirks that cropped up because of the different UI schemes utilized for macOS and iOS.
+
+However, one thing shared in both versions is that the dollar amount will not be recorded until pressing enter.
+
+This is something one must live with for now because it does not seem to be possible have the fields displayed as currency and to automatically register the correct value.
+
+Also, the currency symbol is required when inputting those values, though they are omitted in the JSON saves.
+
+====Removing Records====
+
+Records can be removed in one of two ways, depending on where you are using the app:
+
+<ul>
+<li>Swipe to Delete (iOS only)</li>
+<li>Right click/control+click (macOS only)</li>
+</ul>
+
 ===Known Issues===
 
 <dl>
@@ -73,18 +92,30 @@ so there is not much I can do, though there may be a fix in the future, if there
 the changes that are expected have indeed been made and are correct.</p>
 <p>If there is something I can do to fix it, I will try to deal with it, but for now, there is not much I can do about this.</p>
 </dd>
+<dt style="font-weight:bold">Records after the record I edited do not update.</dt>
+<dd>
+<p>This is another one that may be a problem that is difficult to solve at this time.</p>
+<p>While balance values do update when you remove records, they are not guaranteed to update by changing a value.</p>
+<p>For now, the best thing to do when you notice a mistake is to fix it in your save file with a text editor and things <strong>should</strong> be rectified the next time you load it.</p>
+</dd>
 </dl>
 
 ===Saves & Loading===
 
 The Mac version and iOS versions may use the same file extension, <strong>bcheck</strong>, but are very different in terms of how they work.
 
-While the macOS application can have data saved under any name, and will pnly read bcheck files, which are just JSON files with a different extension, to not 
+While the macOS application can have data saved under any name in any directory, and will only read bcheck files, which are just JSON files with a different extension (they <strong>should</strong> be viewable in any text editor without changing extensions, but can safely have the extension temporarily changed to <strong>json</strong> to do the same thing), to not 
 give users the impression that any JSON file will be loadable, the iOS version does not allow such freedom. 
 This difference was by design, so that automatically loading data upon launch will work properly, though it tends to be annoying.
 
 It is recommended to save your data as <strong>transactions.bcheck</strong> if you want to send your save to your iPhone or iPad, 
 as that is what the iOS app looks for when it runs.
+
+===Backing up Data===
+
+Your data can be backed by simply backing up the bcheck file, which <strong>should</strong> be accessible via iTunes, Finder (only guaranteed on Macs without iTunes), and the Files app on iOS.
+
+On macOS, the file will be wherever you told it to save the file (Default is in the Documents directory).
 
 ===Support===
 
@@ -98,8 +129,14 @@ Use iOS email for issues that only exist in iOS and the Msc email for issues tha
 
 If the problems exists in both versions, choose ether one and be sure to note in the subject that it is both systems, otherwise I will assume the issue is only on the platform associate with the email you used.
 
+===Contributing===
+
+If you are familiar with SwiftUI and want to help make things work even better. Feel free to fork this project and submit a pull request.
+
+Submissions will be tested by me before they will be merged.
+
 ===Other===
 
-This program will only work on macOS 11. When I tried deploying the Yahtzee program to an older version of macOS, XCode would complain about the code being used only being available on macOS 10.15 and later and other stuff was only available in macOS 11.
+This program will only work on macOS 11. When I tried deploying the Yahtzee program to an older version of macOS, XCode would complain about the code being used only being available on macOS 10.15 and later and other stuff was only available in macOS 11 and later.
 
 The iOS version <strong>should</strong> be deployable to older versions of iOS that support SwiftUI, but I am not sure if there is any code that requires iOS 14, though that is the deployment target.
