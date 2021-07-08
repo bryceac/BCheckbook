@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct CheckbookApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @Environment(\.scenePhase) var scenePhase
     
     @StateObject var records: Records = Records()
     
