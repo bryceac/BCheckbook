@@ -12,6 +12,7 @@ struct CheckbookApp: App {
     @StateObject var records: Records = Records()
     
     @State var file: URL? = nil
+    @State var showNewFileAlert = false
     
     let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
@@ -20,8 +21,8 @@ struct CheckbookApp: App {
             #if os(macOS)
             if let filePath = file, let displayName = Bundle.main.displayName {
                 ContentView().environmentObject(records).navigationTitle("\(filePath.path) - \(displayName)")
-            } else {
-                ContentView().environmentObject(records)
+            } else if let displayName = Bundle.main.displayName {
+                ContentView().environmentObject(records).navigationTitle("New Register - \(displayName)")
             }
             #else
             ContentView().environmentObject(records)
@@ -30,9 +31,12 @@ struct CheckbookApp: App {
             #if os (macOS)
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 Button("New") {
-                    file = nil
-                    records.clear()
-                }.keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
+                }.alert(isPresented: $showNewFileAlert, content: {
+                    Alert(title: Text("Creating New Register"), message: Text("You are about to create a new Document. Any unsaved data will be lost. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
+                        self.file = nil
+                        self.records.clear()
+                    }), secondaryButton: .destructive(Text("No"), action: nil))
+                }).keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
             }
             
             CommandGroup(before: CommandGroupPlacement.newItem) {
