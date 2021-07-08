@@ -61,6 +61,7 @@ struct CheckbookApp: App {
                             appAlert = nil
                         })
                     }
+                    NSApplication.shared.terminate(self)
                 }.keyboardShortcut(KeyEquivalent("q"), modifiers: .command)
             }
             
