@@ -36,6 +36,7 @@ struct CheckbookApp: App {
                     Alert(title: Text("Creating New Register"), message: Text("You are about to create a new Document. Any unsaved data will be lost. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
                         self.file = nil
                         self.records.clear()
+                        showNewFileAlert = false
                     }), secondaryButton: .default(Text("No"), action: {
                         self.showNewFileAlert = false
                     }))
