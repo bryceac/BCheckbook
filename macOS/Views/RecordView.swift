@@ -32,7 +32,7 @@ struct RecordView: View {
     
     var body: some View {
         HStack {
-            DatePicker("", selection: $record.event.date, displayedComponents: [.date])
+            DatePicker("", selection: $record.event.date, displayedComponents: [.date]).colorScheme(.light)
             
             VStack {
                 Text("Check No.")
@@ -100,6 +100,7 @@ struct RecordView: View {
                     .foregroundColor(Color.black)
                 if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
                     Text(BALANCE_VALUE)
+                        .foregroundColor(Color.black)
                 }
             }
             
