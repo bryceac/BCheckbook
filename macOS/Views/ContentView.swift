@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Binding var bcheckFile: BCheckFile
+    @Binding var bcheckFile: BCheckFileDocument
     
     var body: some View {
         List {

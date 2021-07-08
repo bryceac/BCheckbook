@@ -9,28 +9,32 @@ import Foundation
 import UniformTypeIdentifiers
 import SwiftUI
 
-struct BCheckFile: FileDocument {
-    static var readableContentTypes: [UTType] = [.json]
+extension UTType {
+    static var bcheckFiles: UTType {
+        UTType(importedAs: "me.brycecampbell.bcheck")
+    }
+}
+
+struct BCheckFileDocument: FileDocument {
+    
+    
+    static var readableContentTypes: [UTType] = [.bcheckFiles]
     
     var records: Records = Records()
+    
+    init(records: Records = Records()) {
+        self.records = records
+    }
     
     init(configuration: ReadConfiguration) throws {
         if let jsonData = configuration.file.regularFileContents {
             let SAVED_RECORDS = try Record.load(from: jsonData)
             
-            for record in SAVED_RECORDS {
-                records.add(record)
-            }
+            self.init(records: Records(withRecords: SAVED_RECORDS))
         }
     }
     
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        let JSON_ENCODER = JSONEncoder()
-        JSON_ENCODER.outputFormatting = .prettyPrinted
-        
-        let ENCODED_RECORDS = try JSON_ENCODER.encode(records.sortedRecords)
-        
-        return FileWrapper(regularFileWithContents: ENCODED_RECORDS)
+        <#code#>
     }
-
 }
