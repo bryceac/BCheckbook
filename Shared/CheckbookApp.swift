@@ -22,10 +22,10 @@ struct CheckbookApp: App {
             if let filePath = file, let displayName = Bundle.main.displayName {
                 ContentView().environmentObject(records).navigationTitle("\(filePath.path) - \(displayName)").alert(isPresented: $showNewFileAlert, content: {
                     Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
+                        showNewFileAlert = false
                         new()
-                        self.showNewFileAlert = false
                     }), secondaryButton: .default(Text("No"), action: {
-                        self.showNewFileAlert = false
+                        showNewFileAlert = false
                     }))
                 })
             } else if let displayName = Bundle.main.displayName {
