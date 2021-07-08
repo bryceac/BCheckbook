@@ -20,9 +20,25 @@ struct CheckbookApp: App {
         WindowGroup {
             #if os(macOS)
             if let filePath = file, let displayName = Bundle.main.displayName {
-                ContentView().environmentObject(records).navigationTitle("\(filePath.path) - \(displayName)")
+                ContentView().environmentObject(records).navigationTitle("\(filePath.path) - \(displayName)").alert(isPresented: $showNewFileAlert, content: {
+                    Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
+                        self.file = nil
+                        self.records.clear()
+                        self.showNewFileAlert = false
+                    }), secondaryButton: .default(Text("No"), action: {
+                        self.showNewFileAlert = false
+                    }))
+                })
             } else if let displayName = Bundle.main.displayName {
-                ContentView().environmentObject(records).navigationTitle("New Register - \(displayName)")
+                ContentView().environmentObject(records).navigationTitle("New Register - \(displayName)").alert(isPresented: $showNewFileAlert, content: {
+                    Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
+                        self.file = nil
+                        self.records.clear()
+                        self.showNewFileAlert = false
+                    }), secondaryButton: .default(Text("No"), action: {
+                        self.showNewFileAlert = false
+                    }))
+                })
             }
             #else
             ContentView().environmentObject(records)
@@ -32,15 +48,7 @@ struct CheckbookApp: App {
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 Button("New") {
                     self.showNewFileAlert = true
-                }.keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/).alert(isPresented: $showNewFileAlert, content: {
-                    Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
-                        self.file = nil
-                        self.records.clear()
-                        self.showNewFileAlert = false
-                    }), secondaryButton: .default(Text("No"), action: {
-                        self.showNewFileAlert = false
-                    }))
-                })
+                }.keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
             }
             
             CommandGroup(before: CommandGroupPlacement.newItem) {
@@ -62,8 +70,6 @@ struct CheckbookApp: App {
                     saveAs()
                 }.keyboardShortcut(KeyEquivalent("s"), modifiers: [.option, .command, .shift])
             }
-            
-            
             #endif
         }
     }
