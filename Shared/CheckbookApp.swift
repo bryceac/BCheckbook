@@ -31,6 +31,7 @@ struct CheckbookApp: App {
             #if os (macOS)
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 Button("New") {
+                    showNewFileAlert = true
                 }.alert(isPresented: $showNewFileAlert, content: {
                     Alert(title: Text("Creating New Register"), message: Text("You are about to create a new Document. Any unsaved data will be lost. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
                         self.file = nil
