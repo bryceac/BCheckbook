@@ -36,24 +36,29 @@ struct RecordView: View {
             
             VStack {
                 Text("Check No.")
+                    .foregroundColor(Color.black)
                 TextField("", text: checkProxy).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack {
                 Text("Reconciled")
+                    .foregroundColor(Color.black)
                 Toggle("", isOn: $record.event.isReconciled)
             }
             
             VStack {
                 Text("Vendor")
+                    .foregroundColor(Color.black)
                 TextField("", text: $record.event.vendor).background(Color(red: 255/255, green: 255/255, blue: 255/255))
                 
                 Text("Memo")
+                    .foregroundColor(Color.black)
                 TextField("", text: $record.event.memo).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack {
                 Text("Credit")
+                    .foregroundColor(Color.black)
                 TextField("", value: $credit, formatter: Event.CURRENCY_FORMAT).onChange(of: credit, perform: { value in
                 
                         if value > 0 {
@@ -73,6 +78,7 @@ struct RecordView: View {
             
             VStack {
                 Text("Withdrawal")
+                    .foregroundColor(Color.black)
                 TextField("", value: $debit, formatter: Event.CURRENCY_FORMAT).onChange(of: debit, perform: { value in
                 
                     if value > 0 {
@@ -91,6 +97,7 @@ struct RecordView: View {
             
             VStack(spacing: 10) {
                 Text("Balance")
+                    .foregroundColor(Color.black)
                 if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
                     Text(BALANCE_VALUE)
                 }
