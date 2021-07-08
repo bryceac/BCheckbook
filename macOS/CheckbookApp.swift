@@ -9,9 +9,7 @@ import SwiftUI
 
 @main
 struct CheckbookApp: App {
-    #if os (macOS)
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    #endif
     
     @StateObject var records: Records = Records()
     
@@ -22,7 +20,6 @@ struct CheckbookApp: App {
     
     var body: some Scene {
         WindowGroup {
-            #if os(macOS)
             if let filePath = file, let displayName = Bundle.main.displayName {
                 ContentView().environmentObject(records).navigationTitle("\(filePath.path) - \(displayName)").alert(isPresented: $showNewFileAlert, content: {
                     Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("No"), action: {
@@ -42,11 +39,7 @@ struct CheckbookApp: App {
                     }))
                 })
             }
-            #else
-            ContentView().environmentObject(records)
-            #endif
         }.commands {
-            #if os (macOS)
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 Button("New") {
                     self.showNewFileAlert = true
@@ -72,12 +65,10 @@ struct CheckbookApp: App {
                     saveAs()
                 }.keyboardShortcut(KeyEquivalent("s"), modifiers: [.option, .command, .shift])
             }
-            #endif
         }
     }
     
     func saveAs() {
-        #if os(macOS)
         let SAVE_PANEL = NSSavePanel()
         SAVE_PANEL.allowedFileTypes = ["bcheck"]
         SAVE_PANEL.showsHiddenFiles = true
@@ -92,11 +83,9 @@ struct CheckbookApp: App {
                 file = filePath
             }
         }
-        #endif
     }
     
     func open() {
-        #if os(macOS)
         records.clear()
         let OPEN_PANEL = NSOpenPanel()
         OPEN_PANEL.allowedFileTypes = ["bcheck"]
@@ -115,16 +104,13 @@ struct CheckbookApp: App {
                 file = filePath
             }
         }
-        #endif
     }
     
     func new() {
-        #if os(macOS)
         DispatchQueue.main.async {
             records.clear()
             file = nil
         }
-        #endif
     }
 }
 
