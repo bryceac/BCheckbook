@@ -14,6 +14,7 @@
 		0226126C26978A300084A085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226126A269789510084A085 /* AppDelegate.swift */; };
 		026767972697950B005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026767962697950B005D7DC2 /* CheckbookApp.swift */; };
 		0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02676794269794FB005D7DC2 /* CheckbookApp.swift */; };
+		0267679A2697A2E7005D7DC2 /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026767992697A2E7005D7DC2 /* AppAlert.swift */; };
 		02A2ADA92660A02E00774151 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADA82660A02E00774151 /* Tests_iOS.swift */; };
 		02A2ADB42660A02E00774151 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADB32660A02E00774151 /* Tests_macOS.swift */; };
 		02A2ADBA2660A02E00774151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02A2AD8F2660A02E00774151 /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 		0226126A269789510084A085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02676794269794FB005D7DC2 /* CheckbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
 		026767962697950B005D7DC2 /* CheckbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
+		026767992697A2E7005D7DC2 /* AppAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
 		02A2AD8F2660A02E00774151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02A2AD942660A02E00774151 /* BCheckbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BCheckbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02A2AD972660A02E00774151 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				02A2AD9F2660A02E00774151 /* macOS.entitlements */,
 				0246E5E3268F83CD0047A663 /* Views */,
 				0226126A269789510084A085 /* AppDelegate.swift */,
+				026767992697A2E7005D7DC2 /* AppAlert.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				02A2ADD52660A07B00774151 /* Record.swift in Sources */,
 				02115E91268CF58500085138 /* RecordView.swift in Sources */,
 				02A2ADD22660A06A00774151 /* Event.swift in Sources */,
+				0267679A2697A2E7005D7DC2 /* AppAlert.swift in Sources */,
 				0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */,
 				0226126C26978A300084A085 /* AppDelegate.swift in Sources */,
 				020B4127268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */,
