@@ -33,10 +33,10 @@ struct CheckbookApp: App {
                 Button("New") {
                     showNewFileAlert = true
                 }.alert(isPresented: $showNewFileAlert, content: {
-                    Alert(title: Text("Creating New Register"), message: Text("You are about to create a new Document. Any unsaved data will be lost. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
+                    Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
                         self.file = nil
                         self.records.clear()
-                        showNewFileAlert = false
+                        self.showNewFileAlert = false
                     }), secondaryButton: .default(Text("No"), action: {
                         self.showNewFileAlert = false
                     }))
