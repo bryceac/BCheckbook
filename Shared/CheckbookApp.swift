@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct CheckbookApp: App {
+    #if os (macOS)
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    #endif
+    
     @StateObject var records: Records = Records()
     
     @State var file: URL? = nil
