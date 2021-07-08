@@ -11,6 +11,7 @@
 		020B4127268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020B4125268F7AA3004B6FE2 /* Bundle+displayName.swift */; };
 		02115E8F268CF50400085138 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02115E8E268CF50400085138 /* ContentView.swift */; };
 		02115E91268CF58500085138 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02115E90268CF58500085138 /* RecordView.swift */; };
+		0226126C26978A300084A085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226126A269789510084A085 /* AppDelegate.swift */; };
 		02A2ADA92660A02E00774151 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADA82660A02E00774151 /* Tests_iOS.swift */; };
 		02A2ADB42660A02E00774151 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADB32660A02E00774151 /* Tests_macOS.swift */; };
 		02A2ADB62660A02E00774151 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2AD8D2660A02E00774151 /* CheckbookApp.swift */; };
@@ -53,6 +54,7 @@
 		020B4125268F7AA3004B6FE2 /* Bundle+displayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+displayName.swift"; sourceTree = "<group>"; };
 		02115E8E268CF50400085138 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		02115E90268CF58500085138 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		0226126A269789510084A085 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02A2AD8D2660A02E00774151 /* CheckbookApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
 		02A2AD8F2660A02E00774151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02A2AD942660A02E00774151 /* BCheckbook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BCheckbook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +214,7 @@
 				02A2AD9E2660A02E00774151 /* Info.plist */,
 				02A2AD9F2660A02E00774151 /* macOS.entitlements */,
 				0246E5E3268F83CD0047A663 /* Views */,
+				0226126A269789510084A085 /* AppDelegate.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				02115E91268CF58500085138 /* RecordView.swift in Sources */,
 				02A2ADB72660A02E00774151 /* CheckbookApp.swift in Sources */,
 				02A2ADD22660A06A00774151 /* Event.swift in Sources */,
+				0226126C26978A300084A085 /* AppDelegate.swift in Sources */,
 				020B4127268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
