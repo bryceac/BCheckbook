@@ -52,6 +52,7 @@ struct CheckbookApp: App {
                                 NSApplication.shared.terminate(self)
                             }, cancelHandler: {
                                 appAlert = nil
+                                NSApplication.shared.terminate(self)
                             })
                         }
                     } else if !records.sortedRecords.isEmpty && .none ~= file {
@@ -61,6 +62,7 @@ struct CheckbookApp: App {
                             NSApplication.shared.terminate(self)
                         }, cancelHandler: {
                             appAlert = nil
+                            NSApplication.shared.terminate(self)
                         })
                     }
                     
