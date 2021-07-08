@@ -14,7 +14,7 @@ struct CheckbookApp: App {
     @StateObject var records: Records = Records()
     
     @State var file: URL? = nil
-    @State var appAlert: Alert? = nil
+    @State var appAlert: AppAlert? = nil
     
     let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
@@ -22,22 +22,23 @@ struct CheckbookApp: App {
         WindowGroup {
             if let filePath = file, let displayName = Bundle.main.displayName {
                 ContentView().environmentObject(records).navigationTitle("\(filePath.path) - \(displayName)").alert(item: $appAlert) { activeAlert in
-                    activeAlert
+                    activeAlert.alert
                 }
             } else if let displayName = Bundle.main.displayName {
                 ContentView().environmentObject(records).navigationTitle("New Register - \(displayName)").alert(item: $appAlert) { activeAlert in
-                    activeAlert
+                    activeAlert.alert
                 }
             }
         }.commands {
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 Button("New") {
-                    appAlert = Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("No"), action: {
+                    appAlert = AppAlert.creatingNewFile(confirmHandler: {
                         appAlert = nil
-                    }), secondaryButton: .default(Text("Yes"), action: {
+                        file = nil
+                        records.clear()
+                    }, cancelHandler: {
                         appAlert = nil
-                        new()
-                    }))
+                    })
                 }.keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
             }
             
@@ -45,10 +46,20 @@ struct CheckbookApp: App {
                 Button("Quit") {
                     if let filePath = file, let savedRecords = try? Record.load(from: filePath) {
                         if records.sortedRecords != savedRecords {
-                            showUnsavedChangesWarning = true
+                            appAlert = AppAlert.unsavedChanges(path: file, confirmHandler: {
+                                appAlert = nil
+                                save()
+                            }, cancelHandler: {
+                                appAlert = nil
+                            })
                         }
-                    } else if !records.sortedRecords.isEmpty {
-                        showUnsavedChangesWarning = true
+                    } else if !records.sortedRecords.isEmpty && .none ~= file {
+                        appAlert = AppAlert.unsavedChanges(confirmHandler: {
+                            appAlert = nil
+                            save()
+                        }, cancelHandler: {
+                            appAlert = nil
+                        })
                     }
                 }.keyboardShortcut(KeyEquivalent("q"), modifiers: .command)
             }
@@ -61,17 +72,21 @@ struct CheckbookApp: App {
             
             CommandGroup(after: CommandGroupPlacement.newItem) {
                 Button("Save") {
-                    if let file = file {
-                        try? records.sortedRecords.save(to: file)
-                    } else {
-                        saveAs()
-                    }
+                    save()
                 }.keyboardShortcut(KeyEquivalent("s"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
                 
                 Button("Save As") {
                     saveAs()
                 }.keyboardShortcut(KeyEquivalent("s"), modifiers: [.option, .command, .shift])
             }
+        }
+    }
+    
+    func save() {
+        if let file = file {
+            try? records.sortedRecords.save(to: file)
+        } else {
+            saveAs()
         }
     }
     
