@@ -49,6 +49,7 @@ struct CheckbookApp: App {
                             appAlert = AppAlert.unsavedChanges(path: file, confirmHandler: {
                                 appAlert = nil
                                 save()
+                                NSApplication.shared.terminate(self)
                             }, cancelHandler: {
                                 appAlert = nil
                             })
@@ -56,12 +57,13 @@ struct CheckbookApp: App {
                     } else if !records.sortedRecords.isEmpty && .none ~= file {
                         appAlert = AppAlert.unsavedChanges(confirmHandler: {
                             appAlert = nil
-                            save()
+                            saveAs()
+                            NSApplication.shared.terminate(self)
                         }, cancelHandler: {
                             appAlert = nil
                         })
                     }
-                    NSApplication.shared.terminate(self)
+                    
                 }.keyboardShortcut(KeyEquivalent("q"), modifiers: .command)
             }
             
