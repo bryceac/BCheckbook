@@ -29,7 +29,14 @@ struct CheckbookApp: App {
                     }))
                 })
             } else if let displayName = Bundle.main.displayName {
-                ContentView().environmentObject(records).navigationTitle("New Register - \(displayName)")
+                ContentView().environmentObject(records).navigationTitle("New Register - \(displayName)").alert(isPresented: $showNewFileAlert, content: {
+                    Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("Yes"), action: {
+                        showNewFileAlert = false
+                        new()
+                    }), secondaryButton: .default(Text("No"), action: {
+                        showNewFileAlert = false
+                    }))
+                })
             }
             #else
             ContentView().environmentObject(records)
