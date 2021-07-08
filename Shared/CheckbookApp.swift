@@ -116,8 +116,10 @@ struct CheckbookApp: App {
     
     func new() {
         #if os(macOS)
-        records.clear()
-        file = nil
+        DispatchQueue.main.async {
+            records.clear()
+            file = nil
+        }
         #endif
     }
 }
