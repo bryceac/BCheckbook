@@ -9,41 +9,48 @@ import SwiftUI
 
 @main
 struct CheckbookApp: App {
-    @Environment(\.scenePhase) var scenePhase
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @StateObject var records: Records = Records()
     
     @State var file: URL? = nil
-    @State var showNewFileAlert = false
+    @State var appAlert: Alert? = nil
     
     let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
     var body: some Scene {
         WindowGroup {
             if let filePath = file, let displayName = Bundle.main.displayName {
-                ContentView().environmentObject(records).navigationTitle("\(filePath.path) - \(displayName)").alert(isPresented: $showNewFileAlert, content: {
-                    Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("No"), action: {
-                        showNewFileAlert = false
-                    }), secondaryButton: .default(Text("Yes"), action: {
-                        showNewFileAlert = false
-                        new()
-                    }))
-                })
+                ContentView().environmentObject(records).navigationTitle("\(filePath.path) - \(displayName)").alert(item: $appAlert) { activeAlert in
+                    activeAlert
+                }
             } else if let displayName = Bundle.main.displayName {
-                ContentView().environmentObject(records).navigationTitle("New Register - \(displayName)").alert(isPresented: $showNewFileAlert, content: {
-                    Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("No"), action: {
-                        showNewFileAlert = false
-                    }), secondaryButton: .default(Text("Yes"), action: {
-                        showNewFileAlert = false
-                        new()
-                    }))
-                })
+                ContentView().environmentObject(records).navigationTitle("New Register - \(displayName)").alert(item: $appAlert) { activeAlert in
+                    activeAlert
+                }
             }
         }.commands {
             CommandGroup(replacing: CommandGroupPlacement.newItem) {
                 Button("New") {
-                    self.showNewFileAlert = true
+                    appAlert = Alert(title: Text("Create New Register"), message: Text("You are about to create a new register, which will override the current view. Do you want to continue?"), primaryButton: .default(Text("No"), action: {
+                        appAlert = nil
+                    }), secondaryButton: .default(Text("Yes"), action: {
+                        appAlert = nil
+                        new()
+                    }))
                 }.keyboardShortcut(KeyEquivalent("n"), modifiers: /*@START_MENU_TOKEN@*/.command/*@END_MENU_TOKEN@*/)
+            }
+            
+            CommandGroup(replacing: CommandGroupPlacement.appTermination) {
+                Button("Quit") {
+                    if let filePath = file, let savedRecords = try? Record.load(from: filePath) {
+                        if records.sortedRecords != savedRecords {
+                            showUnsavedChangesWarning = true
+                        }
+                    } else if !records.sortedRecords.isEmpty {
+                        showUnsavedChangesWarning = true
+                    }
+                }.keyboardShortcut(KeyEquivalent("q"), modifiers: .command)
             }
             
             CommandGroup(before: CommandGroupPlacement.newItem) {
