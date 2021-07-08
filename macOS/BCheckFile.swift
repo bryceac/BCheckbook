@@ -15,11 +15,22 @@ struct BCheckFile: FileDocument {
     var records: Records = Records()
     
     init(configuration: ReadConfiguration) throws {
-        let SAVED_RECORDS = Record.load(from: configuration.file.)
+        if let jsonData = configuration.file.regularFileContents {
+            let SAVED_RECORDS = try Record.load(from: jsonData)
+            
+            for record in SAVED_RECORDS {
+                records.add(record)
+            }
+        }
     }
     
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        <#code#>
+        let JSON_ENCODER = JSONEncoder()
+        JSON_ENCODER.outputFormatting = .prettyPrinted
+        
+        let ENCODED_RECORDS = try JSON_ENCODER.encode(records.sortedRecords)
+        
+        return FileWrapper(regularFileWithContents: ENCODED_RECORDS)
     }
 
 }
