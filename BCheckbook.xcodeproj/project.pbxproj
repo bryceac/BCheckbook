@@ -33,6 +33,7 @@
 		02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
 		02DBE1172697B7F6003C44EC /* Record+loadfromData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */; };
 		02DBE11A2697C820003C44EC /* DocumentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1192697C820003C44EC /* DocumentScene.swift */; };
+		02DBE11E2697CB88003C44EC /* RecordArray+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE11D2697CB88003C44EC /* RecordArray+data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		02DBE1142697B173003C44EC /* BCheckFileDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCheckFileDocument.swift; sourceTree = "<group>"; };
 		02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+loadfromData.swift"; sourceTree = "<group>"; };
 		02DBE1192697C820003C44EC /* DocumentScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScene.swift; sourceTree = "<group>"; };
+		02DBE11D2697CB88003C44EC /* RecordArray+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordArray+data.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */,
+				02DBE11D2697CB88003C44EC /* RecordArray+data.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				02A2ADCC2660A04900774151 /* EvenType.swift in Sources */,
 				02A2ADCF2660A05900774151 /* EventTypeError.swift in Sources */,
 				02115E8F268CF50400085138 /* ContentView.swift in Sources */,
+				02DBE11E2697CB88003C44EC /* RecordArray+data.swift in Sources */,
 				02A2ADD82660AF3A00774151 /* Records.swift in Sources */,
 				02A2ADD52660A07B00774151 /* Record.swift in Sources */,
 				02115E91268CF58500085138 /* RecordView.swift in Sources */,

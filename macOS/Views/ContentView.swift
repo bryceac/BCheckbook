@@ -31,6 +31,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(bcheckFile: .constant(BCheckFile()))
+        ContentView(bcheckFile: .constant(BCheckFileDocument()))
     }
 }

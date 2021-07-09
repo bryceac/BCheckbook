@@ -27,14 +27,24 @@ struct BCheckFileDocument: FileDocument {
     }
     
     init(configuration: ReadConfiguration) throws {
+        var records = Records()
+        
         if let jsonData = configuration.file.regularFileContents {
             let SAVED_RECORDS = try Record.load(from: jsonData)
             
-            self.init(records: Records(withRecords: SAVED_RECORDS))
+            records = Records(withRecords: SAVED_RECORDS)
         }
+        
+        self.init(records: records)
     }
     
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        <#code#>
+        var fileWrapper = FileWrapper()
+        
+        if let JSON_DATA = records.sortedRecords.data {
+            fileWrapper = FileWrapper(regularFileWithContents: JSON_DATA)
+        }
+        
+        return fileWrapper
     }
 }
