@@ -15,18 +15,18 @@ extension UTType {
     }
 }
 
-struct BCheckFileDocument: FileDocument {
+class BCheckFileDocument: ReferenceFileDocument {
     
     
     static var readableContentTypes: [UTType] = [.bcheckFiles]
     
-    var records: Records = Records()
+    @Published var records: Records = Records()
     
     init(records: Records = Records()) {
         self.records = records
     }
     
-    init(configuration: ReadConfiguration) throws {
+    required convenience init(configuration: ReadConfiguration) throws {
         var records = Records()
         
         if let jsonData = configuration.file.regularFileContents {
@@ -38,7 +38,7 @@ struct BCheckFileDocument: FileDocument {
         self.init(records: records)
     }
     
-    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+    /* func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
         var fileWrapper = FileWrapper()
         
         if let JSON_DATA = records.sortedRecords.data {
@@ -46,5 +46,19 @@ struct BCheckFileDocument: FileDocument {
         }
         
         return fileWrapper
+    } */
+    
+    func fileWrapper(snapshot: [Record], configuration: WriteConfiguration) throws -> FileWrapper {
+        var fileWrappr = FileWrapper()
+        
+        if let JSON_Data = snapshot.data {
+            fileWrappr = FileWrapper(regularFileWithContents: JSON_Data)
+        }
+        
+        return fileWrappr
+    }
+    
+    func snapshot(contentType: UTType) throws -> [Record] {
+        return self.records.sortedRecords
     }
 }
