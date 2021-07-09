@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Binding var bcheckFile: BCheckFileDocument
+    @ObservedObject var bcheckFile: BCheckFileDocument
     
     var body: some View {
         List {
@@ -31,8 +31,8 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(bcheckFile: .constant(BCheckFileDocument(records: Records(withRecords: [
+        ContentView(bcheckFile: BCheckFileDocument(records: Records(withRecords: [
             Record()
-        ]))))
+        ])))
     }
 }
