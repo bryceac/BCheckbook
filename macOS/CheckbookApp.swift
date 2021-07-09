@@ -11,7 +11,7 @@ import SwiftUI
 struct CheckbookApp: App {
     var body: some Scene {
         DocumentGroup(newDocument: { BCheckFileDocument() }) { file in
-            ContentView(bcheckFile: file.document)
+            ContentView(records: file.document.records)
         }
     }
 }
