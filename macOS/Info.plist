@@ -59,9 +59,7 @@
 					<string>bcheck</string>
 				</array>
 				<key>public.mime-type</key>
-				<array>
-					<string>application/json</string>
-				</array>
+				<array/>
 			</dict>
 		</dict>
 	</array>
