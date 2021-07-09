@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
+
+struct DocumentScene: Scene {
+    var body: some Scene {
+        DocumentGroup(viewing: BCheckFileDocument.self) { file in
+            ContentView(bcheckFile: file.$document)
+        }
+    }
+}
