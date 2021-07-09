@@ -37,7 +37,7 @@ struct RecordView: View {
             VStack {
                 Text("Check No.")
                     .foregroundColor(Color.black)
-                TextField("", text: checkProxy).colorScheme(.light)/*.background(Color(red: 255/255, green: 255/255, blue: 255/255)).foregroundColor(.black) */
+                TextField("", text: checkProxy).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))/*.foregroundColor(.black) */
             }
             
             VStack {
@@ -49,11 +49,11 @@ struct RecordView: View {
             VStack {
                 Text("Vendor")
                     .foregroundColor(Color.black)
-                TextField("", text: $record.event.vendor).colorScheme(.light)/*.background(Color(red: 255/255, green: 255/255, blue: 255/255)).foregroundColor(.black) */
+                TextField("", text: $record.event.vendor).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))/*.foregroundColor(.black) */
                 
                 Text("Memo")
                     .foregroundColor(Color.black)
-                TextField("", text: $record.event.memo).colorScheme(.light)/*.background(Color(red: 255/255, green: 255/255, blue: 255/255)).foregroundColor(/*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/) */
+                TextField("", text: $record.event.memo).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))/*.foregroundColor(/*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/) */
             }
             
             VStack {
@@ -73,7 +73,7 @@ struct RecordView: View {
                 
                     credit = value
                 
-                }).colorScheme(.light)/*.background(Color(red: 255/255, green: 255/255, blue: 255/255)).foregroundColor(.black) */
+                }).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))/*.foregroundColor(.black) */
             }
             
             VStack {
@@ -92,7 +92,7 @@ struct RecordView: View {
                     }
                 
                     debit = value
-                }).colorScheme(.light)/*.background(Color(red: 255/255, green: 255/255, blue: 255/255)).foregroundColor(.black) */
+                }).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))/*.foregroundColor(.black) */
             }
             
             VStack(spacing: 10) {
