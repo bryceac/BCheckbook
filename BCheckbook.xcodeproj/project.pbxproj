@@ -32,7 +32,6 @@
 		02A2ADDF2660B03200774151 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADDE2660B03200774151 /* RecordDetailView.swift */; };
 		02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
 		02DBE1172697B7F6003C44EC /* Record+loadfromData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */; };
-		02DBE11A2697C820003C44EC /* DocumentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1192697C820003C44EC /* DocumentScene.swift */; };
 		02DBE11E2697CB88003C44EC /* RecordArray+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE11D2697CB88003C44EC /* RecordArray+data.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,7 +80,6 @@
 		02A2ADDE2660B03200774151 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
 		02DBE1142697B173003C44EC /* BCheckFileDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCheckFileDocument.swift; sourceTree = "<group>"; };
 		02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+loadfromData.swift"; sourceTree = "<group>"; };
-		02DBE1192697C820003C44EC /* DocumentScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScene.swift; sourceTree = "<group>"; };
 		02DBE11D2697CB88003C44EC /* RecordArray+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordArray+data.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,7 +222,6 @@
 				0246E5E3268F83CD0047A663 /* Views */,
 				02DBE1142697B173003C44EC /* BCheckFileDocument.swift */,
 				02DBE1182697B803003C44EC /* Extensions */,
-				02DBE1192697C820003C44EC /* DocumentScene.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -438,7 +435,6 @@
 				02A2ADD52660A07B00774151 /* Record.swift in Sources */,
 				02115E91268CF58500085138 /* RecordView.swift in Sources */,
 				02A2ADD22660A06A00774151 /* Event.swift in Sources */,
-				02DBE11A2697C820003C44EC /* DocumentScene.swift in Sources */,
 				0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */,
 				02DBE1172697B7F6003C44EC /* Record+loadfromData.swift in Sources */,
 				020B4127268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */,
