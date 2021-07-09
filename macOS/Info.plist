@@ -68,6 +68,10 @@
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.json</string>
+			</array>
 			<key>UTTypeDescription</key>
 			<string>BCheck files</string>
 			<key>UTTypeIcons</key>
