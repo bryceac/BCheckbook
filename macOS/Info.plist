@@ -42,6 +42,10 @@
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.jon</string>
+			</array>
 			<key>UTTypeDescription</key>
 			<string>BCheck File</string>
 			<key>UTTypeIcons</key>
