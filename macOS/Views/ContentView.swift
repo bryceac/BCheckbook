@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         List {
-            ForEach(bcheckFile.records.sortedRecords.indices, id: \.self) { index in
+            ForEach(records.sortedRecords.indices, id: \.self) { index in
                 RecordView(record: records.sortedRecords[index]).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
                         records.remove(at: index)
@@ -33,6 +33,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(records: Records(withRecords: [
             Record()
-        ])))
+        ]))
     }
 }
