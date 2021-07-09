@@ -10,7 +10,9 @@ import SwiftUI
 @main
 struct CheckbookApp: App {
     var body: some Scene {
-        DocumentScene()
+        DocumentGroup(newDocument: BCheckFileDocument()) { file in
+            ContentView(bcheckFile: file.$document)
+        }
     }
 }
 
