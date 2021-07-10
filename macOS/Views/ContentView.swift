@@ -17,11 +17,6 @@ struct ContentView: View {
                 RecordView(record: records.sortedRecords[index]).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
                         let REMOVED_RECORD: Record = records.remove(at: index)
-                        
-                        undoManager?.registerUndo(withTarget: records, handler: { storedRecords in
-                            storedRecords.add(REMOVED_RECORD)
-                        })
-                        
                     }
                 }))
             }
@@ -31,14 +26,28 @@ struct ContentView: View {
                     records.add(Record())
                     
                     let ADDED_RECORD = records.sortedRecords.last!
-                    
-                    undoManager?.registerUndo(withTarget: records, handler: { storedRecords in
-                        if let ADDED_RECORD_INDEX = storedRecords.sortedRecords.firstIndex(of: ADDED_RECORD) {
-                            storedRecords.remove(at: ADDED_RECORD_INDEX)
-                        }
-                    })
-                    
                 }
+            }
+        })
+    }
+    
+    func addRecordUndoActionRegister(at index: Int) {
+        
+        undoManager?.registerUndo(withTarget: records, handler: { _ in
+            let REMOVED_RECORD = records.remove(at: index)
+            removeRecordUndoActionRegister(REMOVED_RECORD)
+        })
+        
+    }
+    
+    func removeRecordUndoActionRegister(_ record: Record) {
+        
+        undoManager?.registerUndo(withTarget: records, handler: { _ in
+            records.add(record)
+            
+            if let RECORD_INDEX = records.sortedRecords.firstIndex(of: record) {
+                
+                addRecordUndoActionRegister(at: RECORD_INDEX)
             }
         })
     }
