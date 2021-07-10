@@ -16,14 +16,20 @@ struct ContentView: View {
             ForEach(records.sortedRecords.indices, id: \.self) { index in
                 RecordView(record: records.sortedRecords[index]).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
-                        records.remove(at: index)
+                        undoManager?.registerUndo(withTarget: records, handler: { storedRecords in
+                            storedRecords.remove(at: index)
+                        })
+                        
                     }
                 }))
             }
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
-                    records.add(Record())
+                    undoManager?.registerUndo(withTarget: records, handler: { storedRecords in
+                        storedRecords.add(Record())
+                    })
+                    
                 }
             }
         })
