@@ -23,9 +23,11 @@ struct ContentView: View {
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
-                    records.add(Record())
+                    let RECORD = Record()
                     
-                    let ADDED_RECORD = records.sortedRecords.last!
+                    records.add(RECORD)
+                    
+                    
                 }
             }
         })
