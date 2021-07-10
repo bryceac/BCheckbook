@@ -19,6 +19,8 @@ struct ContentView: View {
                         let RECORD = records.sortedRecords[index]
                         
                         records.remove(RECORD)
+                        
+                        removeRecordUndoActionRegister(RECORD)
                     }
                 }))
             }
@@ -28,6 +30,10 @@ struct ContentView: View {
                     let RECORD = Record()
                     
                     records.add(RECORD)
+                    
+                    if let RECORD_INDEX = records.sortedRecords.firstIndex(of: RECORD) {
+                        addRecordUndoActionRegister(at: RECORD_INDEX)
+                    }
                     
                     
                 }
