@@ -28,8 +28,14 @@ struct ContentView: View {
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
+                    records.add(Record())
+                    
+                    let ADDED_RECORD = records.sortedRecords.last!
+                    
                     undoManager?.registerUndo(withTarget: records, handler: { storedRecords in
-                        storedRecords.add(Record())
+                        if let ADDED_RECORD_INDEX = storedRecords.sortedRecords.firstIndex(of: ADDED_RECORD) {
+                            storedRecords.remove(at: ADDED_RECORD_INDEX)
+                        }
                     })
                     
                 }
