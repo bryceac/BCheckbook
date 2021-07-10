@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.undoManager) var undoManager
     @ObservedObject var records: Records
     
     var body: some View {
