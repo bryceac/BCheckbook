@@ -16,7 +16,9 @@ struct ContentView: View {
             ForEach(records.sortedRecords.indices, id: \.self) { index in
                 RecordView(record: records.sortedRecords[index]).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
-                        let REMOVED_RECORD: Record = records.remove(at: index)
+                        let RECORD = records.sortedRecords[index]
+                        
+                        records.remove(RECORD)
                     }
                 }))
             }
@@ -36,8 +38,10 @@ struct ContentView: View {
     func addRecordUndoActionRegister(at index: Int) {
         
         undoManager?.registerUndo(withTarget: records, handler: { _ in
-            let REMOVED_RECORD = records.remove(at: index)
-            removeRecordUndoActionRegister(REMOVED_RECORD)
+            let RECORD = records.sortedRecords[index]
+            
+            records.remove(RECORD)
+            removeRecordUndoActionRegister(RECORD)
         })
         
     }
