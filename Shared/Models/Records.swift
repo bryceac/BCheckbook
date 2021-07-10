@@ -38,8 +38,8 @@ class Records: ObservableObject {
         items.append(record)
     }
     
-    func remove(at index: Int) {
-        items.remove(at: index)
+    func remove(at index: Int) -> Record {
+        return items.remove(at: index)
     }
     
     func clear() {
