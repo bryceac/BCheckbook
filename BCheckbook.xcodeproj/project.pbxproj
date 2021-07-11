@@ -30,6 +30,7 @@
 		02A2ADDA2660AFBD00774151 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADD92660AFBD00774151 /* ContentView.swift */; };
 		02A2ADDD2660B01F00774151 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADDC2660B01F00774151 /* RecordView.swift */; };
 		02A2ADDF2660B03200774151 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADDE2660B03200774151 /* RecordDetailView.swift */; };
+		02AC535A269A247B0045EDDC /* Records+removeRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC5359269A247B0045EDDC /* Records+removeRecord.swift */; };
 		02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
 		02DBE1172697B7F6003C44EC /* Record+loadfromData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */; };
 		02DBE11E2697CB88003C44EC /* RecordArray+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE11D2697CB88003C44EC /* RecordArray+data.swift */; };
@@ -78,6 +79,7 @@
 		02A2ADD92660AFBD00774151 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		02A2ADDC2660B01F00774151 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		02A2ADDE2660B03200774151 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
+		02AC5359269A247B0045EDDC /* Records+removeRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Records+removeRecord.swift"; sourceTree = "<group>"; };
 		02DBE1142697B173003C44EC /* BCheckFileDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCheckFileDocument.swift; sourceTree = "<group>"; };
 		02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+loadfromData.swift"; sourceTree = "<group>"; };
 		02DBE11D2697CB88003C44EC /* RecordArray+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordArray+data.swift"; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 			children = (
 				02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */,
 				02DBE11D2697CB88003C44EC /* RecordArray+data.swift */,
+				02AC5359269A247B0045EDDC /* Records+removeRecord.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */,
 				02DBE1172697B7F6003C44EC /* Record+loadfromData.swift in Sources */,
 				020B4127268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */,
+				02AC535A269A247B0045EDDC /* Records+removeRecord.swift in Sources */,
 				02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
