@@ -117,6 +117,26 @@ Your data can be backed by simply backing up the bcheck file, which <strong>shou
 
 On macOS, the file will be wherever you told it to save the file (Default is in the Documents directory).
 
+===Transferring Saves===
+
+As stated above, the iOS application and macOS application work very different when it comes to saving and loading, as one is more flexible in naming than the other.
+
+If you would like to transfer saves from one device to another, there are certain things can be done, depending on platform.
+
+====macOS Destination from iOS target====
+
+You can use either Airdrop inside the Files app or use either Finder or iTunes to grab the save.
+
+When the transfer is made via AirDrop, your file will located in the Downloads Folder, while Finder, and likely iTunes may be more flexible.
+
+====iOS Destination via AirDrop====
+
+Currently, the iOS app is not registered to accept files directly, though I intend to look into this, to ease transfers.
+
+For now, when transferring a save via AirDrop, it is best to tell it to open the file in the Files app, navigate to the location of stuff on your device, and save the file to the <strong>BCheckbook</strong> folder.
+
+As long as the save is named <strong>transactions.bcheck</strong>, the iOS app should automatically load the file upon start up.
+
 ===Support===
 
 If you have any problems not listed under Known Issues, I will try my best to help you. Depending on where you are seeing the problem, send me an email at either of the following:
