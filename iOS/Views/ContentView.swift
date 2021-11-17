@@ -9,6 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var records: Records
+    
+    @State private var showSaveSuccessfulAlert = true
+    
     var body: some View {
         NavigationView {
             List {
@@ -26,7 +29,9 @@ struct ContentView: View {
                     Button("Save") {
                         let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                         
-                        try? records.sortedRecords.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck"))
+                        if let _ = try? records.sortedRecords.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
+                            showSaveSuccessfulAlert = true
+                        }
                     }
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
@@ -44,6 +49,8 @@ struct ContentView: View {
                     records.add(record)
                 }
             }
+        }.alert(isPresented: $showSaveSuccessfulAlert) {
+            Alert(title: Text("Save Successful"), message: Text("Transactions were successfully saved"), dismissButton: .default(Text("Ok")))
         }
     }
     
