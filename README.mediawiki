@@ -1,6 +1,8 @@
 =BCheckbook=
 
-'''Version:''' 0.1
+'''macOS Version:''' 0.1
+
+'''iOS Version:''' 0.1.1
 
 '''Author:''' Bryce Campbell
 
@@ -12,14 +14,23 @@
 
 ==Notes==
 
-This application has only been tested on macOS 11 and iOS 14.6.
+This application has only been tested on macOS 11 and iOS 14 and iOS 15.
+
+===Version History===
+
+<dl>
+<dt style="font-weight:bold">0.1.1 (iOS)</dt>
+<dd>Minor patch that gives user feedback if the save was successful. November 2021</dd>
+<dt style="font-weight:bold">0.1 (Both platforms)</dt>
+<dd>Initial release. July 2021</dd>
+</dl>
 
 ===Questions===
 
 <ol>
 <li>
 <dl>
-<dt style="font-weight-bold">Why create this application when there are so many other applicatios that do the same thing?</dt>
+<dt style="font-weight:bold">Why create this application when there are so many other applicatios that do the same thing?</dt>
 <dd>
 <p>At the time of writing this README, I have been using <a href="https://gnucash.org/">GnuCash</a> to keep track of finances 
 and I wanted something that could be utilized to help keep track of that on other devices.</p>
@@ -157,6 +168,6 @@ Submissions will be tested by me before they will be merged.
 
 ===Other===
 
-This program will only work on macOS 11. When I tried deploying the Yahtzee program to an older version of macOS, XCode would complain about the code being used only being available on macOS 10.15 and later and other stuff was only available in macOS 11 and later.
+This program will only work on macOS 11 and later. When I tried deploying the Yahtzee program to an older version of macOS, XCode would complain about the code being used only being available on macOS 10.15 and later and other stuff was only available in macOS 11 and later.
 
-The iOS version <strong>should</strong> be deployable to older versions of iOS that support SwiftUI, but I am not sure if there is any code that requires iOS 14, though that is the deployment target.
+The iOS version only works on iOS 14 and later.
