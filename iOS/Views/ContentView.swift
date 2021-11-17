@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var records: Records
     
-    @State private var showSaveSuccessfulAlert = true
+    @State private var showSaveSuccessfulAlert = false
     
     var body: some View {
         NavigationView {
