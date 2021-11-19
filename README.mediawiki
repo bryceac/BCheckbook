@@ -92,11 +92,13 @@ Records can be removed in one of two ways, depending on where you are using the 
 ===Known Issues===
 
 <dl>
-<dt style="font-weight:bold">Transaction amount is wrong, but the balance info is right</dt>
+<dt style="font-weight:bold">Transaction amount is wrong</dt>
 <dd>
 <p>This has been partially fix.</p>
 <p>This is no longer an issue in iOS, but this can still happen on macOS, mainly when changing dates.</p>
 <p>If I can find a way to fix this issue, I will apply the fix when I can.</p>
+
+<p>For now, it is best to relaunch the application or reload your save file if you notice this.</p>
 </dd>
 <dt style="font-weight:bold">Records after the record I edited do not update.</dt>
 <dd>
@@ -104,6 +106,11 @@ Records can be removed in one of two ways, depending on where you are using the 
 <p>While the transactions will now update properly, as of version 0.2, There are still problems that occur after changing dates of transactions.</p>
 <p>If you change dates for any transaction, it is recommended that you relaunch the application and/or reload the file, so that things will be updated properly.</p>
 <p>If I find a way to fix this issue, I will apply a fix when I can.</p>
+</dd>
+<dt style="font-weight:bold">Balance is wrong is after changing date</dt>
+<dd>
+<p>This problem is a little bothersome to tackle. I plan to deal with it as soon as I can, but I see one possible reason for that.</p>
+<p>I will attempt to fix this when I can, but for now, reloading your save or relaunching the application after saving <strong>should</strong> rectify things.</p>
 </dd>
 </dl>
 
