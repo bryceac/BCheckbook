@@ -1,8 +1,6 @@
 =BCheckbook=
 
-'''macOS Version:''' 0.1
-
-'''iOS Version:''' 0.1.1
+'''Version:''' 0.2
 
 '''Author:''' Bryce Campbell
 
@@ -19,6 +17,12 @@ This application has only been tested on macOS 11 and iOS 14 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">0.2</dt>
+<dd>
+<p>Major fix that deals with 
+updating suceeding transactions, fixing transaction ordering, and
+showing the proper amounts.
+</p></dd>
 <dt style="font-weight:bold">0.1.1 (iOS)</dt>
 <dd>Minor patch that gives user feedback if the save was successful. November 2021</dd>
 <dt style="font-weight:bold">0.1 (Both platforms)</dt>
@@ -88,8 +92,8 @@ Records can be removed in one of two ways, depending on where you are using the 
 ===Known Issues===
 
 <dl>
-<dt style="font-weight:bold">Transactions will not automatically sort by date</dt>
-<dd>
+<dt style="font-weight:bold; text-decoration:line-through">Transactions will not automatically sort by date</dt>
+<dd style="text-decoration:line-through">>
 <p>To make things easier on me, I have the program automatically pull the preceding trasaction from the list, 
 which help make sure the numbers are right, which sorts the transactions by date, and the computed property used to facilitate it 
 is also used in displaying the data.</p>
@@ -97,17 +101,18 @@ is also used in displaying the data.</p>
 <p>Upon looking through the JSON contents, which is pretty much what the save format for this application is things are indeed sorted correctly, 
 so there is not much I can do, though there may be a fix in the future, if there is indeed a fix that I can apply.</p>
 </dd>
-<dt style="font-weight:bold">Transaction amount is wrong, but the balance info is right</dt>
-<dd>
+<dt style="font-weight:bold; text-decoration:line-through">">Transaction amount is wrong, but the balance info is right</dt>
+<dd style="text-decoration:line-through">">
 <p>This is yet another problem I have yet to figure out. All signs point to something being wrong, but from the details of the JSON saves, 
 the changes that are expected have indeed been made and are correct.</p>
 <p>If there is something I can do to fix it, I will try to deal with it, but for now, there is not much I can do about this.</p>
 </dd>
 <dt style="font-weight:bold">Records after the record I edited do not update.</dt>
 <dd>
-<p>This is another one that may be a problem that is difficult to solve at this time.</p>
-<p>While balance values do update when you remove records, they are not guaranteed to update by changing a value.</p>
-<p>For now, the best thing to do when you notice a mistake is to fix it in your save file with a text editor and things <strong>should</strong> be rectified the next time you load it.</p>
+<p>This issue has been partially dealt with.</p>
+<p>While the transactions will now update properly, as of version 0.2, There are still problems that occur after changing dates of transactions.</p>
+<p>If you change dates for any transaction, it is recommended that you relaunch the application and/or reload the file, so that things will be updated properly.</p>
+<p>If I find a way to fix this issue, I will apply a fix when I can.</p>
 </dd>
 </dl>
 
