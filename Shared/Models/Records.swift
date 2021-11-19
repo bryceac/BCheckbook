@@ -6,15 +6,25 @@
 //
 
 import Foundation
+import Combine
 
 class Records: ObservableObject {
     @Published var items: [Record] {
         didSet {
+            cancellables = []
             sortedRecords.forEach { record in
-                record.previousRecord = items.element(before: record)
+                record.previousRecord = sortedRecords.element(before: record)
+                
+                let cancellable = record.objectWillChange.sink { _ in
+                    self.objectWillChange.send()
+                }
+                
+                cancellables.append(cancellable)
             }
         }
     }
+    
+    var cancellables: [AnyCancellable] = []
     
     var sortedRecords: [Record] {
         return items.sorted { firstRecord, secondRecord in
