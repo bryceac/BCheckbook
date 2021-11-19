@@ -92,6 +92,21 @@ Records can be removed in one of two ways, depending on where you are using the 
 ===Known Issues===
 
 <dl>
+<dt style="font-weight:bold; text-decoration:line-through;">Transactions will not automatically sort by date</dt>
+<dd style="text-decoration:line-through;">
+<p>To make things easier on me, I have the program automatically pull the preceding trasaction from the list, 
+which help make sure the numbers are right, which sorts the transactions by date, and the computed property used to facilitate it 
+is also used in displaying the data.</p>
+<p>However, when testing things out on my Mac and in the iOS simulator, the views will not sort when the view refreshes.</p>
+<p>Upon looking through the JSON contents, which is pretty much what the save format for this application is things are indeed sorted correctly, 
+so there is not much I can do, though there may be a fix in the future, if there is indeed a fix that I can apply.</p>
+</dd>
+<dt style="font-weight:bold; text-decoration:line-through;">Transaction amount is wrong, but the balance info is right</dt>
+<dd style="text-decoration:line-through;">">
+<p>This is yet another problem I have yet to figure out. All signs point to something being wrong, but from the details of the JSON saves, 
+the changes that are expected have indeed been made and are correct.</p>
+<p>If there is something I can do to fix it, I will try to deal with it, but for now, there is not much I can do about this.</p>
+</dd>
 <dt style="font-weight:bold">Records after the record I edited do not update.</dt>
 <dd>
 <p>This issue has been partially dealt with.</p>
