@@ -6,11 +6,18 @@
 //
 
 import Foundation
+import Combine
 
 class Record: Identifiable, ObservableObject, Codable {
     let id: String
     @Published var event: Event
-    var previousRecord: Record? = nil
+    @Published var previousRecord: Record? = nil {
+        didSet {
+            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
+                self.objectWillChange.send()
+            })
+        }
+    }
     
     var balance: Double {
         var value = previousRecord?.balance ?? 0
@@ -22,6 +29,8 @@ class Record: Identifiable, ObservableObject, Codable {
         
         return value
     }
+    
+    private var cancellable: AnyCancellable? = nil
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
