@@ -21,7 +21,7 @@ This application has only been tested on macOS 11 and iOS 14 and iOS 15.
 <dd>
 <p>Major fix that deals with 
 updating suceeding transactions, fixing transaction ordering, and
-showing the proper amounts.
+showing the proper amounts. Released Nov. 19, 2021
 </p></dd>
 <dt style="font-weight:bold">0.1.1 (iOS)</dt>
 <dd>Minor patch that gives user feedback if the save was successful. November 2021</dd>
