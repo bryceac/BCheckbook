@@ -16,7 +16,7 @@ struct CheckbookApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(records)
+            ContentView().environmentObject(records).environmentObject(databaseManager)
         }
     }
     
