@@ -11,11 +11,17 @@ import SwiftUI
 struct CheckbookApp: App {
     @StateObject var records: Records = Records()
     
-    let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    
     var body: some Scene {
         WindowGroup {
             ContentView().environmentObject(records)
+        }
+    }
+    
+    init() {
+        if !FileManager.default.fileExists(atPath: DB.shared.url.absoluteString) {
+            if let BUNDLE_PATH = Bundle.main.url(forResource: DB.shared.url.deletingPathExtension().lastPathComponent, withExtension: DB.shared.url.pathExtension) {
+                try? FileManager.default.copyItem(at: BUNDLE_PATH, to: DB.shared.url)
+            }
         }
     }
 }
