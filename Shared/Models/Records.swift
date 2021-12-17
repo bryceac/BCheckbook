@@ -12,7 +12,7 @@ class Records: ObservableObject {
     @Published var items: [Record] {
         didSet {
             cancellables = []
-            sortedRecords.forEach { record in
+            items.forEach { record in
                 let cancellable = record.objectWillChange.sink { _ in
                     self.objectWillChange.send()
                 }
