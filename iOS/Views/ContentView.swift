@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(records.sortedRecords.indices, id: \.self) { index in
+                ForEach(records.items.indices, id: \.self) { index in
                     
                     
                         NavigationLink(
