@@ -39,6 +39,10 @@ struct ContentView: View {
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                     Button("+") {
                         records.add(Record())
+                        
+                        let record = records.items.last!
+                        
+                        databaseManger.add(record: record)
                     }
                 }
             })
