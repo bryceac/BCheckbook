@@ -57,6 +57,12 @@ struct ContentView: View {
     
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
+            if let databaseManager = DB.shared.manager {
+                let record = records.items[index]
+                
+                try? databaseManager.remove(record: record)
+            }
+            
             records.remove(at: index)
         }
     }
