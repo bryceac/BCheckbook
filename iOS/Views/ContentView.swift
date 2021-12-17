@@ -10,8 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var records: Records
     
-    @EnvironmentObject var databaseManger: DBManager
-    
     @State private var showSaveSuccessfulAlert = false
     
     var body: some View {
@@ -40,14 +38,16 @@ struct ContentView: View {
                     Button("+") {
                         records.add(Record())
                         
-                        let record = records.items.last!
-                        
-                        databaseManger.add(record: record)
+                        if let databaseManager = DB.shared.manager, let record = records.items.last {
+                            do {
+                                try databaseManager.add(record: record)
+                            } catch {}
+                        }
                     }
                 }
             })
         }.onAppear() {
-            if let storedRecords = databaseManger.records {
+            if let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records {
                 records.items = storedRecords
             }
         }.alert(isPresented: $showSaveSuccessfulAlert) {
