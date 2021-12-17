@@ -8,7 +8,7 @@
 import Foundation
 import SQLite
 
-class DBManager: ObservableObject {
+class DBManager {
     
     /// records in database
     var records: [Record]? {
@@ -21,7 +21,7 @@ class DBManager: ObservableObject {
     }
     
     
-    @Published var db: Connection
+    private var db: Connection
     
     // Tables
     private let LEDGER_VIEW = Table("ledger")
