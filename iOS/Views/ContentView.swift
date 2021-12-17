@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var records: Records
     
+    @EnvironmentObject var databaseManger: DBManager
+    
     @State private var showSaveSuccessfulAlert = false
     
     var body: some View {
