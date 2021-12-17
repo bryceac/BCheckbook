@@ -21,9 +21,9 @@ struct ContentView: View {
                     
                     
                         NavigationLink(
-                            destination: RecordDetailView(record: records.sortedRecords[index]),
+                            destination: RecordDetailView(record: records.items[index]),
                             label: {
-                                RecordView(record: records.sortedRecords[index])
+                                RecordView(record: records.items[index])
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
@@ -31,7 +31,7 @@ struct ContentView: View {
                     Button("Save") {
                         let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                         
-                        if let _ = try? records.sortedRecords.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
+                        if let _ = try? records.items.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
                             showSaveSuccessfulAlert = true
                         }
                     }
