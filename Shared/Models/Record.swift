@@ -9,7 +9,15 @@ import Foundation
 
 class Record: Identifiable, ObservableObject, Codable {
     let id: String
-    @Published var event: Event
+    @Published var event: Event {
+        didSet {
+            if let databaseManager = DB.shared.manager, let records = databaseManager.records {
+                guard records.contains(self) else { return }
+                
+                try? databaseManager.update(record: self)
+            }
+        }
+    }
     
     @Published var balance: Double = 0
     
