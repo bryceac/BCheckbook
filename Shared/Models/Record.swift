@@ -6,38 +6,19 @@
 //
 
 import Foundation
-import Combine
 
 class Record: Identifiable, ObservableObject, Codable {
     let id: String
     @Published var event: Event
-    @Published var previousRecord: Record? = nil {
-        didSet {
-            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
-                self.objectWillChange.send()
-            })
-        }
-    }
     
-    var balance: Double {
-        var value = previousRecord?.balance ?? 0
-        
-        switch event.type {
-        case .deposit: value += event.amount
-        case .withdrawal: value -= event.amount
-        }
-        
-        return value
-    }
-    
-    private var cancellable: AnyCancellable? = nil
+    var balance: Double = 0
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
     }
     
-    init(withID id: String = UUID().uuidString, transaction: Event = Event(), previousRecord: Record? = nil) {
-        (self.id, self.event, self.previousRecord) = (id, transaction, previousRecord)
+    init(withID id: String = UUID().uuidString, transaction: Event = Event(), andBalance balance: Double = 0) {
+        (self.id, self.event, self.balance) = (id, transaction, balance)
     }
     
     required convenience init(from decoder: Decoder) throws {
@@ -81,6 +62,7 @@ extension Record: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(event)
+        hasher.combine(balance)
     }
 }
 
