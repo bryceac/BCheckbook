@@ -24,8 +24,11 @@ class Records: ObservableObject {
     
     var cancellables: [AnyCancellable] = []
     
-    init(withRecords records: [Record] = []) {
+    var databaseManager: DBManager
+    
+    init(withRecords records: [Record] = [], databaseLocation: URL) throws {
         items = records
+        databaseManager = DBManager(withDB: databaseLocation)
     }
     
     func add(_ record: Record) {
