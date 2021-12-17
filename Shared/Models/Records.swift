@@ -24,12 +24,6 @@ class Records: ObservableObject {
     
     var cancellables: [AnyCancellable] = []
     
-    var sortedRecords: [Record] {
-        return items.sorted { firstRecord, secondRecord in
-            firstRecord.event.date < secondRecord.event.date
-        }
-    }
-    
     init(withRecords records: [Record] = []) {
         items = records
     }
