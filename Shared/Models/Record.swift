@@ -11,7 +11,7 @@ class Record: Identifiable, ObservableObject, Codable {
     let id: String
     @Published var event: Event
     
-    var balance: Double = 0
+    @Published var balance: Double = 0
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
