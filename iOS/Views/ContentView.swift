@@ -41,7 +41,9 @@ struct ContentView: View {
                         if let databaseManager = DB.shared.manager, let record = records.items.last {
                             do {
                                 try databaseManager.add(record: record)
-                            } catch {}
+                            } catch (let error) {
+                                print(error.localizedDescription)
+                            }
                         }
                     }
                 }
