@@ -9,7 +9,11 @@ import Foundation
 
 class DB {
     var manager: DBManager?
-    var url: URL
+    var url: URL {
+        didSet {
+            manager = try? DBManager(withDB: url)
+        }
+    }
     
     static let shared = DB()
     
