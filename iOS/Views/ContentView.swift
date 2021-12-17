@@ -43,13 +43,8 @@ struct ContentView: View {
                 }
             })
         }.onAppear() {
-            let DOCUMENTS_DIECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-
-            if let SAVED_RECORDS = try? Record.load(from: DOCUMENTS_DIECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
-                
-                for record in SAVED_RECORDS {
-                    records.add(record)
-                }
+            if let storedRecords = databaseManger.records {
+                records.items = storedRecords
             }
         }.alert(isPresented: $showSaveSuccessfulAlert) {
             Alert(title: Text("Save Successful"), message: Text("Transactions were successfully saved"), dismissButton: .default(Text("Ok")))
