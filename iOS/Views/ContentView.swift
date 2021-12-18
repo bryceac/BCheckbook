@@ -36,10 +36,14 @@ struct ContentView: View {
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                     Button("+") {
-                        records.add(Record())
+                        let record = Record()
                         
-                        if let databaseManager = DB.shared.manager, let record = records.items.last {
-                            databaseManager.add(record: record)
+                        if let databaseManager = DB.shared.manager {
+                            try? databaseManager.add(record: record)
+                            
+                            if let storedRecords = databaseManager.records {
+                                records.items = storedRecords
+                            }
                         }
                     }
                 }
@@ -58,7 +62,11 @@ struct ContentView: View {
             if let databaseManager = DB.shared.manager {
                 let record = records.items[index]
                 
-                databaseManager.remove(record: record)
+                try? databaseManager.remove(record: record)
+                
+                if let storedReords = databaseManager.records {
+                    records.items = storedReords
+                }
             }
             
             records.remove(at: index)
