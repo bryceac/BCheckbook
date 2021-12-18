@@ -69,12 +69,12 @@ class DBManager {
      */
     func add(record: Record) {
         if let category = record.event.category {
-            if let categoryID = try? id(ofCategory: category) {
+            if let categoryID = id(ofCategory: category) {
                 let _ = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount)
             } else {
-                try? add(category: category)
+                add(category: category)
                 
-                guard let categoryID = try? id(ofCategory: category) else { return }
+                guard let categoryID = id(ofCategory: category) else { return }
             
                 let _ = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount)
             }
@@ -87,7 +87,7 @@ class DBManager {
      add specified category to database.
      - parameter category: The category to be added to the database.
      */
-    func add(category: String) throws {
+    func add(category: String) {
         let _ = CATEGORY_TABLE.insert(CATEGORY_FIELD <- category)
     }
     
@@ -138,22 +138,22 @@ class DBManager {
      update specified record in database.
      - parameter record: The record to be updated.
      */
-    func update(record: Record) throws {
+    func update(record: Record) {
         let TRSNSACTION_RECORD = TRABSACTION_TABLE.filter(ID_FIELD == record.id)
         
         if let category = record.event.category {
-            if let categoryID = try id(ofCategory: category) {
+            if let categoryID = id(ofCategory: category) {
                 let _ =  TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
             } else {
-                try add(category: category)
+                add(category: category)
                 
-                guard let categoryID = try id(ofCategory: category) else { return }
+                guard let categoryID = id(ofCategory: category) else { return }
                 
                 let _ =  TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
             }
             
         } else {
-            let _ =  TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- try id(ofCategory: record.event.category), VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
+            let _ =  TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- id(ofCategory: record.event.category), VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
         }
     }
     
@@ -161,20 +161,29 @@ class DBManager {
      remove specified record from database.
      - parameter record: The record to remove
      */
-    func remove(record: Record) throws {
+    func remove(record: Record) {
         let TRSNSACTION_RECORD = TRABSACTION_TABLE.filter(ID_FIELD == record.id)
         
-        try db.run(TRSNSACTION_RECORD.delete())
+        do {
+            try db.run(TRSNSACTION_RECORD.delete())
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     /**
      remove specified category from data base.
      - parameter category: The category to remove.
      */
-    func remove(category: String) throws {
-        guard let id = try id(ofCategory: category) else { return }
+    func remove(category: String) {
+        guard let id = id(ofCategory: category) else { return }
         let CATEGORY_RECORD = CATEGORY_TABLE.filter(CATEGORY_ID_FIELD == id)
         
-        try db.run(CATEGORY_RECORD.delete())
+        do {
+            try db.run(CATEGORY_RECORD.delete())
+        } catch {
+            print(error.localizedDescription)
+        }
+        
     }
 }
