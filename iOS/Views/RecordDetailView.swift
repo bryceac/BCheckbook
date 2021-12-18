@@ -10,6 +10,16 @@ import SwiftUI
 struct RecordDetailView: View {
     @ObservedObject var record: Record
     
+    var dateBinding: Binding<Date> {
+        Binding(get: {
+            return record.event.date
+        }, set: { newDate in
+            record.event.date = newDate
+            
+            updateDB()
+        })
+    }
+    
     var checkNumberProxy: Binding<String> {
         Binding<String>(get: {
             var value = ""
@@ -21,6 +31,8 @@ struct RecordDetailView: View {
             return value
         }) { value in
             record.event.checkNumber = Int(value)
+            
+            updateDB()
         }
     }
     
