@@ -36,14 +36,34 @@ struct RecordDetailView: View {
         }
     }
     
+    var vendorBinding: Binding<String> {
+        Binding(get: {
+            return record.event.vendor
+        }, set: { vendorValue in
+            record.event.vendor = vendorValue
+            
+            updateDB()
+        })
+    }
+    
+    var memoBinding: Binding<String> {
+        Binding(get: {
+            return record.event.memo
+        }, set: { memoValue in
+            record.event.memo = memoValue
+            
+            updateDB()
+        })
+    }
+    
     var body: some View {
         Form {
-            DatePicker("Date", selection: $record.event.date, displayedComponents: [.date])
+            DatePicker("Date", selection: dateBinding, displayedComponents: [.date])
             
             TextField("Check No.", text: checkNumberProxy).keyboardType(.numberPad)
             
-            TextField("Vendor", text: $record.event.vendor)
-            TextField("Memo", text: $record.event.memo)
+            TextField("Vendor", text: vendorBinding)
+            TextField("Memo", text: memoBinding)
             TextField("Amount", value: $record.event.amount, formatter: Event.CURRENCY_FORMAT)
             
             Picker("Type", selection: $record.event.type) {
