@@ -14,7 +14,7 @@ class Record: Identifiable, ObservableObject, Codable {
             if let databaseManager = DB.shared.manager, let records = databaseManager.records {
                 guard records.contains(self) else { return }
                 
-                databaseManager.update(record: self)
+                try? databaseManager.update(record: self)
             }
         }
     }
