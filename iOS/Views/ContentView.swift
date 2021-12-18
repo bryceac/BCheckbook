@@ -39,9 +39,7 @@ struct ContentView: View {
                         records.add(Record())
                         
                         if let databaseManager = DB.shared.manager, let record = records.items.last {
-                            do {
-                                try databaseManager.add(record: record)
-                            } catch {}
+                            databaseManager.add(record: record)
                         }
                     }
                 }
@@ -60,7 +58,7 @@ struct ContentView: View {
             if let databaseManager = DB.shared.manager {
                 let record = records.items[index]
                 
-                try? databaseManager.remove(record: record)
+                databaseManager.remove(record: record)
             }
             
             records.remove(at: index)
