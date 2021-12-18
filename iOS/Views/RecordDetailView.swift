@@ -43,6 +43,12 @@ struct RecordDetailView: View {
             Toggle("Reconciled", isOn: $record.event.isReconciled)
         }
     }
+    
+    func updateDB() {
+        guard let databaseManager = DB.shared.manager else { return }
+        
+        try? databaseManager.update(record: record)
+    }
 }
 
 struct RecordDetailView_Previews: PreviewProvider {
