@@ -67,14 +67,14 @@ class DBManager {
      add specified record to database.
      - parameter record: The record to add to database.
      */
-    func add(record: Record) throws {
+    func add(record: Record) {
         if let category = record.event.category {
-            if let categoryID = try id(ofCategory: category) {
+            if let categoryID = try? id(ofCategory: category) {
                 let _ = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount)
             } else {
-                try add(category: category)
+                try? add(category: category)
                 
-                guard let categoryID = try id(ofCategory: category) else { return }
+                guard let categoryID = try? id(ofCategory: category) else { return }
             
                 let _ = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount)
             }
@@ -91,15 +91,19 @@ class DBManager {
         let _ = CATEGORY_TABLE.insert(CATEGORY_FIELD <- category)
     }
     
-    private func id(ofCategory category: String?) throws -> Int? {
+    private func id(ofCategory category: String?) -> Int? {
         guard let category = category else { return nil }
         
         var id: Int? = nil
         
-        let row = try db.pluck(CATEGORY_TABLE.filter(CATEGORY_FIELD == category))
-        
-        if let result = row, let rowID = Int(result[ID_FIELD]) {
-            id = rowID
+        do {
+            let row = try db.pluck(CATEGORY_TABLE.filter(CATEGORY_FIELD == category))
+            
+            if let result = row, let rowID = Int(result[ID_FIELD]) {
+                id = rowID
+            }
+        } catch {
+            print(error.localizedDescription)
         }
         
         return id
