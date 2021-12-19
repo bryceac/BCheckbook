@@ -20,7 +20,7 @@ struct ContentView: View, RecordDetailDelegate {
                     
                     
                         NavigationLink(
-                            destination: RecordDetailView(record: records[index]),
+                            destination: RecordDetailView(record: records[index], delegate: self),
                             label: {
                                 RecordView(record: records[index])
                             })
