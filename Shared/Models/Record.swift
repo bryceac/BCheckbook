@@ -102,7 +102,7 @@ extension Array where Element == Record {
     }
     
     func element(before record: Record) -> Record? {
-        guard self.first! != record else { return nil }
+        guard let firstRecord = self.first, firstRecord != record else { return nil }
         guard let INDEX = self.firstIndex(of: record) else { return nil }
         
         let PREVIOUS_INDEX = self.index(before: INDEX)
