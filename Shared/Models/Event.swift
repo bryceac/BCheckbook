@@ -52,7 +52,7 @@ extension Event {
         self.vendor = vendor
         self.memo = memo
         self.amount = abs(amount)
-        self.type = amount < 0 ? EventType.withdrawal : EventType.deposit
+        self.type = amount <= 0 ? EventType.withdrawal : EventType.deposit
         self.isReconciled = isReconciled
     }
     
