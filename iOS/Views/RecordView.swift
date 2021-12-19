@@ -10,6 +10,10 @@ import SwiftUI
 struct RecordView: View {
     @ObservedObject var record: Record
     
+    var balanceBinding: Binding<Double> {
+        Binding.constant(record.balance)
+    }
+    
     var body: some View {
         HStack {
             Text(Event.DF.string(from: record.event.date))
@@ -40,7 +44,7 @@ struct RecordView: View {
                 }
             }
             
-            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
+            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balanceBinding.wrappedValue)) {
                 Text(VALUE)
             }
         }
