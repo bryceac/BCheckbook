@@ -8,20 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var records: Records
+    
+    @State var records: [Record] = []
     
     @State private var showSaveSuccessfulAlert = false
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(records.items.indices, id: \.self) { index in
+                ForEach(records.indices, id: \.self) { index in
                     
                     
                         NavigationLink(
-                            destination: RecordDetailView(record: records.items[index]),
+                            destination: RecordDetailView(record: records[index]),
                             label: {
-                                RecordView(record: records.items[index])
+                                RecordView(record: records[index])
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
@@ -29,7 +30,7 @@ struct ContentView: View {
                     Button("Save") {
                         let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                         
-                        if let _ = try? records.items.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
+                        if let _ = try? records.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
                             showSaveSuccessfulAlert = true
                         }
                     }
@@ -42,7 +43,7 @@ struct ContentView: View {
                             try? databaseManager.add(record: record)
                             
                             if let storedRecords = databaseManager.records {
-                                records.items = storedRecords
+                                records = storedRecords
                             }
                         }
                     }
@@ -50,7 +51,7 @@ struct ContentView: View {
             })
         }.onAppear() {
             if let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records {
-                records.items = storedRecords
+                records = storedRecords
             }
         }.alert(isPresented: $showSaveSuccessfulAlert) {
             Alert(title: Text("Save Successful"), message: Text("Transactions were successfully saved"), dismissButton: .default(Text("Ok")))
@@ -60,12 +61,12 @@ struct ContentView: View {
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
             if let databaseManager = DB.shared.manager {
-                let record = records.items[index]
+                let record = records[index]
                 
                 try? databaseManager.remove(record: record)
                 
                 if let storedReords = databaseManager.records {
-                    records.items = storedReords
+                    records = storedReords
                 }
             }
             
@@ -76,8 +77,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(Records(withRecords: [
-        Record()
-        ]))
+        ContentView()
     }
 }
