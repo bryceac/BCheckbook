@@ -24,20 +24,6 @@ class Record: Identifiable, ObservableObject, Codable {
         return balance
     }
     
-    private var previousRecord: Record? {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return nil }
-        
-        return storedRecords.element(before: self)
-    }
-    
-    var cancellable: AnyCancellable? {
-        guard let previousRecord = previousRecord else { return nil }
-        
-        return previousRecord.objectWillChange.sink { _ in
-            self.objectWillChange.send()
-        }
-    }
-    
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
     }
