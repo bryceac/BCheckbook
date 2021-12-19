@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecordDetailView: View {
     @ObservedObject var record: Record
+    var delegate: RecordDetailDelegate? = nil
     
     var dateBinding: Binding<Date> {
         Binding(get: {
