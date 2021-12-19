@@ -6,6 +6,6 @@
 //
 
 import Foundation
-protocol RecordDelegate {
+protocol RecordDetailDelegate {
     func refreshListView()
 }

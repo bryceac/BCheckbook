@@ -41,7 +41,7 @@
 		02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
 		02DBE1172697B7F6003C44EC /* Record+loadfromData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */; };
 		02DBE11E2697CB88003C44EC /* RecordArray+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE11D2697CB88003C44EC /* RecordArray+data.swift */; };
-		02DFAD66276EB54200071515 /* RecordDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DFAD65276EB54200071515 /* RecordDelegate.swift */; };
+		02DFAD66276EB54200071515 /* RecordDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DFAD65276EB54200071515 /* RecordDetailDelegate.swift */; };
 		02EB8363276E5887006761D1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02EB8362276E5887006761D1 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
@@ -95,7 +95,7 @@
 		02DBE1142697B173003C44EC /* BCheckFileDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCheckFileDocument.swift; sourceTree = "<group>"; };
 		02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+loadfromData.swift"; sourceTree = "<group>"; };
 		02DBE11D2697CB88003C44EC /* RecordArray+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordArray+data.swift"; sourceTree = "<group>"; };
-		02DFAD65276EB54200071515 /* RecordDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDelegate.swift; sourceTree = "<group>"; };
+		02DFAD65276EB54200071515 /* RecordDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailDelegate.swift; sourceTree = "<group>"; };
 		02EB8362276E5887006761D1 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -231,7 +231,7 @@
 				026767962697950B005D7DC2 /* CheckbookApp.swift */,
 				02A2AD972660A02E00774151 /* Info.plist */,
 				0246E5E2268F83AA0047A663 /* Views */,
-				02DFAD65276EB54200071515 /* RecordDelegate.swift */,
+				02DFAD65276EB54200071515 /* RecordDetailDelegate.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -451,7 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02A2ADCB2660A04900774151 /* EvenType.swift in Sources */,
-				02DFAD66276EB54200071515 /* RecordDelegate.swift in Sources */,
+				02DFAD66276EB54200071515 /* RecordDetailDelegate.swift in Sources */,
 				02A2ADCE2660A05900774151 /* EventTypeError.swift in Sources */,
 				02A2ADDA2660AFBD00774151 /* ContentView.swift in Sources */,
 				02A2ADDF2660B03200774151 /* RecordDetailView.swift in Sources */,
