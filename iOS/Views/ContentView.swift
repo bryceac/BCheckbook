@@ -50,9 +50,7 @@ struct ContentView: View, RecordDetailDelegate {
                 }
             })
         }.onAppear() {
-            if let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records {
-                records = storedRecords
-            }
+            loadRecords()
         }.alert(isPresented: $showSaveSuccessfulAlert) {
             Alert(title: Text("Save Successful"), message: Text("Transactions were successfully saved"), dismissButton: .default(Text("Ok")))
         }
@@ -64,13 +62,9 @@ struct ContentView: View, RecordDetailDelegate {
                 let record = records[index]
                 
                 try? databaseManager.remove(record: record)
-                
-                if let storedReords = databaseManager.records {
-                    records = storedReords
-                }
             }
             
-            records.remove(at: index)
+            loadRecords()
         }
     }
     
