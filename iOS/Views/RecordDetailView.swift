@@ -10,16 +10,6 @@ import SwiftUI
 struct RecordDetailView: View {
     @ObservedObject var record: Record
     
-    var dateBinding: Binding<Date> {
-        Binding(get: {
-            return record.event.date
-        }, set: { newDate in
-            record.event.date = newDate
-            
-            updateDB()
-        })
-    }
-    
     var checkNumberProxy: Binding<String> {
         Binding<String>(get: {
             var value = ""
@@ -31,85 +21,27 @@ struct RecordDetailView: View {
             return value
         }) { value in
             record.event.checkNumber = Int(value)
-            
-            updateDB()
         }
-    }
-    
-    var vendorBinding: Binding<String> {
-        Binding(get: {
-            return record.event.vendor
-        }, set: { vendorValue in
-            record.event.vendor = vendorValue
-            
-            updateDB()
-        })
-    }
-    
-    var memoBinding: Binding<String> {
-        Binding(get: {
-            return record.event.memo
-        }, set: { memoValue in
-            record.event.memo = memoValue
-            
-            updateDB()
-        })
-    }
-    
-    var amountBinding: Binding<Double> {
-        Binding(get: {
-            return record.event.amount
-        }, set: { amountValue in
-            record.event.amount = amountValue
-            
-            updateDB()
-        })
-    }
-    
-    var typeBinding: Binding<EventType> {
-        Binding(get: {
-            return record.event.type
-        }, set: { typeValue in
-            record.event.type = typeValue
-            
-            updateDB()
-        })
-    }
-    
-    var isReconciledBinding: Binding<Bool> {
-        Binding(get: {
-            return record.event.isReconciled
-        }, set: { isReconciledValue in
-            record.event.isReconciled = isReconciledValue
-            
-            updateDB()
-        })
     }
     
     var body: some View {
         Form {
-            DatePicker("Date", selection: dateBinding, displayedComponents: [.date])
+            DatePicker("Date", selection: $record.event.date, displayedComponents: [.date])
             
             TextField("Check No.", text: checkNumberProxy).keyboardType(.numberPad)
             
-            TextField("Vendor", text: vendorBinding)
-            TextField("Memo", text: memoBinding)
-            TextField("Amount", value: amountBinding, formatter: Event.CURRENCY_FORMAT)
+            TextField("Vendor", text: $record.event.vendor)
+            TextField("Memo", text: $record.event.memo)
+            TextField("Amount", value: $record.event.amount, formatter: Event.CURRENCY_FORMAT)
             
-            Picker("Type", selection: typeBinding) {
+            Picker("Type", selection: $record.event.type) {
                 ForEach(EventType.allCases, id: \.self) { type in
                     Text(type.rawValue)
                 }
             }
             
-            Toggle("Reconciled", isOn: isReconciledBinding)
+            Toggle("Reconciled", isOn: $record.event.isReconciled)
         }
-    }
-    
-    func updateDB() {
-        guard let databaseManager = DB.shared.manager else { return }
-        
-        try? databaseManager.update(record: record)
     }
 }
 
