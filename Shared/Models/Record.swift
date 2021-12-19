@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 class Record: Identifiable, ObservableObject, Codable {
     let id: String
