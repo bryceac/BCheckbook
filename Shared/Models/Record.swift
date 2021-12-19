@@ -14,6 +14,10 @@ class Record: Identifiable, ObservableObject, Codable {
             guard let databaseManager = DB.shared.manager else { return }
             
             try? databaseManager.update(record: self)
+            
+            guard let balance = try? databaseManager.balance(for: self) else { return }
+            
+            self.balance = balance
         }
     }
     
