@@ -16,16 +16,14 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(records.items.indices, id: \.self) { index in
+                ForEach(records.sortedRecords) { record in
                     
                     
                         NavigationLink(
-                            destination: RecordDetailView(record: records.items[index]),
+                            destination: RecordDetailView(record: record),
                             label: {
-                                RecordView(record: records.items[index])
-                            }).onDisappear {
-                                loadRecords()
-                            }
+                                RecordView(record: record)
+                            })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
@@ -41,10 +39,10 @@ struct ContentView: View {
                     Button("+") {
                         let record = Record()
                         
+                        records.add(record)
+                        
                         if let databaseManager = DB.shared.manager {
                             try? databaseManager.add(record: record)
-                            
-                            loadRecords()
                         }
                     }
                 }
