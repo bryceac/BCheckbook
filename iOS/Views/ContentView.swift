@@ -42,9 +42,7 @@ struct ContentView: View {
                         if let databaseManager = DB.shared.manager {
                             try? databaseManager.add(record: record)
                             
-                            if let storedRecords = databaseManager.records {
-                                records = storedRecords
-                            }
+                            loadRecords()
                         }
                     }
                 }
