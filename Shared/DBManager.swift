@@ -64,6 +64,22 @@ class DBManager {
     }
     
     /**
+     retrieve balance for a particular record.
+     - parameter record: The record to look for.
+     */
+    func balance(for record: Record) throws -> Double {
+        let row = try db.pluck(LEDGER_VIEW.filter(ID_FIELD == record.id))
+        
+        var balance: Double = 0
+        
+        if let result = row {
+            balance = result[BALANCE_FIELD]
+        }
+        
+        return balance
+    }
+    
+    /**
      add specified record to database.
      - parameter record: The record to add to database.
      */
