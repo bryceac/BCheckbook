@@ -12,7 +12,9 @@ class Records: ObservableObject {
     @Published var items: [Record] {
         didSet {
             cancellables = []
-            items.forEach { record in
+            sortedRecords.forEach { record in
+                record.previousRecord = sortedRecords.element(before: record)
+                
                 let cancellable = record.objectWillChange.sink { _ in
                     self.objectWillChange.send()
                 }
@@ -24,8 +26,22 @@ class Records: ObservableObject {
     
     var cancellables: [AnyCancellable] = []
     
+    var sortedRecords: [Record] {
+        return items.sorted { firstRecord, secondRecord in
+            firstRecord.event.date < secondRecord.event.date
+        }
+    }
+    
     init(withRecords records: [Record] = []) {
         items = records
+        
+        guard !records.isEmpty && records.count > 1 else { return }
+        
+        for index in records.indices where index != records.startIndex {
+            let PREVIOUS_INDEX = records.index(before: index)
+            
+            records[index].previousRecord = records[PREVIOUS_INDEX]
+        }
     }
     
     func add(_ record: Record) {
