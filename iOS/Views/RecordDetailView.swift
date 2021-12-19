@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RecordDetailView: View {
     @ObservedObject var record: Record
-    var delegate: RecordDetailDelegate? = nil
     
     var dateBinding: Binding<Date> {
         Binding(get: {
@@ -18,7 +17,6 @@ struct RecordDetailView: View {
             record.event.date = newDate
             
             updateDB()
-            delegate?.loadRecords()
         })
     }
     
@@ -35,7 +33,6 @@ struct RecordDetailView: View {
             record.event.checkNumber = Int(value)
             
             updateDB()
-            delegate?.loadRecords()
         }
     }
     
@@ -46,7 +43,6 @@ struct RecordDetailView: View {
             record.event.vendor = vendorValue
             
             updateDB()
-            delegate?.loadRecords()
         })
     }
     
@@ -57,7 +53,6 @@ struct RecordDetailView: View {
             record.event.memo = memoValue
             
             updateDB()
-            delegate?.loadRecords()
         })
     }
     
@@ -68,7 +63,6 @@ struct RecordDetailView: View {
             record.event.amount = amountValue
             
             updateDB()
-            delegate?.loadRecords()
         })
     }
     
@@ -79,7 +73,6 @@ struct RecordDetailView: View {
             record.event.type = typeValue
             
             updateDB()
-            delegate?.loadRecords()
         })
     }
     
@@ -90,7 +83,6 @@ struct RecordDetailView: View {
             record.event.isReconciled = isReconciledValue
             
             updateDB()
-            delegate?.loadRecords()
         })
     }
     

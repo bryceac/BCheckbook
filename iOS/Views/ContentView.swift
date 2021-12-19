@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View, RecordDetailDelegate {
+struct ContentView: View {
     
     @State var records: [Record] = []
     
@@ -20,7 +20,7 @@ struct ContentView: View, RecordDetailDelegate {
                     
                     
                         NavigationLink(
-                            destination: RecordDetailView(record: records[index], delegate: self),
+                            destination: RecordDetailView(record: records[index]),
                             label: {
                                 RecordView(record: records[index])
                             })
