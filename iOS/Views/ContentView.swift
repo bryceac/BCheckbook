@@ -9,20 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var records: [Record] = []
+    @EnvironmentObject var records: Records
     
     @State private var showSaveSuccessfulAlert = false
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(records.indices, id: \.self) { index in
+                ForEach(records.items.indices, id: \.self) { index in
                     
                     
                         NavigationLink(
-                            destination: RecordDetailView(record: records[index]),
+                            destination: RecordDetailView(record: records.items[index]),
                             label: {
-                                RecordView(record: records[index])
+                                RecordView(record: records.items[index])
                             }).onDisappear {
                                 loadRecords()
                             }
@@ -32,7 +32,7 @@ struct ContentView: View {
                     Button("Save") {
                         let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                         
-                        if let _ = try? records.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
+                        if let _ = try? records.items.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
                             showSaveSuccessfulAlert = true
                         }
                     }
@@ -59,7 +59,7 @@ struct ContentView: View {
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
             if let databaseManager = DB.shared.manager {
-                let record = records[index]
+                let record = records.items[index]
                 
                 try? databaseManager.remove(record: record)
             }
@@ -71,12 +71,12 @@ struct ContentView: View {
     func loadRecords() {
         guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
         
-        records = storedRecords
+        records.items = storedRecords
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(Records())
     }
 }
