@@ -9,7 +9,13 @@ import Foundation
 
 class Record: Identifiable, ObservableObject, Codable {
     let id: String
-    @Published var event: Event
+    @Published var event: Event {
+        didSet {
+            guard let databaseManager = DB.shared.manager else { return }
+            
+            try? databaseManager.update(record: self)
+        }
+    }
     
     @Published var balance: Double = 0
     
