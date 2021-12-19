@@ -17,14 +17,18 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    @Published var balance: Double = 0
+    var balance: Double {
+        guard let databaseManager = DB.shared.manager, let balance = try? databaseManager.balance(for: self) else { return 0 }
+        
+        return balance
+    }
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
     }
     
-    init(withID id: String = UUID().uuidString, transaction: Event = Event(), andBalance balance: Double = 0) {
-        (self.id, self.event, self.balance) = (id, transaction, balance)
+    init(withID id: String = UUID().uuidString, transaction: Event = Event()) {
+        (self.id, self.event) = (id, transaction)
     }
     
     required convenience init(from decoder: Decoder) throws {
