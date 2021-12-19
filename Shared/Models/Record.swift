@@ -18,21 +18,11 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    @Published var previousRecord: Record? = nil {
-        didSet {
-            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
-                            self.objectWillChange.send()
-                        })
-        }
-    }
-    
     var balance: Double {
         guard let databaseManager = DB.shared.manager, let balance = try? databaseManager.balance(for: self) else { return 0 }
         
         return balance
     }
-    
-    private var cancellable: AnyCancellable? = nil
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
