@@ -56,6 +56,36 @@ struct RecordDetailView: View {
         })
     }
     
+    var amountBinding: Binding<Double> {
+        Binding(get: {
+            return record.event.amount
+        }, set: { amountValue in
+            record.event.amount = amountValue
+            
+            updateDB()
+        })
+    }
+    
+    var typeBinding: Binding<EventType> {
+        Binding(get: {
+            return record.event.type
+        }, set: { typeValue in
+            record.event.type = typeValue
+            
+            updateDB()
+        })
+    }
+    
+    var isReconciledBinding: Binding<Bool> {
+        Binding(get: {
+            return record.event.isReconciled
+        }, set: { isReconciledValue in
+            record.event.isReconciled = isReconciledValue
+            
+            updateDB()
+        })
+    }
+    
     var body: some View {
         Form {
             DatePicker("Date", selection: dateBinding, displayedComponents: [.date])
@@ -64,15 +94,15 @@ struct RecordDetailView: View {
             
             TextField("Vendor", text: vendorBinding)
             TextField("Memo", text: memoBinding)
-            TextField("Amount", value: $record.event.amount, formatter: Event.CURRENCY_FORMAT)
+            TextField("Amount", value: amountBinding, formatter: Event.CURRENCY_FORMAT)
             
-            Picker("Type", selection: $record.event.type) {
+            Picker("Type", selection: typeBinding) {
                 ForEach(EventType.allCases, id: \.self) { type in
                     Text(type.rawValue)
                 }
             }
             
-            Toggle("Reconciled", isOn: $record.event.isReconciled)
+            Toggle("Reconciled", isOn: isReconciledBinding)
         }
     }
     
