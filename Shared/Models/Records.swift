@@ -11,8 +11,11 @@ import Combine
 class Records: ObservableObject {
     @Published var items: [Record] {
         didSet {
+            guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
+            
             cancellables = []
             sortedRecords.forEach { record in
+                record.previousRecord = storedRecords.element(before: record)
                 let cancellable = record.objectWillChange.sink { _ in
                     self.objectWillChange.send()
                 }
