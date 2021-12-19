@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View, RecordDetailDelegate {
     
     @State var records: [Record] = []
     
@@ -72,6 +72,12 @@ struct ContentView: View {
             
             records.remove(at: index)
         }
+    }
+    
+    func loadRecords() {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
+        
+        records = storedRecords
     }
 }
 

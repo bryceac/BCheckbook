@@ -7,5 +7,5 @@
 
 import Foundation
 protocol RecordDetailDelegate {
-    func refreshListView()
+    func loadRecords()
 }
