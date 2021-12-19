@@ -23,7 +23,9 @@ struct ContentView: View {
                             destination: RecordDetailView(record: records[index]),
                             label: {
                                 RecordView(record: records[index])
-                            })
+                            }).onDisappear {
+                                loadRecords()
+                            }
                 }.onDelete(perform: delete)
             }.toolbar(content: {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
