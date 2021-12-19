@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class Record: Identifiable, ObservableObject, Codable {
     let id: String
@@ -21,6 +22,12 @@ class Record: Identifiable, ObservableObject, Codable {
         guard let databaseManager = DB.shared.manager, let balance = try? databaseManager.balance(for: self) else { return 0 }
         
         return balance
+    }
+    
+    var previousRecord: Record? {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return nil }
+        
+        return storedRecords.element(before: self)
     }
     
     private enum CodingKeys: String, CodingKey {
