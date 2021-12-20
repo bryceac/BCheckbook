@@ -124,18 +124,32 @@ class DBManager {
         return categoryRow[CATEGORY_ID_FIELD]
     }
     
+    /**
+     add multiple records to database. This function is useful for importing data.
+     - parameter records: the records to add.
+     */
+    func add(records: [Record]) throws {
+        for record in records {
+            try add(record: record)
+        }
+    }
+    
+    /**
+     add multiple categories to database.
+     - parameter categories: the categories to add.
+     */
+    func add(categories: [String]) throws {
+        for category in categories {
+            try add(category: category)
+        }
+    }
+    
     private func databaseHas(record: Record) throws -> Bool {
         let TRANSACTION_RECORD = LEDGER_VIEW.filter(ID_FIELD == record.id)
         
         guard let _ = try db.pluck(TRANSACTION_RECORD) else { return false }
         
         return true
-    }
-    
-    func add(categories: [String]) throws {
-        for category in categories {
-            try add(category: category)
-        }
     }
     
     private func retrieveRecords() throws -> [Record] {
