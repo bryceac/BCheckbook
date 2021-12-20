@@ -27,6 +27,10 @@ struct OptionalComboBox: View {
     var body: some View {
         if let _ = selection {
             ComboBox(choices: $choices, value: selectionBinding)
+        } else {
+            Button("Set Category") {
+                selection = choices.first!
+            }
         }
     }
 }
