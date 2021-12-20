@@ -39,6 +39,7 @@
 		02ABA420276D3C4E00ABD4EE /* register.db in Resources */ = {isa = PBXBuildFile; fileRef = 02ABA41E276D3C4E00ABD4EE /* register.db */; };
 		02AC535A269A247B0045EDDC /* Records+removeRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC5359269A247B0045EDDC /* Records+removeRecord.swift */; };
 		02AC936C2770FBAD00329736 /* ComboBox in Frameworks */ = {isa = PBXBuildFile; productRef = 02AC936B2770FBAD00329736 /* ComboBox */; };
+		02CA16322771015600A46892 /* OptionalComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CA16312771015600A46892 /* OptionalComboBox.swift */; };
 		02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
 		02DBE1172697B7F6003C44EC /* Record+loadfromData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */; };
 		02DBE11E2697CB88003C44EC /* RecordArray+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE11D2697CB88003C44EC /* RecordArray+data.swift */; };
@@ -91,6 +92,7 @@
 		02A2ADDE2660B03200774151 /* RecordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailView.swift; sourceTree = "<group>"; };
 		02ABA41E276D3C4E00ABD4EE /* register.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = register.db; sourceTree = "<group>"; };
 		02AC5359269A247B0045EDDC /* Records+removeRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Records+removeRecord.swift"; sourceTree = "<group>"; };
+		02CA16312771015600A46892 /* OptionalComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalComboBox.swift; sourceTree = "<group>"; };
 		02DBE1142697B173003C44EC /* BCheckFileDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BCheckFileDocument.swift; sourceTree = "<group>"; };
 		02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+loadfromData.swift"; sourceTree = "<group>"; };
 		02DBE11D2697CB88003C44EC /* RecordArray+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecordArray+data.swift"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				02A2ADD92660AFBD00774151 /* ContentView.swift */,
 				02A2ADDC2660B01F00774151 /* RecordView.swift */,
 				02A2ADDE2660B03200774151 /* RecordDetailView.swift */,
+				02CA16312771015600A46892 /* OptionalComboBox.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				02A2ADDA2660AFBD00774151 /* ContentView.swift in Sources */,
 				02A2ADDF2660B03200774151 /* RecordDetailView.swift in Sources */,
 				02A2ADD72660AF3A00774151 /* Records.swift in Sources */,
+				02CA16322771015600A46892 /* OptionalComboBox.swift in Sources */,
 				026E6A71276D214B00ED3E36 /* DB.swift in Sources */,
 				02A2ADD42660A07B00774151 /* Record.swift in Sources */,
 				02A2ADDD2660B01F00774151 /* RecordView.swift in Sources */,
