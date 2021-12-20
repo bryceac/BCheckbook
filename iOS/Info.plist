@@ -51,5 +51,33 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.json</string>
+				<string>public.content</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>BCheck File</string>
+			<key>UTTypeIconFiles</key>
+			<array/>
+			<key>UTTypeIdentifier</key>
+			<string>me.brycecampbell.bcheck</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>bcheck</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>public.mime-type</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>
