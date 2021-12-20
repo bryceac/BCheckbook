@@ -27,7 +27,7 @@ struct RecordDetailView: View {
     var categoryListBinding: Binding<[String]> {
         Binding(get: {
             guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories else { return [] }
-            return categories
+            return categories.sorted()
         }, set: { newValue in
             guard let databaseManager = DB.shared.manager else { return }
             
