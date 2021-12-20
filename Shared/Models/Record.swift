@@ -64,6 +64,14 @@ class Record: Identifiable, ObservableObject, Codable {
         
         return DECODED_RECORDS
     }
+    
+    class func load(from data: Data) throws -> [Record] {
+        let JSON_DECODER = JSONDecoder()
+        
+        let SAVED_RECORDS = try JSON_DECODER.decode([Record].self, from: data)
+        
+        return SAVED_RECORDS
+    }
 }
 
 extension Record: Comparable {
@@ -96,6 +104,15 @@ extension Array where Element == Record {
         #else
         try ENCODED_RECORDS.write(to: path, options: .atomic)
         #endif
+    }
+    
+    var data: Data? {
+        let JSON_ENCODER = JSONEncoder()
+        JSON_ENCODER.outputFormatting = .prettyPrinted
+        
+        guard let ENCODED_RECORDS = try? JSON_ENCODER.encode(self) else { return nil }
+        
+        return ENCODED_RECORDS
     }
     
     func element(before record: Record) -> Record? {

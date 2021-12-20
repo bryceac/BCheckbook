@@ -42,6 +42,12 @@ class Records: ObservableObject {
         items.remove(at: index)
     }
     
+    func remove(_ record: Record) {
+        guard let RECORD_INDEX = self.items.firstIndex(of: record) else { return }
+        
+        self.remove(at: RECORD_INDEX)
+    }
+    
     func clear() {
         items.removeAll()
     }
