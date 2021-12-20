@@ -41,8 +41,6 @@ struct RecordDetailView: View {
             
             TextField("Check No.", text: checkNumberProxy).keyboardType(.numberPad)
             
-            OptionalComboBox(selection: $record.event.category, choices: categoryListBinding)
-            
             TextField("Vendor", text: $record.event.vendor)
             TextField("Memo", text: $record.event.memo)
             TextField("Amount", value: $record.event.amount, formatter: Event.CURRENCY_FORMAT)
@@ -52,6 +50,8 @@ struct RecordDetailView: View {
                     Text(type.rawValue)
                 }
             }
+            
+            OptionalComboBox(selection: $record.event.category, choices: categoryListBinding)
             
             Toggle("Reconciled", isOn: $record.event.isReconciled)
         }
