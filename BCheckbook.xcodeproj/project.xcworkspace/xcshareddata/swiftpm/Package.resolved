@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "ComboBox",
-        "repositoryURL": "https://github.com/bryceac/ComboBox",
-        "state": {
-          "branch": "main",
-          "revision": "251541124e38ccfbad4083cdc9613356b4da03e3",
-          "version": null
-        }
-      },
-      {
         "package": "SQLite.swift",
         "repositoryURL": "https://github.com/stephencelis/SQLite.swift",
         "state": {
