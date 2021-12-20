@@ -59,6 +59,12 @@ class Record: Identifiable, ObservableObject, Codable {
         try container.encode(event, forKey: .event)
     }
     
+    func loadPreviousRecord() {
+        guard let databasManager = DB.shared.manager, let storedRecords = databasManager.records else { return }
+        
+        previousRecord = storedRecords.element(before: self)
+    }
+    
     class func load(from path: URL) throws -> [Record] {
         let JSON_DECODER = JSONDecoder()
         
