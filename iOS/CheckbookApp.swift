@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct CheckbookApp: App {
     
-    @StateObject var records: Records = Records()
+    @StateObject var document: BCheckFileDocument = BCheckFileDocument()
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(records)
+            ContentView().environmentObject(document)
         }
     }
 }
