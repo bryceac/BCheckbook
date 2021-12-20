@@ -168,6 +168,8 @@ class DBManager {
      - parameter record: The record to be updated.
      */
     func update(record: Record) throws {
+        guard try databaseHas(record: record) else { return }
+        
         let TRSNSACTION_RECORD = TRABSACTION_TABLE.filter(ID_FIELD == record.id)
         
         var update: Update!
