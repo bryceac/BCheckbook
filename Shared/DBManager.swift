@@ -84,6 +84,8 @@ class DBManager {
      - parameter record: The record to add to database.
      */
     func add(record: Record) throws {
+        guard try !databaseHas(record: record) else { return }
+        
         var insert: Insert!
         
         if let category = record.event.category {
