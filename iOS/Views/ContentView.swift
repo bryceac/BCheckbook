@@ -27,7 +27,7 @@ struct ContentView: View {
                 }.onDelete(perform: delete)
             }.toolbar(content: {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
-                    Button("Save") {
+                    Button("Export") {
                         let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
                         
                         if let _ = try? records.items.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
@@ -50,7 +50,7 @@ struct ContentView: View {
         }.onAppear() {
             loadRecords()
         }.alert(isPresented: $showSaveSuccessfulAlert) {
-            Alert(title: Text("Save Successful"), message: Text("Transactions were successfully saved"), dismissButton: .default(Text("Ok")))
+            Alert(title: Text("Export Successful"), message: Text("Transactions were successfully Exported"), dismissButton: .default(Text("Ok")))
         }
     }
     
