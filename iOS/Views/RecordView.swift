@@ -47,7 +47,7 @@ struct RecordView: View {
             }
             
             HStack {
-                Text(record.event.category)
+                Text(record.event.category ?? "Uncategorized")
             }
         }.onAppear {
             record.loadbalance()
