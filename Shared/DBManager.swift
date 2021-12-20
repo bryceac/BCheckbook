@@ -201,7 +201,7 @@ class DBManager {
      - parameter category: The category to remove.
      */
     func remove(category: String) throws {
-        guard let id = try? id(ofCategory: category) else { return }
+        guard let id = try id(ofCategory: category) else { return }
         let CATEGORY_RECORD = CATEGORY_TABLE.filter(CATEGORY_ID_FIELD == id)
         
         try db.run(CATEGORY_RECORD.delete())
