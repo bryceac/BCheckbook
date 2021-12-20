@@ -10,8 +10,8 @@ import SwiftUI
 struct RecordView: View {
     @ObservedObject var record: Record
     
-    var balanceBinding: Binding<Double> {
-        Binding.constant(record.balance)
+    var balance: Double {
+        return record.balance
     }
     
     var body: some View {
@@ -44,7 +44,7 @@ struct RecordView: View {
                 }
             }
             
-            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balanceBinding.wrappedValue)) {
+            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
                 Text(VALUE)
             }
         }
