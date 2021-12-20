@@ -73,9 +73,7 @@
 					<string>bcheck</string>
 				</array>
 				<key>public.mime-type</key>
-				<array>
-					<string>public.mime-type</string>
-				</array>
+				<array/>
 			</dict>
 		</dict>
 	</array>
