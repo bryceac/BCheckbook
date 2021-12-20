@@ -10,10 +10,6 @@ import SwiftUI
 struct RecordView: View {
     @ObservedObject var record: Record
     
-    var balance: Double {
-        return record.balance
-    }
-    
     var body: some View {
         HStack {
             Text(Event.DF.string(from: record.event.date))
@@ -44,9 +40,11 @@ struct RecordView: View {
                 }
             }
             
-            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
+            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
                 Text(VALUE)
             }
+        }.onAppear {
+            record.loadPreviousRecord()
         }
     }
 }
