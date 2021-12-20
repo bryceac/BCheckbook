@@ -164,23 +164,25 @@ class DBManager {
     func update(record: Record) throws {
         let TRSNSACTION_RECORD = TRABSACTION_TABLE.filter(ID_FIELD == record.id)
         
-        var update: Update!
+        var update: Update?
         
         if let category = record.event.category {
-            if let categoryID = try? id(ofCategory: category) {
-                update =  TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
+            if let categoryID = try id(ofCategory: category) {
+                update = TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
             } else {
                 try add(category: category)
                 
-                guard let categoryID = try? id(ofCategory: category) else { return }
+                guard let categoryID = try id(ofCategory: category) else { return }
                 
-                update =  TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
+                update = TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
             }
             
         } else {
-            update =  TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- try id(ofCategory: record.event.category), VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
+            update = TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- try id(ofCategory: record.event.category), VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
         }
         
+        guard let update = update else { return }
+
         try db.run(update)
     }
     
