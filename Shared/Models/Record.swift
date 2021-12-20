@@ -18,26 +18,7 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    @Published var previousRecord: Record? = nil {
-        didSet {
-            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
-                self.objectWillChange.send()
-            })
-        }
-    }
-    
-    var balance: Double {
-        var value = previousRecord?.balance ?? 0
-        
-        switch event.type {
-        case .deposit: value += event.amount
-        case .withdrawal: value -= event.amount
-        }
-        
-        return value
-    }
-    
-    var cancellable: AnyCancellable? = nil
+    @Published var balance: Double = 0
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
@@ -64,10 +45,10 @@ class Record: Identifiable, ObservableObject, Codable {
         try container.encode(event, forKey: .event)
     }
     
-    func loadPreviousRecord() {
-        guard let databasManager = DB.shared.manager, let storedRecords = databasManager.records else { return }
+    func loadbalance() {
+        guard let databasManager = DB.shared.manager, let storedBalance = try? databasManager.balance(for: self) else { return }
         
-        previousRecord = storedRecords.element(before: self)
+            balance = storedBalance
     }
     
     class func load(from path: URL) throws -> [Record] {
