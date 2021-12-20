@@ -27,9 +27,14 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     var balance: Double {
-        guard let databaseManager = DB.shared.manager, let balance = try? databaseManager.balance(for: self) else { return 0 }
+        var value = previousRecord?.balance ?? 0
         
-        return balance
+        switch event.type {
+        case .deposit: value += event.amount
+        case .withdrawal: value -= event.amount
+        }
+        
+        return value
     }
     
     var cancellable: AnyCancellable? = nil
