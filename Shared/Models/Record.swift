@@ -8,7 +8,10 @@
 import Foundation
 import Combine
 
+/// Type that represents a record in the ledger.
 class Record: Identifiable, ObservableObject, Codable {
+    
+    /// the record's identifier
     let id: String
     @Published var event: Event {
         didSet {
@@ -18,6 +21,7 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
+    /// the balance as of the transaction
     @Published var balance: Double = 0
     
     private enum CodingKeys: String, CodingKey {
@@ -45,6 +49,7 @@ class Record: Identifiable, ObservableObject, Codable {
         try container.encode(event, forKey: .event)
     }
     
+    // implement function to get around the issue of retrieving up to date balances.
     func loadbalance() {
         guard let databasManager = DB.shared.manager, let storedBalance = try? databasManager.balance(for: self) else { return }
         
