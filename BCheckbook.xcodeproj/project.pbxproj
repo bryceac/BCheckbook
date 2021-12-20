@@ -19,6 +19,7 @@
 		026E6A71276D214B00ED3E36 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E6A70276D214B00ED3E36 /* DB.swift */; };
 		026E6A72276D214B00ED3E36 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E6A70276D214B00ED3E36 /* DB.swift */; };
 		0297EDEA27712710007B3E99 /* ComboBox in Frameworks */ = {isa = PBXBuildFile; productRef = 0297EDE927712710007B3E99 /* ComboBox */; };
+		0297EDEB2771384A007B3E99 /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
 		02A2ADA92660A02E00774151 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADA82660A02E00774151 /* Tests_iOS.swift */; };
 		02A2ADB42660A02E00774151 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADB32660A02E00774151 /* Tests_macOS.swift */; };
 		02A2ADBA2660A02E00774151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02A2AD8F2660A02E00774151 /* Assets.xcassets */; };
@@ -155,6 +156,7 @@
 		0246E5E1268F83430047A663 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				02DBE1142697B173003C44EC /* BCheckFileDocument.swift */,
 				02A2ADD02660A06A00774151 /* Event.swift */,
 				02A2ADD32660A07B00774151 /* Record.swift */,
 				02A2ADD62660AF3A00774151 /* Records.swift */,
@@ -237,7 +239,6 @@
 				02A2AD9E2660A02E00774151 /* Info.plist */,
 				02A2AD9F2660A02E00774151 /* macOS.entitlements */,
 				0246E5E3268F83CD0047A663 /* Views */,
-				02DBE1142697B173003C44EC /* BCheckFileDocument.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -445,6 +446,7 @@
 				02A2ADD42660A07B00774151 /* Record.swift in Sources */,
 				02A2ADDD2660B01F00774151 /* RecordView.swift in Sources */,
 				020B4126268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */,
+				0297EDEB2771384A007B3E99 /* BCheckFileDocument.swift in Sources */,
 				02A2ADD12660A06A00774151 /* Event.swift in Sources */,
 				026767972697950B005D7DC2 /* CheckbookApp.swift in Sources */,
 				026E6A6B276D13CE00ED3E36 /* DBManager.swift in Sources */,
