@@ -61,6 +61,13 @@ struct ContentView: View {
             if case .success = result {
                 showSaveSuccessfulAlert = true
             }
+        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFiles], allowsMultipleSelection: false) { result in
+            if case .success = result {
+                guard let file = try? result.get().first, let loadedRecords = try? Record.load(from: file) else { return }
+                
+                try? addRecords(loadedRecords)
+                loadRecords()
+            }
         }
     }
     
@@ -80,6 +87,12 @@ struct ContentView: View {
         guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
         
         records.items = storedRecords
+    }
+    
+    func addRecords(_ records: [Record]) throws {
+        guard let databaseManager = DB.shared.manager else { return }
+        
+        try databaseManager.add(records: records)
     }
 }
 
