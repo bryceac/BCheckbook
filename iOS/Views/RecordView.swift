@@ -44,7 +44,7 @@ struct RecordView: View {
                 Text(VALUE)
             }
         }.onAppear {
-            record.loadPreviousRecord()
+            record.loadbalance()
         }
     }
 }
