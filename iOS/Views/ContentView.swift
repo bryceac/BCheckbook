@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var records: Records
-    
-    @State var document = BCheckFileDocument()
+    @EnvironmentObject var document: BCheckFileDocument
     
     @State var isExporting = false
     @State var isImporting = false
@@ -21,7 +19,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(records.sortedRecords) { record in
+                ForEach(document.records.sortedRecords) { record in
                     
                     
                         NavigationLink(
@@ -33,18 +31,14 @@ struct ContentView: View {
             }.toolbar(content: {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                     Button("Export") {
-                        let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                        
-                        if let _ = try? records.items.save(to: DOCUMENTS_DIRECTORY.appendingPathComponent("transactions").appendingPathExtension("bcheck")) {
-                            showSaveSuccessfulAlert = true
-                        }
+                        isExporting = true
                     }
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                     Button("+") {
                         let record = Record()
                         
-                        records.add(record)
+                        document.records.add(record)
                         
                         if let databaseManager = DB.shared.manager {
                             try? databaseManager.add(record: record)
@@ -54,7 +48,6 @@ struct ContentView: View {
             })
         }.onAppear() {
             loadRecords()
-            document = BCheckFileDocument(records: records)
         }.alert(isPresented: $showSaveSuccessfulAlert) {
             Alert(title: Text("Export Successful"), message: Text("Transactions were successfully Exported"), dismissButton: .default(Text("Ok")))
         }.fileExporter(isPresented: $isExporting, document: document, contentType: .bcheckFiles, defaultFilename: "transactions") { result in
@@ -74,7 +67,7 @@ struct ContentView: View {
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
             if let databaseManager = DB.shared.manager {
-                let record = records.items[index]
+                let record = document.records.items[index]
                 
                 try? databaseManager.remove(record: record)
             }
@@ -86,7 +79,7 @@ struct ContentView: View {
     func loadRecords() {
         guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
         
-        records.items = storedRecords
+        document.records.items = storedRecords
     }
     
     func addRecords(_ records: [Record]) throws {
@@ -98,6 +91,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(Records())
+        ContentView().environmentObject(BCheckFileDocument())
     }
 }
