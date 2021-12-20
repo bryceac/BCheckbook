@@ -115,15 +115,11 @@ class DBManager {
     private func id(ofCategory category: String?) throws -> Int? {
         guard let category = category else { return nil }
         
-        var id: Int? = nil
-        
         let row = try db.pluck(CATEGORY_TABLE.filter(CATEGORY_FIELD == category))
             
-        if let result = row, let rowID = Int(result[ID_FIELD]) {
-            id = rowID
-        }
+        guard let categoryRow = row else { return nil }
         
-        return id
+        return categoryRow[CATEGORY_ID_FIELD]
     }
     
     func add(categories: [String]) throws {
