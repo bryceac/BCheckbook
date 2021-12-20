@@ -108,6 +108,7 @@ class DBManager {
      - parameter category: The category to be added to the database.
      */
     func add(category: String) throws  {
+        guard case .none = try id(ofCategory: category) else { return }
         try db.run(CATEGORY_TABLE.insert(CATEGORY_FIELD <- category))
     }
     
@@ -123,6 +124,12 @@ class DBManager {
         }
         
         return id
+    }
+    
+    func add(categories: [String]) throws {
+        for category in categories {
+            try add(category: category)
+        }
     }
     
     private func retrieveRecords() throws -> [Record] {
