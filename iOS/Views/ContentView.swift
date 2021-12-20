@@ -13,6 +13,9 @@ struct ContentView: View {
     
     @State var document = BCheckFileDocument()
     
+    @State var isExporting = false
+    @State var isImporting = false
+    
     @State private var showSaveSuccessfulAlert = false
     
     var body: some View {
@@ -54,6 +57,10 @@ struct ContentView: View {
             document = BCheckFileDocument(records: records)
         }.alert(isPresented: $showSaveSuccessfulAlert) {
             Alert(title: Text("Export Successful"), message: Text("Transactions were successfully Exported"), dismissButton: .default(Text("Ok")))
+        }.fileExporter(isPresented: $isExporting, document: document, contentType: .bcheckFiles, defaultFilename: "transactions") { result in
+            if case .success = result {
+                showSaveSuccessfulAlert = true
+            }
         }
     }
     
