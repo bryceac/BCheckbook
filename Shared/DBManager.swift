@@ -197,6 +197,7 @@ class DBManager {
      - parameter record: The record to remove
      */
     func remove(record: Record) throws {
+        guard try databaseHas(record: record) else { return }
         let TRSNSACTION_RECORD = TRABSACTION_TABLE.filter(ID_FIELD == record.id)
         
         try db.run(TRSNSACTION_RECORD.delete())
