@@ -48,7 +48,7 @@ struct RecordView: View {
             
             HStack {
                 Text(record.event.category ?? "Uncategorized")
-            }
+            }.padding()
         }.onAppear {
             record.loadbalance()
         }
