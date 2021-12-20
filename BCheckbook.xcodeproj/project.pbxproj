@@ -41,7 +41,6 @@
 		02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
 		02DBE1172697B7F6003C44EC /* Record+loadfromData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1162697B7F6003C44EC /* Record+loadfromData.swift */; };
 		02DBE11E2697CB88003C44EC /* RecordArray+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE11D2697CB88003C44EC /* RecordArray+data.swift */; };
-		02EB8363276E5887006761D1 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 02EB8362276E5887006761D1 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +101,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02EB8363276E5887006761D1 /* libsqlite3.tbd in Frameworks */,
 				026E6A6F276D200A00ED3E36 /* SQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
