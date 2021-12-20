@@ -27,14 +27,11 @@ struct RecordDetailView: View {
     var categoryListBinding: Binding<[String]> {
         Binding(get: {
             guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories else { return [] }
-            
             return categories
         }, set: { newValue in
             guard let databaseManager = DB.shared.manager else { return }
             
-            newValue.forEach { value in
-                
-            }
+            try? databaseManager.add(categories: newValue)
         })
     }
     
@@ -44,7 +41,7 @@ struct RecordDetailView: View {
             
             TextField("Check No.", text: checkNumberProxy).keyboardType(.numberPad)
             
-            OptionalComboBox(selection: $record.category, choices: <#T##Binding<[String]>#>)
+            OptionalComboBox(selection: $record.event.category, choices: categoryListBinding)
             
             TextField("Vendor", text: $record.event.vendor)
             TextField("Memo", text: $record.event.memo)
