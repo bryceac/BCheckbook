@@ -122,6 +122,14 @@ class DBManager {
         return categoryRow[CATEGORY_ID_FIELD]
     }
     
+    private func has(record: Record) throws -> Bool {
+        let TRANSACTION_RECORD = LEDGER_VIEW.filter(ID_FIELD == record.id)
+        
+        guard let _ = try db.pluck(TRANSACTION_RECORD) else { return false }
+        
+        return true
+    }
+    
     func add(categories: [String]) throws {
         for category in categories {
             try add(category: category)
