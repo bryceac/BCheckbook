@@ -11,6 +11,8 @@ struct ContentView: View {
     
     @EnvironmentObject var records: Records
     
+    @State var document = BCheckFileDocument()
+    
     @State private var showSaveSuccessfulAlert = false
     
     var body: some View {
@@ -49,6 +51,7 @@ struct ContentView: View {
             })
         }.onAppear() {
             loadRecords()
+            document = BCheckFileDocument(records: records)
         }.alert(isPresented: $showSaveSuccessfulAlert) {
             Alert(title: Text("Export Successful"), message: Text("Transactions were successfully Exported"), dismissButton: .default(Text("Ok")))
         }
