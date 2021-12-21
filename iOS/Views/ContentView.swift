@@ -30,9 +30,18 @@ struct ContentView: View {
                 }.onDelete(perform: delete)
             }.toolbar(content: {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
-                    Button("Export") {
-                        isExporting = true
-                    }
+                    
+                    Menu(content: {
+                        Button("Export") {
+                            isExporting = true
+                        }
+                        
+                        Button("Import") {
+                            isImporting = true
+                        }
+                    }, label: {
+                        Text("Options")
+                    })
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                     Button("+") {
