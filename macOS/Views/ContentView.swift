@@ -23,8 +23,6 @@ struct ContentView: View {
                 RecordView(record: record).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
                         try? remove(record: record)
-                        
-                        removeRecordUndoActionRegister(record)
                     }
                 }))
             }
@@ -34,8 +32,6 @@ struct ContentView: View {
                     let RECORD = Record()
                     
                     try? add(record: RECORD)
-                    
-                    addRecordUndoActionRegister(for: RECORD)
                 }
             }
         }).fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: .bcheckFiles, defaultFilename: "transaction") { result in
@@ -43,7 +39,7 @@ struct ContentView: View {
                 showSuccessfulExportAlert = true
             }
         }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFiles], allowsMultipleSelection: false) { result in
-            if case .sucess = result {
+            if case .success = result {
                 guard let file = try? result.get().first, let loadedRecords = try? Record.load(from: file) else { return }
                 
                 try? add(records: loadedRecords)
