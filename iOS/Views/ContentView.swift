@@ -73,7 +73,7 @@ struct ContentView: View {
         }.onOpenURL { fileURL in
             guard let savedRecords = try? Record.load(from: fileURL) else { return }
             
-            addRecords(savedRecords)
+            try? addRecords(savedRecords)
             loadRecords()
         }
     }
