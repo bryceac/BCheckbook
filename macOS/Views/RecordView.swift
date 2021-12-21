@@ -14,18 +14,6 @@ struct RecordView: View {
     
     @State var debit: Double
     
-    var balance: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        var value: Double = 0
-        
-        if let storedBalance = try? databaseManager.balance(for: record) {
-            value = storedBalance
-        }
-        
-        return value
-    }
-    
     var checkProxy: Binding<String> {
         Binding<String>(get: {
             var value = ""
@@ -126,15 +114,13 @@ struct RecordView: View {
             VStack(spacing: 10) {
                 Text("Balance")
                     .foregroundColor(Color.black)
-                if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
+                if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
                     Text(BALANCE_VALUE)
                         .foregroundColor(Color.black)
                 }
             }
             
-        }.background(Color.init(red: 192/255, green: 192/255, blue: 192/255)).onAppear {
-            record.loadbalance()
-        }.edgesIgnoringSafeArea(.bottom)
+        }.background(Color.init(red: 192/255, green: 192/255, blue: 192/255)).edgesIgnoringSafeArea(.bottom)
     }
     
     init(record: Record) {
