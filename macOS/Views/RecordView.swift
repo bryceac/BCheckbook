@@ -126,7 +126,7 @@ struct RecordView: View {
             VStack(spacing: 10) {
                 Text("Balance")
                     .foregroundColor(Color.black)
-                if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
+                if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
                     Text(BALANCE_VALUE)
                         .foregroundColor(Color.black)
                 }
