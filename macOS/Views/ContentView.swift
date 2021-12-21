@@ -46,6 +46,12 @@ struct ContentView: View {
         records.items = storedRecords
     }
     
+    func add(record: Record) throws {
+        guard let databaseManager = DB.shared.manager else { return }
+        
+        try databaseManager.add(record: record)
+    }
+    
     func addRecords(_ records: [Record]) throws {
         guard let databaseManager = DB.shared.manager else { return }
         
