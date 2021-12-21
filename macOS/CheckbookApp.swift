@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct CheckbookApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
