@@ -34,7 +34,7 @@ struct ContentView: View {
                         isImporting = true
                     }
                     
-                    Button("Export Transaction") {
+                    Button("Export Transactions") {
                         isExporting = true
                     }
                 }, label: {
