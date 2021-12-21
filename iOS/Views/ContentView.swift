@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var document: BCheckFileDocument
+    @StateObject var records: Records = Records()
     
     @State var isExporting = false
     @State var isImporting = false
@@ -19,7 +19,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(document.records.sortedRecords) { record in
+                ForEach(records.sortedRecords) { record in
                     
                     
                         NavigationLink(
@@ -47,7 +47,7 @@ struct ContentView: View {
                     Button("+") {
                         let record = Record()
                         
-                        document.records.add(record)
+                        records.add(record)
                         
                         if let databaseManager = DB.shared.manager {
                             try? databaseManager.add(record: record)
@@ -59,7 +59,7 @@ struct ContentView: View {
             loadRecords()
         }.alert(isPresented: $showSaveSuccessfulAlert) {
             Alert(title: Text("Export Successful"), message: Text("Transactions were successfully Exported"), dismissButton: .default(Text("Ok")))
-        }.fileExporter(isPresented: $isExporting, document: document, contentType: .bcheckFiles, defaultFilename: "transactions") { result in
+        }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: .bcheckFiles, defaultFilename: "transactions") { result in
             if case .success = result {
                 showSaveSuccessfulAlert = true
             }
@@ -76,7 +76,7 @@ struct ContentView: View {
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
             if let databaseManager = DB.shared.manager {
-                let record = document.records.items[index]
+                let record = records.items[index]
                 
                 try? databaseManager.remove(record: record)
             }
@@ -88,7 +88,7 @@ struct ContentView: View {
     func loadRecords() {
         guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
         
-        document.records.items = storedRecords
+        records.items = storedRecords
     }
     
     func addRecords(_ records: [Record]) throws {
