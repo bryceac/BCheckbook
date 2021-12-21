@@ -41,6 +41,7 @@
 		02ABA420276D3C4E00ABD4EE /* register.db in Resources */ = {isa = PBXBuildFile; fileRef = 02ABA41E276D3C4E00ABD4EE /* register.db */; };
 		02B098FE277233AA00BD36E4 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 02B098FD277233AA00BD36E4 /* SQLite */; };
 		02B09900277233B100BD36E4 /* ComboBox in Frameworks */ = {isa = PBXBuildFile; productRef = 02B098FF277233B100BD36E4 /* ComboBox */; };
+		02B09903277247A200BD36E4 /* OptionalComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CA16312771015600A46892 /* OptionalComboBox.swift */; };
 		02CA16322771015600A46892 /* OptionalComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CA16312771015600A46892 /* OptionalComboBox.swift */; };
 		02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
 /* End PBXBuildFile section */
@@ -470,6 +471,7 @@
 				02115E8F268CF50400085138 /* ContentView.swift in Sources */,
 				02A2ADD82660AF3A00774151 /* Records.swift in Sources */,
 				02A2ADD52660A07B00774151 /* Record.swift in Sources */,
+				02B09903277247A200BD36E4 /* OptionalComboBox.swift in Sources */,
 				02115E91268CF58500085138 /* RecordView.swift in Sources */,
 				02A2ADD22660A06A00774151 /* Event.swift in Sources */,
 				026E6A72276D214B00ED3E36 /* DB.swift in Sources */,
