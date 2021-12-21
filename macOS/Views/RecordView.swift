@@ -14,6 +14,18 @@ struct RecordView: View {
     
     @State var debit: Double
     
+    var balance: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        var value: Double = 0
+        
+        if let storedBalance = try? databaseManager.balance(for: record) {
+            value = storedBalance
+        }
+        
+        return value
+    }
+    
     var checkProxy: Binding<String> {
         Binding<String>(get: {
             var value = ""
