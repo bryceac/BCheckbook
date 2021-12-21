@@ -174,7 +174,6 @@
 				02A2ADD92660AFBD00774151 /* ContentView.swift */,
 				02A2ADDC2660B01F00774151 /* RecordView.swift */,
 				02A2ADDE2660B03200774151 /* RecordDetailView.swift */,
-				02CA16312771015600A46892 /* OptionalComboBox.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,6 +203,7 @@
 		02A2AD8C2660A02E00774151 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				02CA16312771015600A46892 /* OptionalComboBox.swift */,
 				02ABA41E276D3C4E00ABD4EE /* register.db */,
 				026E6A6A276D13CE00ED3E36 /* DBManager.swift */,
 				0246E5DF268F82790047A663 /* Enumerations */,
