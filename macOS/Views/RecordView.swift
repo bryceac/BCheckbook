@@ -30,6 +30,17 @@ struct RecordView: View {
         }
     }
     
+    var categoryListBinding: Binding<[String]> {
+            Binding(get: {
+                guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories else { return [] }
+                return categories.sorted()
+            }, set: { newValue in
+                guard let databaseManager = DB.shared.manager else { return }
+                
+                try? databaseManager.add(categories: newValue)
+            })
+        }
+    
     var body: some View {
         HStack {
             DatePicker("", selection: $record.event.date, displayedComponents: [.date]).colorScheme(.light)
@@ -48,6 +59,7 @@ struct RecordView: View {
             
             VStack {
                 Text("Category")
+                OptionalComboBox(selection: $record.event.category, choices: categoryListBinding)
             }
             
             VStack {
