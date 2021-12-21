@@ -227,4 +227,24 @@ class DBManager {
         
         try db.run(CATEGORY_RECORD.delete())
     }
+    
+    /**
+     remove a specified list of records.
+     - parameter records: the records to remove
+     */
+    func remove(records: [Record]) throws {
+        for record in records {
+            try remove(record: record)
+        }
+    }
+    
+    /**
+     remove a specified list of categories.
+     - parameter categories: list of categories to remoe.
+     */
+    func remove(categories: [String]) throws {
+        for category in categories {
+            try remove(category: category)
+        }
+    }
 }
