@@ -9,18 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.undoManager) var undoManager
-    @ObservedObject var records: Records
+    
+    @StateObject var records: Records = Records()
     
     var body: some View {
         List {
-            ForEach(records.sortedRecords.indices, id: \.self) { index in
-                RecordView(record: records.sortedRecords[index]).contextMenu(ContextMenu(menuItems: {
+            ForEach(records.sortedRecords) { record in
+                RecordView(record: record).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
-                        let RECORD = records.sortedRecords[index]
+                        records.remove(record)
                         
-                        records.remove(RECORD)
-                        
-                        removeRecordUndoActionRegister(RECORD)
+                        removeRecordUndoActionRegister(record)
                     }
                 }))
             }
@@ -31,7 +30,7 @@ struct ContentView: View {
                     
                     records.add(RECORD)
                     
-                    if let RECORD_INDEX = records.sortedRecords.firstIndex(of: RECORD) {
+                    if let RECORD_INDEX = records.items.firstIndex(of: RECORD) {
                         addRecordUndoActionRegister(at: RECORD_INDEX)
                     }
                     
@@ -39,6 +38,18 @@ struct ContentView: View {
                 }
             }
         })
+    }
+    
+    func loadRecords() {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
+        
+        records.items = storedRecords
+    }
+    
+    func addRecords(_ records: [Record]) throws {
+        guard let databaseManager = DB.shared.manager else { return }
+        
+        try databaseManager.add(records: records)
     }
     
     func addRecordUndoActionRegister(at index: Int) {
