@@ -1,6 +1,7 @@
 =BCheckbook=
 
-'''Version:''' 0.2
+'''iOS Version:''' 0.2
+'''macOS Version:''' 0.3
 
 '''Author:''' Bryce Campbell
 
@@ -17,6 +18,12 @@ This application has only been tested on macOS 11 and iOS 14 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">0.3 (Currently iOS only)</dt>
+<dd>
+<p>Major fix that deals with transaction balances 
+and also registers app as owner of <strong>bcheck</strong> files, making importing easier.</p>
+<p>Data persistence also now utilizes a database, making importing old data important.</p>
+</dd>
 <dt style="font-weight:bold">0.2 (Both)</dt>
 <dd>
 <p>Major fix that deals with 
@@ -102,54 +109,89 @@ Records can be removed in one of two ways, depending on where you are using the 
 </dd>
 <dt style="font-weight:bold">Records after the record I edited do not update.</dt>
 <dd>
-<p>This issue has been partially dealt with.</p>
+<p>This issue has been <strong>completely</strong> dealt with on <strong>iOS</strong> as of version 0.3, but still exists in the Mac app, which still has its update in development.</p>
 <p>While the transactions will now update properly, as of version 0.2, There are still problems that occur after changing dates of transactions.</p>
 <p>If you change dates for any transaction, it is recommended that you relaunch the application and/or reload the file, so that things will be updated properly.</p>
 <p>If I find a way to fix this issue, I will apply a fix when I can.</p>
 </dd>
 <dt style="font-weight:bold">Balance is wrong is after changing date</dt>
 <dd>
-<p>This problem is a little bothersome to tackle. I plan to deal with it as soon as I can, but I see one possible reason for that.</p>
+<p>This problem has been dealt with on iOS as of version 0.3, but is a little bothersome to tackle to in the Mac version, whose update is still in development. I plan to deal with it as soon as I can, but I see one possible reason for that.</p>
 <p>I will attempt to fix this when I can, but for now, reloading your save or relaunching the application after saving <strong>should</strong> rectify things.</p>
 </dd>
+<dt style="font-weight:bold">Importing records will not update existing Records</dt>
+<dd>
+<p>This problem exists only in version 0.3, which is iOS only at this time.</p>
+<p>This is presently intentional on my part.</p>
+<p>While I would have like to have import update existing records 
+and have been able to do it with the code available, 
+I only see the changes reflected in the database and not in the UI, 
+so I chose not to have importing update records at this time.</p>
+<p>If I find a way to resolve this, I will fix it as soon as I can.</p>
 </dl>
 
 ===Saves & Loading===
 
-The Mac version and iOS versions may use the same file extension, <strong>bcheck</strong>, but are very different in terms of how they work.
+<p>At this point in time, the Mac and iOS versions are very different. 
+Both may support the <strong>bcheck</strong>, 
+but the iOS app no longer reads from those files directly.</p>
 
-While the macOS application can have data saved under any name in any directory, and will only read bcheck files, which are just JSON files with a different extension (they <strong>should</strong> be viewable in any text editor without changing extensions, but can safely have the extension temporarily changed to <strong>json</strong> to do the same thing), to not 
-give users the impression that any JSON file will be loadable, the iOS version does not allow such freedom. 
-This difference was by design, so that automatically loading data upon launch will work properly, though it tends to be annoying.
+<p>The iOS app currently utilizes a database backend c
+alled <strong>register.db</strong>, which the 
+Mac app <strong>should</strong> support at a later date, 
+and instead imports any new transactions from a provided 
+<strong>bcheck</strong> file into the database, 
+to make it easy for users to get up and running.</p>
 
-It is recommended to save your data as <strong>transactions.bcheck</strong> if you want to send your save to your iPhone or iPad, 
-as that is what the iOS app looks for when it runs.
+<p>However, the bcheck files exported by the iOS app 
+can be read without issue in the Mac application.</p>
 
 ===Backing up Data===
 
-Your data can be backed by simply backing up the bcheck file, which <strong>should</strong> be accessible via iTunes, Finder (only guaranteed on Macs without iTunes), and the Files app on iOS.
+<p>Due to the iOS app and the Mac app being very 
+different at this point in time, backup procedures differ.</p>
 
-On macOS, the file will be wherever you told it to save the file (Default is in the Documents directory).
+====iOS====
+
+<p>On iOS, you can back up your data by backing up 
+either the <strong>register.db</strong> file 
+or exporting your transactions to a <strong>bcheck</strong> file, 
+with the latter path being the recommended way to preserve data.</p>
+
+<p>These files are accessible in the Files app, 
+Finder (only Macs without iTunes), and iTunes.</p>
+
+====macOS===
+
+<p>The Mac app still relies entirely on <strong>bcheck</strong> files, 
+so backing up is as simple as backing up the <strong>bcheck</strong>.</p>
+
+<p>The bcheck file will be wherever you told it to save 
+(Defaults to Documents Directory).</p>
 
 ===Transferring Saves===
 
-As stated above, the iOS application and macOS application work very different when it comes to saving and loading, as one is more flexible in naming than the other.
+As stated above, the iOS application and macOS application work very different when it comes to saving and loading.
 
 If you would like to transfer saves from one device to another, there are certain things can be done, depending on platform.
 
 ====macOS Destination from iOS target====
 
-You can use either Airdrop inside the Files app or use either Finder or iTunes to grab the save.
+You can use either Airdrop inside the Files app or use either Finder or iTunes to grab the exported bcheck file.
 
 When the transfer is made via AirDrop, your file will located in the Downloads Folder, while Finder, and likely iTunes may be more flexible.
 
 ====iOS Destination via AirDrop====
 
-Currently, the iOS app is not registered to accept files directly, though I intend to look into this, to ease transfers.
+<p>As of version 0.3, the iOS app is registered to accept files bcheck directly.</p>
 
-For now, when transferring a save via AirDrop, it is best to tell it to open the file in the Files app, navigate to the location of stuff on your device, and save the file to the <strong>BCheckbook</strong> folder.
+<p>When transferring a save via AirDrop, the application will import any new transactions into the database and update the list of transactions.</p>
 
-As long as the save is named <strong>transactions.bcheck</strong>, the iOS app should automatically load the file upon start up.
+<p>However, if you want to reimport everything, 
+which is currently the only way to update pre existing transaction,
+you need to delete <strong>register.db</strong>, after closing the application, 
+and then try importing your data, as the app <strong>should</strong> 
+give you a fresh copy of the database.</p>
 
 ===Support===
 
@@ -174,3 +216,28 @@ Submissions will be tested by me before they will be merged.
 This program will only work on macOS 11 and later. When I tried deploying the Yahtzee program to an older version of macOS, XCode would complain about the code being used only being available on macOS 10.15 and later and other stuff was only available in macOS 11 and later.
 
 The iOS version only works on iOS 14 and later.
+
+===Projects Used===
+
+This app uses the following projects to help things run smoothly.
+
+<dl>
+<dt>
+<a href="https://github.com/stephencelis/SQLite.swift">SQLite.swift</a>
+</dt>
+<dd>
+<p>Used to implement the database backend of the iOS application.</p>
+</dd>
+<dt>
+<a href="https://github.com/bryceac/ComboBox">ComboBox</a>
+</dt>
+<dd>
+<p>Custom view that is used 
+to allow users to either add their own categories 
+or to selected from the list of available categories.</p>
+<p>On macOS this renders an NSComboBox, 
+which is modified to add any custom values to the list when a user presses enter.</p>
+<p>On iOS this operates as a custom picker that has filtering capabilities, 
+as well as lets users add items to the list if what they type is not found.</p>
+</dd>
+</dl>
