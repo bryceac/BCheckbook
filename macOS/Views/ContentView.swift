@@ -27,6 +27,15 @@ struct ContentView: View {
                 }))
             }
         }.toolbar(content: {
+            ToolbarItem(placement: ToolbarItemPlacement.principal) {
+                Button("Import Transactions") {
+                    isImporting = true
+                }
+                
+                Button("Export Transaction") {
+                    isExporting = true
+                }
+            }
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
                     let RECORD = Record()

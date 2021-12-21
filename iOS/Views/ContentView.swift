@@ -32,11 +32,11 @@ struct ContentView: View {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                     
                     Menu(content: {
-                        Button("Export") {
+                        Button("Export Transactions") {
                             isExporting = true
                         }
                         
-                        Button("Import") {
+                        Button("Import Transactions") {
                             isImporting = true
                         }
                     }, label: {
