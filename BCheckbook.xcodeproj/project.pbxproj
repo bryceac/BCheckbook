@@ -20,7 +20,6 @@
 		026E6A72276D214B00ED3E36 /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E6A70276D214B00ED3E36 /* DB.swift */; };
 		0297EDEA27712710007B3E99 /* ComboBox in Frameworks */ = {isa = PBXBuildFile; productRef = 0297EDE927712710007B3E99 /* ComboBox */; };
 		0297EDEB2771384A007B3E99 /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
-		0297EDEE27714F2B007B3E99 /* ActivityView in Frameworks */ = {isa = PBXBuildFile; productRef = 0297EDED27714F2B007B3E99 /* ActivityView */; };
 		02A2ADA92660A02E00774151 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADA82660A02E00774151 /* Tests_iOS.swift */; };
 		02A2ADB42660A02E00774151 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADB32660A02E00774151 /* Tests_macOS.swift */; };
 		02A2ADBA2660A02E00774151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02A2AD8F2660A02E00774151 /* Assets.xcassets */; };
@@ -101,7 +100,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				026E6A6F276D200A00ED3E36 /* SQLite in Frameworks */,
-				0297EDEE27714F2B007B3E99 /* ActivityView in Frameworks */,
 				0297EDEA27712710007B3E99 /* ComboBox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,7 +288,6 @@
 			packageProductDependencies = (
 				026E6A6E276D200A00ED3E36 /* SQLite */,
 				0297EDE927712710007B3E99 /* ComboBox */,
-				0297EDED27714F2B007B3E99 /* ActivityView */,
 			);
 			productName = "Checkbook (iOS)";
 			productReference = 02A2AD942660A02E00774151 /* BCheckbook.app */;
@@ -386,7 +383,6 @@
 			packageReferences = (
 				026E6A6D276D200A00ED3E36 /* XCRemoteSwiftPackageReference "SQLite" */,
 				0297EDE827712710007B3E99 /* XCRemoteSwiftPackageReference "ComboBox" */,
-				0297EDEC27714F2B007B3E99 /* XCRemoteSwiftPackageReference "ActivityView" */,
 			);
 			productRefGroup = 02A2AD952660A02E00774151 /* Products */;
 			projectDirPath = "";
@@ -878,14 +874,6 @@
 				minimumVersion = 0.1.0;
 			};
 		};
-		0297EDEC27714F2B007B3E99 /* XCRemoteSwiftPackageReference "ActivityView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftUI-Plus/ActivityView";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.1.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -898,11 +886,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0297EDE827712710007B3E99 /* XCRemoteSwiftPackageReference "ComboBox" */;
 			productName = ComboBox;
-		};
-		0297EDED27714F2B007B3E99 /* ActivityView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0297EDEC27714F2B007B3E99 /* XCRemoteSwiftPackageReference "ActivityView" */;
-			productName = ActivityView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
