@@ -70,6 +70,11 @@ struct ContentView: View {
                 try? addRecords(loadedRecords)
                 loadRecords()
             }
+        }.onOpenURL { fileURL in
+            guard let savedRecords = try? Record.load(from: fileURL) else { return }
+            
+            try? addRecords(savedRecords)
+            loadRecords()
         }
     }
     
