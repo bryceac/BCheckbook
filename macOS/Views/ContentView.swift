@@ -17,7 +17,7 @@ struct ContentView: View {
             ForEach(records.sortedRecords) { record in
                 RecordView(record: record).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
-                        records.remove(record)
+                        try? remove(record: record)
                         
                         removeRecordUndoActionRegister(record)
                     }
@@ -28,13 +28,9 @@ struct ContentView: View {
                 Button("+") {
                     let RECORD = Record()
                     
-                    records.add(RECORD)
+                    try? add(record: RECORD)
                     
-                    if let RECORD_INDEX = records.items.firstIndex(of: RECORD) {
-                        addRecordUndoActionRegister(at: RECORD_INDEX)
-                    }
-                    
-                    
+                    addRecordUndoActionRegister(for: RECORD)
                 }
             }
         })
@@ -50,46 +46,52 @@ struct ContentView: View {
         guard let databaseManager = DB.shared.manager else { return }
         
         try databaseManager.add(record: record)
+        
+        loadRecords()
     }
     
     func remove(record: Record) throws {
         guard let databaseManager = DB.shared.manager else { return }
         
         try databaseManager.remove(record: record)
+        
+        loadRecords()
     }
     
     func remove(records: [Record]) throws {
         guard let databaseManager = DB.shared.manager else { return }
         
         try databaseManager.remove(records: records)
+        
+        loadRecords()
     }
     
-    func addRecords(_ records: [Record]) throws {
+    func add(records: [Record]) throws {
         guard let databaseManager = DB.shared.manager else { return }
         
         try databaseManager.add(records: records)
+        
+        loadRecords()
     }
     
-    func addRecordUndoActionRegister(at index: Int) {
+    func addRecordUndoActionRegister(for record: Record) {
         
         undoManager?.registerUndo(withTarget: records, handler: { _ in
-            let RECORD = records.sortedRecords[index]
             
-            records.remove(RECORD)
-            removeRecordUndoActionRegister(RECORD)
+            try? remove(record: record)
         })
         
+    }
+    
+    func addRecordsUndoActionRegister(for records: [Record]) {
+        undoManager
     }
     
     func removeRecordUndoActionRegister(_ record: Record) {
         
         undoManager?.registerUndo(withTarget: records, handler: { _ in
-            records.add(record)
             
-            if let RECORD_INDEX = records.sortedRecords.firstIndex(of: record) {
-                
-                addRecordUndoActionRegister(at: RECORD_INDEX)
-            }
+            try? add(record: record)
         })
     }
 }
