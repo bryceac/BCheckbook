@@ -84,7 +84,15 @@ struct ContentView: View {
     }
     
     func addRecordsUndoActionRegister(for records: [Record]) {
-        undoManager
+        undoManager?.registerUndo(withTarget: self.records, handler: { _ in
+            try? remove(records: records)
+        })
+    }
+    
+    func removeRecordsUndoActionRegister(for records: [Record]) {
+        undoManager?.registerUndo(withTarget: self.records, handler: { _ in
+            try? add(records: records)
+        })
     }
     
     func removeRecordUndoActionRegister(_ record: Record) {
