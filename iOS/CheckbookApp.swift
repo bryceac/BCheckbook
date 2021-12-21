@@ -14,7 +14,11 @@ struct CheckbookApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(document)
+            ContentView().environmentObject(document).onOpenURL { fileURL in
+                guard let databaseManager = DB.shared.manager, let savedRecords = try? Record.load(from: fileURL) else { return }
+                
+                try? databaseManager.add(records: savedRecords)
+            }
         }
     }
 }
