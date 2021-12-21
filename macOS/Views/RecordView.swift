@@ -58,8 +58,8 @@ struct RecordView: View {
             }
             
             VStack {
-                Text("Category")
-                OptionalComboBox(selection: $record.event.category, choices: categoryListBinding)
+                Text("Category").foregroundColor(Color.black)
+                OptionalComboBox(selection: $record.event.category, choices: categoryListBinding).colorScheme(.light)
             }
             
             VStack {
@@ -69,7 +69,7 @@ struct RecordView: View {
                 
                 Text("Memo")
                     .foregroundColor(Color.black)
-                TextField("", text: $record.event.memo).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))/*.foregroundColor(/*@START_MENU_TOKEN@*/.black/*@END_MENU_TOKEN@*/) */
+                TextField("", text: $record.event.memo).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack {
@@ -89,7 +89,7 @@ struct RecordView: View {
                 
                     credit = value
                 
-                }).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))/*.foregroundColor(.black) */
+                }).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack {
@@ -108,7 +108,7 @@ struct RecordView: View {
                     }
                 
                     debit = value
-                }).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))/*.foregroundColor(.black) */
+                }).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))
             }
             
             VStack(spacing: 10) {
