@@ -54,12 +54,12 @@ struct ContentView: View {
                         }
                     }
                 }
-            }).onOpenURL { fileURL in
+            })/*.onOpenURL { fileURL in
                 guard let savedRecords = try? Record.load(from: fileURL) else { return }
                 
                 try? addRecords(savedRecords)
                 loadRecords()
-            }
+            }*/
         }.onAppear() {
             loadRecords()
         }.alert(isPresented: $showSaveSuccessfulAlert) {
