@@ -18,7 +18,11 @@ struct CheckbookApp: App {
                 guard let databaseManager = DB.shared.manager, let savedRecords = try? Record.load(from: fileURL) else { return }
                 
                 try? databaseManager.add(records: savedRecords)
-                document.records.items = savedRecords
+                
+                guard let storedRecords = databaseManager.records else { return }
+                
+                document.records.items = storedRecords
+                
             }
         }
     }
