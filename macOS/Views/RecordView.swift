@@ -47,6 +47,10 @@ struct RecordView: View {
             }
             
             VStack {
+                Text("Category")
+            }
+            
+            VStack {
                 Text("Vendor")
                     .foregroundColor(Color.black)
                 TextField("", text: $record.event.vendor).colorScheme(.light).background(Color(red: 255/255, green: 255/255, blue: 255/255))/*.foregroundColor(.black) */
