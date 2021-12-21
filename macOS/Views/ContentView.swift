@@ -34,6 +34,8 @@ struct ContentView: View {
                     try? add(record: RECORD)
                 }
             }
+        }).alert(isPresented: $showSuccessfulExportAlert, content: {
+            Alert(title: Text("Export Successful"), message: Text("Transactions were successfully exported"), dismissButton: .default(Text("Ok")))
         }).fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: .bcheckFiles, defaultFilename: "transaction") { result in
             if case .success = result {
                 showSuccessfulExportAlert = true
