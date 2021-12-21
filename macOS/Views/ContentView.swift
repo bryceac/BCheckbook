@@ -28,13 +28,19 @@ struct ContentView: View {
             }
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.principal) {
-                Button("Import Transactions") {
-                    isImporting = true
-                }
                 
-                Button("Export Transaction") {
-                    isExporting = true
-                }
+                Menu(content: {
+                    Button("Import Transactions") {
+                        isImporting = true
+                    }
+                    
+                    Button("Export Transaction") {
+                        isExporting = true
+                    }
+                }, label: {
+                    Text("Options")
+                })
+                
             }
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
