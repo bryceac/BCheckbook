@@ -39,6 +39,8 @@
 		02A2ADDF2660B03200774151 /* RecordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A2ADDE2660B03200774151 /* RecordDetailView.swift */; };
 		02ABA41F276D3C4E00ABD4EE /* register.db in Resources */ = {isa = PBXBuildFile; fileRef = 02ABA41E276D3C4E00ABD4EE /* register.db */; };
 		02ABA420276D3C4E00ABD4EE /* register.db in Resources */ = {isa = PBXBuildFile; fileRef = 02ABA41E276D3C4E00ABD4EE /* register.db */; };
+		02B098FE277233AA00BD36E4 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 02B098FD277233AA00BD36E4 /* SQLite */; };
+		02B09900277233B100BD36E4 /* ComboBox in Frameworks */ = {isa = PBXBuildFile; productRef = 02B098FF277233B100BD36E4 /* ComboBox */; };
 		02CA16322771015600A46892 /* OptionalComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CA16312771015600A46892 /* OptionalComboBox.swift */; };
 		02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
 /* End PBXBuildFile section */
@@ -108,6 +110,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B098FE277233AA00BD36E4 /* SQLite in Frameworks */,
+				02B09900277233B100BD36E4 /* ComboBox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +310,10 @@
 			dependencies = (
 			);
 			name = "BCheckbook (macOS)";
+			packageProductDependencies = (
+				02B098FD277233AA00BD36E4 /* SQLite */,
+				02B098FF277233B100BD36E4 /* ComboBox */,
+			);
 			productName = "Checkbook (macOS)";
 			productReference = 02A2AD9C2660A02E00774151 /* BCheckbook.app */;
 			productType = "com.apple.product-type.application";
@@ -883,6 +891,16 @@
 			productName = SQLite;
 		};
 		0297EDE927712710007B3E99 /* ComboBox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0297EDE827712710007B3E99 /* XCRemoteSwiftPackageReference "ComboBox" */;
+			productName = ComboBox;
+		};
+		02B098FD277233AA00BD36E4 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 026E6A6D276D200A00ED3E36 /* XCRemoteSwiftPackageReference "SQLite" */;
+			productName = SQLite;
+		};
+		02B098FF277233B100BD36E4 /* ComboBox */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0297EDE827712710007B3E99 /* XCRemoteSwiftPackageReference "ComboBox" */;
 			productName = ComboBox;
