@@ -42,7 +42,7 @@ struct RecordView: View {
         }
     
     var body: some View {
-        LazyHStack {
+        HStack {
             DatePicker("", selection: $record.event.date, displayedComponents: [.date]).colorScheme(.light)
             
             VStack {
