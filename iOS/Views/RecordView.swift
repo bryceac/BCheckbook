@@ -50,8 +50,8 @@ struct RecordView: View {
                 Text(record.event.category ?? "Uncategorized")
             }.padding()
         }.onAppear {
-            // make sure up to date balance is displayed
-            record.loadbalance()
+            // make sure recod is linked to previous record.
+            record.getPreviousRecord()
         }
     }
 }

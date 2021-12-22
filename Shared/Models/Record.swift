@@ -23,6 +23,7 @@ class Record: Identifiable, ObservableObject, Codable {
     
     @Published var previousRecord: Record? = nil {
         didSet {
+            cancellable = nil
             cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
                 self.objectWillChange.send()
             })
@@ -72,10 +73,10 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     // implement function to get around the issue of retrieving up to date balances.
-    func loadbalance() {
-        guard let databasManager = DB.shared.manager, let storedBalance = try? databasManager.balance(for: self) else { return }
+    func getPreviousRecord() {
+        guard let databasManager = DB.shared.manager, let storedRecords = try? databasManager.records else { return }
         
-            balance = storedBalance
+        previousRecord = storedRecords.element(before: self)
     }
     
     class func load(from path: URL) throws -> [Record] {
