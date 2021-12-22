@@ -105,9 +105,16 @@ struct ContentView: View {
     }
     
     func getRecord(priorTo record: Record) -> Record? {
-        guard let databaseManager = DB.shared.manager, let storedRecord = databaseManager.records else { return nil }
+        var priorRecord: Record? = nil
         
-        return storedRecord.element(before: record)
+        DispatchQueue.main.async {
+            guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
+            
+            priorRecord = storedRecords.element(before: record)
+        }
+        
+        
+        return priorRecord
     }
 }
 
