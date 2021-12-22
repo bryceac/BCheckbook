@@ -25,7 +25,9 @@ struct ContentView: View {
                         NavigationLink(
                             destination: RecordDetailView(record: record),
                             label: {
-                                RecordView(record: record)
+                                RecordView(record: record) {
+                          getRecord(priorTo: record)
+                                }
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
@@ -100,6 +102,12 @@ struct ContentView: View {
         guard let databaseManager = DB.shared.manager else { return }
         
         try databaseManager.add(records: records)
+    }
+    
+    func getRecord(priorTo record: Record) -> Record? {
+        guard let databaseManager = DB.shared.manager, let storedRecord = databaseManager.records else { return nil }
+        
+        return storedRecord.element(before: record)
     }
 }
 
