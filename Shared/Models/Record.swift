@@ -86,7 +86,7 @@ class Record: Identifiable, ObservableObject, Codable {
         case .withdrawal: balance -= event.amount
         }
         
-        return initialValue
+        return balance
     }
     
     class func load(from path: URL) throws -> [Record] {
