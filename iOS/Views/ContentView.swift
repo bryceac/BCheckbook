@@ -26,8 +26,15 @@ struct ContentView: View {
                             destination: RecordDetailView(record: record),
                             label: {
                                 RecordView(record: record) {
-                          getRecord(priorTo: record)
+                                    var priorRecord: Record? = nil
+                                    
+                                    DispatchQueue.main.async {
+                                        priorRecord = getRecord(priorTo: record)
+                                    }
+                                    
+                                    return priorRecord
                                 }
+                                
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
@@ -111,14 +118,11 @@ struct ContentView: View {
     func getRecord(priorTo record: Record) -> Record? {
         var priorRecord: Record? = nil
         
-        DispatchQueue.main.async {
-            if let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records {
-                priorRecord = storedRecords.element(before: record)
-            } else {
+        if let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records {
+            priorRecord = storedRecords.element(before: record)
+        } else {
                 priorRecord = records.sortedRecords.element(before: record)
-            }
         }
-        
         
         return priorRecord
     }
