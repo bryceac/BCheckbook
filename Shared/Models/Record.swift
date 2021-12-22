@@ -29,16 +29,7 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    var balance: Double {
-        var value: Double = previousRecord?.balance ?? 0
-        
-        switch event.type {
-        case .deposit: value += event.amount
-        case .withdrawal: value -= event.amount
-        }
-        
-        return value
-    }
+    @Published var balance: Double = 0
     
     var cancellable: AnyCancellable? = nil
     
