@@ -119,7 +119,7 @@ struct RecordView: View {
                         .foregroundColor(Color.black)
                 }
             }.onChange(of: record.previousRecord?.balance ?? record.event.amount) { _ in
-                guard let databaseManager = DB.shared.manager
+                record.getBalance()
             }
             
         }.background(Color.init(red: 192/255, green: 192/255, blue: 192/255)).edgesIgnoringSafeArea(.bottom).onAppear {
