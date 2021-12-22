@@ -25,16 +25,7 @@ struct ContentView: View {
                         NavigationLink(
                             destination: RecordDetailView(record: record),
                             label: {
-                                RecordView(record: record) {
-                                    var priorRecord: Record? = nil
-                                    
-                                    DispatchQueue.main.async {
-                                        priorRecord = getRecord(priorTo: record)
-                                    }
-                                    
-                                    return priorRecord
-                                }
-                                
+                                RecordView(record: record)
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
@@ -63,7 +54,11 @@ struct ContentView: View {
                         }
                     }
                 }
-            })
+            }).onReceive(records.objectWillChange) { _ in
+                records.items.forEach { record in
+                    record.previousRecord = getRecord(priorTo: record)
+                }
+            }
         }.onAppear() {
             loadRecords()
         }.alert(isPresented: $showSaveSuccessfulAlert) {
