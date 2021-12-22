@@ -119,9 +119,7 @@ struct RecordView: View {
                         .foregroundColor(Color.black)
                 }
             }
-        }.background(Color.init(red: 192/255, green: 192/255, blue: 192/255)).edgesIgnoringSafeArea(.bottom).onAppear {
-            record.getPreviousRecord()
-        }
+        }.background(Color.init(red: 192/255, green: 192/255, blue: 192/255)).edgesIgnoringSafeArea(.bottom)
     }
     
     init(record: Record) {
