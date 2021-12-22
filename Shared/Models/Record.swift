@@ -32,8 +32,8 @@ class Record: Identifiable, ObservableObject, Codable {
     var balance: Double {
         var value: Double = 0
         
-        if let databaseManager = DB.shared.manager, let previousRecord = previousRecord {
-            value = databaseManager.balance(for: previousRecord.id)
+        if let databaseManager = DB.shared.manager, let previousRecord = previousRecord, let previousBalance = try? databaseManager.balance(for: previousRecord) {
+            value = previousBalance
         }
         
         switch event.type {
