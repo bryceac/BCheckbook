@@ -22,16 +22,25 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     @Published var previousRecord: Record? = nil {
-        didSet {
-            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
+        willSet {
+            cancellable = newValue?.objectWillChange.sink(receiveValue: { _ in
                 self.objectWillChange.send()
             })
         }
     }
     
-    @Published var balance: Double = 0
+    var balance: Double {
+        var value = previousRecord?.balance ?? 0
+        
+        switch event.type {
+        case .deposit: value += event.amount
+        case .withdrawal: value -= event.amount
+        }
+        
+        return value
+    }
     
-    var cancellable: AnyCancellable? = nil
+    private var cancellable: AnyCancellable? = nil
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
@@ -59,12 +68,6 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     // implement function to get around the issue of retrieving up to date balances.
-    func getBalance() {
-        guard let databaseManager = DB.shared.manager, let storedBalance = try? databaseManager.balance(for: self) else { return }
-        
-        balance = storedBalance
-    }
-    
     func getPreviousRecord() {
         guard let databasManager = DB.shared.manager, let storedRecords = databasManager.records else { return }
         
