@@ -49,10 +49,18 @@ struct RecordView: View {
             HStack {
                 Text(record.event.category ?? "Uncategorized")
             }.padding()
-        }.onAppear {
-            // make sure recod is linked to previous record.
-            record.getPreviousRecord()
         }
+    }
+    
+    init(record: Record, previousRecord: (()->Record?)? = nil) {
+        self.record = record
+        
+        guard let receivedArgument = previousRecord, let previousRecord = receivedArgument() else {
+            return
+        }
+        
+        record.previousRecord = previousRecord
+
     }
 }
 

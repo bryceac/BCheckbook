@@ -70,13 +70,6 @@ class Record: Identifiable, ObservableObject, Codable {
         try container.encode(event, forKey: .event)
     }
     
-    // implement function to get previous record
-    func getPreviousRecord() {
-        guard let databasManager = DB.shared.manager, let storedRecords = databasManager.records else { return }
-        
-        previousRecord = storedRecords.element(before: self)
-    }
-    
     //implement function to calculate balane
     func calculateBalance(withInitialValue initialValue: Double) -> Double {
         var balance = initialValue
