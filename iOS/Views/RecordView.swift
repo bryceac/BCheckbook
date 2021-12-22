@@ -42,7 +42,9 @@ struct RecordView: View {
                 }
                 
                 if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
-                    Text(VALUE)
+                    Text(VALUE).onChange(of: record.previousRecord?.balance) { _ in
+                        record.objectWillChange.send()
+                    }
                 }
             }
             
