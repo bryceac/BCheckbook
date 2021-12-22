@@ -31,11 +31,7 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     var balance: Double {
-        var value: Double = 0
-        
-        if let previousRecord = previousRecord {
-            value = previousRecord.balance
-        }
+        var value: Double = previousRecord?.balance ?? 0
         
         switch event.type {
         case .deposit: value += event.amount
