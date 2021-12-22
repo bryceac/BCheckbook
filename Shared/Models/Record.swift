@@ -30,11 +30,14 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     var balance: Double {
-        var value = previousRecord?.balance ?? 0
+        var value: Double = 0
         
-        switch event.type {
-        case .deposit: value += event.amount
-        case .withdrawal: value -= event.amount
+        if let databaseManager = DB.shared.manager, let storedBalance = try? databaseManager.balance(for: self) {
+            value = storedBalance
+        } else if let previousRecord = previousRecord {
+            value = previousRecord.balance
+            
+            
         }
         
         return value
@@ -67,11 +70,23 @@ class Record: Identifiable, ObservableObject, Codable {
         try container.encode(event, forKey: .event)
     }
     
-    // implement function to get around the issue of retrieving up to date balances.
+    // implement function to get previous record
     func getPreviousRecord() {
         guard let databasManager = DB.shared.manager, let storedRecords = databasManager.records else { return }
         
         previousRecord = storedRecords.element(before: self)
+    }
+    
+    //implement function to calculate balane
+    func calculateBalance(withInitialValue initialValue: Double) -> Double {
+        var balance = initialValue
+        
+        switch event.type {
+        case .deposit: balance += event.amount
+        case .withdrawal: balance -= event.amount
+        }
+        
+        return initialValue
     }
     
     class func load(from path: URL) throws -> [Record] {
