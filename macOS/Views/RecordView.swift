@@ -59,8 +59,8 @@ struct RecordView: View {
             
             VStack {
                 Text("Category").foregroundColor(Color.black)
-                OptionalComboBox(selection: $record.event.category, choices: categoryListBinding).colorScheme(.light)
-            }
+                OptionalComboBox(selection: $record.event.category, choices: categoryListBinding)
+            }.colorScheme(.light)
             
             VStack {
                 Text("Vendor")
