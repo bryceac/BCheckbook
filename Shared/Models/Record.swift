@@ -21,8 +21,30 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    /// the balance as of the transaction
-    @Published var balance: Double = 0
+    @Published var previousRecord: Record? = nil {
+        didSet {
+            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
+                self.objectWillChange.send()
+            })
+        }
+    }
+    
+    var balance: Double {
+        var value: Double = 0
+        
+        if let databaseManager = DB.shared.manager, let previousRecord = previousRecord {
+            value = databaseManager.balance(for: previousRecord.id)
+        }
+        
+        switch event.type {
+        case .deposit: value += event.amount
+        case .withdrawal: value -= event.amount
+        }
+        
+        return value
+    }
+    
+    var cancellable: AnyCancellable? = nil
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
