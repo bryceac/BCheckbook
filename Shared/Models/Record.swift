@@ -23,14 +23,13 @@ class Record: Identifiable, ObservableObject, Codable {
     
     @Published var previousRecord: Record? = nil {
         didSet {
-            cancellable = nil
             cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
                 self.objectWillChange.send()
             })
         }
     }
     
-    /* var balance: Double {
+    var balance: Double {
         var value: Double = previousRecord?.balance ?? 0
         
         switch event.type {
@@ -39,9 +38,7 @@ class Record: Identifiable, ObservableObject, Codable {
         }
         
         return value
-    } */
-    
-    @Published var balance: Double = 0
+    }
     
     var cancellable: AnyCancellable? = nil
     
@@ -71,12 +68,6 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     // implement function to get around the issue of retrieving up to date balances.
-    func getBalance() {
-        guard let databaseManager = DB.shared.manager, let storedBalance = try? databaseManager.balance(for: self) else { return }
-        
-        balance = storedBalance
-    }
-    
     func getPreviousRecord() {
         guard let databasManager = DB.shared.manager, let storedRecords = databasManager.records else { return }
         
