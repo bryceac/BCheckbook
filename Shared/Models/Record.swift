@@ -37,7 +37,9 @@ class Record: Identifiable, ObservableObject, Codable {
         } else if let previousRecord = previousRecord {
             value = previousRecord.balance
             
-            
+            value = calculateBalance(withInitialValue: value)
+        } else {
+            value = calculateBalance(withInitialValue: 0)
         }
         
         return value
