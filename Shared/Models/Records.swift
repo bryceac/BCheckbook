@@ -25,9 +25,18 @@ class Records: ObservableObject {
     var cancellables: [AnyCancellable] = []
     
     var sortedRecords: [Record] {
-        return items.sorted { firstRecord, secondRecord in
+        
+        let sortedArray = items.sorted { firstRecord, secondRecord in
             firstRecord.event.date < secondRecord.event.date
         }
+        
+        DispatchQueue.main.async {
+            self.items.forEach { item in
+                item.previousRecord = sortedArray.element(before: item)
+            }
+        }
+        
+        return sortedArray
     }
     
     init(withRecords records: [Record] = []) {
