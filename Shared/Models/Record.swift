@@ -59,6 +59,12 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     // implement function to get around the issue of retrieving up to date balances.
+    func getBalance() {
+        guard let databaseManager = DB.shared.manager, let storedBalance = try? databaseManager.balance(for: self) else { return }
+        
+        balance = storedBalance
+    }
+    
     func getPreviousRecord() {
         guard let databasManager = DB.shared.manager, let storedRecords = databasManager.records else { return }
         
