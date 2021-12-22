@@ -32,14 +32,14 @@ class Record: Identifiable, ObservableObject, Codable {
     var balance: Double {
         var value: Double = 0
         
-        if let databaseManager = DB.shared.manager, let storedBalance = try? databaseManager.balance(for: self) {
-            value = storedBalance
-        } else if let previousRecord = previousRecord {
+        if let previousRecord = previousRecord {
             value = previousRecord.balance
             
             value = calculateBalance(withInitialValue: value)
+        } else if let databaseManager = DB.shared.manager, let storedBalance = try? databaseManager.balance(for: self) {
+            value = storedBalance
         } else {
-            value = calculateBalance(withInitialValue: 0)
+            value = calculateBalance(withInitialValue: value)
         }
         
         return value
