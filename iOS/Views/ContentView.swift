@@ -54,11 +54,7 @@ struct ContentView: View {
                         }
                     }
                 }
-            }).onReceive(records.objectWillChange) { _ in
-                records.items.forEach { record in
-                    record.previousRecord = getRecord(priorTo: record)
-                }
-            }
+            })
         }.onAppear() {
             loadRecords()
         }.alert(isPresented: $showSaveSuccessfulAlert) {
@@ -108,18 +104,6 @@ struct ContentView: View {
         } else {
             self.records.items += records
         }
-    }
-    
-    func getRecord(priorTo record: Record) -> Record? {
-        var priorRecord: Record? = nil
-        
-        if let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records {
-            priorRecord = storedRecords.element(before: record)
-        } else {
-                priorRecord = records.sortedRecords.element(before: record)
-        }
-        
-        return priorRecord
     }
 }
 
