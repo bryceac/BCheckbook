@@ -122,8 +122,6 @@ struct RecordView: View {
             
         }.background(Color.init(red: 192/255, green: 192/255, blue: 192/255)).edgesIgnoringSafeArea(.bottom).onAppear {
             record.getPreviousRecord()
-        }.onReceive(record.objectWillChange) { _ in
-            record.getBalance()
         }
     }
     
