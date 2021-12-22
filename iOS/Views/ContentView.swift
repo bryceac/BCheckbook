@@ -86,9 +86,11 @@ struct ContentView: View {
                 let record = records.items[index]
                 
                 try? databaseManager.remove(record: record)
+                
+                loadRecords()
+            } else {
+                records.remove(at: index)
             }
-            
-            loadRecords()
         }
     }
     
@@ -99,18 +101,22 @@ struct ContentView: View {
     }
     
     func addRecords(_ records: [Record]) throws {
-        guard let databaseManager = DB.shared.manager else { return }
-        
-        try databaseManager.add(records: records)
+        if let databaseManager = DB.shared.manager {
+            try databaseManager.add(records: records)
+        } else {
+            self.records.items += records
+        }
     }
     
     func getRecord(priorTo record: Record) -> Record? {
         var priorRecord: Record? = nil
         
         DispatchQueue.main.async {
-            guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
-            
-            priorRecord = storedRecords.element(before: record)
+            if let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records {
+                priorRecord = storedRecords.element(before: record)
+            } else {
+                priorRecord = records.sortedRecords.element(before: record)
+            }
         }
         
         
