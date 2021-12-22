@@ -20,8 +20,6 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(records.sortedRecords) { record in
-                    
-                    
                         NavigationLink(
                             destination: RecordDetailView(record: record),
                             label: {
