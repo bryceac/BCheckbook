@@ -118,10 +118,7 @@ struct RecordView: View {
                     Text(BALANCE_VALUE)
                         .foregroundColor(Color.black)
                 }
-            }.onChange(of: record.previousRecord?.balance ?? record.event.amount) { _ in
-                record.getBalance()
             }
-            
         }.background(Color.init(red: 192/255, green: 192/255, blue: 192/255)).edgesIgnoringSafeArea(.bottom).onAppear {
             record.getPreviousRecord()
         }
