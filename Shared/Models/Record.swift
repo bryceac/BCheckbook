@@ -22,8 +22,8 @@ class Record: Identifiable, ObservableObject, Codable {
     }
     
     @Published var previousRecord: Record? = nil {
-        willSet {
-            cancellable = newValue?.objectWillChange.sink(receiveValue: { _ in
+        didSet {
+            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
                 self.objectWillChange.send()
             })
         }
