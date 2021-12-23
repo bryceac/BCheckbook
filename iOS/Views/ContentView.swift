@@ -23,15 +23,7 @@ struct ContentView: View {
                         NavigationLink(
                             destination: RecordDetailView(record: record),
                             label: {
-                                RecordView(record: record) {
-                                    var prior: Record? = nil
-                                    
-                                    DispatchQueue.main.async {
-                                        prior = self.record(preceding: record)
-                                    }
-                                    
-                                    return prior
-                                }
+                                RecordView(record: record)
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
@@ -101,11 +93,16 @@ struct ContentView: View {
     func record(preceding record: Record) -> Record? {
         var priorRecord: Record? = nil
         
-        if let databaseManager = DB.shared.manager {
-            priorRecord = databaseManager.record(before: record)
-        } else if let precedingRecord = records.element(before: record) {
-            priorRecord = precedingRecord
+        var semaphore = DispatchSemaphore(value: 0)
+        
+        DispatchQueue.main.async {
+            if let databaseManager = DB.shared.manager {
+                priorRecord = databaseManager.record(before: record)
+            } else if let precedingRecord = records.element(before: record) {
+                priorRecord = precedingRecord
+            }
         }
+        semaphore.wait()
         
         return priorRecord
     }
