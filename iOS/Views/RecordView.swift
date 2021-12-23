@@ -55,9 +55,9 @@ struct RecordView: View {
     init(record: Record, previousRecord: (() -> Record?)? = nil) {
         self.record = record
         
-        guard let previousRecordArgument = previousRecord, let previousRecord = previousRecordArgument() else { return }
+        guard let previousRecord = previousRecord else { return }
         
-        self.record.previousRecord = previousRecord
+        self.record.previousRecord = previousRecord()
     }
 }
 
