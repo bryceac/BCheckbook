@@ -157,7 +157,7 @@ class DBManager {
         for row in try db.prepare(LEDGER_VIEW) {
             guard let transaction = Event(date: row[DATE_FIELD], checkNumber: row[CHECK_NUMBER_FIELD], category: row[CATEGORY_FIELD], vendor: row[VENDOR_FIELD], memo: row[MEMO_FIELD], amount: row[AMOUNT_FIELD], andIsReconciled: row[RECONCILED_FIELD] == "Y") else { continue }
             
-            let record = Record(withID: row[ID_FIELD], transaction: transaction)
+            let record = Record(withID: row[ID_FIELD], transaction: transaction, andPreviousRecord: records.last)
             
             records.append(record)
         }
