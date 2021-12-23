@@ -56,7 +56,7 @@ class Records: ObservableObject {
         items.removeAll()
     }
     
-    func element(before: Record) -> Record? {
-        return sortedRecords.element(before: <#T##Record#>)
+    func element(before record: Record) -> Record? {
+        return sortedRecords.element(before: record)
     }
 }
