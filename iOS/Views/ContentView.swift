@@ -25,17 +25,7 @@ struct ContentView: View {
                         NavigationLink(
                             destination: RecordDetailView(record: record),
                             label: {
-                                RecordView(record: record) {
-                                    var priorRecord: Record? = nil
-                                    
-                                    DispatchQueue.main.async {
-                                        self.record(preceding: record) { precedingRecord in
-                                            priorRecord = precedingRecord
-                                        }
-                                    }
-                                    
-                                    return priorRecord
-                                }
+                                RecordView(record: record)
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
@@ -102,11 +92,10 @@ struct ContentView: View {
         }
     }
     
-    func record(preceding record: Record, completion: @escaping (Record?) -> Void) {
+    func record(preceding record: Record) -> Record? {
         var priorRecord: Record? = nil
         
         let queue = DispatchQueue.global(qos: .background)
-        
         queue.async {
             if let databaseManager = DB.shared.manager {
                     priorRecord = databaseManager.record(before: record)
@@ -114,8 +103,10 @@ struct ContentView: View {
                     priorRecord = precedingRecord
             }
             
-            completion(priorRecord)
+            return
         }
+        
+        return priorRecord
     }
     
     func loadRecords() {
