@@ -247,4 +247,10 @@ class DBManager {
             try remove(category: category)
         }
     }
+    
+    func record(before r: Record) -> Record? {
+        guard let records = records else { return nil }
+        
+        return records.element(before: r)
+    }
 }
