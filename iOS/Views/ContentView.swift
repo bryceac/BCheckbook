@@ -93,7 +93,7 @@ struct ContentView: View {
     func record(preceding record: Record) -> Record? {
         var priorRecord: Record? = nil
         
-        var semaphore = DispatchSemaphore(value: 0)
+        let semaphore = DispatchSemaphore(value: 0)
         
         DispatchQueue.main.async {
             if let databaseManager = DB.shared.manager {
