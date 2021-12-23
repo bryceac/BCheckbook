@@ -248,9 +248,9 @@ class DBManager {
         }
     }
     
-    func record(before r: Record) -> Record? {
+    func record(before record: Record) -> Record? {
         guard let records = records else { return nil }
         
-        return records.element(before: r)
+        return records.element(before: record)
     }
 }
