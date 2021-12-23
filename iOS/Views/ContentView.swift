@@ -95,22 +95,18 @@ struct ContentView: View {
     }
     
     private func record(preceding record: Record, completion: @escaping (Record?) -> Void) {
-        var priorRecord: Record? = nil
-        
         let queue = DispatchQueue.global(qos: .background)
-        let semaphore = DispatchSemaphore(value: 0)
         queue.async {
+            var priorRecord: Record? = nil
+            
             if let databaseManager = DB.shared.manager {
                     priorRecord = databaseManager.record(before: record)
-                semaphore.signal()
             } else if let precedingRecord = records.element(before: record) {
                     priorRecord = precedingRecord
-                semaphore.signal()
             }
+            completion(priorRecord)
         }
         
-        semaphore.wait()
-        completion(priorRecord)
     }
     
     func getRecord(before record: Record) -> Record? {
