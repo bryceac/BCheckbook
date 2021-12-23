@@ -24,6 +24,7 @@ struct ContentView: View {
                             destination: RecordDetailView(record: record),
                             label: {
                                 RecordView(record: record) {
+                                
                                     self.record(preceding: record)
                                 }
                             })
@@ -92,27 +93,20 @@ struct ContentView: View {
         }
     }
     
-    func record(preceding record: Record) -> Record? {
+    func record(preceding record: Record, completion: @escaping (Record?) -> Void) {
         var priorRecord: Record? = nil
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            
-            let semaphore = DispatchSemaphore(value: 0)
-            
-            DispatchQueue.main.async {
-                if let databaseManager = DB.shared.manager {
-                    priorRecord = databaseManager.record(before: record)
-                    semaphore.signal()
-                } else if let precedingRecord = records.element(before: record) {
-                    priorRecord = precedingRecord
-                    semaphore.signal()
-                }
-                
-            }
-            semaphore.wait()
-        }
+        let queue = DispatchQueue.global(qos: .background)
         
-        return priorRecord
+        queue.async {
+            if let databaseManager = DB.shared.manager {
+                    priorRecord = databaseManager.record(before: record)
+            } else if let precedingRecord = records.element(before: record) {
+                    priorRecord = precedingRecord
+            }
+            
+            completion(priorRecord)
+        }
     }
     
     func loadRecords() {
