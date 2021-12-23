@@ -25,24 +25,9 @@ class Records: ObservableObject {
     var cancellables: [AnyCancellable] = []
     
     var sortedRecords: [Record] {
-        
-        let sortedArray = items.sorted { firstRecord, secondRecord in
+        return items.sorted { firstRecord, secondRecord in
             firstRecord.event.date < secondRecord.event.date
         }
-        
-        DispatchQueue.main.async {
-            if let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records {
-                self.items.forEach { item in
-                    item.previousRecord = storedRecords.element(before: item)
-                }
-            } else {
-                self.items.forEach { item in
-                    item.previousRecord = sortedArray.element(before: item)
-                }
-            }
-        }
-        
-        return sortedArray
     }
     
     init(withRecords records: [Record] = []) {
@@ -51,6 +36,10 @@ class Records: ObservableObject {
     
     func add(_ record: Record) {
         items.append(record)
+    }
+    
+    func add(_ records: [Record]) {
+        items += records
     }
     
     func remove(at index: Int) {
@@ -67,9 +56,7 @@ class Records: ObservableObject {
         items.removeAll()
     }
     
-    func element(matching record: Record) -> Record? {
-        guard items.contains(record) else { return nil }
-        
-        return items.first(where: { $0 == record })
+    func element(before: Record) -> Record? {
+        return sortedRecords.element(before: <#T##Record#>)
     }
 }
