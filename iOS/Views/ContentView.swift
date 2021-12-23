@@ -24,7 +24,13 @@ struct ContentView: View {
                             destination: RecordDetailView(record: record),
                             label: {
                                 RecordView(record: record) {
-                                    self.record(preceding: record)
+                                    var prior: Record? = nil
+                                    
+                                    DispatchQueue.main.async {
+                                        prior = self.record(preceding: record)
+                                    }
+                                    
+                                    return prior
                                 }
                             })
                 }.onDelete(perform: delete)
