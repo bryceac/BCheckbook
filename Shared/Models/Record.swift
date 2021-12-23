@@ -21,7 +21,7 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    @Published var previousRecord: Record?
+    @Published var previousRecord: Record? = nil
     
     var balance: Double {
         var value: Double = 0
@@ -43,8 +43,8 @@ class Record: Identifiable, ObservableObject, Codable {
         case id, event = "transaction"
     }
     
-    init(withID id: String = UUID().uuidString, transaction: Event = Event(), andPreviousRecord previousRecord: Record? = nil) {
-        (self.id, self.event, self.previousRecord) = (id, transaction, previousRecord)
+    init(withID id: String = UUID().uuidString, transaction: Event = Event()) {
+        (self.id, self.event) = (id, transaction)
         
         cancellable = self.previousRecord?.objectWillChange.sink(receiveValue: { [weak self] _ in
             self?.objectWillChange.send()
