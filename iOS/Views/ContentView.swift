@@ -103,6 +103,7 @@ struct ContentView: View {
             } else if let precedingRecord = records.element(before: record) {
                 priorRecord = precedingRecord
             }
+            semaphore.signal()
         }
         semaphore.wait()
         
