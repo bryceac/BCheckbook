@@ -112,8 +112,9 @@ struct ContentView: View {
     func getRecord(before record: Record) -> Record? {
         var precedingRecord: Record? = nil
         
-        DispatchQueue.main.async {
-            self.record(preceding: record) { priorRecord in
+        self.record(preceding: record) { priorRecord in
+            
+            DispatchQueue.main.async {
                 precedingRecord = priorRecord
             }
         }
