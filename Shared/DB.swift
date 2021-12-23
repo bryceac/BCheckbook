@@ -41,6 +41,7 @@ class DB {
         }
         #endif
         
-        manager = try? DBManager(withDB: url)
+        // manager = try? DBManager(withDB: url)
+        manager = nil
     }
 }
