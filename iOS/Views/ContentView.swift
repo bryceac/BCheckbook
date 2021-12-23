@@ -20,12 +20,21 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(records.sortedRecords) { record in
+                    
+                    
                         NavigationLink(
                             destination: RecordDetailView(record: record),
                             label: {
                                 RecordView(record: record) {
-                                
-                                    self.record(preceding: record)
+                                    var priorRecord: Record? = nil
+                                    
+                                    DispatchQueue.main.async {
+                                        self.record(preceding: record) { precedingRecord in
+                                            priorRecord = precedingRecord
+                                        }
+                                    }
+                                    
+                                    return priorRecord
                                 }
                             })
                 }.onDelete(perform: delete)
