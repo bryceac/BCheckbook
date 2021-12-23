@@ -92,7 +92,7 @@ struct ContentView: View {
         }
     }
     
-    func record(preceding record: Record) -> Record? {
+    func record(preceding record: Record, completion: @escaping (Record?) -> Void) {
         var priorRecord: Record? = nil
         
         let queue = DispatchQueue.global(qos: .background)
@@ -103,10 +103,8 @@ struct ContentView: View {
                     priorRecord = precedingRecord
             }
             
-            return
+            completion(priorRecord)
         }
-        
-        return priorRecord
     }
     
     func loadRecords() {
