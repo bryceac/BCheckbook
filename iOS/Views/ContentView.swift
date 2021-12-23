@@ -106,7 +106,6 @@ struct ContentView: View {
             }
             completion(priorRecord)
         }
-        
     }
     
     func getRecord(before record: Record) -> Record? {
