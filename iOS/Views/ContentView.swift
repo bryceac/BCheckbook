@@ -80,41 +80,14 @@ struct ContentView: View {
     
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
-            if let databaseManager = DB.shared.manager {
+            guard let databaseManager = DB.shared.manager else { return }
+            
                 let record = records.items[index]
                 
                 try? databaseManager.remove(record: record)
                 
                 loadRecords()
-            } else {
-                records.remove(at: index)
-            }
         }
-    }
-    
-    private func record(preceding record: Record, completion: @escaping (Record?) -> Void) {
-        let queue = DispatchQueue.global(qos: .background)
-        queue.async {
-            var priorRecord: Record? = nil
-            
-            if let databaseManager = DB.shared.manager {
-                    priorRecord = databaseManager.record(before: record)
-            } else if let precedingRecord = records.element(before: record) {
-                    priorRecord = precedingRecord
-            }
-            completion(priorRecord)
-        }
-    }
-    
-    func getRecord(before record: Record) -> Record? {
-        var precedingRecord: Record? = nil
-        
-        self.record(preceding: record) { priorRecord in
-            
-            precedingRecord = priorRecord
-        }
-        
-        return precedingRecord
     }
     
     func loadRecords() {
@@ -124,11 +97,9 @@ struct ContentView: View {
     }
     
     func addRecords(_ records: [Record]) throws {
-        if let databaseManager = DB.shared.manager {
-            try databaseManager.add(records: records)
-        } else {
-            self.records.items += records
-        }
+        guard let databaseManager = DB.shared.manager else { return }
+        
+        try databaseManager.add(records: records)
     }
 }
 
