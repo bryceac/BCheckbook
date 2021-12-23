@@ -21,7 +21,13 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    @Published var previousRecord: Record? = nil
+    @Published var previousRecord: Record? = nil {
+        didSet {
+            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
+                self.objectWillChange.send()
+            })
+        }
+    }
     
     var balance: Double {
         var value: Double = 0
