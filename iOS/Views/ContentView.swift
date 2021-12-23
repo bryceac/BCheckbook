@@ -90,6 +90,18 @@ struct ContentView: View {
         }
     }
     
+    func record(preceding record: Record) -> Record? {
+        var priorRecord: Record? = nil
+        
+        if let databaseManager = DB.shared.manager {
+            priorRecord = databaseManager.record(before: record)
+        } else if let precedingRecord = records.element(before: record) {
+            priorRecord = precedingRecord
+        }
+        
+        return priorRecord
+    }
+    
     func loadRecords() {
         guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
         
