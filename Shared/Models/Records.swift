@@ -55,8 +55,4 @@ class Records: ObservableObject {
     func clear() {
         items.removeAll()
     }
-    
-    func element(before record: Record) -> Record? {
-        return sortedRecords.element(before: record)
-    }
 }
