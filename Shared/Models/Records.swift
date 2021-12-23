@@ -31,8 +31,14 @@ class Records: ObservableObject {
         }
         
         DispatchQueue.main.async {
-            self.items.forEach { item in
-                item.previousRecord = sortedArray.element(before: item)
+            if let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records {
+                self.items.forEach { item in
+                    item.previousRecord = storedRecords.element(before: item)
+                }
+            } else {
+                self.items.forEach { item in
+                    item.previousRecord = sortedArray.element(before: item)
+                }
             }
         }
         
