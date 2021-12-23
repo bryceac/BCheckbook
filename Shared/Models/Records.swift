@@ -13,6 +13,8 @@ class Records: ObservableObject {
         didSet {
             cancellables = []
             sortedRecords.forEach { record in
+                record.previousRecord = sortedRecords.element(before: record)
+                
                 let cancellable = record.objectWillChange.sink { _ in
                     self.objectWillChange.send()
                 }
