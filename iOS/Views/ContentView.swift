@@ -100,10 +100,12 @@ struct ContentView: View {
         DispatchQueue.main.async {
             if let databaseManager = DB.shared.manager {
                 priorRecord = databaseManager.record(before: record)
+                semaphore.signal()
             } else if let precedingRecord = records.element(before: record) {
                 priorRecord = precedingRecord
+                semaphore.signal()
             }
-            semaphore.signal()
+            
         }
         semaphore.wait()
         
