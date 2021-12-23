@@ -25,9 +25,7 @@ struct ContentView: View {
                         NavigationLink(
                             destination: RecordDetailView(record: record),
                             label: {
-                                RecordView(record: record) {
-                                    self.getRecord(before: record)
-                                }
+                                RecordView(record: record)
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
@@ -113,9 +111,7 @@ struct ContentView: View {
         
         self.record(preceding: record) { priorRecord in
             
-            DispatchQueue.main.async {
-                precedingRecord = priorRecord
-            }
+            precedingRecord = priorRecord
         }
         
         return precedingRecord

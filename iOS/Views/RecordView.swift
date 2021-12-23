@@ -51,14 +51,6 @@ struct RecordView: View {
             }.padding()
         }
     }
-    
-    init(record: Record, previousRecord: (() -> Record?)? = nil) {
-        self.record = record
-        
-        guard let previousRecord = previousRecord else { return }
-        
-        self.record.previousRecord = previousRecord()
-    }
 }
 
 struct RecordView_Previews: PreviewProvider {
