@@ -25,7 +25,9 @@ struct ContentView: View {
                         NavigationLink(
                             destination: RecordDetailView(record: record),
                             label: {
-                                RecordView(record: record)
+                                RecordView(record: record) {
+                                    self.getRecord(before: record)
+                                }
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
