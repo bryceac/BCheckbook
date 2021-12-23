@@ -21,13 +21,7 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    @Published var previousRecord: Record? = nil {
-        didSet {
-            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
-                self.objectWillChange.send()
-            })
-        }
-    }
+    @Published var previousRecord: Record?
     
     var balance: Double {
         var value: Double = 0
@@ -43,14 +37,18 @@ class Record: Identifiable, ObservableObject, Codable {
         return value
     }
     
-    private var cancellable: AnyCancellable? = nil
+    private var cancellable: AnyCancellable?
     
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
     }
     
-    init(withID id: String = UUID().uuidString, transaction: Event = Event()) {
-        (self.id, self.event) = (id, transaction)
+    init(withID id: String = UUID().uuidString, transaction: Event = Event(), andPreviousRecord previousRecord: Record? = nil) {
+        (self.id, self.event, self.previousRecord) = (id, transaction, previousRecord)
+        
+        cancellable = self.previousRecord?.objectWillChange.sink(receiveValue: { [weak self] _ in
+            self?.objectWillChange.send()
+        })
     }
     
     required convenience init(from decoder: Decoder) throws {
