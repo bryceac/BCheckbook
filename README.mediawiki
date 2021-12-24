@@ -163,23 +163,41 @@ As stated above, the iOS application and macOS application work similiarly in te
 
 You can either transfer the database, or import a bcheck file.
 
-====macOS Destination from iOS target====
+Please be aware that unlike before, 
+where all transactions from a bcheck file were loaded every time, 
+<strong>only new transactions will be imported</strong>. 
+This was a decision I had to make 
+because having the import functionality 
+update existing records only worked on the back end,
+meaning the application would need to be relaunched to see the changes.
+
+====macOS Destination from iOS====
 
 You can use either Airdrop inside the Files app or use either Finder or iTunes to grab the exported bcheck file.
 
 When the transfer is made via AirDrop, your file will located in the Downloads Folder, while Finder, and likely iTunes may be more flexible.
 
+If your fle contains changes to existing records, 
+it is recommended you delete the <strong>register.db</strong>, 
+which should be located in the places specified by the 
+[[# Saving & Loading]] section, before importing, 
+as the application will regenerate it.
+
+If you are transferring by using the database file, 
+you just need to move it to the right spot.
+
 ====iOS Destination via AirDrop====
 
 <p>As of version 0.3, the iOS app is registered to accept files bcheck directly.</p>
 
-<p>When transferring a save via AirDrop, the application will import any new transactions into the database and update the list of transactions.</p>
+<p>When transferring a bcheck file via AirDrop, the application will import 
+any <strong>new</strong> transactions into the database and update the list of transactions.</p>
 
 <p>However, if you want to reimport everything, 
 which is currently the only way to update pre existing transaction,
-you need to delete <strong>register.db</strong>, after closing the application, 
-and then try importing your data, as the app <strong>should</strong> 
-give you a fresh copy of the database.</p>
+you need to delete <strong>register.db</strong>, after closing the 
+application, and then try importing your data, as the app 
+<strong>should</strong> regenerate the database.</p>
 
 ===Support===
 
@@ -195,13 +213,21 @@ If the problems exists in both versions, choose ether one and be sure to note in
 
 ===Contributing===
 
-If you are familiar with SwiftUI and want to help make things work even better. Feel free to fork this project and submit a pull request.
+If you are familiar with Swift and SwiftUI and want to help make things 
+work even better, feel free to fork this project and submit a pull request.
+
+Help would be greatly appreciated in dealing with the known issues.
 
 Submissions will be tested by me before they will be merged.
 
 ===Other===
 
-This program will only work on macOS 11 and later. When I tried deploying the Yahtzee program to an older version of macOS, XCode would complain about the code being used only being available on macOS 10.15 and later and other stuff was only available in macOS 11 and later.
+This program will only work on macOS 11 and later. 
+
+When I tried deploying the Yahtzee program to an older version of macOS, 
+XCode would complain about the code being used only being 
+available on macOS 10.15 and later and other stuff was only available in 
+macOS 11 and later.
 
 The iOS version only works on iOS 14 and later.
 
@@ -223,9 +249,5 @@ This app uses the following projects to help things run smoothly.
 <p>Custom view that is used 
 to allow users to either add their own categories 
 or to selected from the list of available categories.</p>
-<p>On macOS this renders an NSComboBox, 
-which is modified to add any custom values to the list when a user presses enter.</p>
-<p>On iOS this operates as a custom picker that has filtering capabilities, 
-as well as lets users add items to the list if what they type is not found.</p>
 </dd>
 </dl>
