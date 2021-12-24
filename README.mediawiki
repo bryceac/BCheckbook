@@ -1,7 +1,6 @@
 =BCheckbook=
 
-'''iOS Version:''' 0.2
-'''macOS Version:''' 0.3
+'''Version:''' 0.3
 
 '''Author:''' Bryce Campbell
 
@@ -13,16 +12,22 @@
 
 ==Notes==
 
-This application has only been tested on macOS 11 and iOS 14 and iOS 15.
+This application has only been tested on macOS 11 and iOS 15.
 
 ===Version History===
 
 <dl>
-<dt style="font-weight:bold">0.3 (Currently iOS only)</dt>
+<dt style="font-weight:bold">0.3 (Both)</dt>
 <dd>
-<p>Major fix that deals with transaction balances 
-and also registers app as owner of <strong>bcheck</strong> files, making importing easier.</p>
-<p>Data persistence also now utilizes a database, making importing old data important.</p>
+<p>Major change, such as:
+<ul>
+<li>move to a database backend</li>
+<li>Fix issues in mac UI and change mac UI a bit</li> 
+<li>transactions can be placed into categories</li>
+<li>transactions can be imported and exported (helps with migration)</li>
+<li>iOS app now registered to accept bcheck format</li>
+<li>Move extension code from mac code to shared</li>
+</ul>
 </dd>
 <dt style="font-weight:bold">0.2 (Both)</dt>
 <dd>
@@ -75,6 +80,8 @@ as figuring out those patterns would be easier than trying to deal with user hab
 </dd>
 </dl>
 </li>
+<li> 
+</li>
 </ol>
 
 ===Usage===
@@ -85,7 +92,7 @@ However, one thing shared in both versions is that the dollar amount will not be
 
 This is something one must live with for now because it does not seem to be possible have the fields displayed as currency and to automatically register the correct value.
 
-Also, the currency symbol is required when inputting those values, though they are omitted in the JSON saves.
+Also, the currency symbol is required when inputting those values, though they are omitted in the JSON exports and database.
 
 ====Removing Records====
 
@@ -99,81 +106,62 @@ Records can be removed in one of two ways, depending on where you are using the 
 ===Known Issues===
 
 <dl>
-<dt style="font-weight:bold">Transaction amount is wrong</dt>
-<dd>
-<p>This has been partially fix.</p>
-<p>This is no longer an issue in iOS, but this can still happen on macOS, mainly when changing dates.</p>
-<p>If I can find a way to fix this issue, I will apply the fix when I can.</p>
-
-<p>For now, it is best to relaunch the application or reload your save file if you notice this.</p>
-</dd>
 <dt style="font-weight:bold">Records after the record I edited do not update.</dt>
 <dd>
-<p>This issue has been <strong>completely</strong> dealt with on <strong>iOS</strong> as of version 0.3, but still exists in the Mac app, which still has its update in development.</p>
-<p>While the transactions will now update properly, as of version 0.2, There are still problems that occur after changing dates of transactions.</p>
-<p>If you change dates for any transaction, it is recommended that you relaunch the application and/or reload the file, so that things will be updated properly.</p>
-<p>If I find a way to fix this issue, I will apply a fix when I can.</p>
+<p>This has been <strong>mostly</strong> dealt.</p>
+<p>While it can still happen after changing dates on transactions, it should not happen otherwise.</p>
+<p>In cases like this relaunch the application .hings <strong>should</strong> then be rectified.</p>
 </dd>
 <dt style="font-weight:bold">Balance is wrong is after changing date</dt>
 <dd>
-<p>This problem has been dealt with on iOS as of version 0.3, but is a little bothersome to tackle to in the Mac version, whose update is still in development. I plan to deal with it as soon as I can, but I see one possible reason for that.</p>
-<p>I will attempt to fix this when I can, but for now, reloading your save or relaunching the application after saving <strong>should</strong> rectify things.</p>
+<p>I initially thought I had resolved this issue
+while working on the update, but it is still a problem, 
+with the cause being known to me.</p>
+<p>I am still looking into resolving it.</p>
+<p>If I can find a fix, I will apply it when I can, but this issue must still be dealt with.</p>
+<p>In the meantime, if you notice this, 
+relaunching the application <strong>should</strong> rectify things.</p>
 </dd>
-<dt style="font-weight:bold">Importing records will not update existing Records</dt>
-<dd>
-<p>This problem exists only in version 0.3, which is iOS only at this time.</p>
-<p>This is presently intentional on my part.</p>
-<p>While I would have like to have import update existing records 
-and have been able to do it with the code available, 
-I only see the changes reflected in the database and not in the UI, 
-so I chose not to have importing update records at this time.</p>
-<p>If I find a way to resolve this, I will fix it as soon as I can.</p>
 </dl>
 
-===Saves & Loading===
+===Saving & Loading===
 
-<p>At this point in time, the Mac and iOS versions are very different. 
-Both may support the <strong>bcheck</strong>, 
-but the iOS app no longer reads from those files directly.</p>
+<p>At this point in time, the Mac and iOS versions are fairly similiar 
+in the area of data persistece.</p>
 
-<p>The iOS app currently utilizes a database backend c
-alled <strong>register.db</strong>, which the 
-Mac app <strong>should</strong> support at a later date, 
-and instead imports any new transactions from a provided 
-<strong>bcheck</strong> file into the database, 
-to make it easy for users to get up and running.</p>
+<p>Both utilize a database stored as <strong>register.db</strong> 
+and will automatically save changes to the database.</p>
 
-<p>However, the bcheck files exported by the iOS app 
-can be read without issue in the Mac application.</p>
+<p>As such, there is no need to manually load data in either version of the app.</p>
+
+<p>However, data must be imported when there are discrepencies.</p>
+
+<p>If you want to transfer things as easily as before, 
+you can do so by placing the <strong>register.db</strong> database 
+in the appropriate location.</p>
+
+<p>On iOS this is in the Documents folder of the application.</p>
+<p>On macOS, this location <strong>should</strong> be somewhere in your user's Library folder 
+in a directory name <strong>me.brycecampbell.bcheckbook</strong>.
 
 ===Backing up Data===
 
-<p>Due to the iOS app and the Mac app being very 
-different at this point in time, backup procedures differ.</p>
+<p>Due to the iOS app and the Mac app being a bit more similiar, 
+with the recent changes, there are two ways to back up data.</p>
 
-====iOS====
+<ul>
+<li>backup the database file (located in the given areas above)</li>
+<li>export transactions to a bcheck file</li>
+</ul>
 
-<p>On iOS, you can back up your data by backing up 
-either the <strong>register.db</strong> file 
-or exporting your transactions to a <strong>bcheck</strong> file, 
-with the latter path being the recommended way to preserve data.</p>
+Of the two options, the latter is recommended for most people, as the 
+database structure might change in the future.
 
-<p>These files are accessible in the Files app, 
-Finder (only Macs without iTunes), and iTunes.</p>
+===Transferring Data===
 
-====macOS===
+As stated above, the iOS application and macOS application work similiarly in terms of data persistence.
 
-<p>The Mac app still relies entirely on <strong>bcheck</strong> files, 
-so backing up is as simple as backing up the <strong>bcheck</strong>.</p>
-
-<p>The bcheck file will be wherever you told it to save 
-(Defaults to Documents Directory).</p>
-
-===Transferring Saves===
-
-As stated above, the iOS application and macOS application work very different when it comes to saving and loading.
-
-If you would like to transfer saves from one device to another, there are certain things can be done, depending on platform.
+You can either transfer the database, or import a bcheck file.
 
 ====macOS Destination from iOS target====
 
