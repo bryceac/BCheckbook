@@ -142,7 +142,7 @@ in the appropriate location.</p>
 
 <p>On iOS this is in the Documents folder of the application.</p>
 <p>On macOS, this location <strong>should</strong> be somewhere in your user's Library folder 
-in a directory name <strong>me.brycecampbell.bcheckbook</strong>.
+in a directory named <strong>me.brycecampbell.bcheckbook</strong>.
 
 ===Backing up Data===
 
@@ -180,7 +180,7 @@ When the transfer is made via AirDrop, your file will located in the Downloads F
 If your fle contains changes to existing records, 
 it is recommended you delete the <strong>register.db</strong>, 
 which should be located in the places specified by the 
-[[# Saving & Loading]] section, before importing, 
+[[#Saving & Loading]] section, before importing, 
 as the application will regenerate it.
 
 If you are transferring by using the database file, 
