@@ -109,27 +109,6 @@ Records can be removed in one of two ways, depending on where you are using the 
 <li>Right click/control+click (macOS only)</li>
 </ul>
 
-===Known Issues===
-
-<dl>
-<dt style="font-weight:bold">Records after the record I edited do not update.</dt>
-<dd>
-<p>This has been <strong>mostly</strong> dealt.</p>
-<p>While it can still happen after changing dates on transactions, it should not happen otherwise.</p>
-<p>In cases like this, relaunching the application <strong>should</strong> rectify things.</p>
-</dd>
-<dt style="font-weight:bold">Balance is wrong is after changing date</dt>
-<dd>
-<p>I initially thought I had resolved this issue
-while working on this update, but it is still a problem, 
-with the cause being known to me.</p>
-<p>I am still looking into resolving it.</p>
-<p>If I can find a fix, I will apply it when I can, but this issue is one must still put up with for now.</p>
-<p>In the meantime, if you notice this, 
-relaunching the application <strong>should</strong> rectify things.</p>
-</dd>
-</dl>
-
 ===Saving & Loading===
 
 <p>At this point in time, the Mac and iOS versions are fairly similiar 
