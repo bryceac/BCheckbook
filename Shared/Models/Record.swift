@@ -46,18 +46,6 @@ class Record: Identifiable, ObservableObject, Codable {
         try container.encode(event, forKey: .event)
     }
     
-    //implement function to calculate balane
-    func calculateBalance(withInitialValue initialValue: Double) -> Double {
-        var balance = initialValue
-        
-        switch event.type {
-        case .deposit: balance += event.amount
-        case .withdrawal: balance -= event.amount
-        }
-        
-        return balance
-    }
-    
     class func load(from path: URL) throws -> [Record] {
         let JSON_DECODER = JSONDecoder()
         
