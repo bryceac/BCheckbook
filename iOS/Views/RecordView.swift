@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RecordView: View {
     @ObservedObject var record: Record
+    var balance: Double = 0
     
     var body: some View {
         VStack {
@@ -41,7 +42,7 @@ struct RecordView: View {
                     }
                 }
                 
-                if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
+                if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
                     Text(VALUE)
                 }
             }
