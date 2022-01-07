@@ -13,8 +13,6 @@ class Records: ObservableObject {
         didSet {
             cancellables = []
             sortedRecords.forEach { record in
-                record.previousRecord = sortedRecords.element(before: record)
-                
                 let cancellable = record.objectWillChange.sink { _ in
                     self.objectWillChange.send()
                 }
@@ -29,6 +27,13 @@ class Records: ObservableObject {
     var sortedRecords: [Record] {
         return items.sorted { firstRecord, secondRecord in
             firstRecord.event.date < secondRecord.event.date
+        }
+    }
+    
+    var balances: [Record: Double] {
+        return sortedRecords.reduce(into: [Record: Double]()) { balances, record in
+            guard let databaseManager = DB.shared.manager else { return }
+            balances[record] = try? databaseManager.balance(for: record)
         }
     }
     
