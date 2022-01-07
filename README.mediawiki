@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''Version:''' 0.3
+'''Version:''' 0.3.1
 
 '''Author:''' Bryce Campbell
 
@@ -17,6 +17,11 @@ This application has only been tested on macOS 11 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">0.3.1 (Both)</dt>
+<dd>
+<p>Minor patch.</p>
+<p>Take care of remaining known issues by changing how balances are retrieved.</p>
+</dd>
 <dt style="font-weight:bold">0.3 (Both)</dt>
 <dd>
 <p>Major change, such as:
