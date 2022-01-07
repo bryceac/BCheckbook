@@ -21,6 +21,7 @@ This application has only been tested on macOS 11 and iOS 15.
 <dd>
 <p>Minor patch.</p>
 <p>Take care of remaining known issues by changing how balances are retrieved.</p>
+<p>Released January 2022</p>
 </dd>
 <dt style="font-weight:bold">0.3 (Both)</dt>
 <dd>
