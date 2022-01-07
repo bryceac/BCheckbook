@@ -90,7 +90,6 @@ extension Record: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
         hasher.combine(event)
-        hasher.combine(balance)
     }
 }
 
