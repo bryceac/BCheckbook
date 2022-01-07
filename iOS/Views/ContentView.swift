@@ -21,11 +21,12 @@ struct ContentView: View {
             List {
                 ForEach(records.sortedRecords) { record in
                     
+                    let recordBalance = records.balances[record]!
                     
                         NavigationLink(
                             destination: RecordDetailView(record: record),
                             label: {
-                                RecordView(record: record)
+                                RecordView(record: record, balance: recordBalance)
                             })
                 }.onDelete(perform: delete)
             }.toolbar(content: {
