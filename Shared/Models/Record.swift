@@ -21,40 +21,12 @@ class Record: Identifiable, ObservableObject, Codable {
         }
     }
     
-    @Published var previousRecord: Record? = nil {
-        didSet {
-            cancellable = previousRecord?.objectWillChange.sink(receiveValue: { _ in
-                self.objectWillChange.send()
-            })
-        }
-    }
-    
-    var balance: Double {
-        var value: Double = 0
-        
-        if let previousRecord = previousRecord {
-            value = calculateBalance(withInitialValue: previousRecord.balance)
-        } else if let databaseManager = DB.shared.manager, let storedBalance = try? databaseManager.balance(for: self) {
-            value = storedBalance
-        } else {
-            value = calculateBalance(withInitialValue: value)
-        }
-        
-        return value
-    }
-    
-    private var cancellable: AnyCancellable?
-    
     private enum CodingKeys: String, CodingKey {
         case id, event = "transaction"
     }
     
     init(withID id: String = UUID().uuidString, transaction: Event = Event()) {
         (self.id, self.event) = (id, transaction)
-        
-        cancellable = self.previousRecord?.objectWillChange.sink(receiveValue: { [weak self] _ in
-            self?.objectWillChange.send()
-        })
     }
     
     required convenience init(from decoder: Decoder) throws {
