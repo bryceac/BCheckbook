@@ -20,7 +20,10 @@ struct ContentView: View {
     var body: some View {
         List {
             ForEach(records.sortedRecords) { record in
-                RecordView(record: record).contextMenu(ContextMenu(menuItems: {
+                
+                let recordBalance = records.balances[record]!
+                
+                RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
                     Button("Delete") {
                         try? remove(record: record)
                     }

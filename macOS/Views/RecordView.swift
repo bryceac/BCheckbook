@@ -10,6 +10,8 @@ import SwiftUI
 struct RecordView: View {
     @ObservedObject var record: Record
     
+    var balance: Double = 0
+    
     @State var credit: Double
     
     @State var debit: Double
@@ -114,7 +116,7 @@ struct RecordView: View {
             VStack(spacing: 10) {
                 Text("Balance")
                     .foregroundColor(Color.black)
-                if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: record.balance)) {
+                if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
                     Text(BALANCE_VALUE)
                         .foregroundColor(Color.black)
                 }
@@ -122,12 +124,14 @@ struct RecordView: View {
         }.background(Color.init(red: 192/255, green: 192/255, blue: 192/255)).edgesIgnoringSafeArea(.bottom)
     }
     
-    init(record: Record) {
+    init(record: Record, balance: Double = 0) {
         self.record = record
         
         self._credit = EventType.deposit ~= record.event.type ? State(initialValue: record.event.amount) : State(initialValue: 0)
         
         self._debit = EventType.withdrawal ~= record.event.type ? State(initialValue: record.event.amount) : State(initialValue: 0)
+        
+        self.balance = balance
     }
 }
 
