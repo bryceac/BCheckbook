@@ -14,9 +14,11 @@ struct CheckbookApp: App {
         WindowGroup {
             TabView{
                 ContentView().tabItem {
+                    Image(systemName: "list.dash")
                     Text("Ledger")
                 }
                 SummaryView().tabItem {
+                    Image(systemName: "tablecells")
                     Text("Summary")
                 }
             }
