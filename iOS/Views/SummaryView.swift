@@ -29,10 +29,6 @@ struct SummaryView: View {
 
 struct SummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        SummaryView(viewModel: SummaryViewModel(withCategories: [
-            "Hello",
-            "World",
-            "7"
-        ]))
+        SummaryView()
     }
 }
