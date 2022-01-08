@@ -14,7 +14,7 @@ struct SummaryView: View {
         List {
             Section {
                 if viewModel.sortedCategories.contains("Opening Balance") {
-                    SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "OpeningBalance"))
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "Opening Balance"))
                 }
             }
             
