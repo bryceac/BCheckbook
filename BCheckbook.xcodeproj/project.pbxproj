@@ -11,6 +11,8 @@
 		020B4127268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020B4125268F7AA3004B6FE2 /* Bundle+displayName.swift */; };
 		02115E8F268CF50400085138 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02115E8E268CF50400085138 /* ContentView.swift */; };
 		02115E91268CF58500085138 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02115E90268CF58500085138 /* RecordView.swift */; };
+		0231B222278A45ED003483BF /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B221278A45ED003483BF /* SummaryViewModel.swift */; };
+		0231B223278A45ED003483BF /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B221278A45ED003483BF /* SummaryViewModel.swift */; };
 		026767972697950B005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026767962697950B005D7DC2 /* CheckbookApp.swift */; };
 		0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02676794269794FB005D7DC2 /* CheckbookApp.swift */; };
 		026E6A6B276D13CE00ED3E36 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E6A6A276D13CE00ED3E36 /* DBManager.swift */; };
@@ -68,6 +70,7 @@
 		020B4125268F7AA3004B6FE2 /* Bundle+displayName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+displayName.swift"; sourceTree = "<group>"; };
 		02115E8E268CF50400085138 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		02115E90268CF58500085138 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		0231B221278A45ED003483BF /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		02676794269794FB005D7DC2 /* CheckbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
 		026767962697950B005D7DC2 /* CheckbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
 		026E6A6A276D13CE00ED3E36 /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
@@ -167,6 +170,7 @@
 				02A2ADD02660A06A00774151 /* Event.swift */,
 				02A2ADD32660A07B00774151 /* Record.swift */,
 				02A2ADD62660AF3A00774151 /* Records.swift */,
+				0231B221278A45ED003483BF /* SummaryViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -459,6 +463,7 @@
 				02A2ADDD2660B01F00774151 /* RecordView.swift in Sources */,
 				020B4126268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */,
 				0297EDEB2771384A007B3E99 /* BCheckFileDocument.swift in Sources */,
+				0231B222278A45ED003483BF /* SummaryViewModel.swift in Sources */,
 				02A2ADD12660A06A00774151 /* Event.swift in Sources */,
 				026767972697950B005D7DC2 /* CheckbookApp.swift in Sources */,
 				026E6A6B276D13CE00ED3E36 /* DBManager.swift in Sources */,
@@ -480,6 +485,7 @@
 				02A2ADD22660A06A00774151 /* Event.swift in Sources */,
 				026E6A72276D214B00ED3E36 /* DB.swift in Sources */,
 				0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */,
+				0231B223278A45ED003483BF /* SummaryViewModel.swift in Sources */,
 				020B4127268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */,
 				02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */,
 				026E6A6C276D13CE00ED3E36 /* DBManager.swift in Sources */,
