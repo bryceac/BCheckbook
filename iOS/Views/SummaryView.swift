@@ -13,11 +13,13 @@ struct SummaryView: View {
     var body: some View {
         List {
             Section {
-                SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "OpeningBalance"))
+                if viewModel.sortedCategories.contains("Opening Balance") {
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "OpeningBalance"))
+                }
             }
             
             Section {
-                ForEach(viewModel.categories.filter({ $0 != "Opening Balance" }), id: \.self) { category in
+                ForEach(viewModel.sortedCategories.filter({ $0 != "Opening Balance" }), id: \.self) { category in
                     SummaryRowView(title: category, tally: viewModel.total(for: category))
                 }
             }
