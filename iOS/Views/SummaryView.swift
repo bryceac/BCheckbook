@@ -15,9 +15,13 @@ struct SummaryView: View {
             Section {
                 SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "OpeningBalance"))
             }
-            ForEach(viewModel.categories, id: \.self) { category in
-                SummaryRowView(title: category, tally: viewModel.total(for: category))
+            
+            Section {
+                ForEach(viewModel.categories.filter({ $0 != "Opening Balance" }), id: \.self) { category in
+                    SummaryRowView(title: category, tally: viewModel.total(for: category))
+                }
             }
+            
         }.onAppear {
             loadSummary()
         }
