@@ -10,6 +10,10 @@ import Foundation
 class SummaryViewModel: ObservableObject {
     @Published var categories: [String]
     
+    var sortedCategories: [String] {
+        return categories.sorted(by: <)
+    }
+    
     init(withCategories categories: [String] = []) {
         self.categories = categories
     }
