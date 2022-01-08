@@ -13,12 +13,7 @@ struct SummaryView: View {
     var body: some View {
         List {
             ForEach(viewModel.categories, id: \.self) { category in
-                HStack {
-                    Text(category).bold()
-                    if let totalValue = Event.CURRENCY_FORMAT.string(from: NSNumber(value: viewModel.total(for: category))) {
-                        Text(totalValue)
-                    }
-                }
+                SummaryRowView(title: category, tally: viewModel.total(for: category))
             }
         }.onAppear {
             loadSummary()
