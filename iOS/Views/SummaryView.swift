@@ -20,6 +20,8 @@ struct SummaryView: View {
                     }
                 }
             }
+        }.onAppear {
+            loadSummary()
         }
     }
     
