@@ -23,8 +23,10 @@ struct SummaryView: View {
         }
     }
     
-    func loadCategories() {
-        guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories
+    func loadSummary() {
+        guard let databaseManager = DB.shared.manager, let tallies = databaseManager.totals else { return }
+        
+        viewModel.categories = tallies.keys.compactMap { $0 }
     }
 }
 
