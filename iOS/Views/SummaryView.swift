@@ -22,6 +22,10 @@ struct SummaryView: View {
             }
         }
     }
+    
+    func loadCategories() {
+        guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories
+    }
 }
 
 struct SummaryView_Previews: PreviewProvider {

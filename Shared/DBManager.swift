@@ -185,7 +185,7 @@ class DBManager {
         let groupQuery = LEDGER_VIEW.select(CATEGORY_FIELD, AMOUNT_FIELD.sum).group(CATEGORY_FIELD)
         
         return try db.prepare(groupQuery).reduce(into: [:], { tallies, row in
-            let category = row[CATEGORY_FIELD]!
+            let category = row[CATEGORY_FIELD] ?? "Uncategorized"
             let tally = row[AMOUNT_FIELD.sum]
             
             tallies[category] = tally
