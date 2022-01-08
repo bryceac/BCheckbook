@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct SummaryView: View {
+    @StateObject var viewModel: SummaryViewModel = SummaryViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(viewModel.categories, id: \.self) { category in
+                HStack {
+                    Text(category)
+                    if let totalValue = Event.CURRENCY_FORMAT.string(from: NSNumber(value: viewModel.total(for: category))) {
+                        Text(totalValue)
+                    }
+                }
+            }
+        }
     }
 }
 
