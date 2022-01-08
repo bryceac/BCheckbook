@@ -12,6 +12,9 @@ struct SummaryView: View {
     
     var body: some View {
         List {
+            Section {
+                SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "OpeningBalance"))
+            }
             ForEach(viewModel.categories, id: \.self) { category in
                 SummaryRowView(title: category, tally: viewModel.total(for: category))
             }
