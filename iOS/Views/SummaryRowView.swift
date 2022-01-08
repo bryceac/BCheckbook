@@ -14,7 +14,7 @@ struct SummaryRowView: View {
     var body: some View {
         HStack {
             Text(title).bold()
-            
+            Spacer()
             if let tallyValue = Event.CURRENCY_FORMAT.string(from: NSNumber(value: tally)) {
                 Text(tallyValue)
             }
