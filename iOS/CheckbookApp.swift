@@ -16,11 +16,12 @@ struct CheckbookApp: App {
                 ContentView().tabItem {
                     Image(systemName: "list.dash")
                     Text("Ledger")
-                }
+                }.navigationTitle("Ledger")
+                
                 SummaryView().tabItem {
                     Image(systemName: "tablecells")
                     Text("Summary")
-                }
+                }.navigationTitle("Summary")
             }
             
         }
