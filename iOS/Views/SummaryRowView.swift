@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct SummaryRowView: View {
+    var title: String = "Hello"
+    var tally: Double = 0
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text(title)
+            
+            if let tallyValue = Event.CURRENCY_FORMAT.string(from: NSNumber(value: tally)) {
+                Text(tallyValue)
+            }
+        }
     }
 }
 
