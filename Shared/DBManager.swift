@@ -20,6 +20,10 @@ class DBManager {
         try? retrieveCategories()
     }
     
+    var totals: [String: Double]? {
+        try? retrieveTotals()
+    }
+    
     
     private var db: Connection
     
@@ -175,6 +179,17 @@ class DBManager {
         }
         
         return categories
+    }
+    
+    private func retrieveTotals() throws -> [String: Double] {
+        let groupQuery = LEDGER_VIEW.select(CATEGORY_FIELD, AMOUNT_FIELD.sum).group(CATEGORY_FIELD)
+        
+        return try db.prepare(groupQuery).reduce(into: [:], { tallies, row in
+            let category = row[CATEGORY_FIELD]!
+            let tally = row[AMOUNT_FIELD.sum]
+            
+            tallies[category] = tally
+        })
     }
     
     /**
