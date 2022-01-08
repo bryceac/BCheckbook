@@ -13,7 +13,7 @@ struct SummaryRowView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(title).bold()
             
             if let tallyValue = Event.CURRENCY_FORMAT.string(from: NSNumber(value: tally)) {
                 Text(tallyValue)
