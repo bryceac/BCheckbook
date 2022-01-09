@@ -49,6 +49,8 @@
 		02B0990527724CA600BD36E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B0990427724CA600BD36E4 /* AppDelegate.swift */; };
 		02CA16322771015600A46892 /* OptionalComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CA16312771015600A46892 /* OptionalComboBox.swift */; };
 		02DBE1152697B173003C44EC /* BCheckFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DBE1142697B173003C44EC /* BCheckFileDocument.swift */; };
+		02F6A8F5278A6C4D00146F34 /* SummaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B226278A4C55003483BF /* SummaryRowView.swift */; };
+		02F6A8F6278A6C5100146F34 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B224278A470D003483BF /* SummaryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,8 +187,6 @@
 				02A2ADD92660AFBD00774151 /* ContentView.swift */,
 				02A2ADDC2660B01F00774151 /* RecordView.swift */,
 				02A2ADDE2660B03200774151 /* RecordDetailView.swift */,
-				0231B224278A470D003483BF /* SummaryView.swift */,
-				0231B226278A4C55003483BF /* SummaryRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,7 +216,7 @@
 		02A2AD8C2660A02E00774151 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				02CA16312771015600A46892 /* OptionalComboBox.swift */,
+				02F6A8F4278A6C3C00146F34 /* Views */,
 				02ABA41E276D3C4E00ABD4EE /* register.db */,
 				026E6A6A276D13CE00ED3E36 /* DBManager.swift */,
 				0246E5DF268F82790047A663 /* Enumerations */,
@@ -285,6 +285,16 @@
 				02EB8362276E5887006761D1 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		02F6A8F4278A6C3C00146F34 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0231B224278A470D003483BF /* SummaryView.swift */,
+				0231B226278A4C55003483BF /* SummaryRowView.swift */,
+				02CA16312771015600A46892 /* OptionalComboBox.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -482,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02F6A8F5278A6C4D00146F34 /* SummaryRowView.swift in Sources */,
 				02A2ADCC2660A04900774151 /* EvenType.swift in Sources */,
 				02A2ADCF2660A05900774151 /* EventTypeError.swift in Sources */,
 				02115E8F268CF50400085138 /* ContentView.swift in Sources */,
@@ -492,6 +503,7 @@
 				02115E91268CF58500085138 /* RecordView.swift in Sources */,
 				02A2ADD22660A06A00774151 /* Event.swift in Sources */,
 				026E6A72276D214B00ED3E36 /* DB.swift in Sources */,
+				02F6A8F6278A6C5100146F34 /* SummaryView.swift in Sources */,
 				0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */,
 				0231B223278A45ED003483BF /* SummaryViewModel.swift in Sources */,
 				020B4127268F7AA3004B6FE2 /* Bundle+displayName.swift in Sources */,
