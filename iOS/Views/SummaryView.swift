@@ -28,6 +28,10 @@ struct SummaryView: View {
                 SummaryRowView(title: "Current Balance", tally: viewModel.grandTotal)
             }
             
+            Section {
+                SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciled)
+                SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciled)
+            }
         }.onAppear {
             loadSummary()
         }
