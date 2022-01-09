@@ -45,13 +45,73 @@ class DBManager {
     }
     
     var unreconciledTotal: Double {
-        guard let total = try? retrieveTotal(ofReconciled: false) else { return 0 }
+        guard let total = try? retrieveTotal(ofReconciled: false, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var weeklyUnreconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: false, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var monthlyUnreconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: false, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var quarterlyUnreconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: false, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var halfYearUnreconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: false, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var yearlyUnreconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: false, in: .all) else { return 0 }
         
         return total
     }
     
     var reconciledTotal: Double {
-        guard let total = try? retrieveTotal(ofReconciled: true) else { return 0 }
+        guard let total = try? retrieveTotal(ofReconciled: true, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var weeklyReconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: true, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var monthlyReconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: true, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var quarterlyReconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: true, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var halfYearReconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: true, in: .all) else { return 0 }
+        
+        return total
+    }
+    
+    var yearlyReconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: true, in: .all) else { return 0 }
         
         return total
     }
