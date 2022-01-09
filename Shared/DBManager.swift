@@ -266,10 +266,15 @@ class DBManager {
         return statement
     }
     
-    private func retrieveTotal(ofReconciled reconciled: Bool) throws -> Double {
-        let requestedRecords = reconciled ? LEDGER_VIEW.filter(RECONCILED_FIELD == "Y") : LEDGER_VIEW.filter(RECONCILED_FIELD == "N")
+    private func retrieveTotal(ofReconciled reconciled: Bool, in period: SummaryPeriod) throws -> Double {
+        let totalQuery = totalsQuery(for: reconciled, in: period)
         
-        guard let row = try db.pluck(requestedRecords.select(AMOUNT_FIELD.sum)), let value = row[AMOUNT_FIELD.sum] else { return 0 }
+        var value: Double = 0
+        
+        for row in try db.prepare(totalQuery) {
+            guard let retrievedValue = row[0] as? Double else { continue }
+            value = retrievedValue
+        }
         
         return value
     }
