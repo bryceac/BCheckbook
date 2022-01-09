@@ -34,6 +34,8 @@ struct SummaryView: View {
             }
         }.onAppear {
             loadSummary()
+        }.onOpenURL { fileURL in
+            <#code#>
         }
     }
     
@@ -41,6 +43,12 @@ struct SummaryView: View {
         guard let databaseManager = DB.shared.manager, let tallies = databaseManager.totals else { return }
         
         viewModel.categories = tallies.keys.compactMap { $0 }
+    }
+    
+    private func addRecords(_ records: [Record]) {
+        guard let databaseManager = DB.shared.manager else { return }
+        
+        try? databaseManager.add(records: records)
     }
 }
 
