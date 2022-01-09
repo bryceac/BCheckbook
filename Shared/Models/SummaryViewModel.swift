@@ -14,6 +14,12 @@ class SummaryViewModel: ObservableObject {
         return categories.sorted(by: <)
     }
     
+    var grandTotal: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
+        
+        return balance
+    }
+    
     init(withCategories categories: [String] = []) {
         self.categories = categories
     }
