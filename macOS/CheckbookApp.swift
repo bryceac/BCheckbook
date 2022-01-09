@@ -13,7 +13,16 @@ struct CheckbookApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView().frame(minWidth: 800, minHeight: 600)
+            TabView {
+                ContentView().tabItem {
+                    Image(systemName: "list.dash")
+                    Text("Ledger")
+                }
+                SummaryView().tabItem {
+                    Image(systemName: "tablecells")
+                    Text("Summary")
+                }
+            }.frame(minWidth: 800, minHeight: 600)
         }
     }
 }
