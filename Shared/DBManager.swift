@@ -21,7 +21,27 @@ class DBManager {
     }
     
     var totals: [String: Double]? {
-        try? retrieveTotals()
+        try? retrieveTotals(for: .all)
+    }
+    
+    var weeklyTotals: [String: Double]? {
+        try? retrieveTotals(for: .week)
+    }
+    
+    var monthlyTotals: [String: Double]? {
+        try? retrieveTotals(for: .month)
+    }
+    
+    var quarterlyTotals: [String: Double]? {
+        try? retrieveTotals(for: .threeMonths)
+    }
+    
+    var halfYearTotals: [String: Double]? {
+        try? retrieveTotals(for: .sixMonths)
+    }
+    
+    var yearlyTotals: [String: Double]? {
+        try? retrieveTotals(for: .year)
     }
     
     var unreconciledTotal: Double {
