@@ -35,7 +35,10 @@ struct SummaryView: View {
         }.onAppear {
             loadSummary()
         }.onOpenURL { fileURL in
-            <#code#>
+            guard let records = try? Record.load(from: fileURL) else { return }
+            
+            addRecords(records)
+            loadSummary()
         }
     }
     
