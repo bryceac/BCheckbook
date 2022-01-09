@@ -11,8 +11,8 @@ struct ContentView: View {
     
     @StateObject var records: Records = Records()
     
-    @State var isExporting = false
-    @State var isImporting = false
+    @State private var isExporting = false
+    @State private var isImporting = false
     
     @State private var showSaveSuccessfulAlert = false
     
