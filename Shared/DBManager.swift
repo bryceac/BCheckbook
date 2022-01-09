@@ -219,13 +219,13 @@ class DBManager {
         case .all:
             statement = "SELECT category, SUM(amount) FROM ledger GROUP BY category"
         case .week:
-            statement = "SELECT category, SUM(amount) FROM ledger WHERE 'date' BETWEEN date('now', '-1 weeks') AND date('now') GROUP BY category"
+            statement = "SELECT category, SUM(amount) FROM ledger WHERE \"date\" BETWEEN date('now', '-1 weeks') AND date('now') GROUP BY category"
         case .month:
-            statement = "SELECT category, SUM(amount) FROM ledger WHERE 'date' BETWEEN date('now', '-1 months') AND date('now') GROUP BY category"
+            statement = "SELECT category, SUM(amount) FROM ledger WHERE \"date\" BETWEEN date('now', '-1 months') AND date('now') GROUP BY category"
         case .threeMonths:
-            statement = "SELECT category, SUM(amount) FROM ledger WHERE 'date' BETWEEN date('now', '-3 months') AND date('now') GROUP BY category"
+            statement = "SELECT category, SUM(amount) FROM ledger WHERE \"date\" BETWEEN date('now', '-3 months') AND date('now') GROUP BY category"
         case .sixMonths:
-            statement = "SELECT category, SUM(amount) FROM ledger WHERE 'date' BETWEEN date('now', '-6 months') AND date('now') GROUP BY category"
+            statement = "SELECT category, SUM(amount) FROM ledger WHERE \"date\" BETWEEN date('now', '-6 months') AND date('now') GROUP BY category"
         case .year:
             statement = "SELECT category, SUM(amount) FROM ledger WHERE 'date' BETWEEN date('now', '-1 years') AND date('now') GROUP BY category"
         }
@@ -243,6 +243,27 @@ class DBManager {
             
             tallies[category] = tally
         })
+    }
+    
+    private func totalsQuery(for isReconciled: Bool, in period: SummaryPeriod) -> String {
+        var statement = ""
+        
+        switch period {
+        case .all:
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N")"
+        case .week:
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-1 weeks') AND date('now')"
+        case .month:
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-1 months') AND date('now')"
+        case .threeMonths:
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-3 months') AND date('now')"
+        case .sixMonths:
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-6 months') AND date('now')"
+        case .year:
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-1 years') AND date('now')"
+        }
+        
+        return statement
     }
     
     private func retrieveTotal(ofReconciled reconciled: Bool) throws -> Double {
