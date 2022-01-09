@@ -20,7 +20,17 @@ class SummaryViewModel: ObservableObject {
         return balance
     }
     
+    var totalReconciled: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.reconciledTotal
+    }
     
+    var totalUnreconciled: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.unreconciledTotal
+    }
     
     init(withCategories categories: [String] = []) {
         self.categories = categories
