@@ -24,6 +24,10 @@ struct SummaryView: View {
                 }
             }
             
+            Section {
+                SummaryRowView(title: "Current Balance", tally: viewModel.grandTotal)
+            }
+            
         }.onAppear {
             loadSummary()
         }
