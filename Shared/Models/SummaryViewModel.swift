@@ -20,6 +20,8 @@ class SummaryViewModel: ObservableObject {
         return balance
     }
     
+    
+    
     init(withCategories categories: [String] = []) {
         self.categories = categories
     }

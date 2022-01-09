@@ -25,7 +25,15 @@ class DBManager {
     }
     
     var unreconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: false) else { return 0 }
         
+        return total
+    }
+    
+    var reconciledTotal: Double {
+        guard let total = try? retrieveTotal(ofReconciled: true) else { return 0 }
+        
+        return total
     }
     
     private var db: Connection
