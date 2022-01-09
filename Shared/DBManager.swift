@@ -24,6 +24,9 @@ class DBManager {
         try? retrieveTotals()
     }
     
+    var unreconciledTotal: Double {
+        
+    }
     
     private var db: Connection
     
@@ -190,6 +193,14 @@ class DBManager {
             
             tallies[category] = tally
         })
+    }
+    
+    private func retrieveTotal(ofReconciled reconciled: Bool) throws -> Double {
+        let unreconciledRecords = reconciled ? LEDGER_VIEW.filter(RECONCILED_FIELD == "Y") : LEDGER_VIEW.filter(RECONCILED_FIELD == "N")
+        
+        guard let row = try db.pluck(unreconciledRecords.select(AMOUNT_FIELD.sum)) else { return 0 }
+        
+        return row[AMOUNT_FIELD.sum]!
     }
     
     /**
