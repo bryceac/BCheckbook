@@ -24,23 +24,23 @@ class DBManager {
         try? retrieveTotals(for: .all)
     }
     
-    var weeklyTotals: [String: Double]? {
+    var totalsForWeek: [String: Double]? {
         try? retrieveTotals(for: .week)
     }
     
-    var monthlyTotals: [String: Double]? {
+    var totalsForMonth: [String: Double]? {
         try? retrieveTotals(for: .month)
     }
     
-    var quarterlyTotals: [String: Double]? {
+    var totalsForQuarter: [String: Double]? {
         try? retrieveTotals(for: .threeMonths)
     }
     
-    var halfYearTotals: [String: Double]? {
+    var totalsForSixMonths: [String: Double]? {
         try? retrieveTotals(for: .sixMonths)
     }
     
-    var yearlyTotals: [String: Double]? {
+    var TotalsForYear: [String: Double]? {
         try? retrieveTotals(for: .year)
     }
     
@@ -50,31 +50,31 @@ class DBManager {
         return total
     }
     
-    var weeklyUnreconciledTotal: Double {
+    var unreconciledTotalForWeek: Double {
         guard let total = try? retrieveTotal(ofReconciled: false, in: .week) else { return 0 }
         
         return total
     }
     
-    var monthlyUnreconciledTotal: Double {
+    var unreconciledTotalForMonth: Double {
         guard let total = try? retrieveTotal(ofReconciled: false, in: .month) else { return 0 }
         
         return total
     }
     
-    var quarterlyUnreconciledTotal: Double {
+    var unreconciledTotalForQuarter: Double {
         guard let total = try? retrieveTotal(ofReconciled: false, in: .threeMonths) else { return 0 }
         
         return total
     }
     
-    var halfYearUnreconciledTotal: Double {
+    var unreconciledTotalForSixMonths: Double {
         guard let total = try? retrieveTotal(ofReconciled: false, in: .sixMonths) else { return 0 }
         
         return total
     }
     
-    var yearlyUnreconciledTotal: Double {
+    var unreconciledTotalForYear: Double {
         guard let total = try? retrieveTotal(ofReconciled: false, in: .year) else { return 0 }
         
         return total
@@ -86,31 +86,31 @@ class DBManager {
         return total
     }
     
-    var weeklyReconciledTotal: Double {
+    var reconciledTotalForWeek: Double {
         guard let total = try? retrieveTotal(ofReconciled: true, in: .week) else { return 0 }
         
         return total
     }
     
-    var monthlyReconciledTotal: Double {
+    var reconciledTotalForMonth: Double {
         guard let total = try? retrieveTotal(ofReconciled: true, in: .month) else { return 0 }
         
         return total
     }
     
-    var quarterlyReconciledTotal: Double {
+    var reconciledTotalForQuarter: Double {
         guard let total = try? retrieveTotal(ofReconciled: true, in: .threeMonths) else { return 0 }
         
         return total
     }
     
-    var halfYearReconciledTotal: Double {
+    var reconciledTotalForSixMonths: Double {
         guard let total = try? retrieveTotal(ofReconciled: true, in: .sixMonths) else { return 0 }
         
         return total
     }
     
-    var yearlyReconciledTotal: Double {
+    var reconciledTotalForYear: Double {
         guard let total = try? retrieveTotal(ofReconciled: true, in: .year) else { return 0 }
         
         return total
