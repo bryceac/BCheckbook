@@ -131,31 +131,31 @@ class SummaryViewModel: ObservableObject {
     var totalUnreconciledForWeek: Double {
         guard let databaseManager = DB.shared.manager else { return 0 }
         
-        return databaseManager.unreconciledTotal
+        return databaseManager.unreconciledTotalForWeek
     }
     
     var totalUnreconciledForMonth: Double {
         guard let databaseManager = DB.shared.manager else { return 0 }
         
-        return databaseManager.unreconciledTotal
+        return databaseManager.unreconciledTotalForMonth
     }
     
     var totalUnreconciledForQuarter: Double {
         guard let databaseManager = DB.shared.manager else { return 0 }
         
-        return databaseManager.unreconciledTotal
+        return databaseManager.unreconciledTotalForQuarter
     }
     
     var totalUnreconciledForSixMonths: Double {
         guard let databaseManager = DB.shared.manager else { return 0 }
         
-        return databaseManager.unreconciledTotal
+        return databaseManager.unreconciledTotalForSixMonths
     }
     
     var totalUnreconciledForYear: Double {
         guard let databaseManager = DB.shared.manager else { return 0 }
         
-        return databaseManager.unreconciledTotal
+        return databaseManager.unreconciledTotalForYear
     }
     
     init(withCategories categories: [String] = []) {
