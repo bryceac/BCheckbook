@@ -252,7 +252,7 @@ class DBManager {
     }
     
     private func retrieveTotal(ofReconciled reconciled: Bool, in period: RecordPeriod) throws -> Double {
-        let totalQuery = ledger(withRange: period, andIsReconciled: reconciled).select(AMOUNT_FIELD.sum)
+        let totalQuery = ledger(withRange: period, andAreReconciled: reconciled).select(AMOUNT_FIELD.sum)
         
         guard let row = try? db.pluck(totalQuery), let value = row[AMOUNT_FIELD.sum] else { return 0 }
         
