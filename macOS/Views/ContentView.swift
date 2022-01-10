@@ -10,16 +10,39 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.undoManager) var undoManager
     
-    @State var isImporting = false
-    @State var isExporting = false
+    @State private var isImporting = false
+    @State private var isExporting = false
     
     @StateObject var records: Records = Records()
     
-    @State var showSuccessfulExportAlert = false
+    @State private var showSuccessfulExportAlert = false
+    
+    @State private var recordRange: RecordPeriod = .all
+    
+    var recordsInRange: [Record] {
+        var list: [Record] = []
+        
+        switch recordRange {
+        case .all:
+            list = records.sortedRecords
+        case .week:
+            list = records.sortedRecords.week
+        case .month:
+            list = records.sortedRecords.month
+        case .threeMonths:
+            list = records.sortedRecords.quarter
+        case .sixMonths:
+            list = records.sortedRecords.sixMonths
+        case .year:
+            list = records.sortedRecords.year
+        }
+        
+        return list
+    }
     
     var body: some View {
         List {
-            ForEach(records.sortedRecords) { record in
+            ForEach(recordsInRange) { record in
                 
                 let recordBalance = records.balances[record]!
                 
