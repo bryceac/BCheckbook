@@ -17,7 +17,11 @@ struct ContentView: View {
     
     @State private var showSuccessfulExportAlert = false
     
-    @State private var recordRange: RecordPeriod = .all
+    @State private var recordRange: RecordPeriod = .all {
+        didSet {
+            loadRecords()
+        }
+    }
     
     var body: some View {
         List {
