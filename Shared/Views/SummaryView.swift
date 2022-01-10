@@ -13,6 +13,12 @@ struct SummaryView: View {
     @State private var summaryRange: SummaryPeriod = .all
     
     var body: some View {
+        Picker("", selection: $summaryRange) {
+            ForEach(SummaryPeriod.allCases, id: \.self) { range in
+                Text(range.rawValue)
+            }
+        }.pickerStyle(SegmentedPickerStyle())
+        
         List {
             Section {
                 switch summaryRange {
