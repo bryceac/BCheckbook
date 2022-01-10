@@ -16,19 +16,52 @@ struct ContentView: View {
     
     @State private var showSaveSuccessfulAlert = false
     
+    @State private var recordRange: RecordPeriod = .all
+    
+    var recordsInRange: [Record] {
+        var list: [Record] = []
+        
+        switch recordRange {
+        case .all:
+            list = records.sortedRecords
+        case .week:
+            list = records.sortedRecords.week
+        case .month:
+            list = records.sortedRecords.month
+        case .threeMonths:
+            list = records.sortedRecords.quarter
+        case .sixMonths:
+            list = records.sortedRecords.sixMonths
+        case .year:
+            list = records.sortedRecords.year
+        }
+        
+        return list
+    }
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(records.sortedRecords) { record in
-                    
-                    let recordBalance = records.balances[record]!
-                    
-                        NavigationLink(
-                            destination: RecordDetailView(record: record),
-                            label: {
-                                RecordView(record: record, balance: recordBalance)
-                            })
-                }.onDelete(perform: delete)
+                Section {
+                    Picker("", selection: $recordRange) {
+                        ForEach(RecordPeriod.allCases, id: \.self) { range in
+                            Text(range.rawValue)
+                        }
+                    }.pickerStyle(SegmentedPickerStyle())
+                }
+                
+                Section {
+                    ForEach(recordsInRange) { record in
+                        
+                        let recordBalance = records.balances[record]!
+                        
+                            NavigationLink(
+                                destination: RecordDetailView(record: record),
+                                label: {
+                                    RecordView(record: record, balance: recordBalance)
+                                })
+                    }.onDelete(perform: delete)
+                }
             }.toolbar(content: {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                     
