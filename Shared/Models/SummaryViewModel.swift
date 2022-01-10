@@ -13,42 +13,6 @@ class SummaryViewModel: ObservableObject {
     var sortedCategories: [String] {
         return categories.sorted(by: <)
     }
-
-    var grandTotal: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var totalForWeek: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.week.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var totalForMonth: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.month.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var totalForQuarter: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.quarter.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var totalForSixMonths: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.sixMonths.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var totalForYear: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.year.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
-        
-        return balance
-    }
     
     init(withCategories categories: [String] = []) {
         self.categories = categories
@@ -94,6 +58,41 @@ class SummaryViewModel: ObservableObject {
             }
         case .year:
             if let firstRecord = records.year.first, let balance = try? databaseManager.balance(for: firstRecord) {
+                value = balance
+            }
+        }
+        
+        return value
+    }
+    
+    func balance(asOf period: RecordPeriod) -> Double {
+        guard let databaseManager = DB.shared.manager, let records = databaseManager.records else { return 0 }
+        
+        var value: Double = 0
+        
+        switch period {
+        case .all:
+            if let lastRecord = records.last, let balance = try? databaseManager.balance(for: lastRecord) {
+                value = balance
+            }
+        case .week:
+            if let lastRecord = records.week.last, let balance = try? databaseManager.balance(for: lastRecord) {
+                value = balance
+            }
+        case .month:
+            if let lastRecord = records.month.last, let balance = try? databaseManager.balance(for: lastRecord) {
+                value = balance
+            }
+        case .threeMonths:
+            if let lastRecord = records.quarter.last, let balance = try? databaseManager.balance(for: lastRecord) {
+                value = balance
+            }
+        case .sixMonths:
+            if let lastRecord = records.sixMonths.last, let balance = try? databaseManager.balance(for: lastRecord) {
+                value = balance
+            }
+        case .year:
+            if let lastRecord = records.year.last, let balance = try? databaseManager.balance(for: lastRecord) {
                 value = balance
             }
         }
