@@ -8,5 +8,5 @@
 import Foundation
 
 enum RecordPeriod: String, CaseIterable {
-    case all, week, month, threeMonths, sixMonths, year
+    case all, week, month, threeMonths = "3 mos", sixMonths = "6 mos", year
 }
