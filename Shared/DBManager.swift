@@ -20,30 +20,6 @@ class DBManager {
         try? retrieveCategories()
     }
     
-    var totals: [String: Double]? {
-        try? retrieveTotals(for: .all)
-    }
-    
-    var totalsForWeek: [String: Double]? {
-        try? retrieveTotals(for: .week)
-    }
-    
-    var totalsForMonth: [String: Double]? {
-        try? retrieveTotals(for: .month)
-    }
-    
-    var totalsForQuarter: [String: Double]? {
-        try? retrieveTotals(for: .threeMonths)
-    }
-    
-    var totalsForSixMonths: [String: Double]? {
-        try? retrieveTotals(for: .sixMonths)
-    }
-    
-    var TotalsForYear: [String: Double]? {
-        try? retrieveTotals(for: .year)
-    }
-    
     var unreconciledTotal: Double {
         guard let total = try? retrieveTotal(ofReconciled: false, in: .all) else { return 0 }
         
