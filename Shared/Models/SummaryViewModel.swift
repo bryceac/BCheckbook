@@ -14,6 +14,42 @@ class SummaryViewModel: ObservableObject {
         return categories.sorted(by: <)
     }
     
+    var startingBalance: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        
+        return balance
+    }
+    
+    var startingBalanceForWeek: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        
+        return balance
+    }
+    
+    var startingBalanceForMonth: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        
+        return balance
+    }
+    
+    var startingBalanceForQuarter: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        
+        return balance
+    }
+    
+    var startingBalanceForSixMonths: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        
+        return balance
+    }
+    
+    var startingBalanceForYear: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        
+        return balance
+    }
+
     var grandTotal: Double {
         guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
         

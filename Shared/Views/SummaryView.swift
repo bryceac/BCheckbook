@@ -10,11 +10,15 @@ import SwiftUI
 struct SummaryView: View {
     @StateObject var viewModel: SummaryViewModel = SummaryViewModel()
     
+    @State private var summaryRange: SummaryPeriod = .all
+    
     var body: some View {
         List {
             Section {
-                if viewModel.sortedCategories.contains("Opening Balance") {
-                    SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "Opening Balance"))
+                if  summaryRange == .all && viewModel.sortedCategories.contains("Opening Balance") {
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "Opening Balance", in: .all))
+                } else {
+                    SummaryRowView(title: "Opening Balance", tally: <#T##Double#>)
                 }
             }
             
