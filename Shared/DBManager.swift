@@ -91,16 +91,16 @@ class DBManager {
         
         if let category = record.event.category {
             if let categoryID = try? id(ofCategory: category) {
-                insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
+                insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- record.event.date, CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
             } else {
                 try add(category: category)
                 
                 guard let categoryID = try? id(ofCategory: category) else { return }
             
-                insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
+                insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- record.event.date, CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
             }
         } else {
-            insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
+            insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- record.event.date, CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
         }
         
         try db.run(insert)
@@ -156,7 +156,7 @@ class DBManager {
     private func retrieveRecords() throws -> [Record] {
         var records: [Record] = []
         for row in try db.prepare(LEDGER_VIEW) {
-            guard let transaction = Event(date: row[DATE_FIELD], checkNumber: row[CHECK_NUMBER_FIELD], category: row[CATEGORY_FIELD], vendor: row[VENDOR_FIELD], memo: row[MEMO_FIELD], amount: row[AMOUNT_FIELD], andIsReconciled: row[RECONCILED_FIELD] == "Y") else { continue }
+            let transaction = Event(date: row[DATE_FIELD], checkNumber: row[CHECK_NUMBER_FIELD], category: row[CATEGORY_FIELD], vendor: row[VENDOR_FIELD], memo: row[MEMO_FIELD], amount: row[AMOUNT_FIELD], andIsReconciled: row[RECONCILED_FIELD] == "Y")
             
             let record = Record(withID: row[ID_FIELD], transaction: transaction)
             
@@ -187,27 +187,27 @@ class DBManager {
         case .week:
             let now = Date()
             if let oneWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
-                table = LEDGER_VIEW.filter(Event.DF.string(from: oneWeekAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+                table = LEDGER_VIEW.filter(oneWeekAgo...now ~= DATE_FIELD)
             }
         case .month:
             let now = Date()
             if let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -7, to: now) {
-                table = LEDGER_VIEW.filter(Event.DF.string(from: oneMonthAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+                table = LEDGER_VIEW.filter(oneMonthAgo...now ~= DATE_FIELD)
             }
         case .threeMonths:
             let now = Date()
             if let threeMonthsAgo = Calendar.current.date(byAdding: .month, value: -3, to: now) {
-                table = LEDGER_VIEW.filter(Event.DF.string(from: threeMonthsAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+                table = LEDGER_VIEW.filter(threeMonthsAgo...now ~= DATE_FIELD)
             }
         case .sixMonths:
             let now = Date()
             if let sixMonthsAgo = Calendar.current.date(byAdding: .month, value: -6, to: now) {
-                table = LEDGER_VIEW.filter(Event.DF.string(from: sixMonthsAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+                table = LEDGER_VIEW.filter(sixMonthsAgo...now ~= DATE_FIELD)
             }
         case .year:
             let now = Date()
             if let oneYearAgo = Calendar.current.date(byAdding: .year, value: -1, to: now) {
-                table = LEDGER_VIEW.filter(Event.DF.string(from: oneYearAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+                table = LEDGER_VIEW.filter(oneYearAgo...now ~= DATE_FIELD)
             }
         }
         
@@ -271,17 +271,17 @@ class DBManager {
         
         if let category = record.event.category {
             if let categoryID = try id(ofCategory: category) {
-                update = TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
+                update = TRSNSACTION_RECORD.update(DATE_FIELD <- record.event.date, CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
             } else {
                 try add(category: category)
                 
                 guard let categoryID = try id(ofCategory: category) else { return }
                 
-                update = TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
+                update = TRSNSACTION_RECORD.update(DATE_FIELD <- record.event.date, CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
             }
             
         } else {
-            update = TRSNSACTION_RECORD.update(DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- try id(ofCategory: record.event.category), VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
+            update = TRSNSACTION_RECORD.update(DATE_FIELD <- record.event.date, CHECK_NUMBER_FIELD <- record.event.checkNumber, TRANSACTION_CATEGORY_ID_FIELD <- try id(ofCategory: record.event.category), VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0 )
         }
 
         try db.run(update)
