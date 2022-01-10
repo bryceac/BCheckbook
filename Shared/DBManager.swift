@@ -284,6 +284,18 @@ class DBManager {
         return table
     }
     
+    private func ledger(withRange range: RecordPeriod, andIsReconciled isReconciled: Bool) -> Table {
+        var table: Table!
+        
+        if isReconciled {
+            table = ledger(withRange: range).filter(RECONCILED_FIELD == "Y")
+        } else {
+            table = ledger(withRange: range).filter(RECONCILED_FIELD == "N")
+        }
+        
+        return table
+    }
+    
     private func retrieveTotals(for period: RecordPeriod) throws -> [String: Double] {
         
         let groupQuery = ledger(withRange: period).select(CATEGORY_FIELD, AMOUNT_FIELD.sum)
