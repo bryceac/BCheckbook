@@ -15,21 +15,47 @@ struct SummaryView: View {
     var body: some View {
         List {
             Section {
-                if  summaryRange == .all && viewModel.sortedCategories.contains("Opening Balance") {
-                    SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "Opening Balance", in: .all))
-                } else {
-                    SummaryRowView(title: "Opening Balance", tally: <#T##Double#>)
+                switch summaryRange {
+                case .all:
+                    if viewModel.categories.contains("Opening Balance") {
+                        SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "Opening Balance", in: .all))
+                    } else {
+                        SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalance)
+                    }
+                case .week:
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForWeek)
+                case .month:
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForMonth)
+                case .threeMonths:
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForQuarter)
+                case .sixMonths:
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForSixMonths)
+                case .year:
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForYear)
                 }
             }
             
             Section {
                 ForEach(viewModel.sortedCategories.filter({ $0 != "Opening Balance" }), id: \.self) { category in
-                    SummaryRowView(title: category, tally: viewModel.total(for: category))
+                    SummaryRowView(title: category, tally: viewModel.total(for: category, in: summaryRange))
                 }
             }
             
             Section {
-                SummaryRowView(title: "Current Balance", tally: viewModel.grandTotal)
+                switch summaryRange {
+                case .all:
+                    SummaryRowView(title: "Current Balance", tally: viewModel.grandTotal)
+                case .week:
+                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForWeek)
+                case .month:
+                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForMonth)
+                case .threeMonths:
+                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForQuarter)
+                case .sixMonths:
+                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForSixMonths)
+                case .year:
+                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForYear)
+                }
             }
             
             Section {
