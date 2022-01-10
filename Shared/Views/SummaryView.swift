@@ -22,23 +22,10 @@ struct SummaryView: View {
                 }.pickerStyle(SegmentedPickerStyle())
             }
             Section {
-                switch summaryRange {
-                case .all:
-                    if viewModel.categories.contains("Opening Balance") {
-                        SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "Opening Balance", in: .all))
-                    } else {
-                        SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalance)
-                    }
-                case .week:
-                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForWeek)
-                case .month:
-                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForMonth)
-                case .threeMonths:
-                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForQuarter)
-                case .sixMonths:
-                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForSixMonths)
-                case .year:
-                    SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalanceForYear)
+                if case .all = summaryRange {
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.categories.contains("Opening Balance") ? viewModel.total(for: "Opening Balance", in: summaryRange) : viewModel.startingBalance(asOf: summaryRange))
+                } else {
+                    SummaryRowView(title: "OpeningBalance", tally: viewModel.startingBalance(asOf: summaryRange))
                 }
             }
             
@@ -49,43 +36,13 @@ struct SummaryView: View {
             }
             
             Section {
-                switch summaryRange {
-                case .all:
-                    SummaryRowView(title: "Current Balance", tally: viewModel.grandTotal)
-                case .week:
-                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForWeek)
-                case .month:
-                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForMonth)
-                case .threeMonths:
-                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForQuarter)
-                case .sixMonths:
-                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForSixMonths)
-                case .year:
-                    SummaryRowView(title: "Current Balance", tally: viewModel.totalForYear)
-                }
+                SummaryRowView(title: "Current Balance", tally: viewModel.balance(asOf: summaryRange))
             }
             
             Section {
-                switch summaryRange {
-                case .all:
-                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciled)
-                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciled)
-                case .week:
-                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForWeek)
-                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForWeek)
-                case .month:
-                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForMonth)
-                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForMonth)
-                case .threeMonths:
-                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForQuarter)
-                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForQuarter)
-                case .sixMonths:
-                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForSixMonths)
-                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForSixMonths)
-                case .year:
-                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForYear)
-                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForYear)
-                }
+                SummaryRowView(title: "Reconciled", tally: viewModel.total(ofReconciled: true, in: summaryRange))
+                
+                SummaryRowView(title: "Unreconciled", tally: viewModel.total(ofReconciled: false, in: summaryRange))
             }
         }.onAppear {
             loadSummary()
