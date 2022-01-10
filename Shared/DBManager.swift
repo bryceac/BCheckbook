@@ -178,7 +178,7 @@ class DBManager {
         return categories
     }
     
-    private func ledger(withRange range: RecordPeriod = .all) -> Table {
+    private func ledger(withRange range: RecordPeriod = .all, andAreReconciled isReconciled: Bool? = nil) -> Table {
         var table: Table!
         
         switch range {
@@ -226,7 +226,7 @@ class DBManager {
         return table
     }
     
-    private func retrieveTotals(for period: RecordPeriod) throws -> [String: Double] {
+    private func retrieveTotals(for period: RecordPeriod, andAreReconciled: Bool? = nil) throws -> [String: Double] {
         
         let groupQuery = ledger(withRange: period).select(CATEGORY_FIELD, AMOUNT_FIELD.sum)
         
