@@ -31,72 +31,14 @@ class SummaryViewModel: ObservableObject {
     }
     
     func startingBalance(asOf period: RecordPeriod) -> Double {
-        guard let databaseManager = DB.shared.manager, let records = databaseManager.records else { return 0 }
+        guard let databaseManager = DB.shared.manager, let records = try? databaseManager.records(inRange: period), let firstRecord = records.first, let startBalance = try? databaseManager.balance(for: firstRecord) else { return 0 }
         
-        var value: Double = 0
-        
-        switch period {
-        case .all:
-            if let firstRecord = records.first, let balance = try? databaseManager.balance(for: firstRecord) {
-                value = balance
-            }
-        case .week:
-            if let firstRecord = records.week.first, let balance = try? databaseManager.balance(for: firstRecord) {
-                value = balance
-            }
-        case .month:
-            if let firstRecord = records.month.first, let balance = try? databaseManager.balance(for: firstRecord) {
-                value = balance
-            }
-        case .threeMonths:
-            if let firstRecord = records.quarter.first, let balance = try? databaseManager.balance(for: firstRecord) {
-                value = balance
-            }
-        case .sixMonths:
-            if let firstRecord = records.sixMonths.first, let balance = try? databaseManager.balance(for: firstRecord) {
-                value = balance
-            }
-        case .year:
-            if let firstRecord = records.year.first, let balance = try? databaseManager.balance(for: firstRecord) {
-                value = balance
-            }
-        }
-        
-        return value
+        return startBalance
     }
     
     func balance(asOf period: RecordPeriod) -> Double {
-        guard let databaseManager = DB.shared.manager, let records = databaseManager.records else { return 0 }
+        guard let databaseManager = DB.shared.manager, let records = try? databaseManager.records(inRange: period), let lastRecord = records.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
         
-        var value: Double = 0
-        
-        switch period {
-        case .all:
-            if let lastRecord = records.last, let balance = try? databaseManager.balance(for: lastRecord) {
-                value = balance
-            }
-        case .week:
-            if let lastRecord = records.week.last, let balance = try? databaseManager.balance(for: lastRecord) {
-                value = balance
-            }
-        case .month:
-            if let lastRecord = records.month.last, let balance = try? databaseManager.balance(for: lastRecord) {
-                value = balance
-            }
-        case .threeMonths:
-            if let lastRecord = records.quarter.last, let balance = try? databaseManager.balance(for: lastRecord) {
-                value = balance
-            }
-        case .sixMonths:
-            if let lastRecord = records.sixMonths.last, let balance = try? databaseManager.balance(for: lastRecord) {
-                value = balance
-            }
-        case .year:
-            if let lastRecord = records.year.last, let balance = try? databaseManager.balance(for: lastRecord) {
-                value = balance
-            }
-        }
-        
-        return value
+        return balance
     }
 }
