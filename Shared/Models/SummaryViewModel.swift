@@ -21,31 +21,31 @@ class SummaryViewModel: ObservableObject {
     }
     
     var startingBalanceForWeek: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.week.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
         
         return balance
     }
     
     var startingBalanceForMonth: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.month.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
         
         return balance
     }
     
     var startingBalanceForQuarter: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.quarter.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
         
         return balance
     }
     
     var startingBalanceForSixMonths: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.sixMonths.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
         
         return balance
     }
     
     var startingBalanceForYear: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.year.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
         
         return balance
     }
