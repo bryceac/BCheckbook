@@ -56,6 +56,36 @@ class SummaryViewModel: ObservableObject {
         return databaseManager.reconciledTotal
     }
     
+    var totalReconciledForWeek: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.reconciledTotalForWeek
+    }
+    
+    var totalReconciledForMonth: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.reconciledTotalForMonth
+    }
+    
+    var totalReconciledForQuarter: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.reconciledTotalForQuarter
+    }
+    
+    var totalReconciledForSixMonths: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.reconciledTotalForSixMonths
+    }
+    
+    var totalReconciledForYear: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.reconciledTotalForYear
+    }
+    
     var totalUnreconciled: Double {
         guard let databaseManager = DB.shared.manager else { return 0 }
         
