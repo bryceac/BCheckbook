@@ -55,9 +55,9 @@ struct SummaryView: View {
     }
     
     func loadCategories() {
-        guard let databaseManager = DB.shared.manager, let tallies = databaseManager.totals(for: summaryRange) else { return }
+        guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories else { return }
         
-        viewModel.categories = tallies.map { String($0.key) }
+        viewModel.categories = categories
     }
     
     private func addRecords(_ records: [Record]) {
