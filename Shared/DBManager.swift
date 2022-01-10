@@ -20,78 +20,6 @@ class DBManager {
         try? retrieveCategories()
     }
     
-    var unreconciledTotal: Double {
-        guard let total = try? retrieveTotal(ofReconciled: false, in: .all) else { return 0 }
-        
-        return total
-    }
-    
-    var unreconciledTotalForWeek: Double {
-        guard let total = try? retrieveTotal(ofReconciled: false, in: .week) else { return 0 }
-        
-        return total
-    }
-    
-    var unreconciledTotalForMonth: Double {
-        guard let total = try? retrieveTotal(ofReconciled: false, in: .month) else { return 0 }
-        
-        return total
-    }
-    
-    var unreconciledTotalForQuarter: Double {
-        guard let total = try? retrieveTotal(ofReconciled: false, in: .threeMonths) else { return 0 }
-        
-        return total
-    }
-    
-    var unreconciledTotalForSixMonths: Double {
-        guard let total = try? retrieveTotal(ofReconciled: false, in: .sixMonths) else { return 0 }
-        
-        return total
-    }
-    
-    var unreconciledTotalForYear: Double {
-        guard let total = try? retrieveTotal(ofReconciled: false, in: .year) else { return 0 }
-        
-        return total
-    }
-    
-    var reconciledTotal: Double {
-        guard let total = try? retrieveTotal(ofReconciled: true, in: .all) else { return 0 }
-        
-        return total
-    }
-    
-    var reconciledTotalForWeek: Double {
-        guard let total = try? retrieveTotal(ofReconciled: true, in: .week) else { return 0 }
-        
-        return total
-    }
-    
-    var reconciledTotalForMonth: Double {
-        guard let total = try? retrieveTotal(ofReconciled: true, in: .month) else { return 0 }
-        
-        return total
-    }
-    
-    var reconciledTotalForQuarter: Double {
-        guard let total = try? retrieveTotal(ofReconciled: true, in: .threeMonths) else { return 0 }
-        
-        return total
-    }
-    
-    var reconciledTotalForSixMonths: Double {
-        guard let total = try? retrieveTotal(ofReconciled: true, in: .sixMonths) else { return 0 }
-        
-        return total
-    }
-    
-    var reconciledTotalForYear: Double {
-        guard let total = try? retrieveTotal(ofReconciled: true, in: .year) else { return 0 }
-        
-        return total
-    }
-    
     private var db: Connection
     
     // Tables
@@ -308,36 +236,10 @@ class DBManager {
         })
     }
     
-    private func totalsQuery(for isReconciled: Bool, in period: RecordPeriod) -> String {
-        var statement = ""
-        
-        switch period {
-        case .all:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\""
-        case .week:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-1 weeks') AND date('now')"
-        case .month:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-1 months') AND date('now')"
-        case .threeMonths:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-3 months') AND date('now')"
-        case .sixMonths:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-6 months') AND date('now')"
-        case .year:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-1 years') AND date('now')"
-        }
-        
-        return statement
-    }
-    
     private func retrieveTotal(ofReconciled reconciled: Bool, in period: RecordPeriod) throws -> Double {
-        let totalQuery = totalsQuery(for: reconciled, in: period)
+        let totalQuery = ledger(withRange: period, andIsReconciled: reconciled).select(AMOUNT_FIELD.sum)
         
-        var value: Double = 0
-        
-        for row in try db.prepare(totalQuery) {
-            guard let retrievedValue = row[0] as? Double else { continue }
-            value = retrievedValue
-        }
+        guard let row = try? db.pluck(totalQuery), let value = row[AMOUNT_FIELD.sum] else { return 0 }
         
         return value
     }
@@ -346,6 +248,12 @@ class DBManager {
         guard let retrievedTotals = try? retrieveTotals(for: period) else { return nil }
         
         return retrievedTotals
+    }
+    
+    func total(ofReconciled isReconciled: Bool, for period: RecordPeriod) -> Double {
+        guard let requestedTotal = try? retrieveTotal(ofReconciled: isReconciled, in: period) else { return 0 }
+        
+        return requestedTotal
     }
     
     /**
