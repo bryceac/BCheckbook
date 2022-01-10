@@ -45,19 +45,19 @@ struct SummaryView: View {
                 SummaryRowView(title: "Unreconciled", tally: viewModel.total(ofReconciled: false, in: summaryRange))
             }
         }.onAppear {
-            loadSummary()
+            loadCategories()
         }.onOpenURL { fileURL in
             guard let records = try? Record.load(from: fileURL) else { return }
             
             addRecords(records)
-            loadSummary()
+            loadCategories()
         }
     }
     
-    func loadSummary() {
+    func loadCategories() {
         guard let databaseManager = DB.shared.manager, let tallies = databaseManager.totals(for: summaryRange) else { return }
         
-        viewModel.categories = tallies.keys.compactMap { $0 }
+        viewModel.categories = tallies.map { String($0.key) }
     }
     
     private func addRecords(_ records: [Record]) {
