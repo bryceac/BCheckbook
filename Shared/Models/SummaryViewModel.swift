@@ -162,7 +162,7 @@ class SummaryViewModel: ObservableObject {
         self.categories = categories
     }
     
-    func total(for category: String, in period: SummaryPeriod) -> Double {
+    func total(for category: String, in period: RecordPeriod) -> Double {
         guard let databaseManager = DB.shared.manager else { return 0 }
         
         var tally: Double = 0

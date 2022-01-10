@@ -10,13 +10,13 @@ import SwiftUI
 struct SummaryView: View {
     @StateObject var viewModel: SummaryViewModel = SummaryViewModel()
     
-    @State private var summaryRange: SummaryPeriod = .all
+    @State private var summaryRange: RecordPeriod = .all
     
     var body: some View {
         List {
             Section {
                 Picker("", selection: $summaryRange) {
-                    ForEach(SummaryPeriod.allCases, id: \.self) { range in
+                    ForEach(RecordPeriod.allCases, id: \.self) { range in
                         Text(range.rawValue)
                     }
                 }.pickerStyle(SegmentedPickerStyle())

@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum SummaryPeriod: String, CaseIterable {
+enum RecordPeriod: String, CaseIterable {
     case all, week, month, threeMonths, sixMonths, year
 }

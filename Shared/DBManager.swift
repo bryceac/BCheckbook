@@ -272,7 +272,7 @@ class DBManager {
         return categories
     }
     
-    private func categoryTotalsStatement(_ period: SummaryPeriod) -> String {
+    private func categoryTotalsStatement(_ period: RecordPeriod) -> String {
         var statement = ""
         
         switch period {
@@ -293,7 +293,7 @@ class DBManager {
         return statement
     }
     
-    private func retrieveTotals(for period: SummaryPeriod) throws -> [String: Double] {
+    private func retrieveTotals(for period: RecordPeriod) throws -> [String: Double] {
         
         let groupQuery = categoryTotalsStatement(period)
         
@@ -305,7 +305,7 @@ class DBManager {
         })
     }
     
-    private func totalsQuery(for isReconciled: Bool, in period: SummaryPeriod) -> String {
+    private func totalsQuery(for isReconciled: Bool, in period: RecordPeriod) -> String {
         var statement = ""
         
         switch period {
@@ -326,7 +326,7 @@ class DBManager {
         return statement
     }
     
-    private func retrieveTotal(ofReconciled reconciled: Bool, in period: SummaryPeriod) throws -> Double {
+    private func retrieveTotal(ofReconciled reconciled: Bool, in period: RecordPeriod) throws -> Double {
         let totalQuery = totalsQuery(for: reconciled, in: period)
         
         var value: Double = 0
