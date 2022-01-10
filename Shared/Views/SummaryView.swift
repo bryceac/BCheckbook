@@ -59,8 +59,26 @@ struct SummaryView: View {
             }
             
             Section {
-                SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciled)
-                SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciled)
+                switch summaryRange {
+                case .all:
+                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciled)
+                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciled)
+                case .week:
+                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForWeek)
+                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForWeek)
+                case .month:
+                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForMonth)
+                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForMonth)
+                case .threeMonths:
+                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForQuarter)
+                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForQuarter)
+                case .sixMonths:
+                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForSixMonths)
+                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForSixMonths)
+                case .year:
+                    SummaryRowView(title: "Reconciled", tally: viewModel.totalReconciledForYear)
+                    SummaryRowView(title: "Unreconciled", tally: viewModel.totalUnreconciledForYear)
+                }
             }
         }.onAppear {
             loadSummary()
