@@ -183,44 +183,57 @@ class DBManager {
         
         switch range {
         case .all:
-            table = LEDGER_VIEW
+            if let isReconciled = isReconciled {
+                let reconciledStatus = isReconciled ? "Y" : "N"
+                table = LEDGER_VIEW.filter(RECONCILED_FIELD == reconciledStatus)
+            } else {
+                table = LEDGER_VIEW
+            }
         case .week:
             let now = Date()
-            if let oneWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
+            if let oneWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now), let isReconciled = isReconciled {
+                let reconciledStatus = isReconciled ? "Y" : "N"
+                
+                table = LEDGER_VIEW.filter(oneWeekAgo...now ~= DATE_FIELD && RECONCILED_FIELD == reconciledStatus)
+            } else if let oneWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
                 table = LEDGER_VIEW.filter(oneWeekAgo...now ~= DATE_FIELD)
             }
         case .month:
             let now = Date()
-            if let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -7, to: now) {
+            if let oneMonthAgo = Calendar.current.date(byAdding: .day, value: -7, to: now), let isReconciled = isReconciled {
+                let reconciledStatus = isReconciled ? "Y" : "N"
+                
+                table = LEDGER_VIEW.filter(oneMonthAgo...now ~= DATE_FIELD && RECONCILED_FIELD == reconciledStatus)
+            } else if let oneMonthAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
                 table = LEDGER_VIEW.filter(oneMonthAgo...now ~= DATE_FIELD)
             }
         case .threeMonths:
             let now = Date()
-            if let threeMonthsAgo = Calendar.current.date(byAdding: .month, value: -3, to: now) {
+            if let threeMonthsAgo = Calendar.current.date(byAdding: .day, value: -7, to: now), let isReconciled = isReconciled {
+                let reconciledStatus = isReconciled ? "Y" : "N"
+                
+                table = LEDGER_VIEW.filter(threeMonthsAgo...now ~= DATE_FIELD && RECONCILED_FIELD == reconciledStatus)
+            } else if let threeMonthsAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
                 table = LEDGER_VIEW.filter(threeMonthsAgo...now ~= DATE_FIELD)
             }
         case .sixMonths:
             let now = Date()
-            if let sixMonthsAgo = Calendar.current.date(byAdding: .month, value: -6, to: now) {
+            if let sixMonthsAgo = Calendar.current.date(byAdding: .day, value: -7, to: now), let isReconciled = isReconciled {
+                let reconciledStatus = isReconciled ? "Y" : "N"
+                
+                table = LEDGER_VIEW.filter(sixMonthsAgo...now ~= DATE_FIELD && RECONCILED_FIELD == reconciledStatus)
+            } else if let sixMonthsAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
                 table = LEDGER_VIEW.filter(sixMonthsAgo...now ~= DATE_FIELD)
             }
         case .year:
             let now = Date()
-            if let oneYearAgo = Calendar.current.date(byAdding: .year, value: -1, to: now) {
+            if let oneYearAgo = Calendar.current.date(byAdding: .day, value: -7, to: now), let isReconciled = isReconciled {
+                let reconciledStatus = isReconciled ? "Y" : "N"
+                
+                table = LEDGER_VIEW.filter(oneYearAgo...now ~= DATE_FIELD && RECONCILED_FIELD == reconciledStatus)
+            } else if let oneYearAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
                 table = LEDGER_VIEW.filter(oneYearAgo...now ~= DATE_FIELD)
             }
-        }
-        
-        return table
-    }
-    
-    private func ledger(withRange range: RecordPeriod, andIsReconciled isReconciled: Bool) -> Table {
-        var table: Table!
-        
-        if isReconciled {
-            table = ledger(withRange: range).filter(RECONCILED_FIELD == "Y")
-        } else {
-            table = ledger(withRange: range).filter(RECONCILED_FIELD == "N")
         }
         
         return table
