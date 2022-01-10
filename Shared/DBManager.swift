@@ -34,7 +34,7 @@ class DBManager {
     
     // ledger fields
     private let ID_FIELD = Expression<String>("id")
-    private let DATE_FIELD = Expression<String>("date")
+    private let DATE_FIELD = Expression<Date>("date")
     private let CHECK_NUMBER_FIELD = Expression<Int?>("check_number")
     private let RECONCILED_FIELD = Expression<String>("reconciled")
     private let VENDOR_FIELD = Expression<String>("vendor")
@@ -60,6 +60,8 @@ class DBManager {
      */
     init(withDB db: URL) throws {
         self.db = try Connection(db.absoluteString)
+        
+        SQLite.dateFormatter.dateFormat = Event.DF.dateFormat
     }
     
     /**
