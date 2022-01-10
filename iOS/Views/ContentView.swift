@@ -18,27 +18,6 @@ struct ContentView: View {
     
     @State private var recordRange: RecordPeriod = .all
     
-    var recordsInRange: [Record] {
-        var list: [Record] = []
-        
-        switch recordRange {
-        case .all:
-            list = records.sortedRecords
-        case .week:
-            list = records.sortedRecords.week
-        case .month:
-            list = records.sortedRecords.month
-        case .threeMonths:
-            list = records.sortedRecords.quarter
-        case .sixMonths:
-            list = records.sortedRecords.sixMonths
-        case .year:
-            list = records.sortedRecords.year
-        }
-        
-        return list
-    }
-    
     var body: some View {
         NavigationView {
             List {
@@ -51,7 +30,7 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    ForEach(recordsInRange) { record in
+                    ForEach(records.sortedRecords) { record in
                         
                         let recordBalance = records.balances[record]!
                         
@@ -125,7 +104,7 @@ struct ContentView: View {
     }
     
     func loadRecords() {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records else { return }
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records(inRange: recordRange) else { return }
         
         records.items = storedRecords
     }
