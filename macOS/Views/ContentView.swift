@@ -42,15 +42,25 @@ struct ContentView: View {
     
     var body: some View {
         List {
-            ForEach(recordsInRange) { record in
-                
-                let recordBalance = records.balances[record]!
-                
-                RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
-                    Button("Delete") {
-                        try? remove(record: record)
+            Section {
+                Picker("", selection: $recordRange) {
+                    ForEach(RecordPeriod.allCases, id: \.self) { range in
+                        Text(range.rawValue)
                     }
-                }))
+                }.pickerStyle(SegmentedPickerStyle())
+            }
+            
+            Section {
+                ForEach(recordsInRange) { record in
+                    
+                    let recordBalance = records.balances[record]!
+                    
+                    RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
+                        Button("Delete") {
+                            try? remove(record: record)
+                        }
+                    }))
+                }
             }
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.principal) {
