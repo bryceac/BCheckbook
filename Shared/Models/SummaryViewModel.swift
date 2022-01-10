@@ -13,42 +13,6 @@ class SummaryViewModel: ObservableObject {
     var sortedCategories: [String] {
         return categories.sorted(by: <)
     }
-    
-    var startingBalance: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var startingBalanceForWeek: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.week.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var startingBalanceForMonth: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.month.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var startingBalanceForQuarter: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.quarter.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var startingBalanceForSixMonths: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.sixMonths.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
-        
-        return balance
-    }
-    
-    var startingBalanceForYear: Double {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let firstRecord = storedRecords.year.first, let balance = try? databaseManager.balance(for: firstRecord) else { return 0 }
-        
-        return balance
-    }
 
     var grandTotal: Double {
         guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
@@ -86,78 +50,6 @@ class SummaryViewModel: ObservableObject {
         return balance
     }
     
-    var totalReconciled: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.reconciledTotal
-    }
-    
-    var totalReconciledForWeek: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.reconciledTotalForWeek
-    }
-    
-    var totalReconciledForMonth: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.reconciledTotalForMonth
-    }
-    
-    var totalReconciledForQuarter: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.reconciledTotalForQuarter
-    }
-    
-    var totalReconciledForSixMonths: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.reconciledTotalForSixMonths
-    }
-    
-    var totalReconciledForYear: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.reconciledTotalForYear
-    }
-    
-    var totalUnreconciled: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.unreconciledTotal
-    }
-    
-    var totalUnreconciledForWeek: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.unreconciledTotalForWeek
-    }
-    
-    var totalUnreconciledForMonth: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.unreconciledTotalForMonth
-    }
-    
-    var totalUnreconciledForQuarter: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.unreconciledTotalForQuarter
-    }
-    
-    var totalUnreconciledForSixMonths: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.unreconciledTotalForSixMonths
-    }
-    
-    var totalUnreconciledForYear: Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        return databaseManager.unreconciledTotalForYear
-    }
-    
     init(withCategories categories: [String] = []) {
         self.categories = categories
     }
@@ -166,5 +58,46 @@ class SummaryViewModel: ObservableObject {
         guard let databaseManager = DB.shared.manager, let tallies = databaseManager.totals(for: period), let tally = tallies[category] else { return 0 }
         
         return tally
+    }
+    
+    func total(ofReconciled isReconciled: Bool, in period: RecordPeriod) -> Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.total(ofReconciled: isReconciled, for: period)
+    }
+    
+    func startingBalance(asOf period: RecordPeriod) -> Double {
+        guard let databaseManager = DB.shared.manager, let records = databaseManager.records else { return 0 }
+        
+        var value: Double = 0
+        
+        switch period {
+        case .all:
+            if let firstRecord = records.first, let balance = try? databaseManager.balance(for: firstRecord) {
+                value = balance
+            }
+        case .week:
+            if let firstRecord = records.week.first, let balance = try? databaseManager.balance(for: firstRecord) {
+                value = balance
+            }
+        case .month:
+            if let firstRecord = records.month.first, let balance = try? databaseManager.balance(for: firstRecord) {
+                value = balance
+            }
+        case .threeMonths:
+            if let firstRecord = records.quarter.first, let balance = try? databaseManager.balance(for: firstRecord) {
+                value = balance
+            }
+        case .sixMonths:
+            if let firstRecord = records.sixMonths.first, let balance = try? databaseManager.balance(for: firstRecord) {
+                value = balance
+            }
+        case .year:
+            if let firstRecord = records.year.first, let balance = try? databaseManager.balance(for: firstRecord) {
+                value = balance
+            }
+        }
+        
+        return value
     }
 }
