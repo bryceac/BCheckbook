@@ -272,6 +272,42 @@ class DBManager {
         return categories
     }
     
+    private func ledger(withRange range: RecordPeriod = .all) -> Table {
+        var table: Table!
+        
+        switch range {
+        case .all:
+            table = LEDGER_VIEW
+        case .week:
+            let now = Date()
+            if let oneWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
+                table = LEDGER_VIEW.filter(Event.DF.string(from: oneWeekAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+            }
+        case .month:
+            let now = Date()
+            if let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -7, to: now) {
+                table = LEDGER_VIEW.filter(Event.DF.string(from: oneMonthAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+            }
+        case .threeMonths:
+            let now = Date()
+            if let threeMonthsAgo = Calendar.current.date(byAdding: .month, value: -3, to: now) {
+                table = LEDGER_VIEW.filter(Event.DF.string(from: threeMonthsAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+            }
+        case .sixMonths:
+            let now = Date()
+            if let sixMonthsAgo = Calendar.current.date(byAdding: .month, value: -6, to: now) {
+                table = LEDGER_VIEW.filter(Event.DF.string(from: sixMonthsAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+            }
+        case .year:
+            let now = Date()
+            if let oneYearAgo = Calendar.current.date(byAdding: .year, value: -1, to: now) {
+                table = LEDGER_VIEW.filter(Event.DF.string(from: oneYearAgo)...Event.DF.string(from: now) ~= DATE_FIELD)
+            }
+        }
+        
+        return table
+    }
+    
     private func categoryTotalsStatement(_ period: RecordPeriod) -> String {
         var statement = ""
         
