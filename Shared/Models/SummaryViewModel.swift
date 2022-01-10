@@ -20,6 +20,36 @@ class SummaryViewModel: ObservableObject {
         return balance
     }
     
+    var totalForWeek: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.week.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
+        
+        return balance
+    }
+    
+    var totalForMonth: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.month.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
+        
+        return balance
+    }
+    
+    var totalForQuarter: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.quarter.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
+        
+        return balance
+    }
+    
+    var totalForSixMonths: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.sixMonths.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
+        
+        return balance
+    }
+    
+    var totalForYear: Double {
+        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records, let lastRecord = storedRecords.year.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
+        
+        return balance
+    }
+    
     var totalReconciled: Double {
         guard let databaseManager = DB.shared.manager else { return 0 }
         
