@@ -104,56 +104,6 @@ extension Array where Element == Record {
         return ENCODED_RECORDS
     }
     
-    var week: [Element] {
-        self.filter { record in
-            guard let oneWeekAgo = Calendar.current.date(byAdding: .day, value: -7, to: Date()) else { return false }
-            
-            let now = Date()
-            
-            return oneWeekAgo...now ~= record.event.date
-        }
-    }
-    
-    var month: [Element] {
-        self.filter { record in
-            guard let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: Date()) else { return false }
-            
-            let now = Date()
-            
-            return oneMonthAgo...now ~= record.event.date
-        }
-    }
-    
-    var quarter: [Element] {
-        self.filter { record in
-            guard let threeMonthsAgo = Calendar.current.date(byAdding: .month, value: -3, to: Date()) else { return false }
-            
-            let now = Date()
-            
-            return threeMonthsAgo...now ~= record.event.date
-        }
-    }
-    
-    var sixMonths: [Element] {
-        self.filter { record in
-            guard let sixMonthsAgo = Calendar.current.date(byAdding: .month, value: -6, to: Date()) else { return false }
-            
-            let now = Date()
-            
-            return sixMonthsAgo...now ~= record.event.date
-        }
-    }
-    
-    var year: [Element] {
-        self.filter { record in
-            guard let oneYearAgo = Calendar.current.date(byAdding: .year, value: -1, to: Date()) else { return false }
-            
-            let now = Date()
-            
-            return oneYearAgo...now ~= record.event.date
-        }
-    }
-    
     func element(before record: Record) -> Record? {
         guard let firstRecord = self.first, firstRecord != record else { return nil }
         guard let INDEX = self.firstIndex(of: record) else { return nil }
