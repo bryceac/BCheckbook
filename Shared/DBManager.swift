@@ -10,11 +10,6 @@ import SQLite
 
 class DBManager {
     
-    /// records in database
-    var records: [Record]? {
-        try? retrieveRecords()
-    }
-    
     /// categories in database
     var categories: [String]? {
         try? retrieveCategories()
@@ -153,9 +148,9 @@ class DBManager {
         return true
     }
     
-    private func retrieveRecords() throws -> [Record] {
+    func records(inRange range: RecordPeriod) throws -> [Record] {
         var records: [Record] = []
-        for row in try db.prepare(LEDGER_VIEW) {
+        for row in try db.prepare(ledger(withRange: range)) {
             let transaction = Event(date: row[DATE_FIELD], checkNumber: row[CHECK_NUMBER_FIELD], category: row[CATEGORY_FIELD], vendor: row[VENDOR_FIELD], memo: row[MEMO_FIELD], amount: row[AMOUNT_FIELD], andIsReconciled: row[RECONCILED_FIELD] == "Y")
             
             let record = Record(withID: row[ID_FIELD], transaction: transaction)
