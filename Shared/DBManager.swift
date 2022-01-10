@@ -310,7 +310,7 @@ class DBManager {
         
         switch period {
         case .all:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N")"
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\""
         case .week:
             statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-1 weeks') AND date('now')"
         case .month:
