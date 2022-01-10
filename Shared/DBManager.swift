@@ -312,15 +312,15 @@ class DBManager {
         case .all:
             statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N")"
         case .week:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-1 weeks') AND date('now')"
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-1 weeks') AND date('now')"
         case .month:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-1 months') AND date('now')"
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-1 months') AND date('now')"
         case .threeMonths:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-3 months') AND date('now')"
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-3 months') AND date('now')"
         case .sixMonths:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-6 months') AND date('now')"
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-6 months') AND date('now')"
         case .year:
-            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \(isReconciled ? "Y" : "N") AND \"date\" BETWEEN date('now', '-1 years') AND date('now')"
+            statement = "SELECT SUM(amount) FROM ledger WHERE reconciled = \"\(isReconciled ? "Y" : "N")\" AND \"date\" BETWEEN date('now', '-1 years') AND date('now')"
         }
         
         return statement
