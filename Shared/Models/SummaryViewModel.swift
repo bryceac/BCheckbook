@@ -92,6 +92,36 @@ class SummaryViewModel: ObservableObject {
         return databaseManager.unreconciledTotal
     }
     
+    var totalUnreconciledForWeek: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.unreconciledTotal
+    }
+    
+    var totalUnreconciledForMonth: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.unreconciledTotal
+    }
+    
+    var totalUnreconciledForQuarter: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.unreconciledTotal
+    }
+    
+    var totalUnreconciledForSixMonths: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.unreconciledTotal
+    }
+    
+    var totalUnreconciledForYear: Double {
+        guard let databaseManager = DB.shared.manager else { return 0 }
+        
+        return databaseManager.unreconciledTotal
+    }
+    
     init(withCategories categories: [String] = []) {
         self.categories = categories
     }
