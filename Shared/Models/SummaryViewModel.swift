@@ -163,36 +163,7 @@ class SummaryViewModel: ObservableObject {
     }
     
     func total(for category: String, in period: RecordPeriod) -> Double {
-        guard let databaseManager = DB.shared.manager else { return 0 }
-        
-        var tally: Double = 0
-        
-        switch period {
-        case .all:
-            if let tallies = databaseManager.totals, let value = tallies[category] {
-                tally = value
-            }
-        case .week:
-            if let tallies = databaseManager.totalsForWeek, let value = tallies[category] {
-                tally = value
-            }
-        case .month:
-            if let tallies = databaseManager.totalsForMonth, let value = tallies[category] {
-                tally = value
-            }
-        case .threeMonths:
-            if let tallies = databaseManager.totalsForQuarter, let value = tallies[category] {
-                tally = value
-            }
-        case .sixMonths:
-            if let tallies = databaseManager.totalsForSixMonths, let value = tallies[category] {
-                tally = value
-            }
-        case .year:
-            if let tallies = databaseManager.TotalsForYear, let value = tallies[category] {
-                tally = value
-            }
-        }
+        guard let databaseManager = DB.shared.manager, let tallies = databaseManager.totals(for: period), let tally = tallies[category] else { return 0 }
         
         return tally
     }

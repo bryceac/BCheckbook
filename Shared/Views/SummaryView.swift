@@ -98,7 +98,7 @@ struct SummaryView: View {
     }
     
     func loadSummary() {
-        guard let databaseManager = DB.shared.manager, let tallies = databaseManager.totals else { return }
+        guard let databaseManager = DB.shared.manager, let tallies = databaseManager.totals(for: summaryRange) else { return }
         
         viewModel.categories = tallies.keys.compactMap { $0 }
     }
