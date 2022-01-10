@@ -308,34 +308,13 @@ class DBManager {
         return table
     }
     
-    private func categoryTotalsStatement(_ period: RecordPeriod) -> String {
-        var statement = ""
-        
-        switch period {
-        case .all:
-            statement = "SELECT category, SUM(amount) FROM ledger GROUP BY category"
-        case .week:
-            statement = "SELECT category, SUM(amount) FROM ledger WHERE \"date\" BETWEEN date('now', '-1 weeks') AND date('now') GROUP BY category"
-        case .month:
-            statement = "SELECT category, SUM(amount) FROM ledger WHERE \"date\" BETWEEN date('now', '-1 months') AND date('now') GROUP BY category"
-        case .threeMonths:
-            statement = "SELECT category, SUM(amount) FROM ledger WHERE \"date\" BETWEEN date('now', '-3 months') AND date('now') GROUP BY category"
-        case .sixMonths:
-            statement = "SELECT category, SUM(amount) FROM ledger WHERE \"date\" BETWEEN date('now', '-6 months') AND date('now') GROUP BY category"
-        case .year:
-            statement = "SELECT category, SUM(amount) FROM ledger WHERE 'date' BETWEEN date('now', '-1 years') AND date('now') GROUP BY category"
-        }
-        
-        return statement
-    }
-    
     private func retrieveTotals(for period: RecordPeriod) throws -> [String: Double] {
         
-        let groupQuery = categoryTotalsStatement(period)
+        let groupQuery = ledger(withRange: period).select(CATEGORY_FIELD, AMOUNT_FIELD.sum)
         
         return try db.prepare(groupQuery).reduce(into: [:], { tallies, row in
-            let category = row[0] as? String ?? "Uncategorized"
-            let tally = row[1] as? Double ?? 0
+            let category = row[CATEGORY_FIELD] ?? "Uncategorized"
+            let tally = row[AMOUNT_FIELD.sum] ?? 0
             
             tallies[category] = tally
         })
