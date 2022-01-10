@@ -330,6 +330,12 @@ class DBManager {
         return value
     }
     
+    func totals(for period: RecordPeriod) -> [String: Double]? {
+        guard let retrievedTotals = try? retrieveTotals(for: period) else { return nil }
+        
+        return retrievedTotals
+    }
+    
     /**
      update specified record in database.
      - parameter record: The record to be updated.
