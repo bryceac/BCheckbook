@@ -41,7 +41,7 @@ struct SummaryView: View {
             
             Section {
                 SummaryRowView(title: "Total Income", tally: viewModel.total(of: .deposit, for: summaryRange))
-                SummaryRowView(title: "Total Expenditures", tally: viewModel.total(of: .withdrawal, for: summaryRange))
+                SummaryRowView(title: "Total Expenditures", tally: viewModel.total(of: .withdrawal, for: summaryRange) * -1.0)
             }
             
             Section {
