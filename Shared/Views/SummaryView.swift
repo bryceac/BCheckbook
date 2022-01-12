@@ -40,6 +40,11 @@ struct SummaryView: View {
             }
             
             Section {
+                SummaryRowView(title: "Total Income", tally: viewModel.total(of: .deposit, for: summaryRange))
+                SummaryRowView(title: "Total Expenditures", tally: viewModel.total(of: .withdrawal, for: summaryRange))
+            }
+            
+            Section {
                 SummaryRowView(title: "Reconciled", tally: viewModel.total(ofReconciled: true, in: summaryRange))
                 
                 SummaryRowView(title: "Unreconciled", tally: viewModel.total(ofReconciled: false, in: summaryRange))
