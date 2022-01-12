@@ -17,34 +17,18 @@ struct ContentView: View {
     
     @State private var showSuccessfulExportAlert = false
     
-    @State private var recordRange: RecordPeriod = .all {
-        didSet {
-            loadRecords()
-        }
-    }
-    
     var body: some View {
         List {
-            Section {
-                Picker("", selection: $recordRange) {
-                    ForEach(RecordPeriod.allCases, id: \.self) { range in
-                        Text(range.rawValue)
-                    }
-                }.pickerStyle(SegmentedPickerStyle())
-            }
-            
-            Section {
-                ForEach(records.sortedRecords) { record in
+            ForEach(records.sortedRecords) { record in
                     
-                    let recordBalance = records.balances[record]!
+                let recordBalance = records.balances[record]!
                     
-                    RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
+                RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
                         Button("Delete") {
                             try? remove(record: record)
                         }
                     }))
                 }
-            }
         }.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.principal) {
                 
@@ -92,7 +76,7 @@ struct ContentView: View {
     }
     
     func loadRecords() {
-        guard let databaseManager = DB.shared.manager, let storedRecords = try? databaseManager.records(inRange: recordRange) else { return }
+        guard let databaseManager = DB.shared.manager, let storedRecords = try? databaseManager.records(inRange: .all) else { return }
         
         records.items = storedRecords
     }
