@@ -104,7 +104,7 @@ struct ContentView: View {
     }
     
     func loadRecords() {
-        guard let databaseManager = DB.shared.manager, let storedRecords = databaseManager.records(inRange: recordRange) else { return }
+        guard let databaseManager = DB.shared.manager, let storedRecords = try? databaseManager.records(inRange: recordRange) else { return }
         
         records.items = storedRecords
     }
