@@ -234,16 +234,23 @@ class DBManager {
         return table
     }
     
-    private func retrieveTotals(for period: RecordPeriod, andAreReconciled: Bool? = nil) throws -> [String: Double] {
-        
-        let groupQuery = ledger(withRange: period).select(CATEGORY_FIELD, AMOUNT_FIELD.sum)
-        
-        return try db.prepare(groupQuery).reduce(into: [:], { tallies, row in
-            let category = row[CATEGORY_FIELD] ?? "Uncategorized"
-            let tally = row[AMOUNT_FIELD.sum] ?? 0
-            
-            tallies[category] = tally
-        })
+    private func retrieveTotals(for period: RecordPeriod, andAreReconciled isReconciled: Bool? = nil) throws -> [String: Double] {
+        var records = try records(inRange: period)
+
+        if let isReconciled = isReconciled {
+            records = records.filter { $0.event.isReconciled == isReconciled }
+        }
+
+        return records.reduce(into: [:]) { tallies, record in
+            let category = record.event.category ?? "Uncategorized"
+            let amount = record.event.type == .withdrawal ? record.event.amount * -1.0 : record.event.amount
+
+            if let total = tallies[category] {
+                tallies[category] = total + amount
+            } else {
+                tallies[category] = amount
+            }
+        }
     }
     
     private func retrieveTotal(ofReconciled reconciled: Bool, in period: RecordPeriod) throws -> Double {
