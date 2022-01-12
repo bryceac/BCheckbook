@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''Version:''' 0.3.1
+'''Version:''' 1.0
 
 '''Author:''' Bryce Campbell
 
@@ -17,6 +17,12 @@ This application has only been tested on macOS 11 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.0 (Both</dt>
+<dd>
+<p>Major change</p>
+<p>Add view that allows person to get a quick overview of transactions,
+which actually makes categories useful and make some code changes to reduce redundant code.</p>
+</dd>
 <dt style="font-weight:bold">0.3.1 (Both)</dt>
 <dd>
 <p>Minor patch.</p>
@@ -87,8 +93,6 @@ as figuring out those patterns would be easier than trying to deal with user hab
 </dd>
 </dl>
 </li>
-<li> 
-</li>
 </ol>
 
 ===Usage===
@@ -103,7 +107,7 @@ Also, the currency symbol is required when inputting those values, though they a
 
 ====Removing Records====
 
-Records can be removed in one of two ways, depending on where you are using the app:
+Records can only be removed from the ledger view in one of two ways, depending on where you are using the app:
 
 <ul>
 <li>Swipe to Delete (iOS only)</li>
@@ -166,7 +170,7 @@ When the transfer is made via AirDrop, your file will located in the Downloads F
 If your fle contains changes to existing records, 
 it is recommended you delete the <strong>register.db</strong>, 
 which should be located in the places specified by the 
-[[#Saving & Loading]] section, before importing, 
+[[#Saving__Loading]] section, before importing, 
 as the application will regenerate it.
 
 If you are transferring by using the database file, 
@@ -187,7 +191,7 @@ application, and then try importing your data, as the app
 
 ===Support===
 
-If you have any problems not listed under Known Issues, I will try my best to help you. Depending on where you are seeing the problem, send me an email at either of the following:
+If you have any problems, I will try my best to help you. Depending on where you are seeing the problem, send me an email at either of the following:
 
 ios@brycecampbell.me
 
@@ -195,14 +199,12 @@ mac@brycecampbell.me
 
 Use iOS email for issues that only exist in iOS and the Msc email for issues that only exist in the Mac app.
 
-If the problems exists in both versions, choose ether one and be sure to note in the subject that it is both systems, otherwise I will assume the issue is only on the platform associate with the email you used.
+If the problems exists in both versions, choose ether one and be sure to note in the subject that it is both systems, otherwise I will assume the issue is only on the platform associated with the email you used.
 
 ===Contributing===
 
 If you are familiar with Swift and SwiftUI and want to help make things 
 work even better, feel free to fork this project and submit a pull request.
-
-Help would be greatly appreciated in dealing with the known issues.
 
 Submissions will be tested by me before they will be merged.
 
@@ -226,7 +228,7 @@ This app uses the following projects to help things run smoothly.
 <a href="https://github.com/stephencelis/SQLite.swift">SQLite.swift</a>
 </dt>
 <dd>
-<p>Used to implement the database backend of the iOS application.</p>
+<p>Used to implement the database backend of the application.</p>
 </dd>
 <dt>
 <a href="https://github.com/bryceac/ComboBox">ComboBox</a>
