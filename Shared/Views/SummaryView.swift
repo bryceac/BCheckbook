@@ -36,7 +36,7 @@ struct SummaryView: View {
             }
             
             Section {
-                SummaryRowView(title: "Current Balance", tally: viewModel.balance(asOf: summaryRange))
+                SummaryRowView(title: "Balance", tally: viewModel.balance(asOf: summaryRange))
             }
             
             Section {
