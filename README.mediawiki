@@ -170,7 +170,7 @@ When the transfer is made via AirDrop, your file will located in the Downloads F
 If your fle contains changes to existing records, 
 it is recommended you delete the <strong>register.db</strong>, 
 which should be located in the places specified by the 
-[[#Saving__Loading]] section, before importing, 
+[[#Saving__Loading | Saving &#38; Loading]] section, before importing, 
 as the application will regenerate it.
 
 If you are transferring by using the database file, 
