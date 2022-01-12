@@ -36,6 +36,14 @@ class SummaryViewModel: ObservableObject {
         return startBalance
     }
     
+    func total(of type: EventType, for period: RecordPeriod) -> Double {
+        guard let databaseManager = DB.shared.manager, let records = try? databaseManager.records(inRange: period) else { return 0 }
+        
+        let recordsMatchingType = records.filter { $0.event.type == type }
+        
+        return recordsMatchingType.reduce(0) { $0 + $1.event.amount }
+    }
+    
     func balance(asOf period: RecordPeriod) -> Double {
         guard let databaseManager = DB.shared.manager, let records = try? databaseManager.records(inRange: period), let lastRecord = records.last, let balance = try? databaseManager.balance(for: lastRecord) else { return 0 }
         
