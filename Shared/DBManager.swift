@@ -195,38 +195,38 @@ class DBManager {
             }
         case .month:
             let now = Date()
-            if let oneMonthAgo = Calendar.current.date(byAdding: .day, value: -7, to: now), let isReconciled = isReconciled {
+            if let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: now), let isReconciled = isReconciled {
                 let reconciledStatus = isReconciled ? "Y" : "N"
                 
                 table = LEDGER_VIEW.filter(oneMonthAgo...now ~= DATE_FIELD && RECONCILED_FIELD == reconciledStatus)
-            } else if let oneMonthAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
+            } else if let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: now) {
                 table = LEDGER_VIEW.filter(oneMonthAgo...now ~= DATE_FIELD)
             }
         case .threeMonths:
             let now = Date()
-            if let threeMonthsAgo = Calendar.current.date(byAdding: .day, value: -7, to: now), let isReconciled = isReconciled {
+            if let threeMonthsAgo = Calendar.current.date(byAdding: .month, value: -3, to: now), let isReconciled = isReconciled {
                 let reconciledStatus = isReconciled ? "Y" : "N"
                 
                 table = LEDGER_VIEW.filter(threeMonthsAgo...now ~= DATE_FIELD && RECONCILED_FIELD == reconciledStatus)
-            } else if let threeMonthsAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
+            } else if let threeMonthsAgo = Calendar.current.date(byAdding: .month, value: -3, to: now) {
                 table = LEDGER_VIEW.filter(threeMonthsAgo...now ~= DATE_FIELD)
             }
         case .sixMonths:
             let now = Date()
-            if let sixMonthsAgo = Calendar.current.date(byAdding: .day, value: -7, to: now), let isReconciled = isReconciled {
+            if let sixMonthsAgo = Calendar.current.date(byAdding: .month, value: -6, to: now), let isReconciled = isReconciled {
                 let reconciledStatus = isReconciled ? "Y" : "N"
                 
                 table = LEDGER_VIEW.filter(sixMonthsAgo...now ~= DATE_FIELD && RECONCILED_FIELD == reconciledStatus)
-            } else if let sixMonthsAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
+            } else if let sixMonthsAgo = Calendar.current.date(byAdding: .month, value: -6, to: now) {
                 table = LEDGER_VIEW.filter(sixMonthsAgo...now ~= DATE_FIELD)
             }
         case .year:
             let now = Date()
-            if let oneYearAgo = Calendar.current.date(byAdding: .day, value: -7, to: now), let isReconciled = isReconciled {
+            if let oneYearAgo = Calendar.current.date(byAdding: .year, value: -1, to: now), let isReconciled = isReconciled {
                 let reconciledStatus = isReconciled ? "Y" : "N"
                 
                 table = LEDGER_VIEW.filter(oneYearAgo...now ~= DATE_FIELD && RECONCILED_FIELD == reconciledStatus)
-            } else if let oneYearAgo = Calendar.current.date(byAdding: .day, value: -7, to: now) {
+            } else if let oneYearAgo = Calendar.current.date(byAdding: .year, value: -1, to: now) {
                 table = LEDGER_VIEW.filter(oneYearAgo...now ~= DATE_FIELD)
             }
         }
