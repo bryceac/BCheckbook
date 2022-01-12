@@ -23,7 +23,7 @@ struct SummaryView: View {
             }
             Section {
                 if case .all = summaryRange {
-                    SummaryRowView(title: "Opening Balance", tally: viewModel.categories.contains("Opening Balance") ? viewModel.total(for: "Opening Balance", in: summaryRange) : viewModel.startingBalance(asOf: summaryRange))
+                    SummaryRowView(title: "Opening Balance", tally: viewModel.total(for: "Opening Balance", in: summaryRange) > 0 ? viewModel.total(for: "Opening Balance", in: summaryRange) : viewModel.startingBalance(asOf: summaryRange))
                 } else {
                     SummaryRowView(title: "Opening Balance", tally: viewModel.startingBalance(asOf: summaryRange))
                 }
