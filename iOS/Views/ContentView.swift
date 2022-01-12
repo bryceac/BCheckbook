@@ -16,31 +16,19 @@ struct ContentView: View {
     
     @State private var showSaveSuccessfulAlert = false
     
-    @State private var recordRange: RecordPeriod = .all
-    
     var body: some View {
         NavigationView {
             List {
-                Section {
-                    Picker("", selection: $recordRange) {
-                        ForEach(RecordPeriod.allCases, id: \.self) { range in
-                            Text(range.rawValue)
-                        }
-                    }.pickerStyle(SegmentedPickerStyle())
-                }
-                
-                Section {
-                    ForEach(records.sortedRecords) { record in
-                        
-                        let recordBalance = records.balances[record]!
-                        
-                            NavigationLink(
-                                destination: RecordDetailView(record: record),
-                                label: {
-                                    RecordView(record: record, balance: recordBalance)
-                                })
-                    }.onDelete(perform: delete)
-                }
+                ForEach(records.sortedRecords) { record in
+                    
+                    let recordBalance = records.balances[record]!
+                    
+                        NavigationLink(
+                            destination: RecordDetailView(record: record),
+                            label: {
+                                RecordView(record: record, balance: recordBalance)
+                            })
+                }.onDelete(perform: delete)
             }.toolbar(content: {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
                     
