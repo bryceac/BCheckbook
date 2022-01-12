@@ -63,6 +63,7 @@ struct SummaryView: View {
         guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories else { return }
         
         viewModel.categories = categories
+        viewModel.categories.append("Uncategorized")
     }
     
     private func addRecords(_ records: [Record]) {
