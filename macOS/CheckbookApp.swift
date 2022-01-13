@@ -17,8 +17,8 @@ struct CheckbookApp: App {
         }
         
         WindowGroup("Summary") {
-            SummaryView().frame(minWidth: 800, minHeight: 600)
-        }
+            SummaryView().frame(minWidth: 800, minHeight: 600).handlesExternalEvents(preferring: Set(arrayLiteral: "summary"), allowing: Set(arrayLiteral: "*"))
+        }.handlesExternalEvents(matching: Set(arrayLiteral: "summary"))
     }
 }
 
