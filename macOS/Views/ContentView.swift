@@ -10,6 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.undoManager) var undoManager
     
+    @Environment(\.openURL) var openURL
+    
     @State private var isImporting = false
     @State private var isExporting = false
     
@@ -44,6 +46,11 @@ struct ContentView: View {
                     Text("Options")
                 })
                 
+                Button("View Summary") {
+                    let summaryURL = URL(string: "bcheckbook://summary")!
+                    
+                    openURL(summaryURL)
+                }
             }
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
