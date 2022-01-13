@@ -42,15 +42,16 @@ struct ContentView: View {
                     Button("Export Transactions") {
                         isExporting = true
                     }
+                    
+                    Button("View Summary") {
+                        let summaryURL = URL(string: "bcheckbook://summary")!
+                        
+                        openURL(summaryURL)
+                    }
                 }, label: {
                     Text("Options")
                 })
                 
-                Button("View Summary") {
-                    let summaryURL = URL(string: "bcheckbook://summary")!
-                    
-                    openURL(summaryURL)
-                }
             }
             ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
