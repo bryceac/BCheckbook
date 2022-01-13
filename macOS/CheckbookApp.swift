@@ -13,14 +13,11 @@ struct CheckbookApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabView {
-                ContentView().tabItem {
-                    Text("Ledger")
-                }
-                SummaryView().tabItem {
-                    Text("Summary")
-                }
-            }.frame(minWidth: 800, minHeight: 600)
+                ContentView().frame(minWidth: 800, minHeight: 600)
+        }
+        
+        WindowGroup("Summary") {
+            SummaryView().frame(minWidth: 800, minHeight: 600)
         }
     }
 }
