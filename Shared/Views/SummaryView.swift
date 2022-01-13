@@ -49,9 +49,7 @@ struct SummaryView: View {
                 
                 SummaryRowView(title: "Unreconciled", tally: viewModel.total(ofReconciled: false, in: summaryRange))
             }
-        }.toolbar(content: {
-            EmptyView()
-        }).onAppear {
+        }.onAppear {
             loadCategories()
         }.onOpenURL { fileURL in
             guard let records = try? Record.load(from: fileURL) else { return }
