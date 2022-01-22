@@ -23,7 +23,7 @@ struct ContentView: View {
         
         var requestedRecords: [Record] = []
         
-        if query.starts(with: "category:") {
+        if query.contains("category:"), let categoryPattern = query.matching(regexPattern: "category:\\s(.*)") {
             
         }
         
