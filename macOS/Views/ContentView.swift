@@ -19,9 +19,42 @@ struct ContentView: View {
     
     @State private var showSuccessfulExportAlert = false
     
+    @State private var query = ""
+    
+    var filteredRecords: [Record] {
+        guard !query.isEmpty else { return records.sortedRecords }
+        
+        var requestedRecords: [Record] = []
+        
+        
+        switch (query) {
+        case let text where text.starts(with: "category:"):
+            if let categoryPattern = text.matching(regexPattern: "category:\\s(.*)"), !categoryPattern.isEmpty, categoryPattern[0].indices.contains(1) {
+                let specifiedCategory = categoryPattern[0][1]
+                
+                requestedRecords = records.filter(category: specifiedCategory)
+            }
+        case let text where text.contains(" category:"):
+            if let categoryRange = text.range(of: "category:"), let categoryPattern = text.matching(regexPattern: "category:\\s(.*)"), !categoryPattern.isEmpty, categoryPattern[0].indices.contains(1) {
+                let specifiedCategory = categoryPattern[0][1]
+                var vendor = String(text[..<categoryRange.lowerBound])
+                
+                if let lastCharacter = vendor.last, lastCharacter.isWhitespace {
+                    vendor = String(vendor.dropLast())
+                }
+                
+                requestedRecords = records.filter(vendor: vendor, category: specifiedCategory)
+            }
+        default:
+            requestedRecords = records.filter(vendor: query)
+        }
+        
+        return requestedRecords
+    }
+    
     var body: some View {
         List {
-            ForEach(records.sortedRecords) { record in
+            ForEach(filteredRecords) { record in
                     
                 let recordBalance = records.balances[record]!
                     
