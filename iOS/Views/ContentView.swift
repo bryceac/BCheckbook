@@ -38,7 +38,8 @@ struct ContentView: View {
                 
                 requestedRecords = records.filter(vendor: vendor, category: specifiedCategory)
             }
-        default: ()
+        default:
+            requestedRecords = records.filter(vendor: query)
         }
         
         return requestedRecords
