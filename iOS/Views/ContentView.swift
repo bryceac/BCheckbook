@@ -113,7 +113,7 @@ struct ContentView: View {
             
             try? addRecords(savedRecords)
             loadRecords()
-        }.searchable(text: $query, prompt: "Search transactions")
+        }.searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
     }
     
     func delete(at offsets: IndexSet) {
