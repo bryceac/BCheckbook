@@ -23,22 +23,16 @@ struct ContentView: View {
         
         var requestedRecords: [Record] = []
         
-        if query.contains("category:"), let categoryPattern = query.matching(regexPattern: "category:\\s(.*)"), let categoryRange = query.range(of: "category:"), !categoryPattern.isEmpty, categoryPattern[0].indices.contains(1) {
-            let specifiedCategory = categoryPattern[0][1]
-            
-            requestedRecords = categoryRange.lowerBound == query.startIndex ? records.sortedRecords.filter { record in
-                guard let category = record.event.category else { return false }
+        
+        switch (query) {
+        case let text where text.starts(with: "category:"):
+            if let categoryPattern = text.matching(regexPattern: "category:\\s(.*)"), !categoryPattern.isEmpty, categoryPattern[0].indices.contains(1) {
+                let specifiedCategory = categoryPattern[0][1]
                 
-                return category.caseInsensitiveCompare(specifiedCategory) == .orderedSame
-            } : records.sortedRecords.filter { record in
-                let vendor = query[..<categoryRange.lowerBound]
-                guard let category = record.event.category else { return false }
-                
-                return record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame &&
-                category.caseInsensitiveCompare(specifiedCategory) == .orderedSame
+                requestedRecords = records.filter(category: specifiedCategory)
             }
-        } else {
-            requestedRecords = records.sortedRecords.filter { $0.event.vendor.caseInsensitiveCompare(query) == .orderedSame }
+        case let text where text.contains("category:"): ()
+        default: ()
         }
         
         return requestedRecords
