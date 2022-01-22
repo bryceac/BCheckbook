@@ -23,7 +23,7 @@ struct ContentView: View {
         
         var requestedRecords: [Record] = []
         
-        if query.contains("category:"), let categoryPattern = query.matching(regexPattern: "category:\\s(.*)"), let categoryRange = query.range(of: "category:") {
+        if query.contains("category:"), let categoryPattern = query.matching(regexPattern: "category:\\s(.*)"), let categoryRange = query.range(of: "category:"), categoryPattern[0].indices.contains(1) {
             let specifiedCategory = categoryPattern[0][1]
             
             requestedRecords = categoryRange.lowerBound == query.startIndex ? records.sortedRecords.filter { record in
