@@ -47,7 +47,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(records.sortedRecords) { record in
+                ForEach(filteredRecords) { record in
                     
                     let recordBalance = records.balances[record]!
                     
