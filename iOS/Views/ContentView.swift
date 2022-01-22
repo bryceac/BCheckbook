@@ -91,8 +91,12 @@ struct ContentView: View {
             })
         }.onAppear() {
             loadRecords()
-        }.alert(isPresented: $showSaveSuccessfulAlert) {
-            Alert(title: Text("Export Successful"), message: Text("Transactions were successfully Exported"), dismissButton: .default(Text("Ok")))
+        }.alert("Export Successful", isPresented: $showSaveSuccessfulAlert) {
+            Button("Ok") {
+                showSaveSuccessfulAlert = false
+            }
+        } message: {
+            Text("Transactions were successfully exported.")
         }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: .bcheckFiles, defaultFilename: "transactions") { result in
             if case .success = result {
                 showSaveSuccessfulAlert = true
