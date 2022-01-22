@@ -145,7 +145,7 @@ extension Event: Codable {
 
 extension Event: Comparable {
     static func ==(lhs: Event, rhs: Event) -> Bool {
-        return lhs.date == rhs.date && lhs.checkNumber == rhs.checkNumber && lhs.vendor == rhs.vendor && lhs.memo == rhs.memo && lhs.amount == rhs.amount && lhs.type == rhs.type && lhs.isReconciled == rhs.isReconciled
+        return lhs.date == rhs.date && lhs.checkNumber == rhs.checkNumber && lhs.category == rhs.category && lhs.vendor == rhs.vendor && lhs.memo == rhs.memo && lhs.amount == rhs.amount && lhs.type == rhs.type && lhs.isReconciled == rhs.isReconciled
     }
     
     static func < (lhs: Event, rhs: Event) -> Bool {
