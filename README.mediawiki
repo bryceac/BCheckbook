@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''Version:''' 1.0
+'''Version:''' 1.1
 
 '''Author:''' Bryce Campbell
 
@@ -17,6 +17,12 @@ This application has only been tested on macOS 11 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.1 (Both)</dt>
+<dd>
+<p>Minor update</p>
+<p>Allow user to search for transactions, allowing them to get transactions from certain vendors and/or categories.</p>
+<p>This update is only available to iOS 15 and later and macOS 12 and later, due to API availability.</p>
+</dd>
 <dt style="font-weight:bold">1.0 (Both</dt>
 <dd>
 <p>Major change</p>
@@ -106,6 +112,45 @@ This is something one must live with for now because it does not seem to be poss
 
 Also, the currency symbol is required when inputting those values, though they are omitted in the JSON exports and database.
 
+====Searching Records====
+
+Starting with version 1.1, it is possible search records in the ledger.
+
+However, this feature is quite limited. 
+It is only possible to search under two different citeria, 
+which are the vendor and the category.
+
+While I have thought about including other things in the search criteria, 
+it seems to be a little complex for me to get the values necessary 
+from the user, 
+so I decided to simplify things to only two particular values.
+
+If you want to search for a vendor, you just type in the name like this:
+
+<pre>
+Fake Street Electronics
+</pre>
+
+To look up transactions in a particular category, you would type in:
+
+<pre>
+category: gifts
+</pre>
+
+To look up transactions with a particular vendor in a particular category, you would type:
+
+<pre>
+Fake Street Electronics category: gifts
+</pre>
+
+all text in a query, except for prefixes 
+like <strong>category</strong>, are case isensitive, 
+so the category specified is case insensitive, as is the vendor.
+
+<strong>Spaces are mandatory</strong> after the category prefix, 
+due to the pattern utilized to deal with category queries.
+
+
 ====Removing Records====
 
 Records can only be removed from the ledger view in one of two ways, depending on where you are using the app:
@@ -114,6 +159,8 @@ Records can only be removed from the ledger view in one of two ways, depending o
 <li>Swipe to Delete (iOS only)</li>
 <li>Right click/control+click (macOS only)</li>
 </ul>
+
+Records can also be removed from the ledger in search results in the same fashion.
 
 ===Saving & Loading===
 
@@ -211,14 +258,9 @@ Submissions will be tested by me before they will be merged.
 
 ===Other===
 
-This program will only work on macOS 11 and later. 
+Version 1.1 only works on iOS 15 and later and macOS 12 and later.
 
-When I tried deploying the Yahtzee program to an older version of macOS, 
-XCode would complain about the code being used only being 
-available on macOS 10.15 and later and other stuff was only available in 
-macOS 11 and later.
-
-The iOS version only works on iOS 14 and later.
+If you have iOS 14 or macOS 11, version 1.0 is the last version available.
 
 ===Projects Used===
 
@@ -237,6 +279,6 @@ This app uses the following projects to help things run smoothly.
 <dd>
 <p>Custom view that is used 
 to allow users to either add their own categories 
-or to selected from the list of available categories.</p>
+or to select from the list of available categories.</p>
 </dd>
 </dl>
