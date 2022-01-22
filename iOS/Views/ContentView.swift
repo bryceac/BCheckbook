@@ -34,7 +34,11 @@ struct ContentView: View {
         case let text where text.contains("category:"):
             if let categoryRange = text.range(of: "category:"), let categoryPattern = text.matching(regexPattern: "category:\\s(.*)"), !categoryPattern.isEmpty, categoryPattern[0].indices.contains(1) {
                 let specifiedCategory = categoryPattern[0][1]
-                let vendor = String(text[..<categoryRange.lowerBound])
+                var vendor = String(text[..<categoryRange.lowerBound])
+                
+                if let lastCharacter = vendor.last, lastCharacter.isWhitespace {
+                    vendor = String(vendor.dropLast())
+                }
                 
                 requestedRecords = records.filter(vendor: vendor, category: specifiedCategory)
             }
