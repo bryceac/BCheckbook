@@ -62,4 +62,22 @@ class Records: ObservableObject {
     func clear() {
         items.removeAll()
     }
+    
+    func filter(vendor: String? = nil, category: String? = nil) -> [Record] {
+        var filteredRecords: [Record] = sortedRecords
+        
+        switch (vendor, category) {
+        case let (.some(vendor), .some(category)):
+            filteredRecords = filteredRecords.filter { record in
+                guard let recordCategory = record.event.category else { return false }
+                
+                return record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame &&
+                recordCategory.caseInsensitiveCompare(category) == .orderedSame
+            }
+        case let (.some(vendor), .none): ()
+        default: ()
+        }
+        
+        return filteredRecords
+    }
 }
