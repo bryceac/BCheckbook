@@ -78,9 +78,14 @@ class Records: ObservableObject {
             filteredRecords = filteredRecords.filter { $0.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame }
         case let (.none, .some(category)):
             filteredRecords = filteredRecords.filter {
-                guard let recordCategory = $0.event.category else { return false }
                 
-                return recordCategory.caseInsensitiveCompare(category) == .orderedSame
+                if category.caseInsensitiveCompare("Uncategorized") == .orderedSame {
+                    return .none ~= $0.event.category
+                } else {
+                    guard let recordCategory = $0.event.category else { return false }
+                    
+                    return recordCategory.caseInsensitiveCompare(category) == .orderedSame
+                }
             }
         default: ()
         }
