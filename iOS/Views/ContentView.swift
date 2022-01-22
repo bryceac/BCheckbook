@@ -111,7 +111,9 @@ struct ContentView: View {
         offsets.forEach { index in
             guard let databaseManager = DB.shared.manager else { return }
             
-                let record = records.items[index]
+                let record = filteredRecords[index]
+            
+                records.remove(record)
                 
                 try? databaseManager.remove(record: record)
                 
