@@ -113,7 +113,7 @@ struct ContentView: View {
             guard let importedRecords = try? Record.load(from: fileURL) else { return }
             
             try? add(records: importedRecords)
-        }
+        }.searchable(text: $query, prompt: "search transactions")
     }
     
     func loadRecords() {
