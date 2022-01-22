@@ -23,8 +23,22 @@ struct ContentView: View {
         
         var requestedRecords: [Record] = []
         
-        if query.contains("category:"), let categoryPattern = query.matching(regexPattern: "category:\\s(.*)") {
+        if query.contains("category:"), let categoryPattern = query.matching(regexPattern: "category:\\s(.*)"), let categoryRange = query.range(of: "category:") {
+            let specifiedCategory = categoryPattern[0][1]
             
+            requestedRecords = categoryRange.lowerBound == query.startIndex ? records.sortedRecords.filter { record in
+                guard let category = record.event.category else { return false }
+                
+                return category.caseInsensitiveCompare(specifiedCategory) == .orderedSame
+            } : records.sortedRecords.filter { record in
+                let vendor = query[..<categoryRange.lowerBound]
+                guard let category = record.event.category else { return false }
+                
+                return record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame &&
+                category.caseInsensitiveCompare(specifiedCategory) == .orderedSame
+            }
+        } else {
+            requestedRecords = records.sortedRecords.filter { $0.event.vendor.caseInsensitiveCompare(query) == .orderedSame }
         }
         
         return requestedRecords
