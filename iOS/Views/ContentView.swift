@@ -16,6 +16,20 @@ struct ContentView: View {
     
     @State private var showSaveSuccessfulAlert = false
     
+    @State private var query = ""
+    
+    var filteredRecords: [Record] {
+        guard !query.isEmpty else { return records.sortedRecords }
+        
+        var requestedRecords: [Record] = []
+        
+        if query.starts(with: "category:") {
+            
+        }
+        
+        return requestedRecords
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -76,7 +90,7 @@ struct ContentView: View {
             
             try? addRecords(savedRecords)
             loadRecords()
-        }
+        }.searchable(text: $query, prompt: "Search transactions")
     }
     
     func delete(at offsets: IndexSet) {
