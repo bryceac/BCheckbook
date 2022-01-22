@@ -69,10 +69,16 @@ class Records: ObservableObject {
         switch (vendor, category) {
         case let (.some(vendor), .some(category)):
             filteredRecords = filteredRecords.filter { record in
-                guard let recordCategory = record.event.category else { return false }
+                if category.caseInsensitiveCompare("uncategorized") == .orderedSame {
+                    return record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame &&
+                        .none ~= record.event.category
+                } else {
+                    guard let recordCategory = record.event.category else { return false }
+                    
+                    return record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame &&
+                    recordCategory.caseInsensitiveCompare(category) == .orderedSame
+                }
                 
-                return record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame &&
-                recordCategory.caseInsensitiveCompare(category) == .orderedSame
             }
         case let (.some(vendor), .none):
             filteredRecords = filteredRecords.filter { $0.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame }
