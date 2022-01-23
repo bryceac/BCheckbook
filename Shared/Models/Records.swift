@@ -70,13 +70,13 @@ class Records: ObservableObject {
         case let (.some(vendor), .some(category)):
             filteredRecords = filteredRecords.filter { record in
                 if category.caseInsensitiveCompare("Uncategorized") == .orderedSame {
-                    return record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame &&
+                    return (record.event.vendor.lowercased().contains(vendor) || record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame) &&
                         .none ~= record.event.category
                 } else {
                     guard let recordCategory = record.event.category else { return false }
                     
-                    return record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame &&
-                    recordCategory.caseInsensitiveCompare(category) == .orderedSame
+                    return (record.event.vendor.lowercased().contains(vendor) || record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame) &&
+                    (recordCategory.lowercased().contains(category.lowercased()) || recordCategory.caseInsensitiveCompare(category) == .orderedSame)
                 }
                 
             }
@@ -90,7 +90,7 @@ class Records: ObservableObject {
                 } else {
                     guard let recordCategory = $0.event.category else { return false }
                     
-                    return recordCategory.caseInsensitiveCompare(category) == .orderedSame
+                    return recordCategory.lowercased().contains(category.lowercased()) || recordCategory.caseInsensitiveCompare(category) == .orderedSame
                 }
             }
         default: ()
