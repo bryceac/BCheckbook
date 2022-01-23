@@ -147,7 +147,7 @@ in a particular category, you would type:
 Fake Street Electronics category: gifts
 </pre>
 
-all text in a query, except for prefixes, like <strong>category</strong>, are case isensitive, 
+all text in a query, except for prefixes, like <strong>category</strong>, are case insensitive, 
 so the category specified is case insensitive, as is the vendor.
 
 ====Removing Records====
