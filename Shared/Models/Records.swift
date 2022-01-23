@@ -70,18 +70,18 @@ class Records: ObservableObject {
         case let (.some(vendor), .some(category)):
             filteredRecords = filteredRecords.filter { record in
                 if category.caseInsensitiveCompare("Uncategorized") == .orderedSame {
-                    return (record.event.vendor.lowercased().contains(vendor) || record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame) &&
+                    return (record.event.vendor.lowercased().contains(vendor.lowercased()) || record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame) &&
                         .none ~= record.event.category
                 } else {
                     guard let recordCategory = record.event.category else { return false }
                     
-                    return (record.event.vendor.lowercased().contains(vendor) || record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame) &&
+                    return (record.event.vendor.lowercased().contains(vendor.lowercased()) || record.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame) &&
                     (recordCategory.lowercased().contains(category.lowercased()) || recordCategory.caseInsensitiveCompare(category) == .orderedSame)
                 }
                 
             }
         case let (.some(vendor), .none):
-            filteredRecords = filteredRecords.filter { $0.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame }
+            filteredRecords = filteredRecords.filter { $0.event.vendor.lowercased().contains(vendor.lowercased()) || $0.event.vendor.caseInsensitiveCompare(vendor) == .orderedSame }
         case let (.none, .some(category)):
             filteredRecords = filteredRecords.filter {
                 
