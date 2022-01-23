@@ -131,11 +131,26 @@ If you want to search for a vendor, you just type in the name like this:
 Fake Street Electronics
 </pre>
 
+When looking up a vendor, there will be no results 
+unless the string matches the entirety of the name.
+
+This was done to make sure the exact vendor is found. 
+If I allowed some sort of partial match, 
+there would be a possibility 
+that more than the intended vendor would be listed, 
+even with a complete name.
+
 To look up transactions in a particular category, you would type in:
 
 <pre>
 category: gifts
 </pre>
+
+<strong>Spaces are mandatory</strong> after the category prefix, 
+due to the pattern utilized to deal with category queries. 
+
+The <strong>category</strong> prefix is case sensitive, 
+due to the same pattern that makes spacing manadatory.
 
 To look up transactions with a particular vendor in a particular category, you would type:
 
@@ -143,13 +158,8 @@ To look up transactions with a particular vendor in a particular category, you w
 Fake Street Electronics category: gifts
 </pre>
 
-all text in a query, except for prefixes 
-like <strong>category</strong>, are case isensitive, 
+all text in a query, except for prefixes, are case isensitive, 
 so the category specified is case insensitive, as is the vendor.
-
-<strong>Spaces are mandatory</strong> after the category prefix, 
-due to the pattern utilized to deal with category queries.
-
 
 ====Removing Records====
 
