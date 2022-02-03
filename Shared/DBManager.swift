@@ -124,7 +124,11 @@ class DBManager {
      */
     func add(records: [Record]) throws {
         for record in records {
-            try add(record: record)
+            if try databaseHas(record: record) {
+                try update(record: record)
+            } else {
+                try add(record: record)
+            }
         }
     }
     
