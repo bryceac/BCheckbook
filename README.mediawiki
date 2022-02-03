@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''Version:''' 1.1
+'''Version:''' 1.1.1
 
 '''Author:''' Bryce Campbell
 
@@ -17,6 +17,12 @@ This application has only been tested on macOS 11 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.1.1 (Both)</dt>
+<dd>
+<p>Minor Patch</p>
+<p>Importing now updates existing records, 
+in addition to adding new records.</p>
+</dd>
 <dt style="font-weight:bold">1.1 (Both)</dt>
 <dd>
 <p>Minor update</p>
@@ -171,28 +177,27 @@ and will automatically save changes to the database.</p>
 
 <p>As such, there is no need to manually load data in either version of the app.</p>
 
-<p>However, data must be reimported when there are discrepencies.</p>
-
-<p>If you want to transfer things as easily as before, 
-you can do so by placing the <strong>register.db</strong> database 
-in the appropriate location.</p>
-
-<p>On iOS this is in the Documents folder of the application.</p>
-<p>On macOS, this location <strong>should</strong> be somewhere in your user's Library folder 
-in a directory named <strong>me.brycecampbell.bcheckbook</strong>.
-
 ===Backing up Data===
 
 <p>Due to the iOS app and the Mac app being a bit more similiar, 
 with the recent changes, there are two ways to back up data.</p>
 
 <ul>
-<li>backup the database file (located in the given areas above)</li>
+<li>backup the database file</li>
 <li>export transactions to a bcheck file</li>
 </ul>
 
-Of the two options, the latter is recommended for most people, as the 
-database structure might change in the future.
+<p>Of the two options, the latter is recommended for most people, as the 
+database structure might change in the future.</p>
+
+<p>However, if you wish to back up the database or access it, 
+it can be found in one of the following places, depending on platform:</p>
+
+<ul>
+<li>Application&#39;s Documents folder (iOS app)</li>
+<li><strong>me.brycecampbell.bcheckbook</strong> folder 
+somewhere in your user&#39;s Library (macOS app)</li>
+</ul>
 
 ===Transferring Data===
 
@@ -200,13 +205,11 @@ As stated above, the iOS application and macOS application work similiarly in te
 
 You can either transfer the database, or import a bcheck file.
 
-Please be aware that unlike before, 
-where all transactions from a bcheck file were loaded every time, 
-<strong>only new transactions will be imported</strong>. 
-This was a decision I had to make 
-because having the import functionality 
-update existing records only worked on the back end,
-meaning the application would need to be relaunched to see the changes.
+While all transactions will not be loaded every time,
+like the initial versions, when importing the bcheck file, 
+it will update any existing listings 
+in addition to adding new transactions as of version 1.1.1, 
+making deleting the database unnecessary.
 
 ====macOS Destination from iOS====
 
@@ -214,39 +217,36 @@ You can use either Airdrop inside the Files app or use either Finder or iTunes t
 
 When the transfer is made via AirDrop, your file will located in the Downloads Folder, while Finder, and likely iTunes may be more flexible.
 
-If your fle contains changes to existing records, 
-it is recommended you delete the <strong>register.db</strong>, 
-which should be located in the places specified by the 
-[[#Saving__Loading | Saving &#38; Loading]] section, before importing, 
-as the application will regenerate it.
-
-If you are transferring by using the database file, 
-you just need to move it to the right spot.
-
 ====iOS Destination via AirDrop====
 
 <p>As of version 0.3, the iOS app is registered to accept files bcheck directly.</p>
 
 <p>When transferring a bcheck file via AirDrop, the application will import 
-any <strong>new</strong> transactions into the database and update the list of transactions.</p>
+any new transactions into the database, update existing transactions, and update the list of transactions.</p>
 
 <p>However, if you want to reimport everything, 
-which is currently the only way to update pre existing transaction,
-you need to delete <strong>register.db</strong>, after closing the 
+to start things with a clean slate, delete <strong>register.db</strong>, after closing the 
 application, and then try importing your data, as the app 
 <strong>should</strong> regenerate the database.</p>
 
 ===Support===
 
-If you have any problems, I will try my best to help you. Depending on where you are seeing the problem, send me an email at either of the following:
+If you have any problems, 
+I will try my best to help you. 
+Depending on where you are seeing the problem, 
+send me an email at either of the following:
 
 ios@brycecampbell.me
 
 mac@brycecampbell.me
 
-Use iOS email for issues that only exist in iOS and the Msc email for issues that only exist in the Mac app.
+Use iOS email for issues that only exist in iOS and 
+the Mac email for issues that only exist in the Mac app.
 
-If the problems exists in both versions, choose ether one and be sure to note in the subject that it is both systems, otherwise I will assume the issue is only on the platform associated with the email you used.
+If the problems exists in both versions, 
+choose ether one and be sure to note in the subject that it is both systems, 
+otherwise I will assume the issue is only on the platform associated 
+with the email you used.
 
 ===Contributing===
 
@@ -257,7 +257,7 @@ Submissions will be tested by me before they will be merged.
 
 ===Other===
 
-Version 1.1 only works on iOS 15 and later and macOS 12 and later.
+Version 1.1 and later only works on iOS 15 and later and macOS 12 and later.
 
 If you have iOS 14 or macOS 11, version 1.0 is the last version available.
 
