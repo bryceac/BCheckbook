@@ -78,7 +78,9 @@ class DBManager {
      - parameter record: The record to add to database.
      */
     func add(record: Record) throws {
-        guard try !databaseHas(record: record) else { return }
+        guard try !databaseHas(record: record) else {
+            try update(record: record)
+            return }
         
         var insert: Insert!
         
