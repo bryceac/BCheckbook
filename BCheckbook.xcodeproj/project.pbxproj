@@ -21,6 +21,8 @@
 		0266A20E27D42CCE00E8023F /* QIF in Frameworks */ = {isa = PBXBuildFile; productRef = 0266A20D27D42CCE00E8023F /* QIF */; };
 		0266A21027D42D7300E8023F /* QIFTransaction+fromEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */; };
 		0266A21127D42D7300E8023F /* QIFTransaction+fromEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */; };
+		0266A21327D42F8600E8023F /* Event+fromQIFTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266A21227D42F8600E8023F /* Event+fromQIFTransaction.swift */; };
+		0266A21427D42F8600E8023F /* Event+fromQIFTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266A21227D42F8600E8023F /* Event+fromQIFTransaction.swift */; };
 		026767972697950B005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026767962697950B005D7DC2 /* CheckbookApp.swift */; };
 		0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02676794269794FB005D7DC2 /* CheckbookApp.swift */; };
 		026E6A6B276D13CE00ED3E36 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E6A6A276D13CE00ED3E36 /* DBManager.swift */; };
@@ -87,6 +89,7 @@
 		0231B224278A470D003483BF /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		0231B226278A4C55003483BF /* SummaryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryRowView.swift; sourceTree = "<group>"; };
 		0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QIFTransaction+fromEvent.swift"; sourceTree = "<group>"; };
+		0266A21227D42F8600E8023F /* Event+fromQIFTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+fromQIFTransaction.swift"; sourceTree = "<group>"; };
 		02676794269794FB005D7DC2 /* CheckbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
 		026767962697950B005D7DC2 /* CheckbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
 		026E6A6A276D13CE00ED3E36 /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
@@ -163,6 +166,7 @@
 				022404B8279C724400CAB636 /* String+matching.swift */,
 				020B4125268F7AA3004B6FE2 /* Bundle+displayName.swift */,
 				0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */,
+				0266A21227D42F8600E8023F /* Event+fromQIFTransaction.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -491,6 +495,7 @@
 				02A2ADCE2660A05900774151 /* EventTypeError.swift in Sources */,
 				02A2ADDA2660AFBD00774151 /* ContentView.swift in Sources */,
 				02A2ADDF2660B03200774151 /* RecordDetailView.swift in Sources */,
+				0266A21327D42F8600E8023F /* Event+fromQIFTransaction.swift in Sources */,
 				02A2ADD72660AF3A00774151 /* Records.swift in Sources */,
 				0231B225278A470D003483BF /* SummaryView.swift in Sources */,
 				02CA16322771015600A46892 /* OptionalComboBox.swift in Sources */,
@@ -518,6 +523,7 @@
 				02A2ADCC2660A04900774151 /* EvenType.swift in Sources */,
 				02A2ADCF2660A05900774151 /* EventTypeError.swift in Sources */,
 				02115E8F268CF50400085138 /* ContentView.swift in Sources */,
+				0266A21427D42F8600E8023F /* Event+fromQIFTransaction.swift in Sources */,
 				02A2ADD82660AF3A00774151 /* Records.swift in Sources */,
 				02B0990527724CA600BD36E4 /* AppDelegate.swift in Sources */,
 				02A2ADD52660A07B00774151 /* Record.swift in Sources */,
