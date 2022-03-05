@@ -19,6 +19,8 @@
 		0231B227278A4C55003483BF /* SummaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B226278A4C55003483BF /* SummaryRowView.swift */; };
 		0266A20C27D42B7600E8023F /* QIF in Frameworks */ = {isa = PBXBuildFile; productRef = 0266A20B27D42B7600E8023F /* QIF */; };
 		0266A20E27D42CCE00E8023F /* QIF in Frameworks */ = {isa = PBXBuildFile; productRef = 0266A20D27D42CCE00E8023F /* QIF */; };
+		0266A21027D42D7300E8023F /* QIFTransaction+fromEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */; };
+		0266A21127D42D7300E8023F /* QIFTransaction+fromEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */; };
 		026767972697950B005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026767962697950B005D7DC2 /* CheckbookApp.swift */; };
 		0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02676794269794FB005D7DC2 /* CheckbookApp.swift */; };
 		026E6A6B276D13CE00ED3E36 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E6A6A276D13CE00ED3E36 /* DBManager.swift */; };
@@ -84,6 +86,7 @@
 		0231B221278A45ED003483BF /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		0231B224278A470D003483BF /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		0231B226278A4C55003483BF /* SummaryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryRowView.swift; sourceTree = "<group>"; };
+		0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QIFTransaction+fromEvent.swift"; sourceTree = "<group>"; };
 		02676794269794FB005D7DC2 /* CheckbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
 		026767962697950B005D7DC2 /* CheckbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
 		026E6A6A276D13CE00ED3E36 /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
@@ -159,6 +162,7 @@
 			children = (
 				022404B8279C724400CAB636 /* String+matching.swift */,
 				020B4125268F7AA3004B6FE2 /* Bundle+displayName.swift */,
+				0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -491,6 +495,7 @@
 				0231B225278A470D003483BF /* SummaryView.swift in Sources */,
 				02CA16322771015600A46892 /* OptionalComboBox.swift in Sources */,
 				026E6A71276D214B00ED3E36 /* DB.swift in Sources */,
+				0266A21027D42D7300E8023F /* QIFTransaction+fromEvent.swift in Sources */,
 				02A2ADD42660A07B00774151 /* Record.swift in Sources */,
 				02A44279278B87EB00FF4BA0 /* RecordPeriod.swift in Sources */,
 				02A2ADDD2660B01F00774151 /* RecordView.swift in Sources */,
@@ -517,6 +522,7 @@
 				02B0990527724CA600BD36E4 /* AppDelegate.swift in Sources */,
 				02A2ADD52660A07B00774151 /* Record.swift in Sources */,
 				02B09903277247A200BD36E4 /* OptionalComboBox.swift in Sources */,
+				0266A21127D42D7300E8023F /* QIFTransaction+fromEvent.swift in Sources */,
 				02115E91268CF58500085138 /* RecordView.swift in Sources */,
 				02A4427A278B87EB00FF4BA0 /* RecordPeriod.swift in Sources */,
 				02A2ADD22660A06A00774151 /* Event.swift in Sources */,
