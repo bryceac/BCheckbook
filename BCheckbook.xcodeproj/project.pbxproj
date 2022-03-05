@@ -17,6 +17,8 @@
 		0231B223278A45ED003483BF /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B221278A45ED003483BF /* SummaryViewModel.swift */; };
 		0231B225278A470D003483BF /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B224278A470D003483BF /* SummaryView.swift */; };
 		0231B227278A4C55003483BF /* SummaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B226278A4C55003483BF /* SummaryRowView.swift */; };
+		0266A20C27D42B7600E8023F /* QIF in Frameworks */ = {isa = PBXBuildFile; productRef = 0266A20B27D42B7600E8023F /* QIF */; };
+		0266A20E27D42CCE00E8023F /* QIF in Frameworks */ = {isa = PBXBuildFile; productRef = 0266A20D27D42CCE00E8023F /* QIF */; };
 		026767972697950B005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026767962697950B005D7DC2 /* CheckbookApp.swift */; };
 		0267679826979526005D7DC2 /* CheckbookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02676794269794FB005D7DC2 /* CheckbookApp.swift */; };
 		026E6A6B276D13CE00ED3E36 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026E6A6A276D13CE00ED3E36 /* DBManager.swift */; };
@@ -119,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0266A20C27D42B7600E8023F /* QIF in Frameworks */,
 				026E6A6F276D200A00ED3E36 /* SQLite in Frameworks */,
 				0297EDEA27712710007B3E99 /* ComboBox in Frameworks */,
 			);
@@ -128,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0266A20E27D42CCE00E8023F /* QIF in Frameworks */,
 				02B098FE277233AA00BD36E4 /* SQLite in Frameworks */,
 				02B09900277233B100BD36E4 /* ComboBox in Frameworks */,
 			);
@@ -324,6 +328,7 @@
 			packageProductDependencies = (
 				026E6A6E276D200A00ED3E36 /* SQLite */,
 				0297EDE927712710007B3E99 /* ComboBox */,
+				0266A20B27D42B7600E8023F /* QIF */,
 			);
 			productName = "Checkbook (iOS)";
 			productReference = 02A2AD942660A02E00774151 /* BCheckbook.app */;
@@ -345,6 +350,7 @@
 			packageProductDependencies = (
 				02B098FD277233AA00BD36E4 /* SQLite */,
 				02B098FF277233B100BD36E4 /* ComboBox */,
+				0266A20D27D42CCE00E8023F /* QIF */,
 			);
 			productName = "Checkbook (macOS)";
 			productReference = 02A2AD9C2660A02E00774151 /* BCheckbook.app */;
@@ -423,6 +429,7 @@
 			packageReferences = (
 				026E6A6D276D200A00ED3E36 /* XCRemoteSwiftPackageReference "SQLite" */,
 				0297EDE827712710007B3E99 /* XCRemoteSwiftPackageReference "ComboBox" */,
+				0266A20A27D42B7600E8023F /* XCRemoteSwiftPackageReference "QIF" */,
 			);
 			productRefGroup = 02A2AD952660A02E00774151 /* Products */;
 			projectDirPath = "";
@@ -910,6 +917,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0266A20A27D42B7600E8023F /* XCRemoteSwiftPackageReference "QIF" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bryceac/QIF";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		026E6A6D276D200A00ED3E36 /* XCRemoteSwiftPackageReference "SQLite" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
@@ -929,6 +944,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0266A20B27D42B7600E8023F /* QIF */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0266A20A27D42B7600E8023F /* XCRemoteSwiftPackageReference "QIF" */;
+			productName = QIF;
+		};
+		0266A20D27D42CCE00E8023F /* QIF */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0266A20A27D42B7600E8023F /* XCRemoteSwiftPackageReference "QIF" */;
+			productName = QIF;
+		};
 		026E6A6E276D200A00ED3E36 /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 026E6A6D276D200A00ED3E36 /* XCRemoteSwiftPackageReference "SQLite" */;

@@ -11,12 +11,21 @@
         }
       },
       {
+        "package": "QIF",
+        "repositoryURL": "https://github.com/bryceac/QIF",
+        "state": {
+          "branch": null,
+          "revision": "0cbdb61440f325ddb318b644fcc8cd9e190c51b3",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "SQLite.swift",
         "repositoryURL": "https://github.com/stephencelis/SQLite.swift",
         "state": {
           "branch": null,
-          "revision": "60a65015f6402b7c34b9a924f755ca0a73afeeaa",
-          "version": "0.13.1"
+          "revision": "5f5ad81ac0d0a0f3e56e39e646e8423c617df523",
+          "version": "0.13.2"
         }
       }
     ]
