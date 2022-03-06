@@ -150,16 +150,24 @@ struct ContentView: View {
     
     func load(bcheck file: URL, completion: @escaping ([Record]) ->Void) {
         
+        isLoadingData = true
+        
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let records = try? Record.load(from: file) else { return }
+            guard let records = try? Record.load(from: file) else {
+                    isLoadingData = false
+                    return
+                }
             
             DispatchQueue.main.async {
                 completion(records)
+                self.isLoadingData = false
             }
         }
     }
     
     func load(qif file: URL, completion: @escaping (QIF) -> Void) {
+        
+        isLoadingData = true
         
         DispatchQueue.global(qos: .userInitiated).async {
             guard let qif = try? QIF.load(from: file) else { return }
@@ -181,6 +189,8 @@ struct ContentView: View {
                 }
             }
         }
+        
+        isLoadingData = false
         
         return records
     }
