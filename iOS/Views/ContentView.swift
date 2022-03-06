@@ -20,8 +20,6 @@ struct ContentView: View {
     
     @State private var query = ""
     
-    @State private var isLoadingData = false
-    
     var filteredRecords: [Record] {
         guard !query.isEmpty else { return records.sortedRecords }
         
@@ -144,22 +142,15 @@ struct ContentView: View {
                 try? addRecords(loadedRecords)
                 loadRecords()
             }
-        }.overlay(ProgressView()
-                    .padding().background(Color.white).cornerRadius(10).shadow(radius: 10).opacity(isLoadingData ? 1 : 0)).searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
+        }.searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
     }
     
     func load(bcheck file: URL, completion: @escaping ([Record]) ->Void) {
         
-        isLoadingData = true
-        
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let records = try? Record.load(from: file) else {
-                    isLoadingData = false
-                    return
-                }
+            guard let records = try? Record.load(from: file) else { return }
             
             DispatchQueue.main.async {
-                self.isLoadingData = false
                 completion(records)
             }
         }
@@ -167,13 +158,8 @@ struct ContentView: View {
     
     func load(qif file: URL, completion: @escaping (QIF) -> Void) {
         
-        isLoadingData = true
-        
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let qif = try? QIF.load(from: file) else {
-                isLoadingData = false
-                return
-            }
+            guard let qif = try? QIF.load(from: file) else { return }
             
             DispatchQueue.main.async {
                 completion(qif)
@@ -192,8 +178,6 @@ struct ContentView: View {
                 }
             }
         }
-        
-        isLoadingData = false
         
         return records
     }
