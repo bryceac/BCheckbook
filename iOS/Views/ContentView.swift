@@ -14,6 +14,7 @@ struct ContentView: View {
     
     @State private var isExporting = false
     @State private var isImporting = false
+    @State private var isExportingToQIF = false
     
     @State private var showSaveSuccessfulAlert = false
     
