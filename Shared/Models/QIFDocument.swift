@@ -19,7 +19,7 @@ extension UTType {
 class QIFDocument: ReferenceFileDocument {
     
     
-    static var readableContentTypes: [UTType] = [.bcheckFiles]
+    static var readableContentTypes: [UTType] = [.quickenInterchangeFormat]
     
     var records: Records = Records()
     
