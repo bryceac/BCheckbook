@@ -135,18 +135,58 @@ struct ContentView: View {
                 }
             }
         }.onOpenURL { fileURL in
-            if let savedRecords = try? Record.load(from: fileURL) {
+            switch fileURL.pathExtension {
+            case "bcheck":
+                load(bcheck: fileURL) { loadedRecords in
+                    try? self.add(records: loadedRecords)
+                    
+                    self.loadRecords()
+                }
+            default:
+                let loadedRecords = transactions(fromQIF: fileURL)
                 
-                try? add(records: savedRecords)
-                loadRecords()
-            } else if let qif = try? QIF.load(from: fileURL), let bank = qif.sections[QIFType.bank.rawValue] {
+                try? self.add(records: loadedRecords)
                 
-                let loadedRecords = bank.transactions.map { Record(transaction: Event($0)) }
-                
-                try? add(records: loadedRecords)
                 loadRecords()
             }
         }.searchable(text: $query, prompt: "search transactions")
+    }
+    
+    func load(bcheck file: URL, completion: @escaping ([Record]) ->Void) {
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let records = try? Record.load(from: file) else { return }
+            
+            DispatchQueue.main.async {
+                completion(records)
+            }
+        }
+    }
+    
+    func load(qif file: URL, completion: @escaping (QIF) -> Void) {
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let qif = try? QIF.load(from: file) else { return }
+            
+            DispatchQueue.main.async {
+                completion(qif)
+            }
+        }
+    }
+    
+    func transactions(fromQIF file: URL) -> [Record] {
+        
+        var records = [Record]()
+        
+        load(qif: file) { qif in
+            if let bank = qif.sections[QIFType.bank.rawValue] {
+                records = bank.transactions.map {
+                    Record(transaction: Event($0))
+                }
+            }
+        }
+        
+        return records
     }
     
     func loadRecords() {
