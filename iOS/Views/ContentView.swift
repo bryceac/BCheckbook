@@ -109,7 +109,7 @@ struct ContentView: View {
             }
         }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFiles, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
             if case .success = result {
-                if let file = try? result.get().first, let loadedRecords = try? Record.load(from: file) {
+                if let file = try? result.get().first, file.pathExtension == "bcheck", let loadedRecords = try? Record.load(from: file) {
                     
                     try? addRecords(loadedRecords)
                     loadRecords()
@@ -125,7 +125,7 @@ struct ContentView: View {
                 showSaveSuccessfulAlert = true
             }
         }.onOpenURL { fileURL in
-            if let savedRecords = try? Record.load(from: fileURL) {
+            if fileURL.pathExtension == "bcheck", let savedRecords = try? Record.load(from: fileURL) {
                 
                 try? addRecords(savedRecords)
                 loadRecords()
