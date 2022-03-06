@@ -121,17 +121,9 @@ struct ContentView: View {
                     
                     switch file.pathExtension {
                     case "bcheck":
-                        load(bcheck: file) { loadedRecords in
-                            try? self.add(records: loadedRecords)
-                            
-                            self.loadRecords()
-                        }
+                        load(fromBCheck: file)
                     default:
-                        let loadedRecords = transactions(fromQIF: file)
-                        
-                        try? self.add(records: loadedRecords)
-                        
-                        loadRecords()
+                        load(fromQIF: file)
                     }
                 }
             }
@@ -144,56 +136,29 @@ struct ContentView: View {
         }.onOpenURL { fileURL in
             switch fileURL.pathExtension {
             case "bcheck":
-                load(bcheck: fileURL) { loadedRecords in
-                    try? self.add(records: loadedRecords)
-                    
-                    self.loadRecords()
-                }
+                load(fromBCheck: fileURL)
             default:
-                let loadedRecords = transactions(fromQIF: fileURL)
-                
-                try? self.add(records: loadedRecords)
-                
-                loadRecords()
+                load(fromQIF: fileURL)
             }
         }.searchable(text: $query, prompt: "search transactions")
     }
     
-    func load(bcheck file: URL, completion: @escaping ([Record]) ->Void) {
+    func load(fromBCheck file: URL) {
+        guard let loadedRecords = try? Record.load(from: file) else { return }
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            guard let records = try? Record.load(from: file) else { return }
-            
-            DispatchQueue.main.async {
-                completion(records)
-            }
-        }
+        try? add(records: loadedRecords)
+        loadRecords()
     }
     
-    func load(qif file: URL, completion: @escaping (QIF) -> Void) {
+    func load(fromQIF file: URL) {
+        guard let qif = try? QIF.load(from: file), let bank = qif.sections[QIFType.bank.rawValue] else { return }
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            guard let qif = try? QIF.load(from: file) else { return }
-            
-            DispatchQueue.main.async {
-                completion(qif)
-            }
-        }
-    }
-    
-    func transactions(fromQIF file: URL) -> [Record] {
-        
-        var records = [Record]()
-        
-        load(qif: file) { qif in
-            if let bank = qif.sections[QIFType.bank.rawValue] {
-                records = bank.transactions.map {
-                    Record(transaction: Event($0))
-                }
-            }
+        let loadedRecords = bank.transactions.map {
+            Record(transaction: Event($0))
         }
         
-        return records
+        try? add(records: loadedRecords)
+        loadRecords()
     }
     
     func loadRecords() {
