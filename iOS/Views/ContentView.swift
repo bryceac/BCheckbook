@@ -72,6 +72,10 @@ struct ContentView: View {
                             isExporting = true
                         }
                         
+                        Button("Export Transactions to QIF") {
+                            isExportingToQIF = true
+                        }
+                        
                         Button("Import Transactions") {
                             isImporting = true
                         }
