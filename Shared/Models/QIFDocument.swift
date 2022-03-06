@@ -8,6 +8,7 @@
 import Foundation
 import UniformTypeIdentifiers
 import SwiftUI
+import QIF
 
 extension UTType {
     static var quickenInterchangeFormat: UTType {
@@ -38,16 +39,6 @@ class QIFDocument: ReferenceFileDocument {
         self.init(records: records)
     }
     
-    /* func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        var fileWrapper = FileWrapper()
-        
-        if let JSON_DATA = records.sortedRecords.data {
-            fileWrapper = FileWrapper(regularFileWithContents: JSON_DATA)
-        }
-        
-        return fileWrapper
-    } */
-    
     func fileWrapper(snapshot: [Record], configuration: WriteConfiguration) throws -> FileWrapper {
         
         var fileWrapper = FileWrapper()
@@ -57,6 +48,18 @@ class QIFDocument: ReferenceFileDocument {
         }
         
         return fileWrapper
+    }
+    
+    func generateQIF() throws -> QIF {
+        let qifTransactions = records.sortedRecords.map { record in
+            QIFTransaction(record.event)
+        }
+        
+        let sectionText = qifTransactions.reduce(into: "!Type:Bank\r\n") { string, transaction in
+            string += "\(transaction)\r\n\r\n"
+        }
+        
+        return try QIF(sectionText)
     }
     
     func snapshot(contentType: UTType) throws -> [Record] {
