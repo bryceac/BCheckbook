@@ -15,6 +15,7 @@ struct ContentView: View {
     
     @State private var isImporting = false
     @State private var isExporting = false
+    @State private var isExportingToQIF = false
     
     @StateObject var records: Records = Records()
     
@@ -123,10 +124,24 @@ struct ContentView: View {
                     loadRecords()
                 }
             }
+        }.fileExporter(isPresented: $isExportingToQIF, document: QIFDocument(records: records), contentType: .quickenInterchangeFormat, defaultFilename: "transactions") { result in
+            if case .success = result {
+                DispatchQueue.main.async {
+                    showSuccessfulExportAlert = true
+                }
+            }
         }.onOpenURL { fileURL in
-            guard let importedRecords = try? Record.load(from: fileURL) else { return }
-            
-            try? add(records: importedRecords)
+            if let savedRecords = try? Record.load(from: fileURL) {
+                
+                try? add(records: savedRecords)
+                loadRecords()
+            } else if let qif = try? QIF.load(from: fileURL), let bank = qif.sections[QIFType.bank.rawValue] {
+                
+                let loadedRecords = bank.transactions.map { Record(transaction: Event($0)) }
+                
+                try? add(records: loadedRecords)
+                loadRecords()
+            }
         }.searchable(text: $query, prompt: "search transactions")
     }
     
