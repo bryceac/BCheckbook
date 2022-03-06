@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import QIF
 
 struct ContentView: View {
     @Environment(\.undoManager) var undoManager
@@ -111,9 +112,16 @@ struct ContentView: View {
             }
         }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFiles], allowsMultipleSelection: false) { result in
             if case .success = result {
-                guard let file = try? result.get().first, let loadedRecords = try? Record.load(from: file) else { return }
-                
-                try? add(records: loadedRecords)
+                if let file = try? result.get().first, let loadedRecords = try? Record.load(from: file) {
+                    
+                    try? add(records: loadedRecords)
+                    loadRecords()
+                } else if let file = try? result.get().first, let loadedQIF = try? QIF.load(from: file), let bank = loadedQIF.sections[QIFType.bank.rawValue] {
+                    let loadedRecords = bank.transactions.map { Record(transaction: Event($0)) }
+                    
+                    try? add(records: loadedRecords)
+                    loadRecords()
+                }
             }
         }.onOpenURL { fileURL in
             guard let importedRecords = try? Record.load(from: fileURL) else { return }
