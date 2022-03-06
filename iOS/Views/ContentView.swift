@@ -125,21 +125,15 @@ struct ContentView: View {
                 showSaveSuccessfulAlert = true
             }
         }.onOpenURL { fileURL in
-            switch fileURL.pathExtension {
-            case "bcheck":
-                if let loadedRecords = try? Record.load(from: fileURL) {
-                    try? addRecords(loadedRecords)
-                    
-                    loadRecords()
-                }
-            default:
-                if let qif = try? QIF.load(from: fileURL), let bank = qif.sections[QIFType.bank.rawValue] {
-                    let loadedRecords = bank.transactions.map { Record(transaction: Event($0)) }
-                    
-                    try? addRecords(loadedRecords)
-                    
-                    loadRecords()
-                }
+            if let loadedRecords = try? Record.load(from: fileURL) {
+                
+                try? addRecords(loadedRecords)
+                loadRecords()
+            } else if let loadedQIF = try? QIF.load(from: fileURL), let bank = loadedQIF.sections[QIFType.bank.rawValue] {
+                let loadedRecords = bank.transactions.map { Record(transaction: Event($0)) }
+                
+                try? addRecords(loadedRecords)
+                loadRecords()
             }
         }.searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
     }
