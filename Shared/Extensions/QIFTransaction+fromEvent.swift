@@ -10,18 +10,6 @@ import QIF
 
 extension QIFTransaction {
     init(_ transaction: Event) {
-        let transactionText = """
-        D\(QIFTransaction.QIF_DATE_FORMATTER.string(from: transaction.date))
-        T\(EventType.withdrawal ~= transaction.type ? transaction.amount * -1 : transaction.amount)
-        C\(transaction.isReconciled ? TransactionStatus.reconciled.rawValue : "")
-        N\(transaction.checkNumber ?? 0)
-        P\(transaction.vendor)
-        M\(transaction.memo)
-        A\(transaction.vendor)
-        L\(transaction.category ?? "")
-        ^
-        """
-        
-        try! self.init(transactionText)
+        self.init(date: transaction.date, checkNumber: transaction.checkNumber, vendor: transaction.vendor, address: transaction.vendor, amount: EventType.withdrawal ~= transaction.type ? transaction.amount * -1 : transaction.amount, category: transaction.category, memo: transaction.memo, status: transaction.isReconciled ? TransactionStatus.reconciled : nil)
     }
 }

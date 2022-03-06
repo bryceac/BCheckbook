@@ -55,11 +55,9 @@ class QIFDocument: ReferenceFileDocument {
             QIFTransaction(record.event)
         }
         
-        let sectionText = qifTransactions.reduce(into: "!Type:Bank\n") { string, transaction in
-            string += "\(transaction)\n\n"
-        }
+        let section = QIFSection(type: .bank, transactions: Set(qifTransactions))
         
-        return try QIF(sectionText)
+        return QIF(sections: [section.type.rawValue: section])
     }
     
     func snapshot(contentType: UTType) throws -> [Record] {
