@@ -20,6 +20,8 @@ struct ContentView: View {
     
     @State private var query = ""
     
+    @State private var isLoadingData = false
+    
     var filteredRecords: [Record] {
         guard !query.isEmpty else { return records.sortedRecords }
         
@@ -142,7 +144,8 @@ struct ContentView: View {
                 try? addRecords(loadedRecords)
                 loadRecords()
             }
-        }.searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
+        }.overlay(ProgressView()
+                    .padding().background(Color.white).cornerRadius(10).shadow(radius: 10).opacity(isLoadingData ? 1 : 0)).searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
     }
     
     func load(bcheck file: URL, completion: @escaping ([Record]) ->Void) {
