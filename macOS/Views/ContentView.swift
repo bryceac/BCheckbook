@@ -115,7 +115,7 @@ struct ContentView: View {
                     showSuccessfulExportAlert = true
                 }
             }
-        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFiles], allowsMultipleSelection: false) { result in
+        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFiles, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
             if case .success = result {
                 if let file = try? result.get().first, let loadedRecords = try? Record.load(from: file) {
                     
