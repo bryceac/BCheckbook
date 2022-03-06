@@ -57,7 +57,7 @@ class QIFDocument: ReferenceFileDocument {
         
         let sectionText = qifTransactions.reduce(into: "!Type:Bank\n") { string, transaction in
             string += "\(transaction)\n\n"
-        }.replacingOccurrences(of: "\n", with: "\r\n")
+        }
         
         return try QIF(sectionText)
     }
