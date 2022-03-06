@@ -159,8 +159,8 @@ struct ContentView: View {
                 }
             
             DispatchQueue.main.async {
-                completion(records)
                 self.isLoadingData = false
+                completion(records)
             }
         }
     }
@@ -170,7 +170,10 @@ struct ContentView: View {
         isLoadingData = true
         
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let qif = try? QIF.load(from: file) else { return }
+            guard let qif = try? QIF.load(from: file) else {
+                isLoadingData = false
+                return
+            }
             
             DispatchQueue.main.async {
                 completion(qif)
