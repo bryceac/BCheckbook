@@ -43,8 +43,8 @@ class QIFDocument: ReferenceFileDocument {
         
         var fileWrapper = FileWrapper()
         
-        if let JSON_DATA = records.sortedRecords.data {
-            fileWrapper = FileWrapper(regularFileWithContents: JSON_DATA)
+        if let qif = try? generateQIF(), let qifData = "\(qif)".data(using: .utf8) {
+            fileWrapper = FileWrapper(regularFileWithContents: qifData)
         }
         
         return fileWrapper
