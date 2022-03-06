@@ -78,6 +78,10 @@ struct ContentView: View {
                         isExporting = true
                     }
                     
+                    Button("Export Transactions to QIF") {
+                        isExportingToQIF = true
+                    }
+                    
                     Button("View Summary") {
                         let summaryURL = URL(string: "bcheckbook://summary")!
                         
