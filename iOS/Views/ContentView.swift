@@ -116,6 +116,10 @@ struct ContentView: View {
                     loadRecords()
                 }
             }
+        }.fileExporter(isPresented: $isExportingToQIF, document: QIFDocument(records: records), contentType: .quickenInterchangeFormat, defaultFilename: "transactions") { result in
+            if case .success = result {
+                showSaveSuccessfulAlert = true
+            }
         }.onOpenURL { fileURL in
             if let savedRecords = try? Record.load(from: fileURL) {
                 
