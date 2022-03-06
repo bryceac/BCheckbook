@@ -129,12 +129,14 @@ struct ContentView: View {
                 
                 try? addRecords(savedRecords)
                 loadRecords()
-            } else if let qif = try? QIF.load(from: fileURL), let bank = qif.sections[QIFType.bank.rawValue] {
+            } else if let qif = try? QIF.load(from: fileURL) {
                 
-                let loadedRecords = bank.transactions.map { Record(transaction: Event($0)) }
+                print(qif.sections.count)
+                
+                /* let loadedRecords = bank.transactions.map { Record(transaction: Event($0)) }
                 
                 try? addRecords(loadedRecords)
-                loadRecords()
+                loadRecords() */
             }
         }.searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
     }
