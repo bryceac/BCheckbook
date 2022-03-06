@@ -117,15 +117,22 @@ struct ContentView: View {
             }
         }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFiles, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
             if case .success = result {
-                if let file = try? result.get().first, let loadedRecords = try? Record.load(from: file) {
+                if let file = try? result.get().first {
                     
-                    try? add(records: loadedRecords)
-                    loadRecords()
-                } else if let file = try? result.get().first, let loadedQIF = try? QIF.load(from: file), let bank = loadedQIF.sections[QIFType.bank.rawValue] {
-                    let loadedRecords = bank.transactions.map { Record(transaction: Event($0)) }
-                    
-                    try? add(records: loadedRecords)
-                    loadRecords()
+                    switch file.pathExtension {
+                    case "bcheck":
+                        load(bcheck: file) { loadedRecords in
+                            try? self.add(records: loadedRecords)
+                            
+                            self.loadRecords()
+                        }
+                    default:
+                        let loadedRecords = transactions(fromQIF: file)
+                        
+                        try? self.add(records: loadedRecords)
+                        
+                        loadRecords()
+                    }
                 }
             }
         }.fileExporter(isPresented: $isExportingToQIF, document: QIFDocument(records: records), contentType: .quickenInterchangeFormat, defaultFilename: "transactions") { result in
