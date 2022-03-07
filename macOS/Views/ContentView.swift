@@ -17,6 +17,8 @@ struct ContentView: View {
     @State private var isExporting = false
     @State private var isExportingToQIF = false
     
+    @State private var isLoading = false
+    
     @StateObject var records: Records = Records()
     
     @State private var showSuccessfulExportAlert = false
@@ -143,6 +145,12 @@ struct ContentView: View {
         }.searchable(text: $query, prompt: "search transactions")
     }
     
+    @ViewBuilder var loadingOverlay: some View {
+        if isLoading {
+            ProgressView()
+        }
+    }
+    
     func records(fromBCheck file: URL) async -> [Record] {
         
         guard let loadedRecords = try? Record.load(from: file) else { return [] }
@@ -152,13 +160,16 @@ struct ContentView: View {
     
     func loadRecords(fromBCheck file: URL) {
         
+        isLoading = true
         Task {
             let loadedRecords = await records(fromBCheck: file)
             
             try? add(records: loadedRecords)
+            
+            loadRecords()
+            
+            isLoading = false
         }
-        
-        loadRecords()
     }
     
     func records(fromQIF file: URL) async -> [Record] {
@@ -175,13 +186,16 @@ struct ContentView: View {
     
     func loadRecords(fromQIF file: URL) {
         
+        isLoading = true
         Task {
             let loadedRecords = await records(fromQIF: file)
             
             try? add(records: loadedRecords)
+            
+            loadRecords()
+            
+            isLoading = false
         }
-        
-        loadRecords()
     }
     
     func loadRecords() {
