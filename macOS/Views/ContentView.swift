@@ -228,7 +228,6 @@ struct ContentView: View {
         
         try databaseManager.remove(records: records)
         
-        loadRecords()
         removeRecordsUndoActionRegister(for: records)
     }
     
@@ -237,7 +236,6 @@ struct ContentView: View {
         
         try databaseManager.add(records: records)
         
-        loadRecords()
         addRecordsUndoActionRegister(for: records)
     }
     
