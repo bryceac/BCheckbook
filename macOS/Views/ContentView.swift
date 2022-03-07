@@ -66,7 +66,10 @@ struct ContentView: View {
                         Button("Delete") {
                             try? remove(record: record)
                             
-                            loadRecords()
+                            Task {
+                                await loadRecords()
+                            }
+                            
                         }
                     }))
                 }
@@ -101,11 +104,17 @@ struct ContentView: View {
                     let RECORD = Record()
                     
                     try? add(record: RECORD)
-                    loadRecords()
+                    
+                    Task {
+                        await loadRecords()
+                    }
+                    
                 }
             }
         }).onAppear(perform: {
-            loadRecords()
+            Task {
+                await loadRecords()
+            }
         }).alert("Export Successful", isPresented: $showSuccessfulExportAlert) {
             Button("Ok") {
                 DispatchQueue.main.async {
@@ -169,7 +178,7 @@ struct ContentView: View {
             
             try? await add(records: loadedRecords)
             
-            loadRecords()
+            await loadRecords()
             
             isLoading = false
         }
@@ -195,13 +204,13 @@ struct ContentView: View {
             
             try? await add(records: loadedRecords)
             
-            loadRecords()
+            await loadRecords()
             
             isLoading = false
         }
     }
     
-    func loadRecords() {
+    func loadRecords() async {
         guard let databaseManager = DB.shared.manager, let storedRecords = try? databaseManager.records(inRange: .all) else { return }
         
         records.items = storedRecords
@@ -244,7 +253,11 @@ struct ContentView: View {
         undoManager?.registerUndo(withTarget: records, handler: { _ in
             
             try? remove(record: record)
-            loadRecords()
+            
+            Task {
+                await loadRecords()
+            }
+            
         })
         
     }
@@ -254,7 +267,7 @@ struct ContentView: View {
             
             Task {
                 try? await remove(records: records)
-                loadRecords()
+                await loadRecords()
             }
             
         })
@@ -265,7 +278,11 @@ struct ContentView: View {
             
             Task {
                 try? await add(records: records)
-                loadRecords()
+                
+                Task {
+                    await loadRecords()
+                }
+                
             }
             
         })
@@ -276,7 +293,11 @@ struct ContentView: View {
         undoManager?.registerUndo(withTarget: records, handler: { _ in
             
             try? add(record: record)
-            loadRecords()
+            
+            Task {
+                await loadRecords()
+            }
+            
         })
     }
 }
