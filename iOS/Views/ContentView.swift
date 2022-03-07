@@ -133,21 +133,44 @@ struct ContentView: View {
         }.searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
     }
     
-    func loadRecords(fromBCheck file: URL) {
-        guard let loadedRecords = try? Record.load(from: file) else { return }
+    func records(fromBCheck file: URL) async -> [Record] {
         
-        try? addRecords(loadedRecords)
+        guard let loadedRecords = try? Record.load(from: file) else { return [] }
+        
+        return loadedRecords
+    }
+    
+    func loadRecords(fromBCheck file: URL) {
+        
+        Task {
+            let loadedRecords = await records(fromBCheck: file)
+            
+            try? addRecords(loadedRecords)
+        }
+        
         loadRecords()
     }
     
-    func loadRecords(fromQIF file: URL) {
-        guard let qif = try? QIF.load(from: file), let bank = qif.sections[QIFType.bank.rawValue] else { return }
+    func records(fromQIF file: URL) async -> [Record] {
+        
+        guard let qif = try? QIF.load(from: file), let bank = qif.sections[QIFType.bank.rawValue] else { return [] }
         
         let loadedRecords = bank.transactions.map {
             Record(transaction: Event($0))
         }
         
-        try? addRecords(loadedRecords)
+        return loadedRecords
+        
+    }
+    
+    func loadRecords(fromQIF file: URL) {
+        
+        Task {
+            let loadedRecords = await records(fromQIF: file)
+            
+            try? addRecords(loadedRecords)
+        }
+        
         loadRecords()
     }
     

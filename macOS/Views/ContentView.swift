@@ -163,7 +163,7 @@ struct ContentView: View {
     
     func records(fromQIF file: URL) async -> [Record] {
         
-        guard let qif = try? QIF.load(from: file), let bank = qif.sections[QIFType.bank.rawValue] else { return }
+        guard let qif = try? QIF.load(from: file), let bank = qif.sections[QIFType.bank.rawValue] else { return [] }
         
         let loadedRecords = bank.transactions.map {
             Record(transaction: Event($0))
