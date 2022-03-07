@@ -222,7 +222,7 @@ struct ContentView: View {
         removeRecordUndoActionRegister(record)
     }
     
-    func remove(records: [Record]) throws {
+    func remove(records: [Record]) async throws {
         guard let databaseManager = DB.shared.manager else { return }
         
         try databaseManager.remove(records: records)
@@ -251,13 +251,21 @@ struct ContentView: View {
     
     func addRecordsUndoActionRegister(for records: [Record]) {
         undoManager?.registerUndo(withTarget: self.records, handler: { _ in
-            try? remove(records: records)
+            
+            Task {
+                try? await remove(records: records)
+            }
+            
         })
     }
     
     func removeRecordsUndoActionRegister(for records: [Record]) {
         undoManager?.registerUndo(withTarget: self.records, handler: { _ in
-            try? add(records: records)
+            
+            Task {
+                try? await add(records: records)
+            }
+            
         })
     }
     
