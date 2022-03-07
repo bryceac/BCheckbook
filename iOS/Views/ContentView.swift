@@ -146,9 +146,8 @@ struct ContentView: View {
             let loadedRecords = await records(fromBCheck: file)
             
             try? addRecords(loadedRecords)
+            loadRecords()
         }
-        
-        loadRecords()
     }
     
     func records(fromQIF file: URL) async -> [Record] {
@@ -169,9 +168,8 @@ struct ContentView: View {
             let loadedRecords = await records(fromQIF: file)
             
             try? addRecords(loadedRecords)
+            loadRecords()
         }
-        
-        loadRecords()
     }
     
     func delete(at offsets: IndexSet) {
