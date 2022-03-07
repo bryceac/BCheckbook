@@ -147,7 +147,7 @@ struct ContentView: View {
             default:
                 loadRecords(fromQIF: fileURL)
             }
-        }.searchable(text: $query, prompt: "search transactions")
+        }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions")
     }
     
     @ViewBuilder var loadingOverlay: some View {
