@@ -164,7 +164,7 @@ struct ContentView: View {
         Task {
             let loadedRecords = await records(fromBCheck: file)
             
-            try? add(records: loadedRecords)
+            try? await add(records: loadedRecords)
             
             loadRecords()
             
@@ -190,7 +190,7 @@ struct ContentView: View {
         Task {
             let loadedRecords = await records(fromQIF: file)
             
-            try? add(records: loadedRecords)
+            try? await add(records: loadedRecords)
             
             loadRecords()
             
@@ -231,7 +231,7 @@ struct ContentView: View {
         removeRecordsUndoActionRegister(for: records)
     }
     
-    func add(records: [Record]) throws {
+    func add(records: [Record]) async throws {
         guard let databaseManager = DB.shared.manager else { return }
         
         try databaseManager.add(records: records)
