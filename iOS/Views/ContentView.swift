@@ -151,11 +151,13 @@ struct ContentView: View {
     
     func loadRecords(fromBCheck file: URL) {
         
+        isLoading = true
         Task {
             let loadedRecords = await records(fromBCheck: file)
             
             try? addRecords(loadedRecords)
             loadRecords()
+            isLoading = false
         }
     }
     
@@ -173,11 +175,14 @@ struct ContentView: View {
     
     func loadRecords(fromQIF file: URL) {
         
+        isLoading = true
         Task {
             let loadedRecords = await records(fromQIF: file)
             
             try? addRecords(loadedRecords)
             loadRecords()
+            
+            isLoading = false
         }
     }
     
