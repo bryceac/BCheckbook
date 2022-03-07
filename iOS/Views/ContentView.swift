@@ -113,9 +113,9 @@ struct ContentView: View {
                     
                     switch file.pathExtension {
                     case "bcheck":
-                        load(fromBCheck: file)
+                        loadRecords(fromBCheck: file)
                     default:
-                        load(fromQIF: file)
+                        loadRecords(fromQIF: file)
                     }
                 }
             }
@@ -126,21 +126,21 @@ struct ContentView: View {
         }.onOpenURL { fileURL in
             switch fileURL.pathExtension {
             case "bcheck":
-                load(fromBCheck: fileURL)
+                loadRecords(fromBCheck: fileURL)
             default:
-                load(fromQIF: fileURL)
+                loadRecords(fromQIF: fileURL)
             }
         }.searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
     }
     
-    func load(fromBCheck file: URL) {
+    func loadRecords(fromBCheck file: URL) {
         guard let loadedRecords = try? Record.load(from: file) else { return }
         
         try? addRecords(loadedRecords)
         loadRecords()
     }
     
-    func load(fromQIF file: URL) {
+    func loadRecords(fromQIF file: URL) {
         guard let qif = try? QIF.load(from: file), let bank = qif.sections[QIFType.bank.rawValue] else { return }
         
         let loadedRecords = bank.transactions.map {
