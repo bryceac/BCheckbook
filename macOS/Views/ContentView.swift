@@ -107,7 +107,9 @@ struct ContentView: View {
                 }
             }
         }).onAppear(perform: {
+            isLoading = true
             loadRecords()
+            isLoading = false
         }).alert("Export Successful", isPresented: $showSuccessfulExportAlert) {
             Button("Ok") {
                 DispatchQueue.main.async {
