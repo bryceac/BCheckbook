@@ -65,6 +65,8 @@ struct ContentView: View {
                 RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
                         Button("Delete") {
                             try? remove(record: record)
+                            
+                            loadRecords()
                         }
                     }))
                 }
@@ -99,6 +101,7 @@ struct ContentView: View {
                     let RECORD = Record()
                     
                     try? add(record: RECORD)
+                    loadRecords()
                 }
             }
         }).onAppear(perform: {
@@ -209,7 +212,6 @@ struct ContentView: View {
         
         try databaseManager.add(record: record)
         
-        loadRecords()
         addRecordUndoActionRegister(for: record)
     }
     
@@ -218,7 +220,6 @@ struct ContentView: View {
         
         try databaseManager.remove(record: record)
         
-        loadRecords()
         removeRecordUndoActionRegister(record)
     }
     
