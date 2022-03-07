@@ -244,6 +244,7 @@ struct ContentView: View {
         undoManager?.registerUndo(withTarget: records, handler: { _ in
             
             try? remove(record: record)
+            loadRecords()
         })
         
     }
@@ -253,6 +254,7 @@ struct ContentView: View {
             
             Task {
                 try? await remove(records: records)
+                loadRecords()
             }
             
         })
@@ -263,6 +265,7 @@ struct ContentView: View {
             
             Task {
                 try? await add(records: records)
+                loadRecords()
             }
             
         })
@@ -273,6 +276,7 @@ struct ContentView: View {
         undoManager?.registerUndo(withTarget: records, handler: { _ in
             
             try? add(record: record)
+            loadRecords()
         })
     }
 }
