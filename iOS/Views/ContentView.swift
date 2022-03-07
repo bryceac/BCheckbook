@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var isImporting = false
     @State private var isExportingToQIF = false
     
+    @State private var isLoading = false
+    
     @State private var showSaveSuccessfulAlert = false
     
     @State private var query = ""
@@ -130,7 +132,14 @@ struct ContentView: View {
             default:
                 loadRecords(fromQIF: fileURL)
             }
-        }.searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
+        }.overlay(loadingOverlay).searchable(text: $query, prompt: "Search transactions").textInputAutocapitalization(.never)
+    }
+    
+    @ViewBuilder var loadingOverlay: some View {
+        
+        if isLoading {
+            ProgressView()
+        }
     }
     
     func records(fromBCheck file: URL) async -> [Record] {
