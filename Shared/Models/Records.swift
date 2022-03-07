@@ -30,15 +30,22 @@ class Records: ObservableObject {
         }
     }
     
-    var balances: [Record: Double] {
+    /* var balances: [Record: Double] {
         return sortedRecords.reduce(into: [Record: Double]()) { balances, record in
             guard let databaseManager = DB.shared.manager else { return }
             balances[record] = try? databaseManager.balance(for: record)
         }
-    }
+    } */
+    
     
     init(withRecords records: [Record] = []) {
         items = records
+    }
+    
+    func balance(for record: Record) -> Double {
+        guard let databaseManager = DB.shared.manager, let balance = try? databaseManager.balance(for: record) else { return 0 }
+        
+        return balance
     }
     
     func add(_ record: Record) {
