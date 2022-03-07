@@ -66,10 +66,7 @@ struct ContentView: View {
                         Button("Delete") {
                             try? remove(record: record)
                             
-                            Task {
-                                await loadRecords()
-                            }
-                            
+                            loadRecords()
                         }
                     }))
                 }
@@ -105,16 +102,12 @@ struct ContentView: View {
                     
                     try? add(record: RECORD)
                     
-                    Task {
-                        await loadRecords()
-                    }
+                    loadRecords()
                     
                 }
             }
         }).onAppear(perform: {
-            Task {
-                await loadRecords()
-            }
+            loadRecords()
         }).alert("Export Successful", isPresented: $showSuccessfulExportAlert) {
             Button("Ok") {
                 DispatchQueue.main.async {
@@ -178,7 +171,7 @@ struct ContentView: View {
             
             try? await add(records: loadedRecords)
             
-            await loadRecords()
+            loadRecords()
             
             isLoading = false
         }
@@ -204,16 +197,26 @@ struct ContentView: View {
             
             try? await add(records: loadedRecords)
             
-            await loadRecords()
+            loadRecords()
             
             isLoading = false
         }
     }
     
-    func loadRecords() async {
-        guard let databaseManager = DB.shared.manager, let storedRecords = try? databaseManager.records(inRange: .all) else { return }
+    func retrieveRecords() async -> [Record] {
         
-        records.items = storedRecords
+        guard let databaseManager = DB.shared.manager, let storedRecords = try? databaseManager.records(inRange: .all) else { return [] }
+        
+        return storedRecords
+    }
+    
+    func loadRecords() {
+        
+        Task {
+            let storedRecords = await retrieveRecords()
+            
+            records.items = storedRecords
+        }
     }
     
     func add(record: Record) throws {
@@ -254,9 +257,7 @@ struct ContentView: View {
             
             try? remove(record: record)
             
-            Task {
-                await loadRecords()
-            }
+            loadRecords()
             
         })
         
@@ -267,7 +268,7 @@ struct ContentView: View {
             
             Task {
                 try? await remove(records: records)
-                await loadRecords()
+                loadRecords()
             }
             
         })
@@ -279,9 +280,7 @@ struct ContentView: View {
             Task {
                 try? await add(records: records)
                 
-                Task {
-                    await loadRecords()
-                }
+                    loadRecords()
                 
             }
             
@@ -294,10 +293,7 @@ struct ContentView: View {
             
             try? add(record: record)
             
-            Task {
-                await loadRecords()
-            }
-            
+            loadRecords()
         })
     }
 }
