@@ -58,7 +58,7 @@ struct ContentView: View {
             List {
                 ForEach(filteredRecords) { record in
                     
-                    let recordBalance = records.balances[record]!
+                    let recordBalance = records.balance(for: record)
                     
                         NavigationLink(
                             destination: RecordDetailView(record: record),

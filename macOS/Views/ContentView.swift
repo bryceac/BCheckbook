@@ -60,7 +60,7 @@ struct ContentView: View {
         List {
             ForEach(filteredRecords) { record in
                     
-                let recordBalance = records.balances[record]!
+                let recordBalance = records.balance(for: record)
                     
                 RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
                         Button("Delete") {
