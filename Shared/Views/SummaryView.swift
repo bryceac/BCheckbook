@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import QIF
 
 struct SummaryView: View {
     @StateObject var viewModel: SummaryViewModel = SummaryViewModel()
@@ -73,6 +74,37 @@ struct SummaryView: View {
             let categories = await retrieveCategories()
             
             viewModel.categories = categories
+        }
+    }
+    
+    func records(fromBCheck file: URL) async -> [Record] {
+        
+        guard let records = try? Record.load(from: file) else { return [] }
+        
+        return records
+    }
+    
+    func load(fromBCheck file: URL) {
+        Task {
+            let records = await records(fromBCheck: file)
+            
+            addRecords(records)
+        }
+    }
+    
+    func records(fromQIF file: URL) async -> [Record] {
+        guard let qif = try? QIF.load(from: file), let bank = qif.sections[QIFType.bank.rawValue] else { return [] }
+        
+        return bank.transactions.map {
+            Record(transaction: Event($0))
+        }
+    }
+    
+    func load(fromQIF file: URL) {
+        Task {
+            let records = await records(fromQIF: file)
+            
+            addRecords(records)
         }
     }
     
