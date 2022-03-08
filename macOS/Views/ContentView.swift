@@ -147,12 +147,12 @@ struct ContentView: View {
             default:
                 loadRecords(fromQIF: fileURL)
             }
-        }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions")
+        }.overlay(loadingOverlay.background(Color.black)).searchable(text: $query, prompt: "search transactions")
     }
     
     @ViewBuilder var loadingOverlay: some View {
         if isLoading {
-            ProgressView("loading data...").background(Color.black).tint(Color.white)
+            ProgressView("loading data...").tint(Color.white)
         }
     }
     
