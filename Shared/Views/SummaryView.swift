@@ -55,10 +55,12 @@ struct SummaryView: View {
         }.onAppear {
             loadCategories()
         }.onOpenURL { fileURL in
-            guard let records = try? Record.load(from: fileURL) else { return }
-            
-            addRecords(records)
-            loadCategories()
+            switch fileURL.pathExtension {
+            case "bcheck":
+                load(fromBCheck: fileURL)
+            default:
+                load(fromQIF: fileURL)
+            }
         }.overlay(loadingOverlay)
     }
     
