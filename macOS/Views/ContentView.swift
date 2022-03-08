@@ -172,8 +172,6 @@ struct ContentView: View {
             try? await add(records: loadedRecords)
             
             loadRecords()
-            
-            isLoading = false
         }
     }
     
@@ -198,8 +196,6 @@ struct ContentView: View {
             try? await add(records: loadedRecords)
             
             loadRecords()
-            
-            isLoading = false
         }
     }
     
@@ -212,10 +208,15 @@ struct ContentView: View {
     
     func loadRecords() {
         
+        if !isLoading {
+            isLoading.toggle()
+        }
+        
         Task {
             let storedRecords = await retrieveRecords()
             
             records.items = storedRecords
+            isLoading = false
         }
     }
     
