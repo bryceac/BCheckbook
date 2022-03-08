@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''Version:''' 1.1.1
+'''Version:''' 1.2
 
 '''Author:''' Bryce Campbell
 
@@ -17,6 +17,15 @@ This application has only been tested on macOS 11 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.2 (Both)</dt>
+<dd>
+<p>Minor update</p>
+<p>Data loading is now asynchronous, 
+due to 
+added support for importing and exporting 
+<abbr title="Quicken Interchange Format">QIF</a>, 
+which can add massive amounts of records.</p>
+</dd>
 <dt style="font-weight:bold">1.1.1 (Both)</dt>
 <dd>
 <p>Minor Patch</p>
@@ -88,9 +97,19 @@ such as multiple accounts and charts.</p>
 <dl>
 <dt style="font-weight:bold">Can I import my transactions from X?</dt>
 <dd>
-<p>I have been looking at a possibility of importing from GnuCash via CSV, but because of the way I modeled things and how many programs 
-and users have different ways of putting down notes for transactions, I decided it was not worth it to allow importing files from other apps at this time, 
-but you are definitely free to help me add in that functionality in future versions of the application.</p>
+<p>When I initially wrote this program, this was not possible, 
+and while I still kind of I stand by my reasoning for CSV support, 
+I decided I should support at least one more common format, 
+in case a family member who I know uses Quicken switches to my app.</p>
+<p>As such, it is possible to import transactions from QIF files, 
+but it is limited in comparison 
+to what the Quicken Interchange Formart allows, 
+especially because this app does not support multiple accounts, 
+nor does the library I use, 
+as all nonivestment and noninvoice transactions are grouped together 
+(e.g. all Bank transactions are listed together regardless of account).</p>
+<p>For best results, 
+I recommend starting off anew than trying to import via QIF.</p>
 </dd>
 </dl>
 </li>
@@ -177,6 +196,31 @@ and will automatically save changes to the database.</p>
 
 <p>As such, there is no need to manually load data in either version of the app.</p>
 
+====Importing QIF Files====
+
+Although this app supports importing and exporting QIF files, 
+as of version 1.2, there are some limitations.
+
+The most important to note, 
+aside from the fact that 
+they cannot be used to update existing entries, 
+is this app only imports things under the 
+<strong>!Type:Bank</strong> heading.
+
+While the library I am using will also pull in stuff 
+marked <strong>Cash</strong>, 
+<strong>CCard</strong>, 
+<strong>Oth A</strong>, 
+and <strong>Oth L</strong>, <strong>Bank</strong> is the only one accepted 
+because this application was only ever meant to track one account.
+
+Also, all <strong>dates must be in MM/DD/YYYY format</strong>. 
+This is a limitation of the library used 
+and is the only format I chose to accept.
+
+Any transactions not in MM/DD/YYYY format will not be seen,
+thus will not be imported into the application.
+
 ===Backing up Data===
 
 <p>Due to the iOS app and the Mac app being a bit more similiar, 
@@ -185,13 +229,23 @@ with the recent changes, there are two ways to back up data.</p>
 <ul>
 <li>backup the database file</li>
 <li>export transactions to a bcheck file</li>
+<li>export transactions to QIF (starting with version 1.2)</li>
 </ul>
 
-<p>Of the two options, the latter is recommended for most people, as the 
-database structure might change in the future.</p>
+<p>Of the three options, the latter two are recommended for most people, as the 
+database structure might change in the future, 
+and the latter most 
+<strong>should</strong> allow you to migrate to other applications if desired.</p>
 
 <p>However, if you wish to back up the database or access it, 
 it can be found in one of the following places, depending on platform:</p>
+
+<p>Of the two most recommended options, 
+<strong>bcheck</strong> will provide the best experience, 
+because everything is <strong>always</strong> imported with QIF 
+and there is no way to use them to update existing records, whereas 
+<strong>bcheck</strong> files provide enough 
+data to update existing transactions.</p> 
 
 <ul>
 <li>Application&#39;s Documents folder (iOS app)</li>
@@ -203,10 +257,10 @@ somewhere in your user&#39;s Library (macOS app)</li>
 
 As stated above, the iOS application and macOS application work similiarly in terms of data persistence.
 
-You can either transfer the database, or import a bcheck file.
+You can either transfer the database, import a bcheck file, or import a QIF file.
 
 While all transactions will not be loaded every time,
-like the initial versions, when importing the bcheck file, 
+like the initial versions, when importing a bcheck file, 
 it will update any existing listings 
 in addition to adding new transactions as of version 1.1.1, 
 making deleting the database unnecessary.
