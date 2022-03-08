@@ -83,10 +83,16 @@ struct SummaryView: View {
     
     func loadCategories() {
         
+        if !isLoading {
+            isLoading.toggle()
+        }
+        
         Task {
             let categories = await retrieveCategories()
             
             viewModel.categories = categories
+            
+            isLoading = false
         }
     }
     
@@ -98,10 +104,12 @@ struct SummaryView: View {
     }
     
     func load(fromBCheck file: URL) {
+        isLoading = true
         Task {
             let records = await records(fromBCheck: file)
             
             addRecords(records)
+            loadCategories()
         }
     }
     
@@ -114,10 +122,13 @@ struct SummaryView: View {
     }
     
     func load(fromQIF file: URL) {
+        
+        isLoading = true
         Task {
             let records = await records(fromQIF: file)
             
             addRecords(records)
+            loadCategories()
         }
     }
     
