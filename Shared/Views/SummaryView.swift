@@ -13,6 +13,8 @@ struct SummaryView: View {
     
     @State private var summaryRange: RecordPeriod = .all
     
+    @State private var isLoading = false
+    
     var body: some View {
         List {
             Section {
@@ -57,6 +59,17 @@ struct SummaryView: View {
             
             addRecords(records)
             loadCategories()
+        }.overlay(loadingOverlay)
+    }
+    
+    @ViewBuilder var loadingOverlay: some View {
+        
+        if isLoading {
+            ZStack {
+                Color.black
+                
+                ProgressView("loading data...").preferredColorScheme(.dark)
+            }
         }
     }
     
