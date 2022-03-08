@@ -157,7 +157,6 @@ struct ContentView: View {
             
             try? addRecords(loadedRecords)
             loadRecords()
-            isLoading = false
         }
     }
     
@@ -181,8 +180,6 @@ struct ContentView: View {
             
             try? addRecords(loadedRecords)
             loadRecords()
-            
-            isLoading = false
         }
     }
     
@@ -200,10 +197,25 @@ struct ContentView: View {
         }
     }
     
-    func loadRecords() {
-        guard let databaseManager = DB.shared.manager, let storedRecords = try? databaseManager.records(inRange: .all) else { return }
+    func retrieveRecords() async -> [Record] {
         
-        records.items = storedRecords
+        guard let databaseManager = DB.shared.manager, let storedRecords = try? databaseManager.records(inRange: .all) else { return [] }
+        
+        return storedRecords
+    }
+    
+    func loadRecords() {
+        if !isLoading {
+            isLoading.toggle()
+        }
+        
+        Task {
+            let storedRecords = await retrieveRecords()
+            
+            records.items = storedRecords
+            
+            isLoading = false
+        }
     }
     
     func addRecords(_ records: [Record]) throws {
