@@ -334,4 +334,11 @@ This app uses the following projects to help things run smoothly.
 to allow users to either add their own categories 
 or to select from the list of available categories.</p>
 </dd>
+<dt>
+<a href="https://github.com/bryceac/QIF">QIF</a>
+</dt>
+<dd>
+<p>Custom library used to parse and export 
+<abbr title="Quicken Interchange Format">QIF</abbr> files.</p>
+</dd>
 </dl>
