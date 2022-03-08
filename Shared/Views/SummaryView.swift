@@ -59,11 +59,21 @@ struct SummaryView: View {
         }
     }
     
-    func loadCategories() {
-        guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories else { return }
+    func retrieveCategories() async -> [String] {
+        guard let databaseManager = DB.shared.manager, var categories = databaseManager.categories else { return [] }
         
-        viewModel.categories = categories
-        viewModel.categories.append("Uncategorized")
+        categories.append("Uncategorized")
+        
+        return categories
+    }
+    
+    func loadCategories() {
+        
+        Task {
+            let categories = await retrieveCategories()
+            
+            viewModel.categories = categories
+        }
     }
     
     private func addRecords(_ records: [Record]) {
