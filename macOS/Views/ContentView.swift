@@ -152,7 +152,7 @@ struct ContentView: View {
     
     @ViewBuilder var loadingOverlay: some View {
         if isLoading {
-            ProgressView("Attempting to load data...")
+            ProgressView("loading data...")
         }
     }
     
