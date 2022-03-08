@@ -155,7 +155,7 @@ struct ContentView: View {
             ZStack {
                 Color.black
                 
-                ProgressView("loading data...").tint(Color.white).foregroundColor(Color.white)
+                ProgressView("loading data...").foregroundColor(Color.white).tint(Color.white)
             }
             
         }
