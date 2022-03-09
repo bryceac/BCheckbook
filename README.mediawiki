@@ -25,6 +25,8 @@ due to
 added support for importing and exporting 
 <abbr title="Quicken Interchange Format">QIF</a>, 
 which can add massive amounts of records.</p>
+
+<p>released March, 8, 2022</p>
 </dd>
 <dt style="font-weight:bold">1.1.1 (Both)</dt>
 <dd>
