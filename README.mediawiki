@@ -242,6 +242,12 @@ and the latter most
 <p>However, if you wish to back up the database or access it, 
 it can be found in one of the following places, depending on platform:</p>
 
+<ul>
+<li>Application&#39;s Documents folder (iOS app)</li>
+<li><strong>me.brycecampbell.bcheckbook</strong> folder 
+somewhere in your user&#39;s Library (macOS app)</li>
+</ul>
+
 <p>Of the two most recommended options, 
 <strong>bcheck</strong> will provide the best experience, 
 because everything is <strong>always</strong> imported with QIF 
@@ -249,11 +255,7 @@ and there is no way to use them to update existing records, whereas
 <strong>bcheck</strong> files provide enough 
 data to update existing transactions.</p> 
 
-<ul>
-<li>Application&#39;s Documents folder (iOS app)</li>
-<li><strong>me.brycecampbell.bcheckbook</strong> folder 
-somewhere in your user&#39;s Library (macOS app)</li>
-</ul>
+
 
 ===Transferring Data===
 
