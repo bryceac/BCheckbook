@@ -121,10 +121,6 @@ struct ContentView: View {
                     }
                 }
             }
-        }.fileExporter(isPresented: $isExportingToQIF, document: QIFDocument(records: records), contentType: .quickenInterchangeFormat, defaultFilename: "transactions") { result in
-            if case .success = result {
-                showSaveSuccessfulAlert = true
-            }
         }.onOpenURL { fileURL in
             switch fileURL.pathExtension {
             case "bcheck":

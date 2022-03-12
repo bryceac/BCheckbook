@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UniformTypeIdentifiers
 
 class Records: ObservableObject {
     @Published var items: [Record] {
@@ -30,12 +31,7 @@ class Records: ObservableObject {
         }
     }
     
-    /* var balances: [Record: Double] {
-        return sortedRecords.reduce(into: [Record: Double]()) { balances, record in
-            guard let databaseManager = DB.shared.manager else { return }
-            balances[record] = try? databaseManager.balance(for: record)
-        }
-    } */
+    var exportFormat: UTType? = nil
     
     
     init(withRecords records: [Record] = []) {
