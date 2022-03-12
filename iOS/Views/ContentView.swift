@@ -71,7 +71,7 @@ struct ContentView: View {
                     Menu(content: {
                         Button("Export Transactions") {
                             
-                            records.exportFormat = .bcheckFiles
+                            records.exportFormat = .bcheckFile
                             
                             isExporting = true
                         }
@@ -110,11 +110,11 @@ struct ContentView: View {
             }
         } message: {
             Text("Transactions were successfully exported.")
-        }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: .bcheckFiles, defaultFilename: "transactions") { result in
+        }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: records.exportFormat!, defaultFilename: "transactions") { result in
             if case .success = result {
                 showSaveSuccessfulAlert = true
             }
-        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFiles, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
+        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFile, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
             if case .success = result {
                 if let file = try? result.get().first {
                     
