@@ -110,7 +110,7 @@ struct ContentView: View {
             }
         } message: {
             Text("Transactions were successfully exported.")
-        }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: records.exportFormat!, defaultFilename: "transactions") { result in
+        }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: records.exportFormat ?? .bcheckFile, defaultFilename: "transactions") { result in
             if case .success = result {
                 showSaveSuccessfulAlert = true
             }

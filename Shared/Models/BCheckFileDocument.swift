@@ -72,7 +72,7 @@ class BCheckFileDocument: ReferenceFileDocument {
         var fileWrapper = FileWrapper()
         
         switch configuration.contentType {
-        case .bcheckFiles:
+        case .bcheckFile:
             if let JSON_DATA = records.sortedRecords.data {
                 fileWrapper = FileWrapper(regularFileWithContents: JSON_DATA)
             }
