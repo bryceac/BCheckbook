@@ -71,16 +71,18 @@ class BCheckFileDocument: ReferenceFileDocument {
         
         var fileWrapper = FileWrapper()
         
-        if configuration.contentType == UTType.bcheckFiles {
+        switch configuration.contentType {
+        case .bcheckFiles:
             if let JSON_DATA = records.sortedRecords.data {
                 fileWrapper = FileWrapper(regularFileWithContents: JSON_DATA)
             }
-        } else {
+        case .quickenInterchangeFormat:
             let qif = generateQIF()
             
             if let qifData = "\(qif)".data(using: .utf8) {
                 fileWrapper = FileWrapper(regularFileWithContents: qifData)
             }
+        default: ()
         }
         
         return fileWrapper
