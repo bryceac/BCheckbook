@@ -7,6 +7,7 @@
 
 import SwiftUI
 import QIF
+import UniformTypeIdentifiers
 
 struct ContentView: View {
     @Environment(\.undoManager) var undoManager
@@ -15,7 +16,6 @@ struct ContentView: View {
     
     @State private var isImporting = false
     @State private var isExporting = false
-    @State private var isExportingToQIF = false
     
     @State private var isLoading = false
     
@@ -79,11 +79,16 @@ struct ContentView: View {
                     }
                     
                     Button("Export Transactions") {
+                        
+                        records.exportFormat = .bcheckFile
+                        
                         isExporting = true
                     }
                     
                     Button("Export Transactions to QIF") {
-                        isExportingToQIF = true
+                        records.exportFormat = .quickenInterchangeFormat
+                        
+                        isExporting = true
                     }
                     
                     Button("View Summary") {
@@ -116,13 +121,13 @@ struct ContentView: View {
             }
         } message: {
             Text("Transactions were exported successfully")
-        }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: .bcheckFiles, defaultFilename: "transactions") { result in
+        }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: records.exportFormat ?? UTType.bcheckFile, defaultFilename: "transactions") { result in
             if case .success = result {
                 DispatchQueue.main.async {
                     showSuccessfulExportAlert = true
                 }
             }
-        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFiles, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
+        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFile, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
             if case .success = result {
                 if let file = try? result.get().first {
                     
@@ -132,12 +137,6 @@ struct ContentView: View {
                     default:
                         loadRecords(fromQIF: file)
                     }
-                }
-            }
-        }.fileExporter(isPresented: $isExportingToQIF, document: QIFDocument(records: records), contentType: .quickenInterchangeFormat, defaultFilename: "transactions") { result in
-            if case .success = result {
-                DispatchQueue.main.async {
-                    showSuccessfulExportAlert = true
                 }
             }
         }.onOpenURL { fileURL in
