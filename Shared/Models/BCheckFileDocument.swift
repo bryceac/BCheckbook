@@ -12,7 +12,7 @@ import QIF
 import SQLite
 
 extension UTType {
-    static var bcheckFiles: UTType {
+    static var bcheckFile: UTType {
         UTType(importedAs: "me.brycecampbell.bcheck")
     }
     
@@ -24,7 +24,7 @@ extension UTType {
 class BCheckFileDocument: ReferenceFileDocument {
     
     
-    static var readableContentTypes: [UTType] = [.bcheckFiles, .quickenInterchangeFormat]
+    static var readableContentTypes: [UTType] = [.bcheckFile, .quickenInterchangeFormat]
     
     var records: Records = Records()
     

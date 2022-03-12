@@ -14,7 +14,6 @@ struct ContentView: View {
     
     @State private var isExporting = false
     @State private var isImporting = false
-    @State private var isExportingToQIF = false
     
     @State private var isLoading = false
     
@@ -71,11 +70,17 @@ struct ContentView: View {
                     
                     Menu(content: {
                         Button("Export Transactions") {
+                            
+                            records.exportFormat = .bcheckFiles
+                            
                             isExporting = true
                         }
                         
                         Button("Export Transactions to QIF") {
-                            isExportingToQIF = true
+                            
+                            records.exportFormat = .quickenInterchangeFormat
+                            
+                            isExporting = true
                         }
                         
                         Button("Import Transactions") {
