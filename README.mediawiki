@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''Version:''' 1.2
+'''Version:''' 1.2.1
 
 '''Author:''' Bryce Campbell
 
@@ -12,11 +12,18 @@
 
 ==Notes==
 
-This application has only been tested on macOS 11 and iOS 15.
+This application has only been tested on macOS 12 and iOS 15.
 
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.2.1 (Both)</dt>
+<dd>
+<p>Bug fix</p>
+<p>fix bug that occurs when trying to export to a bcheck file, 
+by merging BCheckFileDocument and QIFDocument, making only one 
+<strong>fileExporter()</strong> instance necessary.</p>
+</dd>
 <dt style="font-weight:bold">1.2 (Both)</dt>
 <dd>
 <p>Minor update</p>
