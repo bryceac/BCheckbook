@@ -23,6 +23,7 @@ This application has only been tested on macOS 12 and iOS 15.
 <p>fix bug that occurs when trying to export to a bcheck file, 
 by merging BCheckFileDocument and QIFDocument, making only one 
 <strong>fileExporter()</strong> instance necessary.</p>
+<p>Released March 13, 2022.</p>
 </dd>
 <dt style="font-weight:bold">1.2 (Both)</dt>
 <dd>
@@ -32,7 +33,6 @@ due to
 added support for importing and exporting 
 <abbr title="Quicken Interchange Format">QIF</a>, 
 which can add massive amounts of records.</p>
-
 <p>released March, 8, 2022</p>
 </dd>
 <dt style="font-weight:bold">1.1.1 (Both)</dt>
