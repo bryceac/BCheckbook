@@ -13,7 +13,7 @@ struct RecordView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Text(Event.DF.string(from: record.event.date)).frame(alignment: .center)
+            Text(Event.DF.string(from: record.event.date))
                 
             if let checkNumber = record.event.checkNumber {
                 HStack {
