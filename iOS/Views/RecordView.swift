@@ -13,19 +13,18 @@ struct RecordView: View {
     
     var body: some View {
         VStack {
-            VStack {
-                Text(Event.DF.string(from: record.event.date))
+            Text(Event.DF.string(from: record.event.date))
                 
-                if let checkNumber = record.event.checkNumber {
+            if let checkNumber = record.event.checkNumber {
                     Text("\(checkNumber)")
-                }
+            }
                 
-                Text(record.event.isReconciled ? "Y" : "N")
+            Text(record.event.isReconciled ? "Y" : "N")
                 
-                Text(record.event.vendor)
-                Text(record.event.memo)
+            Text(record.event.vendor)
+            Text(record.event.memo)
                 
-                switch record.event.type {
+            switch record.event.type {
                 case .deposit:
                     if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                         Text(value)
@@ -38,11 +37,10 @@ struct RecordView: View {
                     if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                         Text(value)
                     }
-                }
+            }
                 
-                if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
-                    Text(VALUE)
-                }
+            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
+                Text(VALUE)
             }
             
             Text(record.event.category ?? "Uncategorized")
