@@ -16,7 +16,10 @@ struct RecordView: View {
             Text(Event.DF.string(from: record.event.date))
                 
             if let checkNumber = record.event.checkNumber {
+                HStack {
+                    Text("Check #")
                     Text("\(checkNumber)")
+                }
             }
                 
             Text(record.event.isReconciled ? "Y" : "N")
