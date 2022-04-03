@@ -21,32 +21,67 @@ struct RecordView: View {
                     Text("\(checkNumber)")
                 }
             }
+            
+            HStack {
+                Text("Reconciled?")
+                Text(record.event.isReconciled ? "Y" : "N")
+            }
+            
                 
-            Text(record.event.isReconciled ? "Y" : "N")
-                
-            Text(record.event.vendor)
-            Text(record.event.memo)
+            HStack {
+                Text("Vendor:")
+                Text(record.event.vendor)
+            }
+            
+            HStack {
+                Text("Memo:")
+                Text(record.event.memo)
+            }
+            
                 
             switch record.event.type {
                 case .deposit:
-                    if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
-                        Text(value)
-                    }
-                    
-                    Text("N/A")
-                case .withdrawal:
-                    Text("N/A")
-                    
-                    if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
-                        Text(value)
-                    }
-            }
                 
-            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
-                Text(VALUE)
+                    HStack {
+                        Text("Credit:")
+                        if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
+                            Text(value)
+                        }
+                    }
+                
+                    HStack {
+                        Text("Withdrawal:")
+                        Text("N/A")
+                    }
+                    
+                    
+                    
+                case .withdrawal:
+                HStack {
+                    Text("Credit:")
+                    Text("N/A")
+                }
+            
+                HStack {
+                    Text("Withdrawal:")
+                    if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
+                        Text(value)
+                    }
+                }
             }
             
-            Text(record.event.category ?? "Uncategorized")
+            HStack {
+                Text("Balance:")
+                if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
+                    Text(VALUE)
+                }
+            }
+            
+            HStack {
+                Text("Category:")
+                Text(record.event.category ?? "Uncategorized")
+            }
+            
         }
     }
 }
