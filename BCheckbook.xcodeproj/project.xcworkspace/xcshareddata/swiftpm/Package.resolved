@@ -1,34 +1,32 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "ComboBox",
-        "repositoryURL": "https://github.com/bryceac/ComboBox",
-        "state": {
-          "branch": null,
-          "revision": "2c567d4293090301f56e1620c7ae5539995d7ec9",
-          "version": "0.1.0"
-        }
-      },
-      {
-        "package": "QIF",
-        "repositoryURL": "https://github.com/bryceac/QIF",
-        "state": {
-          "branch": null,
-          "revision": "0f43d5aaed50b2e64cab7068efb7aba31399a1fc",
-          "version": "0.1.2"
-        }
-      },
-      {
-        "package": "SQLite.swift",
-        "repositoryURL": "https://github.com/stephencelis/SQLite.swift",
-        "state": {
-          "branch": null,
-          "revision": "5f5ad81ac0d0a0f3e56e39e646e8423c617df523",
-          "version": "0.13.2"
-        }
+  "pins" : [
+    {
+      "identity" : "combobox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bryceac/ComboBox",
+      "state" : {
+        "revision" : "bc137e5aadf35fdd76709a9b86ac30ae6406c882",
+        "version" : "0.1.1"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "qif",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bryceac/QIF",
+      "state" : {
+        "revision" : "0f43d5aaed50b2e64cab7068efb7aba31399a1fc",
+        "version" : "0.1.2"
+      }
+    },
+    {
+      "identity" : "sqlite.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stephencelis/SQLite.swift",
+      "state" : {
+        "revision" : "4d543d811ee644fa4cc4bfa0be996b4dd6ba0f54",
+        "version" : "0.13.3"
+      }
+    }
+  ],
+  "version" : 2
 }

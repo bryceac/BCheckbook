@@ -91,7 +91,7 @@ struct ContentView: View {
                     })
                 }
                 ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
-                    Button("+") {
+                    Button(action: {
                         let record = Record()
                         
                         records.add(record)
@@ -99,6 +99,8 @@ struct ContentView: View {
                         if let databaseManager = DB.shared.manager {
                             try? databaseManager.add(record: record)
                         }
+                    }) {
+                        Image(systemName: "plus")
                     }
                 }
             })
