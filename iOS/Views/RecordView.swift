@@ -12,7 +12,7 @@ struct RecordView: View {
     var balance: Double = 0
     
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             Text(Event.DF.string(from: record.event.date))
                 
             if let checkNumber = record.event.checkNumber {
