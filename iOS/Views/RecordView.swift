@@ -13,7 +13,7 @@ struct RecordView: View {
     
     var body: some View {
         VStack {
-            HStack {
+            VStack {
                 Text(Event.DF.string(from: record.event.date))
                 
                 if let checkNumber = record.event.checkNumber {
@@ -22,10 +22,8 @@ struct RecordView: View {
                 
                 Text(record.event.isReconciled ? "Y" : "N")
                 
-                VStack {
-                    Text(record.event.vendor)
-                    Text(record.event.memo)
-                }
+                Text(record.event.vendor)
+                Text(record.event.memo)
                 
                 switch record.event.type {
                 case .deposit:
@@ -47,9 +45,7 @@ struct RecordView: View {
                 }
             }
             
-            HStack {
-                Text(record.event.category ?? "Uncategorized")
-            }.padding()
+            Text(record.event.category ?? "Uncategorized")
         }
     }
 }
