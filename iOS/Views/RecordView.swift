@@ -23,18 +23,18 @@ struct RecordView: View {
             }
             
             HStack {
-                Text("Reconciled?").bold()
+                Text("Reconciled").bold()
                 Text(record.event.isReconciled ? "Y" : "N")
             }
             
                 
             HStack {
-                Text("Vendor:").bold()
+                Text("Vendor").bold()
                 Text(!record.event.vendor.isEmpty ? record.event.vendor : "N/A")
             }
             
             HStack {
-                Text("Memo:").bold()
+                Text("Memo").bold()
                 Text(!record.event.memo.isEmpty ? record.event.memo : "N/A")
             }
             
@@ -43,14 +43,14 @@ struct RecordView: View {
                 case .deposit:
                 
                     HStack {
-                        Text("Credit:").bold()
+                        Text("Credit").bold()
                         if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                             Text(value)
                         }
                     }
                 
                     HStack {
-                        Text("Withdrawal:").bold()
+                        Text("Withdrawal").bold()
                         Text("N/A")
                     }
                     
@@ -58,12 +58,12 @@ struct RecordView: View {
                     
                 case .withdrawal:
                 HStack {
-                    Text("Credit:").bold()
+                    Text("Credit").bold()
                     Text("N/A")
                 }
             
                 HStack {
-                    Text("Withdrawal:").bold()
+                    Text("Withdrawal").bold()
                     if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                         Text(value)
                     }
@@ -71,14 +71,14 @@ struct RecordView: View {
             }
             
             HStack {
-                Text("Balance:").bold()
+                Text("Balance").bold()
                 if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
                     Text(VALUE)
                 }
             }
             
             HStack {
-                Text("Category:").bold()
+                Text("Category").bold()
                 Text(record.event.category ?? "Uncategorized")
             }
             
