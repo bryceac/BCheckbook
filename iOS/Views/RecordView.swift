@@ -88,6 +88,7 @@ struct RecordView: View {
             
             HStack {
                 Text("Category").bold()
+                Spacer()
                 Text(record.event.category ?? "Uncategorized")
             }
             
