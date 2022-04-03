@@ -13,28 +13,32 @@ struct RecordView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Text(Event.DF.string(from: record.event.date))
+            Text(Event.DF.string(from: record.event.date)).frame(alignment: .center)
                 
             if let checkNumber = record.event.checkNumber {
                 HStack {
                     Text("Check #").bold()
+                    Spacer()
                     Text("\(checkNumber)")
                 }
             }
             
             HStack {
                 Text("Reconciled").bold()
+                Spacer()
                 Text(record.event.isReconciled ? "Y" : "N")
             }
             
                 
             HStack {
                 Text("Vendor").bold()
+                Spacer()
                 Text(!record.event.vendor.isEmpty ? record.event.vendor : "N/A")
             }
             
             HStack {
                 Text("Memo").bold()
+                Spacer()
                 Text(!record.event.memo.isEmpty ? record.event.memo : "N/A")
             }
             
@@ -44,6 +48,7 @@ struct RecordView: View {
                 
                     HStack {
                         Text("Credit").bold()
+                        Spacer()
                         if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                             Text(value)
                         }
@@ -51,6 +56,7 @@ struct RecordView: View {
                 
                     HStack {
                         Text("Withdrawal").bold()
+                        Spacer()
                         Text("N/A")
                     }
                     
@@ -59,11 +65,13 @@ struct RecordView: View {
                 case .withdrawal:
                 HStack {
                     Text("Credit").bold()
+                    Spacer()
                     Text("N/A")
                 }
             
                 HStack {
                     Text("Withdrawal").bold()
+                    Spacer()
                     if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                         Text(value)
                     }
@@ -72,6 +80,7 @@ struct RecordView: View {
             
             HStack {
                 Text("Balance").bold()
+                Spacer()
                 if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
                     Text(VALUE)
                 }
