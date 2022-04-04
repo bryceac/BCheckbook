@@ -28,10 +28,7 @@ struct RecordView: View {
             if !record.event.memo.isEmpty {
                     Text(!record.event.memo.isEmpty ? record.event.memo : "N/A")
                 }
-            }
             
-            
-                
             switch record.event.type {
                 case .deposit:
                 
@@ -51,12 +48,13 @@ struct RecordView: View {
                     }
             }
         
-        if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
+            if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
                     Text(VALUE)
-        }
+            }
             
-        if let _ = record.event.category {
+            if let _ = record.event.category {
                     Image(systemName: "folder")
+            }
         }
     }
 }
