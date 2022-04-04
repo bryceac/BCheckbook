@@ -34,11 +34,14 @@ struct RecordView: View {
                 Text(!record.event.vendor.isEmpty ? record.event.vendor : "N/A")
             }
             
-            HStack {
-                Text("Memo").bold()
-                Spacer()
-                Text(!record.event.memo.isEmpty ? record.event.memo : "N/A")
+            if !record.event.memo.isEmpty {
+                HStack {
+                    Image(systemName: "note.text")
+                    Spacer()
+                    Text(!record.event.memo.isEmpty ? record.event.memo : "N/A")
+                }
             }
+            
             
                 
             switch record.event.type {
@@ -84,11 +87,14 @@ struct RecordView: View {
                 }
             }
             
-            HStack {
-                Text("Category").bold()
-                Spacer()
-                Text(record.event.category ?? "Uncategorized")
+            if let category = record.event.category {
+                HStack {
+                    Text("Category").bold()
+                    Spacer()
+                    Text(category)
+                }
             }
+            
             
         }
     }
