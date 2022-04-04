@@ -16,28 +16,16 @@ struct RecordView: View {
             Text(Event.DF.string(from: record.event.date))
                 
             if let checkNumber = record.event.checkNumber {
-                HStack {
-                    Text("Check #").bold()
-                    Spacer()
                     Text("\(checkNumber)")
-                }
             }
             
             if record.event.isReconciled {
                 Image(systemName: "checkmark")
             }
             
-                
-            HStack {
-                Text("Vendor").bold()
-                Spacer()
-                Text(!record.event.vendor.isEmpty ? record.event.vendor : "N/A")
-            }
+            Text(!record.event.vendor.isEmpty ? record.event.vendor : "N/A")
             
             if !record.event.memo.isEmpty {
-                HStack {
-                    Text("Memo").bold()
-                    Spacer()
                     Text(!record.event.memo.isEmpty ? record.event.memo : "N/A")
                 }
             }
@@ -47,51 +35,28 @@ struct RecordView: View {
             switch record.event.type {
                 case .deposit:
                 
-                    HStack {
-                        Text("Credit").bold()
-                        Spacer()
-                        if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
+                    if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                             Text(value)
-                        }
-                    }
-                
-                    HStack {
-                        Text("Withdrawal").bold()
-                        Spacer()
+                    } else {
                         Text("N/A")
                     }
                     
                     
                     
                 case .withdrawal:
-                HStack {
-                    Text("Credit").bold()
-                    Spacer()
                     Text("N/A")
-                }
-            
-                HStack {
-                    Text("Withdrawal").bold()
-                    Spacer()
+                
                     if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                         Text(value)
                     }
-                }
             }
-            
-            HStack {
-                Text("Balance").bold()
-                Spacer()
-                if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
+        
+        if let VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: balance)) {
                     Text(VALUE)
-                }
-            }
+        }
             
-            if let _ = record.event.category {
+        if let _ = record.event.category {
                     Image(systemName: "folder")
-            }
-            
-            
         }
     }
 }
