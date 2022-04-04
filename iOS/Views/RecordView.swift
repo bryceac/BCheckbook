@@ -50,8 +50,8 @@ struct RecordView: View {
                     Text(VALUE)
             }
             
-            if let _ = record.event.category {
-                    Image(systemName: "folder")
+            if let category = record.event.category {
+                    Text(category)
             }
         }
     }
