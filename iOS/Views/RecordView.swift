@@ -36,7 +36,7 @@ struct RecordView: View {
             
             if !record.event.memo.isEmpty {
                 HStack {
-                    Image(systemName: "note.text")
+                    Text("Memo").bold()
                     Spacer()
                     Text(!record.event.memo.isEmpty ? record.event.memo : "N/A")
                 }
