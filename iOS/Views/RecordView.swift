@@ -34,11 +34,9 @@ struct RecordView: View {
                 
                     if let value = Event.CURRENCY_FORMAT.string(from: record.event.amount as NSNumber) {
                             Text(value)
-                    } else {
-                        Text("N/A")
                     }
                     
-                    
+                    Text("N/A")
                     
                 case .withdrawal:
                     Text("N/A")
