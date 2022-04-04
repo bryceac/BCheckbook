@@ -23,10 +23,8 @@ struct RecordView: View {
                 }
             }
             
-            HStack {
-                Text("Reconciled").bold()
-                Spacer()
-                Text(record.event.isReconciled ? "Y" : "N")
+            if record.event.isReconciled {
+                Image(systemName: "checkmark")
             }
             
                 
