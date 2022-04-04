@@ -89,7 +89,7 @@ struct RecordView: View {
             
             if let category = record.event.category {
                 HStack {
-                    Text("Category").bold()
+                    Image(systemName: "folder")
                     Spacer()
                     Text(category)
                 }
