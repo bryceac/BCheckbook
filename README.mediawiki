@@ -1,6 +1,7 @@
 =BCheckbook=
 
-'''Version:''' 1.2.1
+'''iOS Version:''' 1.2.2
+'''macOS Version:''' 1.2.1
 
 '''Author:''' Bryce Campbell
 
@@ -17,6 +18,14 @@ This application has only been tested on macOS 12 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.2.2 (iOS)</dt>
+<dd>
+<p>UI tweaks</p>
+<p>change add button&39;s label to a system provided image, 
+making it easier to add transactions, 
+and make Record views display details vertically, 
+which fixes things getting cut off.</p>
+</dd>
 <dt style="font-weight:bold">1.2.1 (Both)</dt>
 <dd>
 <p>Bug fix</p>
