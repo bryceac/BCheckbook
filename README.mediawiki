@@ -26,6 +26,7 @@ This application has only been tested on macOS 12 and iOS 15.
 making it easier to add transactions, 
 and make Record views display details vertically, 
 which fixes things getting cut off.</p>
+<p>Released April 4, 2022</p>
 </dd>
 <dt style="font-weight:bold">1.2.1 (Both)</dt>
 <dd>
