@@ -97,10 +97,10 @@ struct ContentView: View {
                             
                             records.add(record)
                             
+                            proxy.scrollTo(record.id)
+                            
                             if let databaseManager = DB.shared.manager {
                                 try? databaseManager.add(record: record)
-                                
-                                proxy.scrollTo(record.id, anchor: .top)
                             }
                         }) {
                             Image(systemName: "plus")
