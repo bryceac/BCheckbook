@@ -64,7 +64,7 @@ struct ContentView: View {
                                 destination: RecordDetailView(record: record),
                                 label: {
                                     RecordView(record: record, balance: recordBalance)
-                                })
+                                }).id(record.id)
                     }.onDelete(perform: delete)
                 }.toolbar(content: {
                     ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
