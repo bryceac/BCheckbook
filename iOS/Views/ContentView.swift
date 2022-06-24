@@ -101,6 +101,8 @@ struct ContentView: View {
                             
                             if let databaseManager = DB.shared.manager {
                                 try? databaseManager.add(record: record)
+                                
+                                newestRecord = record.id
                             }
                         }) {
                             Image(systemName: "plus")
