@@ -109,7 +109,7 @@ struct ContentView: View {
                         }
                     }
                 }).onChange(of: newestRecord) { record in
-                    proxy.scrollTo(newestRecord, anchor: .top)
+                    proxy.scrollTo(newestRecord)
                 }
             }
         }.onAppear() {
