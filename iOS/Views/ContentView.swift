@@ -54,56 +54,60 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(filteredRecords) { record in
-                    
-                    let recordBalance = records.balance(for: record)
-                    
-                        NavigationLink(
-                            destination: RecordDetailView(record: record),
-                            label: {
-                                RecordView(record: record, balance: recordBalance)
-                            })
-                }.onDelete(perform: delete)
-            }.toolbar(content: {
-                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
-                    
-                    Menu(content: {
-                        Button("Export Transactions") {
-                            
-                            records.exportFormat = .bcheckFile
-                            
-                            isExporting = true
-                        }
+            ScrollViewReader { proxy in
+                List {
+                    ForEach(filteredRecords) { record in
                         
-                        Button("Export Transactions to QIF") {
+                        let recordBalance = records.balance(for: record)
+                        
+                            NavigationLink(
+                                destination: RecordDetailView(record: record),
+                                label: {
+                                    RecordView(record: record, balance: recordBalance)
+                                })
+                    }.onDelete(perform: delete)
+                }.toolbar(content: {
+                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) {
+                        
+                        Menu(content: {
+                            Button("Export Transactions") {
+                                
+                                records.exportFormat = .bcheckFile
+                                
+                                isExporting = true
+                            }
                             
-                            records.exportFormat = .quickenInterchangeFormat
+                            Button("Export Transactions to QIF") {
+                                
+                                records.exportFormat = .quickenInterchangeFormat
+                                
+                                isExporting = true
+                            }
                             
-                            isExporting = true
-                        }
-                        
-                        Button("Import Transactions") {
-                            isImporting = true
-                        }
-                    }, label: {
-                        Text("Options")
-                    })
-                }
-                ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
-                    Button(action: {
-                        let record = Record()
-                        
-                        records.add(record)
-                        
-                        if let databaseManager = DB.shared.manager {
-                            try? databaseManager.add(record: record)
-                        }
-                    }) {
-                        Image(systemName: "plus")
+                            Button("Import Transactions") {
+                                isImporting = true
+                            }
+                        }, label: {
+                            Text("Options")
+                        })
                     }
-                }
-            })
+                    ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
+                        Button(action: {
+                            let record = Record()
+                            
+                            records.add(record)
+                            
+                            if let databaseManager = DB.shared.manager {
+                                try? databaseManager.add(record: record)
+                                
+                                proxy.scrollTo(record.id)
+                            }
+                        }) {
+                            Image(systemName: "plus")
+                        }
+                    }
+                })
+            }
         }.onAppear() {
             loadRecords()
         }.alert("Export Successful", isPresented: $showSaveSuccessfulAlert) {
