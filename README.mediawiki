@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''iOS Version:''' 1.2.2
+'''iOS Version:''' 1.2.3
 
 '''macOS Version:''' 1.2.1
 
@@ -19,6 +19,10 @@ This application has only been tested on macOS 12 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.2.3 (iOS)</dt>
+<dd>
+<p>Make app autoscroll to new item, making it quick and easy to modify new entry.</p>
+</dd>
 <dt style="font-weight:bold">1.2.2 (iOS)</dt>
 <dd>
 <p>UI tweaks</p>
