@@ -21,6 +21,8 @@ struct ContentView: View {
     
     @State private var query = ""
     
+    @State var newestRecord: String? = nil
+    
     var filteredRecords: [Record] {
         guard !query.isEmpty else { return records.sortedRecords }
         
@@ -97,8 +99,6 @@ struct ContentView: View {
                             
                             records.add(record)
                             
-                            proxy.scrollTo(record.id, anchor: .top)
-                            
                             if let databaseManager = DB.shared.manager {
                                 try? databaseManager.add(record: record)
                             }
@@ -106,7 +106,9 @@ struct ContentView: View {
                             Image(systemName: "plus")
                         }
                     }
-                })
+                }).onChange(of: newestRecord) { record in
+                    proxy.scrollTo(newestRecord, anchor: .top)
+                }
             }
         }.onAppear() {
             loadRecords()
