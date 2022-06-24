@@ -97,7 +97,7 @@ struct ContentView: View {
                             
                             records.add(record)
                             
-                            proxy.scrollTo(record.id)
+                            proxy.scrollTo(record.id, anchor: .top)
                             
                             if let databaseManager = DB.shared.manager {
                                 try? databaseManager.add(record: record)
