@@ -57,96 +57,98 @@ struct ContentView: View {
     }
     
     var body: some View {
-        /* List {
-            ForEach(filteredRecords) { record in
+        ScrollViewReader { proxy in
+            List {
+                ForEach(filteredRecords) { record in
+                        
+                    let recordBalance = records.balance(for: record)
+                        
+                    RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
+                            Button("Delete") {
+                                try? remove(record: record)
+                                
+                                loadRecords()
+                            }
+                        }))
+                    }
+            }.toolbar(content: {
+                ToolbarItem(placement: ToolbarItemPlacement.principal) {
                     
-                let recordBalance = records.balance(for: record)
-                    
-                RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
-                        Button("Delete") {
-                            try? remove(record: record)
-                            
-                            loadRecords()
+                    Menu(content: {
+                        Button("Import Transactions") {
+                            isImporting = true
                         }
-                    }))
-                }
-        }.toolbar(content: {
-            ToolbarItem(placement: ToolbarItemPlacement.principal) {
-                
-                Menu(content: {
-                    Button("Import Transactions") {
-                        isImporting = true
-                    }
-                    
-                    Button("Export Transactions") {
                         
-                        records.exportFormat = .bcheckFile
+                        Button("Export Transactions") {
+                            
+                            records.exportFormat = .bcheckFile
+                            
+                            isExporting = true
+                        }
                         
-                        isExporting = true
-                    }
-                    
-                    Button("Export Transactions to QIF") {
-                        records.exportFormat = .quickenInterchangeFormat
+                        Button("Export Transactions to QIF") {
+                            records.exportFormat = .quickenInterchangeFormat
+                            
+                            isExporting = true
+                        }
                         
-                        isExporting = true
-                    }
+                        Button("View Summary") {
+                            let summaryURL = URL(string: "bcheckbook://summary")!
+                            
+                            openURL(summaryURL)
+                        }
+                    }, label: {
+                        Text("Options")
+                    })
                     
-                    Button("View Summary") {
-                        let summaryURL = URL(string: "bcheckbook://summary")!
+                }
+                ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
+                    Button("+") {
+                        let RECORD = Record()
                         
-                        openURL(summaryURL)
-                    }
-                }, label: {
-                    Text("Options")
-                })
-                
-            }
-            ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
-                Button("+") {
-                    let RECORD = Record()
-                    
-                    try? add(record: RECORD)
-                    
-                    loadRecords()
-                    
-                }
-            }
-        }).onAppear(perform: {
-            loadRecords()
-        }).alert("Export Successful", isPresented: $showSuccessfulExportAlert) {
-            Button("Ok") {
-                DispatchQueue.main.async {
-                    showSuccessfulExportAlert = false
-                }
-            }
-        } message: {
-            Text("Transactions were exported successfully")
-        }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: records.exportFormat ?? UTType.bcheckFile, defaultFilename: "transactions") { result in
-            if case .success = result {
-                DispatchQueue.main.async {
-                    showSuccessfulExportAlert = true
-                }
-            }
-        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFile, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
-            if case .success = result {
-                if let file = try? result.get().first {
-                    
-                    switch file.pathExtension {
-                    case "bcheck":
-                        loadRecords(fromBCheck: file)
-                    default:
-                        loadRecords(fromQIF: file)
+                        try? add(record: RECORD)
+                        
+                        loadRecords()
+                        
                     }
                 }
-            }
-        }.onOpenURL { fileURL in
-            switch fileURL.pathExtension {
-            case "bcheck":
-                loadRecords(fromBCheck: fileURL)
-            default:
-                loadRecords(fromQIF: fileURL)
-            }
-        }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions") */
+            }).onAppear(perform: {
+                loadRecords()
+            }).alert("Export Successful", isPresented: $showSuccessfulExportAlert) {
+                Button("Ok") {
+                    DispatchQueue.main.async {
+                        showSuccessfulExportAlert = false
+                    }
+                }
+            } message: {
+                Text("Transactions were exported successfully")
+            }.fileExporter(isPresented: $isExporting, document: BCheckFileDocument(records: records), contentType: records.exportFormat ?? UTType.bcheckFile, defaultFilename: "transactions") { result in
+                if case .success = result {
+                    DispatchQueue.main.async {
+                        showSuccessfulExportAlert = true
+                    }
+                }
+            }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFile, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
+                if case .success = result {
+                    if let file = try? result.get().first {
+                        
+                        switch file.pathExtension {
+                        case "bcheck":
+                            loadRecords(fromBCheck: file)
+                        default:
+                            loadRecords(fromQIF: file)
+                        }
+                    }
+                }
+            }.onOpenURL { fileURL in
+                switch fileURL.pathExtension {
+                case "bcheck":
+                    loadRecords(fromBCheck: fileURL)
+                default:
+                    loadRecords(fromQIF: fileURL)
+                }
+            }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions")
+        }
     }
     
     @ViewBuilder var loadingOverlay: some View {
