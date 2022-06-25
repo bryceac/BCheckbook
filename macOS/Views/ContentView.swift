@@ -25,6 +25,8 @@ struct ContentView: View {
     
     @State private var query = ""
     
+    @State private var newestRecord: String? = nil
+    
     var filteredRecords: [Record] {
         guard !query.isEmpty else { return records.sortedRecords }
         
