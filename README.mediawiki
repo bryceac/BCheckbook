@@ -2,7 +2,7 @@
 
 '''iOS Version:''' 1.2.3
 
-'''macOS Version:''' 1.2.1
+'''macOS Version:''' 1.2.2
 
 '''Author:''' Bryce Campbell
 
@@ -19,9 +19,14 @@ This application has only been tested on macOS 12 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.2.2 (macOS)</dt>
+<dd>
+<p>add autoscroll to new item to macOS app, to allow it to operate like iOS app.</p>
+</dd>
 <dt style="font-weight:bold">1.2.3 (iOS)</dt>
 <dd>
 <p>Make app autoscroll to new item, making it quick and easy to modify new entry.</p>
+<p>Released June 24, 2022</p>
 </dd>
 <dt style="font-weight:bold">1.2.2 (iOS)</dt>
 <dd>
