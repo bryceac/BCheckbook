@@ -63,7 +63,7 @@ struct ContentView: View {
                         
                     let recordBalance = records.balance(for: record)
                         
-                    RecordView(record: record, balance: recordBalance).contextMenu(ContextMenu(menuItems: {
+                    RecordView(record: record, balance: recordBalance).id(record.id).contextMenu(ContextMenu(menuItems: {
                             Button("Delete") {
                                 try? remove(record: record)
                                 
