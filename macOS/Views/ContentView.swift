@@ -57,7 +57,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        List {
+        /* List {
             ForEach(filteredRecords) { record in
                     
                 let recordBalance = records.balance(for: record)
@@ -146,7 +146,7 @@ struct ContentView: View {
             default:
                 loadRecords(fromQIF: fileURL)
             }
-        }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions")
+        }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions") */
     }
     
     @ViewBuilder var loadingOverlay: some View {
