@@ -66,8 +66,6 @@ struct ContentView: View {
                     RecordView(record: record, balance: recordBalance).id(record.id).contextMenu(ContextMenu(menuItems: {
                             Button("Delete") {
                                 try? remove(record: record)
-                                
-                                loadRecords()
                             }
                         }))
                     }
@@ -229,6 +227,8 @@ struct ContentView: View {
     func add(record: Record) throws {
         guard let databaseManager = DB.shared.manager else { return }
         
+        records.add(record)
+        
         try databaseManager.add(record: record)
         
         addRecordUndoActionRegister(for: record)
@@ -236,6 +236,8 @@ struct ContentView: View {
     
     func remove(record: Record) throws {
         guard let databaseManager = DB.shared.manager else { return }
+        
+        records.remove(record)
         
         try databaseManager.remove(record: record)
         
@@ -263,9 +265,6 @@ struct ContentView: View {
         undoManager?.registerUndo(withTarget: records, handler: { _ in
             
             try? remove(record: record)
-            
-            loadRecords()
-            
         })
         
     }
@@ -299,8 +298,6 @@ struct ContentView: View {
         undoManager?.registerUndo(withTarget: records, handler: { _ in
             
             try? add(record: record)
-            
-            loadRecords()
         })
     }
 }
