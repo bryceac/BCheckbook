@@ -108,7 +108,7 @@ struct ContentView: View {
                         
                         try? add(record: RECORD)
                         
-                        loadRecords()
+                        newestRecord = RECORD.id
                         
                     }
                 }
@@ -147,7 +147,9 @@ struct ContentView: View {
                 default:
                     loadRecords(fromQIF: fileURL)
                 }
-            }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions")
+            }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions").onChange(of: newestRecord) { recordID in
+                proxy.scrollTo(recordID)
+            }
         }
     }
     
