@@ -23,10 +23,13 @@ struct ContentView: View {
     
     @Binding var recordId: Record.ID?
     
-    var recordBing: Binding<Record> {
-        
+    var recordBinding: Binding<Record> {
         $records.items[id: recordId!]
     }
+    
+    @State private var sortOrder: [KeyPathComparator<Record>] = [
+        KeyPathComparator(\Record.event.date, order: .forward)
+    ]
     
     @State private var showSuccessfulExportAlert = false
     
@@ -66,9 +69,11 @@ struct ContentView: View {
     }
     
     var table: some View {
-        Table(filteredRecords) {
+        Table(filteredRecords, sortOrder: $sortOrder) {
             TableColumn("Date", value: \.event.date) { record in
+                recordId = record.id
                 
+                DatePicker("Date", selection: recordBinding.event.date, displayedComponents: [.date])
             }
         }
     }
