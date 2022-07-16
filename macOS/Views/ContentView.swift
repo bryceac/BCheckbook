@@ -21,6 +21,8 @@ struct ContentView: View {
     
     @StateObject var records: Records = Records()
     
+    @Binding var recordId: Record.ID?
+    
     @State private var showSuccessfulExportAlert = false
     
     @State private var query = ""
@@ -56,6 +58,14 @@ struct ContentView: View {
         }
         
         return requestedRecords
+    }
+    
+    var table: some View {
+        Table(filteredRecords) {
+            TableColumn("Date", value: \.event.date) { record in
+                
+            }
+        }
     }
     
     var body: some View {
@@ -151,6 +161,7 @@ struct ContentView: View {
                 proxy.scrollTo(recordID)
             }
         } */
+        table
     }
     
     @ViewBuilder var loadingOverlay: some View {

@@ -121,4 +121,8 @@ extension Array where Element == Record {
         
         return self[NEXT_INDEX]
     }
+    
+    subscript(id id: String) -> Record? {
+        return self.first(where: { $0.id == id })
+    }
 }
