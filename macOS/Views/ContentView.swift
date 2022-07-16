@@ -115,6 +115,11 @@ struct ContentView: View {
                 
                 TextField("", text: $records.items[id: record.id].event.memo)
             }
+            
+            TableColumn("Credit", value: \Record.event.amount) { record in
+                
+                TextField("", value: $records.items[id: record.id].event.amount, formatter: Event.CURRENCY_FORMAT)
+            }
         }
     }
     
