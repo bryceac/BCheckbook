@@ -70,7 +70,7 @@ struct ContentView: View {
     
     var table: some View {
         Table(filteredRecords, sortOrder: $sortOrder) {
-            TableColumn("Date", value: \.event.date) { record in
+            TableColumn("Date", value: \Record.event.date) { record in
                 recordId = record.id
                 
                 DatePicker("Date", selection: recordBinding.event.date, displayedComponents: [.date])
