@@ -105,6 +105,16 @@ struct ContentView: View {
                 
                 OptionalComboBox(selection: $records.items[id: record.id].event.category, choices: categoryListBinding)
             }
+            
+            TableColumn("Vendor", value: \Record.event.vendor) { record in
+                
+                TextField("", text: $records.items[id: record.id].event.vendor)
+            }
+            
+            TableColumn("Memo", value: \Record.event.memo) { record in
+                
+                TextField("", text: $records.items[id: record.id].event.memo)
+            }
         }
     }
     
