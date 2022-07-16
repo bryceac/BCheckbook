@@ -21,12 +21,6 @@ struct ContentView: View {
     
     @StateObject var records: Records = Records()
     
-    @Binding var recordId: Record.ID?
-    
-    var recordBinding: Binding<Record> {
-        $records.items[id: recordId!]
-    }
-    
     @State private var sortOrder: [KeyPathComparator<Record>] = [
         KeyPathComparator(\Record.event.date, order: .forward)
     ]
@@ -71,9 +65,13 @@ struct ContentView: View {
     var table: some View {
         Table(filteredRecords, sortOrder: $sortOrder) {
             TableColumn("Date", value: \Record.event.date) { record in
-                recordId = record.id
                 
-                DatePicker("Date", selection: recordBinding.event.date, displayedComponents: [.date])
+                DatePicker("Date", selection: $records.items[id: record.id].event.date, displayedComponents: [.date])
+            }
+            
+            TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: ) { record in
+                
+                Toggle("", isOn: $records.items[id: record.id].event.isReconciled)
             }
         }
     }
