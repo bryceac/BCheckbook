@@ -25,7 +25,7 @@ struct ContentView: View {
     
     @State private var query = ""
     
-    @State private var newestRecord: String? = nil
+    // @State private var newestRecord: String? = nil
     
     var filteredRecords: [Record] {
         guard !query.isEmpty else { return records.sortedRecords }
@@ -59,7 +59,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        ScrollViewReader { proxy in
+        /* ScrollViewReader { proxy in
             List {
                 ForEach(filteredRecords) { record in
                         
@@ -150,7 +150,7 @@ struct ContentView: View {
             }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions").onChange(of: newestRecord) { recordID in
                 proxy.scrollTo(recordID)
             }
-        }
+        } */
     }
     
     @ViewBuilder var loadingOverlay: some View {
