@@ -103,7 +103,7 @@ struct ContentView: View {
             
             TableColumn("Category", value: \Record.event.category, comparator: OptionalComparator<String>()) { record in
                 
-                
+                OptionalComboBox(selection: $records.items[id: record.id].event.category, choices: categoryListBinding)
             }
         }
     }
