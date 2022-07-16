@@ -261,9 +261,7 @@ struct ContentView: View {
             default:
                 loadRecords(fromQIF: fileURL)
             }
-        }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions").onChange(of: newestRecord) { recordID in
-            proxy.scrollTo(recordID)
-        }
+        }.overlay(loadingOverlay).searchable(text: $query, prompt: "search transactions")
     }
     
     @ViewBuilder var loadingOverlay: some View {
