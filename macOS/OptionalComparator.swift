@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OptionalComparator<T> {
+struct OptionalComparator<T>: SortComparator {
     typealias Compared = T?
     
     var order: SortOrder = .forward

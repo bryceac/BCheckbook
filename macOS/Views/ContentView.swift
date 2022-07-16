@@ -69,10 +69,26 @@ struct ContentView: View {
                 DatePicker("Date", selection: $records.items[id: record.id].event.date, displayedComponents: [.date])
             }
             
-            TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: ) { record in
+            TableColumn("Check #", value: \Record.event.checkNumber, comparator: OptionalComparator<Int>()) { record in
+                
+                let checkNumberBinding = Binding {
+                    if let checkNumber = record.event.checkNumber {
+                        return "\(checkNumber)"
+                    } else {
+                        return ""
+                    }
+                } set: { number in
+                    record.event.checkNumber = Int(number)
+                }
+                
+                TextField("", text: checkNumberBinding)
+
+            }
+            
+            /* TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: ) { record in
                 
                 Toggle("", isOn: $records.items[id: record.id].event.isReconciled)
-            }
+            } */
         }
     }
     
