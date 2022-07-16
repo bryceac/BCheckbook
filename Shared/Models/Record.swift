@@ -123,6 +123,14 @@ extension Array where Element == Record {
     }
     
     subscript(id id: String) -> Record? {
-        return self.first(where: { $0.id == id })
+        get {
+            return self.first(where: { $0.id == id})
+        }
+        
+        set {
+            guard self.contains(where: { $0.id == id }) else { return }
+            
+            self[id: id] = newValue
+        }
     }
 }

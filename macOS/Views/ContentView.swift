@@ -23,6 +23,10 @@ struct ContentView: View {
     
     @Binding var recordId: Record.ID?
     
+    var recordBing: Binding<Record> {
+        $records.items[id: recordId]
+    }
+    
     @State private var showSuccessfulExportAlert = false
     
     @State private var query = ""
