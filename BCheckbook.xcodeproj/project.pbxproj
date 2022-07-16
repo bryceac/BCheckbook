@@ -164,6 +164,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020CF0C7288374B600706A06 /* Comparators */ = {
+			isa = PBXGroup;
+			children = (
+				020CF0C328836D9400706A06 /* OptionalComparator.swift */,
+				020CF0C5288373B200706A06 /* BoolComparator.swift */,
+			);
+			path = Comparators;
+			sourceTree = "<group>";
+		};
 		0246E5DE268F82090047A663 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,8 +290,7 @@
 				02A2AD9F2660A02E00774151 /* macOS.entitlements */,
 				0246E5E3268F83CD0047A663 /* Views */,
 				02B0990427724CA600BD36E4 /* AppDelegate.swift */,
-				020CF0C328836D9400706A06 /* OptionalComparator.swift */,
-				020CF0C5288373B200706A06 /* BoolComparator.swift */,
+				020CF0C7288374B600706A06 /* Comparators */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
