@@ -31,6 +31,17 @@ struct ContentView: View {
     
     // @State private var newestRecord: String? = nil
     
+    var categoryListBinding: Binding<[String]> {
+            Binding(get: {
+                guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories else { return [] }
+                return categories.sorted()
+            }, set: { newValue in
+                guard let databaseManager = DB.shared.manager else { return }
+                
+                try? databaseManager.add(categories: newValue)
+            })
+        }
+    
     var filteredRecords: [Record] {
         guard !query.isEmpty else { return records.sortedRecords }
         
@@ -88,6 +99,11 @@ struct ContentView: View {
             TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: BoolComparator()) { record in
                 
                 Toggle("", isOn: $records.items[id: record.id].event.isReconciled)
+            }
+            
+            TableColumn("Category", value: \Record.event.category, comparator: OptionalComparator<String>()) { record in
+                
+                
             }
         }
     }
