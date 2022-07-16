@@ -222,7 +222,7 @@ struct ContentView: View {
                     
                     try? add(record: RECORD)
                     
-                    newestRecord = RECORD.id
+                    // newestRecord = RECORD.id
                     
                 }
             }
