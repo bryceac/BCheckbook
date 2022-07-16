@@ -85,10 +85,10 @@ struct ContentView: View {
 
             }
             
-            /* TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: ) { record in
+            TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: BoolComparator()) { record in
                 
                 Toggle("", isOn: $records.items[id: record.id].event.isReconciled)
-            } */
+            }
         }
     }
     
