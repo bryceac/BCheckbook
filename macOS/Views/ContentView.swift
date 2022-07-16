@@ -120,6 +120,19 @@ struct ContentView: View {
                 
                 TextField("", value: $records.items[id: record.id].event.amount, formatter: Event.CURRENCY_FORMAT)
             }
+            
+            TableColumn("Withdrawal", value: \Record.event.amount) { record in
+                
+                TextField("", value: $records.items[id: record.id].event.amount, formatter: Event.CURRENCY_FORMAT)
+            }
+            
+            TableColumn("Balance", value: \Record.self) { record in
+                
+                if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: records.balance(for: record))) {
+                    Text(BALANCE_VALUE)
+                        .foregroundColor(Color.black)
+                }
+            }
         }
     }
     
