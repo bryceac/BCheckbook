@@ -24,7 +24,26 @@ struct ContentView: View {
     @State private var recordID: Record.ID? = nil
     
     var recordBinding: Binding<Record> {
-        $records.items[id: recordID]!
+        
+        var binding: Binding<Record>!
+        
+        var placeholder = Record(withID: "FF04C3DC-F0FE-472E-8737-0F4034C049F0", transaction: Event(date: Date(), checkNumber: 1260, vendor: "Sam Hill Credit Union", memo: "Open Account", amount: 500, type: .deposit, isReconciled: true))
+        
+        if let id = recordID, var record = records.items[id: id] {
+            binding = Binding(get: {
+                record
+            }, set: { newRecord in
+                record = newRecord
+            })
+        } else {
+            binding = Binding(get: {
+                placeholder
+            }, set: { newRecord in
+                placeholder = newRecord
+            })
+        }
+        
+        return binding
     }
     
     @State private var sortOrder: [KeyPathComparator<Record>] = [
