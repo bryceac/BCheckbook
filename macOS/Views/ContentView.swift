@@ -180,16 +180,40 @@ struct ContentView: View {
             
             TableColumn("Credit", value: \Record.event.amount) { record in
                 
-                recordID = record.id
+                var creditBinding: Binding<Double>? {
+                    guard let storedRecord = records.items[id: record.id] else { return nil }
+                    
+                    return Binding {
+                        guard case EventType.deposit = storedRecord.event.type else { 0 }
+                        
+                        return storedRecord.event.amount
+                    } set: { newAmount in
+                        storedRecord.event.type = .deposit
+                        
+                        storedRecord.event.amount = newAmount
+                    }
+                }
                 
-                TextField("", value: creditBinding, formatter: Event.CURRENCY_FORMAT)
+                TextField("", value: creditBinding!, formatter: Event.CURRENCY_FORMAT)
             }
             
             TableColumn("Withdrawal", value: \Record.event.amount) { record in
                 
-                recordID = record.id
+                var withdrawalBinding: Binding<Double>? {
+                    guard let storedRecord = records.items[id: record.id] else { return nil }
+                    
+                    return Binding {
+                        guard case EventType.withdrawal = storedRecord.event.type else { 0 }
+                        
+                        return storedRecord.event.amount
+                    } set: { newAmount in
+                        storedRecord.event.type = .withdrawal
+                        
+                        storedRecord.event.amount = newAmount
+                    }
+                }
                 
-                TextField("", value: withdrawalBinding, formatter: Event.CURRENCY_FORMAT)
+                TextField("", value: withdrawalBinding!, formatter: Event.CURRENCY_FORMAT)
             }
             
             TableColumn("Balance", value: \Record.self) { record in
