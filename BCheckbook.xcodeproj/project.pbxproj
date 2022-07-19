@@ -18,6 +18,8 @@
 		0231B223278A45ED003483BF /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B221278A45ED003483BF /* SummaryViewModel.swift */; };
 		0231B225278A470D003483BF /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B224278A470D003483BF /* SummaryView.swift */; };
 		0231B227278A4C55003483BF /* SummaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B226278A4C55003483BF /* SummaryRowView.swift */; };
+		02420ECC2887409200476745 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 02420ECB2887409200476745 /* IdentifiedCollections */; };
+		02420ECE288740A300476745 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 02420ECD288740A300476745 /* IdentifiedCollections */; };
 		0266A20C27D42B7600E8023F /* QIF in Frameworks */ = {isa = PBXBuildFile; productRef = 0266A20B27D42B7600E8023F /* QIF */; };
 		0266A20E27D42CCE00E8023F /* QIF in Frameworks */ = {isa = PBXBuildFile; productRef = 0266A20D27D42CCE00E8023F /* QIF */; };
 		0266A21027D42D7300E8023F /* QIFTransaction+fromEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */; };
@@ -130,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0266A20C27D42B7600E8023F /* QIF in Frameworks */,
+				02420ECC2887409200476745 /* IdentifiedCollections in Frameworks */,
 				026E6A6F276D200A00ED3E36 /* SQLite in Frameworks */,
 				0297EDEA27712710007B3E99 /* ComboBox in Frameworks */,
 			);
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0266A20E27D42CCE00E8023F /* QIF in Frameworks */,
+				02420ECE288740A300476745 /* IdentifiedCollections in Frameworks */,
 				02B098FE277233AA00BD36E4 /* SQLite in Frameworks */,
 				02B09900277233B100BD36E4 /* ComboBox in Frameworks */,
 			);
@@ -348,6 +352,7 @@
 				026E6A6E276D200A00ED3E36 /* SQLite */,
 				0297EDE927712710007B3E99 /* ComboBox */,
 				0266A20B27D42B7600E8023F /* QIF */,
+				02420ECB2887409200476745 /* IdentifiedCollections */,
 			);
 			productName = "Checkbook (iOS)";
 			productReference = 02A2AD942660A02E00774151 /* BCheckbook.app */;
@@ -370,6 +375,7 @@
 				02B098FD277233AA00BD36E4 /* SQLite */,
 				02B098FF277233B100BD36E4 /* ComboBox */,
 				0266A20D27D42CCE00E8023F /* QIF */,
+				02420ECD288740A300476745 /* IdentifiedCollections */,
 			);
 			productName = "Checkbook (macOS)";
 			productReference = 02A2AD9C2660A02E00774151 /* BCheckbook.app */;
@@ -449,6 +455,7 @@
 				026E6A6D276D200A00ED3E36 /* XCRemoteSwiftPackageReference "SQLite" */,
 				0297EDE827712710007B3E99 /* XCRemoteSwiftPackageReference "ComboBox" */,
 				0266A20A27D42B7600E8023F /* XCRemoteSwiftPackageReference "QIF" */,
+				02420ECA2887409200476745 /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
 			);
 			productRefGroup = 02A2AD952660A02E00774151 /* Products */;
 			projectDirPath = "";
@@ -941,6 +948,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		02420ECA2887409200476745 /* XCRemoteSwiftPackageReference "swift-identified-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-identified-collections.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
 		0266A20A27D42B7600E8023F /* XCRemoteSwiftPackageReference "QIF" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/bryceac/QIF";
@@ -968,6 +983,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		02420ECB2887409200476745 /* IdentifiedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02420ECA2887409200476745 /* XCRemoteSwiftPackageReference "swift-identified-collections" */;
+			productName = IdentifiedCollections;
+		};
+		02420ECD288740A300476745 /* IdentifiedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02420ECA2887409200476745 /* XCRemoteSwiftPackageReference "swift-identified-collections" */;
+			productName = IdentifiedCollections;
+		};
 		0266A20B27D42B7600E8023F /* QIF */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0266A20A27D42B7600E8023F /* XCRemoteSwiftPackageReference "QIF" */;
