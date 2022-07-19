@@ -10,13 +10,46 @@ import SwiftUI
 struct RecordTable: View {
     @EnvironmentObject var records: Records
     
-    @State var displayedRecords: [Record] = []
-    
     @State private var order = [
         KeyPathComparator(\Record.event.date, order: .forward)
     ]
     
     @Binding var selectedRecords: Set<Record.ID>
+    
+    @Binding var query: String?
+    
+    var filteredRecords: [Record] {
+        guard let query = query, !query.isEmpty else { return records.sortedRecords }
+        
+        var requestedRecords: [Record] = []
+        
+        
+        switch (query) {
+        case let text where text.starts(with: "category:"):
+            if let categoryPattern = text.matching(regexPattern: "category:\\s(.*)"), !categoryPattern.isEmpty, categoryPattern[0].indices.contains(1) {
+                let specifiedCategory = categoryPattern[0][1]
+                
+                requestedRecords = records.filter(category: specifiedCategory)
+            }
+        case let text where text.contains(" category:"):
+            if let categoryRange = text.range(of: "category:"), let categoryPattern = text.matching(regexPattern: "category:\\s(.*)"), !categoryPattern.isEmpty, categoryPattern[0].indices.contains(1) {
+                let specifiedCategory = categoryPattern[0][1]
+                var vendor = String(text[..<categoryRange.lowerBound])
+                
+                if let lastCharacter = vendor.last, lastCharacter.isWhitespace {
+                    vendor = String(vendor.dropLast())
+                }
+                
+                requestedRecords = records.filter(vendor: vendor, category: specifiedCategory)
+            }
+        default:
+            requestedRecords = records.filter(vendor: query)
+        }
+        
+        return requestedRecords
+    }
+    
+    @State private var displayedRecords = filteredRecords
     
     var categoryListBinding: Binding<[String]> {
             Binding(get: {
@@ -147,15 +180,15 @@ struct RecordTable: View {
 }
 
 extension RecordTable {
-    init(withRecordsToDisplay displayedRecords: [Record] = [], selection selectedRecords: Binding<Set<Record.ID>>) {
-        self.displayedRecords = displayedRecords
-        
+    init(selection selectedRecords: Binding<Set<Record.ID>>, filter query: Binding<String?>) {
         self._selectedRecords = selectedRecords
+        
+        self._query = query
     }
 }
 
 struct RecordTableView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordTable( selectedRecords: .constant(Set<Record.ID>()))
+        RecordTable(selectedRecords: .constant(Set<Record.ID>()), query: .constant(""))
     }
 }
