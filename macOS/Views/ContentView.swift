@@ -76,7 +76,7 @@ struct ContentView: View {
     }
     
     var table: some View {
-        Table(filteredRecords, sortOrder: $sortOrder) {
+        Table(filteredRecords, selection: $selectedRecords, sortOrder: $sortOrder) {
             TableColumn("Date", value: \Record.event.date) { record in
                 
                 let dateBinding = Binding {
