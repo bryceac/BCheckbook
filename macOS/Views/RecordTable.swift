@@ -16,10 +16,12 @@ struct RecordTable: View {
     
     @Binding var selectedRecords: Set<Record.ID>
     
-    @Binding var query: String?
+    @Binding var query: String
+    
+    @State var displayedRecords: [Record] = []
     
     var filteredRecords: [Record] {
-        guard let query = query, !query.isEmpty else { return records.sortedRecords }
+        guard !query.isEmpty else { return records.sortedRecords }
         
         var requestedRecords: [Record] = []
         
@@ -48,8 +50,6 @@ struct RecordTable: View {
         
         return requestedRecords
     }
-    
-    @State private var displayedRecords = filteredRecords
     
     var categoryListBinding: Binding<[String]> {
             Binding(get: {
@@ -180,10 +180,12 @@ struct RecordTable: View {
 }
 
 extension RecordTable {
-    init(selection selectedRecords: Binding<Set<Record.ID>>, filter query: Binding<String?>) {
+    init(selection selectedRecords: Binding<Set<Record.ID>>, filter query: Binding<String>) {
         self._selectedRecords = selectedRecords
         
         self._query = query
+        
+        displayedRecords = filteredRecords
     }
 }
 
