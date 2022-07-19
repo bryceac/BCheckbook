@@ -105,22 +105,50 @@ struct ContentView: View {
             
             TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: BoolComparator()) { record in
                 
-                Toggle("", isOn: $records.items[id: record.id].event.isReconciled)
+                let reconciledBinding = Binding {
+                    record.event.isReconciled
+                } set: { newValue in
+                    record.event.isReconciled = newValue
+                }
+
+                
+                Toggle("", isOn: reconciledBinding)
             }
             
             TableColumn("Category", value: \Record.event.category, comparator: OptionalComparator<String>()) { record in
                 
-                OptionalComboBox(selection: $records.items[id: record.id].event.category, choices: categoryListBinding)
+                let categoryBinding = Binding {
+                    record.event.category
+                } set: { newValue in
+                    record.event.category = newValue
+                }
+
+                
+                OptionalComboBox(selection: categoryBinding, choices: categoryListBinding)
             }
             
             TableColumn("Vendor", value: \Record.event.vendor) { record in
                 
-                TextField("", text: $records.items[id: record.id].event.vendor)
+                let vendorBinding = Binding {
+                    record.event.vendor
+                } set: { newVendor in
+                    record.event.vendor = newVendor
+                }
+
+                
+                TextField("", text: vendorBinding)
             }
             
             TableColumn("Memo", value: \Record.event.memo) { record in
                 
-                TextField("", text: $records.items[id: record.id].event.memo)
+                let memoBinding = Binding {
+                    record.event.memo
+                } set: { newMemo in
+                    record.event.memo = newMemo
+                }
+
+                
+                TextField("", text: memoBinding)
             }
             
             TableColumn("Credit", value: \Record.event.amount) { record in
