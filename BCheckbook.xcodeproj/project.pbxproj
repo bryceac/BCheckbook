@@ -20,7 +20,7 @@
 		0231B227278A4C55003483BF /* SummaryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0231B226278A4C55003483BF /* SummaryRowView.swift */; };
 		02420ECC2887409200476745 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 02420ECB2887409200476745 /* IdentifiedCollections */; };
 		02420ECE288740A300476745 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 02420ECD288740A300476745 /* IdentifiedCollections */; };
-		02420ED028875DAC00476745 /* RecordTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02420ECF28875DAC00476745 /* RecordTableView.swift */; };
+		02420ED028875DAC00476745 /* RecordTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02420ECF28875DAC00476745 /* RecordTable.swift */; };
 		0266A20C27D42B7600E8023F /* QIF in Frameworks */ = {isa = PBXBuildFile; productRef = 0266A20B27D42B7600E8023F /* QIF */; };
 		0266A20E27D42CCE00E8023F /* QIF in Frameworks */ = {isa = PBXBuildFile; productRef = 0266A20D27D42CCE00E8023F /* QIF */; };
 		0266A21027D42D7300E8023F /* QIFTransaction+fromEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */; };
@@ -93,7 +93,7 @@
 		0231B221278A45ED003483BF /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		0231B224278A470D003483BF /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		0231B226278A4C55003483BF /* SummaryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryRowView.swift; sourceTree = "<group>"; };
-		02420ECF28875DAC00476745 /* RecordTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableView.swift; sourceTree = "<group>"; };
+		02420ECF28875DAC00476745 /* RecordTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTable.swift; sourceTree = "<group>"; };
 		0266A20F27D42D7300E8023F /* QIFTransaction+fromEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QIFTransaction+fromEvent.swift"; sourceTree = "<group>"; };
 		0266A21227D42F8600E8023F /* Event+fromQIFTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+fromQIFTransaction.swift"; sourceTree = "<group>"; };
 		02676794269794FB005D7DC2 /* CheckbookApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckbookApp.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				02115E8E268CF50400085138 /* ContentView.swift */,
-				02420ECF28875DAC00476745 /* RecordTableView.swift */,
+				02420ECF28875DAC00476745 /* RecordTable.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -545,7 +545,7 @@
 				02A2ADCF2660A05900774151 /* EventTypeError.swift in Sources */,
 				02115E8F268CF50400085138 /* ContentView.swift in Sources */,
 				0266A21427D42F8600E8023F /* Event+fromQIFTransaction.swift in Sources */,
-				02420ED028875DAC00476745 /* RecordTableView.swift in Sources */,
+				02420ED028875DAC00476745 /* RecordTable.swift in Sources */,
 				02A2ADD82660AF3A00774151 /* Records.swift in Sources */,
 				02B0990527724CA600BD36E4 /* AppDelegate.swift in Sources */,
 				02A2ADD52660A07B00774151 /* Record.swift in Sources */,

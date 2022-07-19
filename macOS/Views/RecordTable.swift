@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct RecordTable: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     @EnvironmentObject var records: Records
     
     @State var displayedRecords: [Record] = []
@@ -77,7 +75,6 @@ struct RecordTable: View {
                 
                 if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: records.balance(for: record))) {
                     Text(BALANCE_VALUE)
-                        .foregroundColor(Color.black)
                 }
             }
         }
