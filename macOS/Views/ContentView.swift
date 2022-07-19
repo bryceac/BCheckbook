@@ -226,7 +226,7 @@ struct ContentView: View {
                 })
                 
             }
-            ToolbarItem(placement: ToolbarItemPlacement.primaryAction) {
+            ToolbarItemGroup(placement: ToolbarItemPlacement.primaryAction) {
                 Button("+") {
                     let RECORD = Record()
                     
