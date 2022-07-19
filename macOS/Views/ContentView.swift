@@ -22,67 +22,6 @@ struct ContentView: View {
     
     @StateObject var records: Records = Records()
     
-    @State private var recordID: Record.ID? = nil
-    
-    var recordBinding: Binding<Record> {
-        
-        var binding: Binding<Record>!
-        
-        var placeholder = Record(withID: "FF04C3DC-F0FE-472E-8737-0F4034C049F0", transaction: Event(date: Date(), checkNumber: 1260, vendor: "Sam Hill Credit Union", memo: "Open Account", amount: 500, type: .deposit, isReconciled: true))
-        
-        if let id = recordID, var record = records.items[id: id] {
-            binding = Binding(get: {
-                record
-            }, set: { newRecord in
-                record = newRecord
-            })
-        } else {
-            binding = Binding(get: {
-                placeholder
-            }, set: { newRecord in
-                placeholder = newRecord
-            })
-        }
-        
-        return binding
-    }
-    
-    var creditBinding: Binding<Double> {
-        Binding {
-            guard  case EventType.deposit = recordBinding.wrappedValue.event.type else { return 0 }
-            
-            return recordBinding.wrappedValue.event.amount
-        } set: { newAmount in
-            recordBinding.wrappedValue.event.type = .deposit
-            
-            recordBinding.wrappedValue.event.amount = newAmount
-        }
-    }
-    
-    var checkNumberBinding: Binding<String> {
-        Binding {
-            if let checkNumber = recordBinding.wrappedValue.event.checkNumber {
-                 return "\(checkNumber)"
-            } else {
-                return ""
-            }
-        } set: { newCheckNumber in
-            recordBinding.wrappedValue.event.checkNumber = Int(newCheckNumber)
-        }
-    }
-    
-    var withdrawalBinding: Binding<Double> {
-        Binding {
-            guard  case EventType.withdrawal = recordBinding.wrappedValue.event.type else { return 0 }
-            
-            return recordBinding.wrappedValue.event.amount
-        } set: { newAmount in
-            recordBinding.wrappedValue.event.type = .withdrawal
-            
-            recordBinding.wrappedValue.event.amount = newAmount
-        }
-    }
-    
     @State private var sortOrder: [KeyPathComparator<Record>] = [
         KeyPathComparator(\Record.event.date, order: .forward)
     ]
@@ -140,11 +79,15 @@ struct ContentView: View {
     var table: some View {
         Table(filteredRecords, selection: $selectedRecords, sortOrder: $sortOrder) {
             TableColumn("Date", value: \Record.event.date) { record in
+                
+                recordID = record.id
 
                 DatePicker("Date", selection: recordBinding.event.date, displayedComponents: [.date])
             }
             
             TableColumn("Check #", value: \Record.event.checkNumber, comparator: OptionalComparator<Int>()) { record in
+                
+                recordID = record.id
                 
                 TextField("", text: checkNumberBinding)
 
@@ -152,31 +95,42 @@ struct ContentView: View {
             
             TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: BoolComparator()) { record in
                 
+                recordID = record.id
+                
                 Toggle("", isOn: recordBinding.event.isReconciled)
             }
             
             TableColumn("Category", value: \Record.event.category, comparator: OptionalComparator<String>()) { record in
+                
+                recordID = record.id
 
                 OptionalComboBox(selection: recordBinding.event.category, choices: categoryListBinding)
             }
             
             TableColumn("Vendor", value: \Record.event.vendor) { record in
                 
+                recordID = record.id
+                
                 TextField("", text: recordBinding.event.vendor)
             }
             
             TableColumn("Memo", value: \Record.event.memo) { record in
                 
+                recordID = record.id
+                
                 TextField("", text: recordBinding.event.memo)
             }
             
             TableColumn("Credit", value: \Record.event.amount) { record in
-
+                
+                recordID = record.id
                 
                 TextField("", value: creditBinding, formatter: Event.CURRENCY_FORMAT)
             }
             
             TableColumn("Withdrawal", value: \Record.event.amount) { record in
+                
+                recordID = record.id
                 
                 TextField("", value: withdrawalBinding, formatter: Event.CURRENCY_FORMAT)
             }
