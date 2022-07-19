@@ -22,12 +22,6 @@ struct ContentView: View {
     
     @EnvironmentObject var records: Records
     
-    @State private var sortOrder: [KeyPathComparator<Record>] = [
-        KeyPathComparator(\Record.event.date, order: .forward)
-    ]
-    
-    @State private var selectedRecords = Set<Record.ID>()
-    
     @State private var showSuccessfulExportAlert = false
     
     @State private var query = ""
@@ -74,59 +68,6 @@ struct ContentView: View {
         }
         
         return requestedRecords
-    }
-    
-    var table: some View {
-        Table(filteredRecords, selection: $selectedRecords, sortOrder: $sortOrder) {
-            TableColumn("Date", value: \Record.event.date) { record in
-
-                DatePicker("Date", selection: recordBinding(record.id).event.date, displayedComponents: [.date])
-            }
-            
-            TableColumn("Check #", value: \Record.event.checkNumber, comparator: OptionalComparator<Int>()) { record in
-
-                TextField("", text: checkNumberBinding(record.id))
-
-            }
-            
-            TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: BoolComparator()) { record in
-                
-                Toggle("", isOn: recordBinding(record.id).event.isReconciled)
-            }
-            
-            TableColumn("Category", value: \Record.event.category, comparator: OptionalComparator<String>()) { record in
-
-                OptionalComboBox(selection: recordBinding(record.id).event.category, choices: categoryListBinding)
-            }
-            
-            TableColumn("Vendor", value: \Record.event.vendor) { record in
-                
-                TextField("", text: recordBinding(record.id).event.vendor)
-            }
-            
-            TableColumn("Memo", value: \Record.event.memo) { record in
-                
-                TextField("", text: recordBinding(record.id).event.memo)
-            }
-            
-            TableColumn("Credit", value: \Record.event.amount) { record in
-                
-                TextField("", value: creditBinding(record.id), formatter: Event.CURRENCY_FORMAT)
-            }
-            
-            TableColumn("Withdrawal", value: \Record.event.amount) { record in
-                
-                TextField("", value: withdrawalBinding(record.id), formatter: Event.CURRENCY_FORMAT)
-            }
-            
-            TableColumn("Balance", value: \Record.self) { record in
-                
-                if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: records.balance(for: record))) {
-                    Text(BALANCE_VALUE)
-                        .foregroundColor(Color.black)
-                }
-            }
-        }
     }
     
     var body: some View {
