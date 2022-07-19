@@ -238,6 +238,21 @@ struct ContentView: View {
                 
                 Button("-") {
                     guard !selectedRecords.isEmpty else { return }
+                    
+                    if selectedRecords.count > 1 {
+                        
+                        let recordSelection = records.items.filter { record in
+                            selectedRecords.contains(record.id)
+                        }
+                        
+                        Task {
+                            try? await remove(records: recordSelection)
+                        }
+                    } else {
+                        if let RECORD = records.items[id: selectedRecords.first!] {
+                            try? remove(record: RECORD)
+                        }
+                    }
                 }
             }
         }).onAppear(perform: {
