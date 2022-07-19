@@ -79,141 +79,44 @@ struct ContentView: View {
     var table: some View {
         Table(filteredRecords, selection: $selectedRecords, sortOrder: $sortOrder) {
             TableColumn("Date", value: \Record.event.date) { record in
-                
-                var dateBinding: Binding<Date>? {
-                    guard let storedRecord = records.items[id: record.id] else { return nil }
-                    
-                    return Binding {
-                        storedRecord.event.date
-                    } set: { newDate in
-                        storedRecord.event.date = newDate
-                    }
 
-                }
-
-                DatePicker("Date", selection: dateBinding!, displayedComponents: [.date])
+                DatePicker("Date", selection: recordBinding(record.id).event.date, displayedComponents: [.date])
             }
             
             TableColumn("Check #", value: \Record.event.checkNumber, comparator: OptionalComparator<Int>()) { record in
-                
-                var checkNumberBinding: Binding<String>? {
-                    guard let storedRecord = records.items[id: record.id] else { return nil }
-                    
-                    return Binding {
-                        if let checkNumber = storedRecord.event.checkNumber {
-                            return "\(checkNumber)"
-                        } else {
-                            return ""
-                        }
-                    } set: { newCheckNumber in
-                        storedRecord.event.checkNumber = Int(newCheckNumber)
-                    }
 
-                }
-
-                TextField("", text: checkNumberBinding!)
+                TextField("", text: checkNumberBinding(record.id))
 
             }
             
             TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: BoolComparator()) { record in
                 
-                var reconciledBinding: Binding<Bool>? {
-                    guard let storedRecord = records.items[id: record.id] else { return nil }
-                            
-                    return Binding {
-                            storedRecord.event.isReconciled
-                        } set: { newValue in
-                                storedRecord.event.isReconciled = newValue
-                        }
-                }
-                
-                Toggle("", isOn: reconciledBinding!)
+                Toggle("", isOn: recordBinding(record.id).event.isReconciled)
             }
             
             TableColumn("Category", value: \Record.event.category, comparator: OptionalComparator<String>()) { record in
-                
-                var categoryBinding: Binding<String?>? {
-                    guard let storedRecord = records.items[id: record.id] else { return nil }
-                    
-                    return Binding {
-                        storedRecord.event.category
-                    } set: { newCategory in
-                        storedRecord.event.category = newCategory
-                    }
 
-                }
-
-                OptionalComboBox(selection: categoryBinding!, choices: categoryListBinding)
+                OptionalComboBox(selection: recordBinding(record.id).event.category, choices: categoryListBinding)
             }
             
             TableColumn("Vendor", value: \Record.event.vendor) { record in
                 
-                var vendorBinding: Binding<String>? {
-                    guard let storedRecord = records.items[id: record.id] else { return nil }
-                    
-                    return Binding {
-                        storedRecord.event.vendor
-                    } set: { newVendor in
-                        storedRecord.event.vendor = newVendor
-                    }
-
-                }
-                
-                TextField("", text: vendorBinding!)
+                TextField("", text: recordBinding(record.id).event.vendor)
             }
             
             TableColumn("Memo", value: \Record.event.memo) { record in
                 
-                var memoBinding: Binding<String>? {
-                    guard let storedRecord = records.items[id: record.id] else { return nil }
-                    
-                    return Binding {
-                        storedRecord.event.memo
-                    } set: { newMemo in
-                        storedRecord.event.memo = newMemo
-                    }
-
-                }
-                
-                TextField("", text: memoBinding!)
+                TextField("", text: recordBinding(record.id).event.memo)
             }
             
             TableColumn("Credit", value: \Record.event.amount) { record in
                 
-                var creditBinding: Binding<Double>? {
-                    guard let storedRecord = records.items[id: record.id] else { return nil }
-                    
-                    return Binding {
-                        guard case EventType.deposit = storedRecord.event.type else { 0 }
-                        
-                        return storedRecord.event.amount
-                    } set: { newAmount in
-                        storedRecord.event.type = .deposit
-                        
-                        storedRecord.event.amount = newAmount
-                    }
-                }
-                
-                TextField("", value: creditBinding!, formatter: Event.CURRENCY_FORMAT)
+                TextField("", value: creditBinding(record.id), formatter: Event.CURRENCY_FORMAT)
             }
             
             TableColumn("Withdrawal", value: \Record.event.amount) { record in
                 
-                var withdrawalBinding: Binding<Double>? {
-                    guard let storedRecord = records.items[id: record.id] else { return nil }
-                    
-                    return Binding {
-                        guard case EventType.withdrawal = storedRecord.event.type else { 0 }
-                        
-                        return storedRecord.event.amount
-                    } set: { newAmount in
-                        storedRecord.event.type = .withdrawal
-                        
-                        storedRecord.event.amount = newAmount
-                    }
-                }
-                
-                TextField("", value: withdrawalBinding!, formatter: Event.CURRENCY_FORMAT)
+                TextField("", value: withdrawalBinding(record.id), formatter: Event.CURRENCY_FORMAT)
             }
             
             TableColumn("Balance", value: \Record.self) { record in
