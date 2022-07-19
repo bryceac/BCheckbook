@@ -33,7 +33,7 @@ struct ContentView: View {
     
     
     var body: some View {
-        RecordTable(withRecordsToDisplay: filteredRecords, selection: $selectedRecords, filter: $query).environmentObject(records).toolbar(content: {
+        RecordTable(selection: $selectedRecords, filter: $query).environmentObject(records).toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.principal) {
                 
                 Menu(content: {
