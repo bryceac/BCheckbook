@@ -13,7 +13,7 @@ struct CheckbookApp: App {
     
     var body: some Scene {
         WindowGroup {
-                ContentView().frame(minWidth: 800, minHeight: 600)
+                ContentView().frame(minWidth: 1024, minHeight: 768)
         }
         
         WindowGroup("Summary") {
