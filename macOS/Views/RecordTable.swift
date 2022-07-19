@@ -147,6 +147,6 @@ struct RecordTable: View {
 
 struct RecordTableView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordTable()
+        RecordTable( selectedRecords: .constant(Set<Record.ID>()))
     }
 }
