@@ -46,6 +46,30 @@ struct ContentView: View {
         return binding
     }
     
+    var creditBinding: Binding<Double> {
+        Binding {
+            guard  case EventType.deposit = recordBinding.wrappedValue.event.type else { return 0 }
+            
+            return recordBinding.wrappedValue.event.amount
+        } set: { newAmount in
+            recordBinding.wrappedValue.event.type = .deposit
+            
+            recordBinding.wrappedValue.event.amount = newAmount
+        }
+    }
+    
+    var withdrawalBinding: Binding<Double> {
+        Binding {
+            guard  case EventType.withdrawal = recordBinding.wrappedValue.event.type else { return 0 }
+            
+            return recordBinding.wrappedValue.event.amount
+        } set: { newAmount in
+            recordBinding.wrappedValue.event.type = .withdrawal
+            
+            recordBinding.wrappedValue.event.amount = newAmount
+        }
+    }
+    
     @State private var sortOrder: [KeyPathComparator<Record>] = [
         KeyPathComparator(\Record.event.date, order: .forward)
     ]
