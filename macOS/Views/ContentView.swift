@@ -21,6 +21,12 @@ struct ContentView: View {
     
     @StateObject var records: Records = Records()
     
+    @State private var recordID: Record.ID? = nil
+    
+    var recordBinding: Binding<Record> {
+        $records.items[id: recordID]!
+    }
+    
     @State private var sortOrder: [KeyPathComparator<Record>] = [
         KeyPathComparator(\Record.event.date, order: .forward)
     ]
