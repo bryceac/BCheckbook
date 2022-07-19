@@ -8,6 +8,7 @@
 import SwiftUI
 import QIF
 import UniformTypeIdentifiers
+import IdentifiedCollections
 
 struct ContentView: View {
     @Environment(\.undoManager) var undoManager
@@ -292,7 +293,7 @@ struct ContentView: View {
                         
                         let recordSelection = records.items.filter { record in
                             selectedRecords.contains(record.id)
-                        }
+                        }.map { $0 }
                         
                         Task {
                             try? await remove(records: recordSelection)
@@ -414,7 +415,7 @@ struct ContentView: View {
         Task {
             let storedRecords = await retrieveRecords()
             
-            records.items = storedRecords
+            records.items = IdentifiedArrayOf(uniqueElements: storedRecords)
             isLoading = false
         }
     }
