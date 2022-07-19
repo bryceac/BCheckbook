@@ -22,22 +22,13 @@ struct ContentView: View {
     
     @EnvironmentObject var records: Records
     
+    @State private var selectedRecords = Set<Record.ID>()
+    
     @State private var showSuccessfulExportAlert = false
     
     @State private var query = ""
     
     // @State private var newestRecord: String? = nil
-    
-    var categoryListBinding: Binding<[String]> {
-            Binding(get: {
-                guard let databaseManager = DB.shared.manager, let categories = databaseManager.categories else { return [] }
-                return categories.sorted()
-            }, set: { newValue in
-                guard let databaseManager = DB.shared.manager else { return }
-                
-                try? databaseManager.add(categories: newValue)
-            })
-        }
     
     var filteredRecords: [Record] {
         guard !query.isEmpty else { return records.sortedRecords }
@@ -71,7 +62,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        table.toolbar(content: {
+        RecordTable(displayedRecords: filteredRecords, selectedRecords: $selectedRecords).environmentObject(records).toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.principal) {
                 
                 Menu(content: {

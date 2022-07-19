@@ -15,7 +15,7 @@ struct RecordTable: View {
         KeyPathComparator(\Record.event.date, order: .forward)
     ]
     
-    @State private var selectedRecords = Set<Record.ID>()
+    @Binding var selectedRecords: Set<Record.ID>
     
     var categoryListBinding: Binding<[String]> {
             Binding(get: {
