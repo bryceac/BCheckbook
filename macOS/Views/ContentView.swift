@@ -59,6 +59,18 @@ struct ContentView: View {
         }
     }
     
+    var checkNumberBinding: Binding<String> {
+        Binding {
+            if let checkNumber = recordBinding.wrappedValue.event.checkNumber {
+                 return "\(checkNumber)"
+            } else {
+                return ""
+            }
+        } set: { newCheckNumber in
+            recordBinding.wrappedValue.event.checkNumber = Int(newCheckNumber)
+        }
+    }
+    
     var withdrawalBinding: Binding<Double> {
         Binding {
             guard  case EventType.withdrawal = recordBinding.wrappedValue.event.type else { return 0 }
@@ -128,15 +140,8 @@ struct ContentView: View {
     var table: some View {
         Table(filteredRecords, selection: $selectedRecords, sortOrder: $sortOrder) {
             TableColumn("Date", value: \Record.event.date) { record in
-                
-                let dateBinding = Binding {
-                    record.event.date
-                } set: { newDate in
-                    record.event.date = newDate
-                }
 
-                
-                DatePicker("Date", selection: dateBinding, displayedComponents: [.date])
+                DatePicker("Date", selection: recordBinding.event.date, displayedComponents: [.date])
             }
             
             TableColumn("Check #", value: \Record.event.checkNumber, comparator: OptionalComparator<Int>()) { record in
@@ -157,79 +162,31 @@ struct ContentView: View {
             
             TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: BoolComparator()) { record in
                 
-                let reconciledBinding = Binding {
-                    record.event.isReconciled
-                } set: { newValue in
-                    record.event.isReconciled = newValue
-                }
-
-                
-                Toggle("", isOn: reconciledBinding)
+                Toggle("", isOn: recordBinding.event.isReconciled)
             }
             
             TableColumn("Category", value: \Record.event.category, comparator: OptionalComparator<String>()) { record in
-                
-                let categoryBinding = Binding {
-                    record.event.category
-                } set: { newValue in
-                    record.event.category = newValue
-                }
 
-                
-                OptionalComboBox(selection: categoryBinding, choices: categoryListBinding)
+                OptionalComboBox(selection: recordBinding.event.category, choices: categoryListBinding)
             }
             
             TableColumn("Vendor", value: \Record.event.vendor) { record in
                 
-                let vendorBinding = Binding {
-                    record.event.vendor
-                } set: { newVendor in
-                    record.event.vendor = newVendor
-                }
-
-                
-                TextField("", text: vendorBinding)
+                TextField("", text: recordBinding.event.vendor)
             }
             
             TableColumn("Memo", value: \Record.event.memo) { record in
                 
-                let memoBinding = Binding {
-                    record.event.memo
-                } set: { newMemo in
-                    record.event.memo = newMemo
-                }
-
-                
-                TextField("", text: memoBinding)
+                TextField("", text: recordBinding.event.memo)
             }
             
             TableColumn("Credit", value: \Record.event.amount) { record in
-                
-                let creditBinding: Binding<Double> = Binding {
-                    guard case EventType.deposit = record.event.type else { return 0 }
-                    
-                    return record.event.amount
-                } set: { newAmount in
-                    record.event.type = .deposit
-                    
-                    record.event.amount = newAmount
-                }
 
                 
                 TextField("", value: creditBinding, formatter: Event.CURRENCY_FORMAT)
             }
             
             TableColumn("Withdrawal", value: \Record.event.amount) { record in
-                
-                let withdrawalBinding: Binding<Double> = Binding {
-                    guard case EventType.withdrawal = record.event.type else { return 0 }
-                    
-                    return record.event.amount
-                } set: { newAmount in
-                    record.event.type = .withdrawal
-                    
-                    record.event.amount = newAmount
-                }
                 
                 TextField("", value: withdrawalBinding, formatter: Event.CURRENCY_FORMAT)
             }
