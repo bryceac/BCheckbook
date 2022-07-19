@@ -122,16 +122,8 @@ extension Array where Element == Record {
         return self[NEXT_INDEX]
     }
     
-    subscript(id id: String) -> Record {
-        get {
-            let record = self.first(where: { $0.id == id})!
+    subscript(id id: String) -> Record? {
+        guard let record = self.first(where: { $0.id == id}) else { return nil }
             return record
-        }
-        
-        set {
-            guard self.contains(where: { $0.id == id }) else { return }
-            
-            self[id: id] = newValue
-        }
     }
 }

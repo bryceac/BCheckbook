@@ -235,6 +235,10 @@ struct ContentView: View {
                     // newestRecord = RECORD.id
                     
                 }
+                
+                Button("-") {
+                    guard !selectedRecords.isEmpty else { return }
+                }
             }
         }).onAppear(perform: {
             loadRecords()
