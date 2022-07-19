@@ -146,16 +146,6 @@ struct ContentView: View {
             
             TableColumn("Check #", value: \Record.event.checkNumber, comparator: OptionalComparator<Int>()) { record in
                 
-                let checkNumberBinding = Binding {
-                    if let checkNumber = record.event.checkNumber {
-                        return "\(checkNumber)"
-                    } else {
-                        return ""
-                    }
-                } set: { number in
-                    record.event.checkNumber = Int(number)
-                }
-                
                 TextField("", text: checkNumberBinding)
 
             }
