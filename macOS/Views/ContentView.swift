@@ -500,6 +500,46 @@ struct ContentView: View {
         
         return recordBinding
     }
+    
+    func checkNumberBinding(_ id: Record.ID) -> Binding<String> {
+        
+        return Binding {
+            if let checkNumber = recordBinding(id).wrappedValue.event.checkNumber {
+                return "\(checkNumber)"
+            } else {
+                return ""
+            }
+        } set: { newCheckNumber in
+            recordBinding(id).wrappedValue.event.checkNumber = Int(newCheckNumber)
+        }
+
+    }
+    
+    func creditBinding(_ id: Record.ID) -> Binding<Double> {
+        
+        return Binding {
+            guard case EventType.deposit = recordBinding(id).wrappedValue.event.type else { return 0 }
+            
+            return recordBinding(id).wrappedValue.event.amount
+        } set: { newAmount in
+            recordBinding(id).wrappedValue.event.type = .deposit
+            
+            recordBinding(id).wrappedValue.event.amount = newAmount
+        }
+    }
+    
+    func withdrawalBinding(_ id: Record.ID) -> Binding<Double> {
+        
+        return Binding {
+            guard case EventType.withdrawal = recordBinding(id).wrappedValue.event.type else { return 0 }
+            
+            return recordBinding(id).wrappedValue.event.amount
+        } set: { newAmount in
+            recordBinding(id).wrappedValue.event.type = .withdrawal
+            
+            recordBinding(id).wrappedValue.event.amount = newAmount
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
