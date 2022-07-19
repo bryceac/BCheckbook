@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct RecordTableView: View {
+    @State private var records = []
+    @State private var order = [
+        KeyPathComparator(\Record.event.date, order: .forward)
+    ]
+    
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
