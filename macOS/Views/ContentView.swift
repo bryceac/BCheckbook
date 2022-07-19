@@ -247,6 +247,8 @@ struct ContentView: View {
                         
                         Task {
                             try? await remove(records: recordSelection)
+                            
+                            loadRecords()
                         }
                     } else {
                         if let RECORD = records.items[id: selectedRecords.first!] {
