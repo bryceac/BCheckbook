@@ -62,7 +62,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        RecordTable( selectedRecords: $selectedRecords).environmentObject(records).toolbar(content: {
+        RecordTable(withRecordsToDisplay: filteredRecords, selection: $selectedRecords).environmentObject(records).toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.principal) {
                 
                 Menu(content: {
