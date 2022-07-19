@@ -8,9 +8,10 @@
 import Foundation
 import Combine
 import UniformTypeIdentifiers
+import IdentifiedCollections
 
 class Records: ObservableObject {
-    @Published var items: [Record] {
+    @Published var items: IdentifiedArrayOf<Record> {
         didSet {
             cancellables = []
             sortedRecords.forEach { record in
@@ -26,7 +27,7 @@ class Records: ObservableObject {
     var cancellables: [AnyCancellable] = []
     
     var sortedRecords: [Record] {
-        return items.sorted { firstRecord, secondRecord in
+        return items.map { $0 }.sorted { firstRecord, secondRecord in
             firstRecord.event.date < secondRecord.event.date
         }
     }
@@ -35,7 +36,7 @@ class Records: ObservableObject {
     
     
     init(withRecords records: [Record] = []) {
-        items = records
+        items = IdentifiedArrayOf(uniqueElements: records)
     }
     
     func balance(for record: Record) -> Double {
@@ -49,7 +50,7 @@ class Records: ObservableObject {
     }
     
     func add(_ records: [Record]) {
-        items += records
+        items.append(contentsOf:records)
     }
     
     func remove(at index: Int) {
