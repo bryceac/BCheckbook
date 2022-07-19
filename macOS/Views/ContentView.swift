@@ -20,7 +20,7 @@ struct ContentView: View {
     
     @State private var isLoading = false
     
-    @StateObject var records: Records = Records()
+    @EnvironmentObject var records: Records
     
     @State private var sortOrder: [KeyPathComparator<Record>] = [
         KeyPathComparator(\Record.event.date, order: .forward)
