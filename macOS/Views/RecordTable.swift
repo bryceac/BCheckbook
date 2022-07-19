@@ -10,7 +10,6 @@ import SwiftUI
 struct RecordTable: View {
     @EnvironmentObject var records: Records
     
-    @State var displayedRecords: [Record] = []
     @State private var order = [
         KeyPathComparator(\Record.event.date, order: .forward)
     ]
@@ -29,7 +28,7 @@ struct RecordTable: View {
         }
     
     var body: some View {
-        Table(displayedRecords, selection: $selectedRecords, sortOrder: $order) {
+        Table(records.sortedRecords, selection: $selectedRecords, sortOrder: $order) {
             TableColumn("Date", value: \Record.event.date) { record in
 
                 DatePicker("Date", selection: recordBinding(record.id).event.date, displayedComponents: [.date])
@@ -77,8 +76,6 @@ struct RecordTable: View {
                     Text(BALANCE_VALUE)
                 }
             }
-        }.onChange(of: order) { newOrder in
-            displayedRecords.sort(using: newOrder)
         }
     }
     
