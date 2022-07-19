@@ -153,7 +153,18 @@ struct ContentView: View {
             
             TableColumn("Credit", value: \Record.event.amount) { record in
                 
-                TextField("", value: $records.items[id: record.id].event.amount, formatter: Event.CURRENCY_FORMAT)
+                let creditBinding: Binding<Double> = Binding {
+                    guard case EventType.deposit = record.event.type else { return 0 }
+                    
+                    return record.event.amount
+                } set: { newAmount in
+                    record.event.type = .deposit
+                    
+                    record.event.amount = newAmount
+                }
+
+                
+                TextField("", value: creditBinding, formatter: Event.CURRENCY_FORMAT)
             }
             
             TableColumn("Withdrawal", value: \Record.event.amount) { record in
