@@ -447,8 +447,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(records: Records(withRecords: [
-            Record()
-        ]))
+        ContentView().environmentObject(Records())
     }
 }
