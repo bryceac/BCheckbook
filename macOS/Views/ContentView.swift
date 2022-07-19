@@ -77,7 +77,14 @@ struct ContentView: View {
         Table(filteredRecords, sortOrder: $sortOrder) {
             TableColumn("Date", value: \Record.event.date) { record in
                 
-                DatePicker("Date", selection: $records.items[id: record.id].event.date, displayedComponents: [.date])
+                let dateBinding = Binding {
+                    record.event.date
+                } set: { newDate in
+                    record.event.date = newDate
+                }
+
+                
+                DatePicker("Date", selection: dateBinding, displayedComponents: [.date])
             }
             
             TableColumn("Check #", value: \Record.event.checkNumber, comparator: OptionalComparator<Int>()) { record in
