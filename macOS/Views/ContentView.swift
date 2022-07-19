@@ -25,6 +25,8 @@ struct ContentView: View {
         KeyPathComparator(\Record.event.date, order: .forward)
     ]
     
+    @State private var selectedRecords = Set<Record.ID>()
+    
     @State private var showSuccessfulExportAlert = false
     
     @State private var query = ""
