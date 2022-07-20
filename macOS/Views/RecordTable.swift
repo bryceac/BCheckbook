@@ -16,7 +16,7 @@ struct RecordTable: View {
     
     @Binding var selectedRecords: Set<Record.ID>
     
-    @State var displayedRecords: [Record] = []
+    @State var displayedRecords: [Record]
     
     var categoryListBinding: Binding<[String]> {
             Binding(get: {
@@ -149,7 +149,7 @@ struct RecordTable: View {
 extension RecordTable {
     init(withRecordsToDisplay displayedRecords: [Record] = [], selection selectedRecords: Binding<Set<Record.ID>>) {
         
-        self._displayedRecords = State(initialValue: displayedRecords)
+        self.displayedRecords = displayedRecords
         
         self._selectedRecords = selectedRecords
     }
@@ -157,6 +157,6 @@ extension RecordTable {
 
 struct RecordTableView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordTable(selectedRecords: .constant(Set<Record.ID>()))
+        RecordTable(withRecordsToDisplay: [], selection: .constant(Set<Record.ID>()))
     }
 }
