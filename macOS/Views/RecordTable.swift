@@ -10,9 +10,9 @@ import SwiftUI
 struct RecordTable: View {
     @EnvironmentObject var records: Records
     
-    @State private var order = [
+    /* @State private var order = [
         KeyPathComparator(\Record.event.date, order: .forward)
-    ]
+    ] */
     
     @Binding var selectedRecords: Set<Record.ID>
     
@@ -30,49 +30,49 @@ struct RecordTable: View {
         }
     
     var body: some View {
-        Table(displayedRecords, selection: $selectedRecords, sortOrder: $order) {
-            TableColumn("Date", value: \Record.event.date) { record in
+        Table(displayedRecords, selection: $selectedRecords) {
+            TableColumn("Date") { record in
 
                 DatePicker("Date", selection: recordBinding(record.id).event.date, displayedComponents: [.date])
             }
             
-            TableColumn("Check #", value: \Record.event.checkNumber, comparator: OptionalComparator<Int>()) { record in
+            TableColumn("Check #") { record in
 
                 TextField("", text: checkNumberBinding(record.id))
 
             }
             
-            TableColumn("Reconciled", value: \Record.event.isReconciled, comparator: BoolComparator()) { record in
+            TableColumn("Reconciled") { record in
                 
                 Toggle("", isOn: recordBinding(record.id).event.isReconciled)
             }
             
-            TableColumn("Category", value: \Record.event.category, comparator: OptionalComparator<String>()) { record in
+            TableColumn("Category") { record in
 
                 OptionalComboBox(selection: recordBinding(record.id).event.category, choices: categoryListBinding)
             }
             
-            TableColumn("Vendor", value: \Record.event.vendor) { record in
+            TableColumn("Vendor") { record in
                 
                 TextField("", text: recordBinding(record.id).event.vendor)
             }
             
-            TableColumn("Memo", value: \Record.event.memo) { record in
+            TableColumn("Memo") { record in
                 
                 TextField("", text: recordBinding(record.id).event.memo)
             }
             
-            TableColumn("Credit", value: \Record.event.amount) { record in
+            TableColumn("Credit") { record in
                 
                 TextField("", value: creditBinding(record.id), formatter: Event.CURRENCY_FORMAT)
             }
             
-            TableColumn("Withdrawal", value: \Record.event.amount) { record in
+            TableColumn("Withdrawal") { record in
                 
                 TextField("", value: withdrawalBinding(record.id), formatter: Event.CURRENCY_FORMAT)
             }
             
-            TableColumn("Balance", value: \Record.self) { record in
+            TableColumn("Balance") { record in
                 
                 if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: records.balance(for: record))) {
                     Text(BALANCE_VALUE)
