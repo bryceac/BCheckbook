@@ -73,8 +73,60 @@ struct ContentView: View {
             })
         }
     
+    var table: some View {
+        Table(filteredRecords, selection: $selectedRecords) {
+            TableColumn("Date") { record in
+
+                DatePicker("Date", selection: recordBinding(record.id).event.date, displayedComponents: [.date])
+            }
+            
+            TableColumn("Check #") { record in
+
+                TextField("", text: checkNumberBinding(record.id))
+
+            }
+            
+            TableColumn("Reconciled") { record in
+                
+                Toggle("", isOn: recordBinding(record.id).event.isReconciled)
+            }
+            
+            TableColumn("Category") { record in
+
+                OptionalComboBox(selection: recordBinding(record.id).event.category, choices: categoryListBinding)
+            }
+            
+            TableColumn("Vendor") { record in
+                
+                TextField("", text: recordBinding(record.id).event.vendor)
+            }
+            
+            TableColumn("Memo") { record in
+                
+                TextField("", text: recordBinding(record.id).event.memo)
+            }
+            
+            TableColumn("Credit") { record in
+                
+                TextField("", value: creditBinding(record.id), formatter: Event.CURRENCY_FORMAT)
+            }
+            
+            TableColumn("Withdrawal") { record in
+                
+                TextField("", value: withdrawalBinding(record.id), formatter: Event.CURRENCY_FORMAT)
+            }
+            
+            TableColumn("Balance") { record in
+                
+                if let BALANCE_VALUE = Event.CURRENCY_FORMAT.string(from: NSNumber(value: records.balance(for: record))) {
+                    Text(BALANCE_VALUE)
+                }
+            }
+        }
+    }
+    
     var body: some View {
-        RecordTable(withRecordsToDisplay: filteredRecords, selection: $selectedRecords).environmentObject(records).toolbar(content: {
+        table.toolbar(content: {
             ToolbarItem(placement: ToolbarItemPlacement.principal) {
                 
                 Menu(content: {
