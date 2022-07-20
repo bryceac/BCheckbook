@@ -78,8 +78,6 @@ struct RecordTable: View {
                     Text(BALANCE_VALUE)
                 }
             }
-        }.onChange(of: order) { newOder in
-            displayedRecords.sort(using: newOder)
         }
     }
     
