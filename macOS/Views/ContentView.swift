@@ -325,6 +325,68 @@ struct ContentView: View {
             try? add(record: record)
         })
     }
+    
+    func recordBinding(_ id: Record.ID) -> Binding<Record> {
+        var placeholder = Record(withID: "FF04C3DC-F0FE-472E-8737-0F4034C049F0", transaction: Event(date: Date(), checkNumber: 1260, vendor: "Sam Hill Credit Union", memo: "Open Account", amount: 500, type: .deposit, isReconciled: true))
+        
+        var recordBinding: Binding<Record>!
+        
+        if var record = records.items[id: id] {
+            recordBinding = Binding(get: {
+                record
+            }, set: { newRecord in
+                record = newRecord
+            })
+        } else {
+            recordBinding = Binding(get: {
+                placeholder
+            }, set: { newRecord in
+                placeholder = newRecord
+            })
+        }
+        
+        return recordBinding
+    }
+    
+    func checkNumberBinding(_ id: Record.ID) -> Binding<String> {
+        
+        return Binding {
+            if let checkNumber = recordBinding(id).wrappedValue.event.checkNumber {
+                return "\(checkNumber)"
+            } else {
+                return ""
+            }
+        } set: { newCheckNumber in
+            recordBinding(id).wrappedValue.event.checkNumber = Int(newCheckNumber)
+        }
+
+    }
+    
+    func creditBinding(_ id: Record.ID) -> Binding<Double> {
+        
+        return Binding {
+            guard case EventType.deposit = recordBinding(id).wrappedValue.event.type else { return 0 }
+            
+            return recordBinding(id).wrappedValue.event.amount
+        } set: { newAmount in
+            recordBinding(id).wrappedValue.event.type = .deposit
+            
+            recordBinding(id).wrappedValue.event.amount = newAmount
+        }
+    }
+    
+    func withdrawalBinding(_ id: Record.ID) -> Binding<Double> {
+        
+        return Binding {
+            guard case EventType.withdrawal = recordBinding(id).wrappedValue.event.type else { return 0 }
+            
+            return recordBinding(id).wrappedValue.event.amount
+        } set: { newAmount in
+            recordBinding(id).wrappedValue.event.type = .withdrawal
+            
+            recordBinding(id).wrappedValue.event.amount = newAmount
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
