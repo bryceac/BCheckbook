@@ -20,7 +20,7 @@ struct ContentView: View {
     
     @State private var isLoading = false
     
-    @EnvironmentObject var records: Records
+    @StateObject var records: Records = Records()
     
     @State private var selectedRecords = Set<Record.ID>()
     
@@ -318,6 +318,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environmentObject(Records())
+        ContentView()
     }
 }
