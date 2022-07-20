@@ -11,11 +11,9 @@ import SwiftUI
 struct CheckbookApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
-    @StateObject var records = Records()
-    
     var body: some Scene {
         WindowGroup {
-            ContentView().frame(minWidth: 1024, minHeight: 768).environmentObject(records)
+            ContentView().frame(minWidth: 1024, minHeight: 768)
         }
         
         WindowGroup("Summary") {
