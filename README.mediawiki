@@ -2,7 +2,7 @@
 
 '''iOS Version:''' 1.2.3
 
-'''macOS Version:''' 1.3
+'''macOS Version:''' 2.0
 
 '''Author:''' Bryce Campbell
 
@@ -19,7 +19,7 @@ This application has only been tested on macOS 12 and iOS 15.
 ===Version History===
 
 <dl>
-<dt style="font-weight:bold">1.3 (macOS)</dt>
+<dt style="font-weight:bold">2.0 (macOS)</dt>
 <dd>
 <p>UI modification, to make the UI look and act more like how it was intended, 
 including the ability to delete either just one of multiple transactions.</p>
