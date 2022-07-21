@@ -402,41 +402,47 @@ struct ContentView: View {
     
     func checkNumberBinding(_ id: Record.ID) -> Binding<String> {
         
+        let record = recordBinding(id)
+        
         return Binding {
-            if let checkNumber = recordBinding(id).wrappedValue.event.checkNumber {
+            if let checkNumber = record.wrappedValue.event.checkNumber {
                 return "\(checkNumber)"
             } else {
                 return ""
             }
         } set: { newCheckNumber in
-            recordBinding(id).wrappedValue.event.checkNumber = Int(newCheckNumber)
+            record.wrappedValue.event.checkNumber = Int(newCheckNumber)
         }
 
     }
     
     func creditBinding(_ id: Record.ID) -> Binding<Double> {
         
+        let record = recordBinding(id)
+        
         return Binding {
-            guard case EventType.deposit = recordBinding(id).wrappedValue.event.type else { return 0 }
+            guard case EventType.deposit = record.wrappedValue.event.type else { return 0 }
             
-            return recordBinding(id).wrappedValue.event.amount
+            return record.wrappedValue.event.amount
         } set: { newAmount in
-            recordBinding(id).wrappedValue.event.type = .deposit
+            record.wrappedValue.event.type = .deposit
             
-            recordBinding(id).wrappedValue.event.amount = newAmount
+            record.wrappedValue.event.amount = newAmount
         }
     }
     
     func withdrawalBinding(_ id: Record.ID) -> Binding<Double> {
         
+        let record = recordBinding(id)
+        
         return Binding {
-            guard case EventType.withdrawal = recordBinding(id).wrappedValue.event.type else { return 0 }
+            guard case EventType.withdrawal = record.wrappedValue.event.type else { return 0 }
             
             return recordBinding(id).wrappedValue.event.amount
         } set: { newAmount in
-            recordBinding(id).wrappedValue.event.type = .withdrawal
+            record.wrappedValue.event.type = .withdrawal
             
-            recordBinding(id).wrappedValue.event.amount = newAmount
+            record.wrappedValue.event.amount = newAmount
         }
     }
 }
