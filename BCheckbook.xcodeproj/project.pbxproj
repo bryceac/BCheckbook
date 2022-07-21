@@ -757,7 +757,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.brycecampbell.bcheckbook;
 				PRODUCT_NAME = BCheckbook;
 				SDKROOT = macosx;
@@ -784,7 +784,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.brycecampbell.bcheckbook;
 				PRODUCT_NAME = BCheckbook;
 				SDKROOT = macosx;
