@@ -82,7 +82,7 @@ struct ContentView: View {
             
             TableColumn("Check #") { record in
 
-                TextField("", text: checkNumberBinding(record.id))
+                TextField("Check No.", text: checkNumberBinding(record.id))
 
             }
             
@@ -98,12 +98,12 @@ struct ContentView: View {
             
             TableColumn("Vendor") { record in
                 
-                TextField("", text: recordBinding(record.id).event.vendor)
+                TextField("Payee", text: recordBinding(record.id).event.vendor)
             }
             
             TableColumn("Memo") { record in
                 
-                TextField("", text: recordBinding(record.id).event.memo)
+                TextField("Description", text: recordBinding(record.id).event.memo)
             }
             
             TableColumn("Credit") { record in

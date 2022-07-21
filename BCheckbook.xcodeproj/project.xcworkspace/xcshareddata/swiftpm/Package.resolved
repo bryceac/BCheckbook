@@ -5,7 +5,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bryceac/ComboBox",
       "state" : {
-        "revision" : "ae9c851b4bf16a189e04a015a744b9f791f6c4ba",
+        "revision" : "c405b822aa8f64589234897ae6ef2c6eef712cb4",
         "version" : "0.2.0"
       }
     },
