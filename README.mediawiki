@@ -2,7 +2,7 @@
 
 '''iOS Version:''' 1.2.3
 
-'''macOS Version:''' 1.2.2
+'''macOS Version:''' 1.3
 
 '''Author:''' Bryce Campbell
 
@@ -19,6 +19,12 @@ This application has only been tested on macOS 12 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.3 (macOS)</dt>
+<dd>
+<p>UI modification, to make the UI look and act more like how it was intended, 
+including the ability to delete either just one of multiple transactions.</p>
+<p>Due to the changes made, the application no longer autoscrolls to new entries.</p>
+</dd>
 <dt style="font-weight:bold">1.2.2 (macOS)</dt>
 <dd>
 <p>add autoscroll to new item to macOS app, to allow it to operate like iOS app.</p>
@@ -372,5 +378,11 @@ or to select from the list of available categories.</p>
 <dd>
 <p>Custom library used to parse and export 
 <abbr title="Quicken Interchange Format">QIF</abbr> files.</p>
+</dd>
+<dt>
+<a href="https://github.com/pointfreeco/swift-identified-collections">Swift Identified Collections</a>
+</dt>
+<dd>
+<p>Library to help create bindings just by specifying id (macOS version only).</p>
 </dd>
 </dl>
