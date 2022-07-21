@@ -158,16 +158,16 @@ struct ContentView: View {
                 
             }
             ToolbarItemGroup(placement: ToolbarItemPlacement.primaryAction) {
-                Button("+") {
+                
+                Button {
                     let RECORD = Record()
                     
                     try? add(record: RECORD)
-                    
-                    // newestRecord = RECORD.id
-                    
+                } label: {
+                    Image(systemName: "plus")
                 }
                 
-                Button("-") {
+                Button {
                     guard !selectedRecords.isEmpty else { return }
                     
                     if selectedRecords.count > 1 {
@@ -186,6 +186,8 @@ struct ContentView: View {
                             try? remove(record: RECORD)
                         }
                     }
+                } label: {
+                    Image(systemName: "minus")
                 }
             }
         }).onAppear(perform: {
