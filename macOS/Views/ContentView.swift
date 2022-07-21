@@ -424,7 +424,11 @@ struct ContentView: View {
             guard case EventType.deposit = record.wrappedValue.event.type else { return 0 }
             
             return record.wrappedValue.event.amount
+            
         } set: { newAmount in
+            
+            guard newAmount > 0 else { return }
+            
             record.wrappedValue.event.type = .deposit
             
             record.wrappedValue.event.amount = newAmount
@@ -440,6 +444,9 @@ struct ContentView: View {
             
             return recordBinding(id).wrappedValue.event.amount
         } set: { newAmount in
+            
+            guard newAmount > 0 else { return }
+            
             record.wrappedValue.event.type = .withdrawal
             
             record.wrappedValue.event.amount = newAmount
