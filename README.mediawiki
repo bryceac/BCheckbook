@@ -24,6 +24,7 @@ This application has only been tested on macOS 12 and iOS 15.
 <p>UI modification, to make the UI look and act more like how it was intended, 
 including the ability to delete either just one of multiple transactions.</p>
 <p>Due to the changes made, the application no longer autoscrolls to new entries.</p>
+<p>Released July, 22, 2022.</p>
 </dd>
 <dt style="font-weight:bold">1.2.2 (macOS)</dt>
 <dd>
@@ -217,7 +218,7 @@ Records can only be removed from the ledger view in one of two ways, depending o
 
 <ul>
 <li>Swipe to Delete (iOS only)</li>
-<li>Right click/control+click (macOS only)</li>
+<li>minus button (as of version 2.0 of the Mac app).</li>
 </ul>
 
 Records can also be removed from the ledger in search results in the same fashion.
@@ -279,7 +280,7 @@ it can be found in one of the following places, depending on platform:</p>
 <ul>
 <li>Application&#39;s Documents folder (iOS app)</li>
 <li><strong>me.brycecampbell.bcheckbook</strong> folder 
-somewhere in your user&#39;s Library (macOS app)</li>
+somewhere in your user&#39;s Library folder (macOS app)</li>
 </ul>
 
 <p>Of the two most recommended options, 
@@ -307,7 +308,7 @@ making deleting the database unnecessary.
 
 You can use either Airdrop inside the Files app or use either Finder or iTunes to grab the exported bcheck file.
 
-When the transfer is made via AirDrop, your file will located in the Downloads Folder, while Finder, and likely iTunes may be more flexible.
+When the transfer is made via AirDrop, your file will be located in the Downloads Folder, while Finder, and likely iTunes may be more flexible.
 
 ====iOS Destination via AirDrop====
 
