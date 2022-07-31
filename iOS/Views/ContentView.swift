@@ -7,6 +7,7 @@
 
 import SwiftUI
 import QIF
+import IdentifiedCollections
 
 struct ContentView: View {
     
@@ -227,7 +228,7 @@ struct ContentView: View {
         Task {
             let storedRecords = await retrieveRecords()
             
-            records.items = storedRecords
+            records.items = IdentifiedArrayOf(uniqueElements: storedRecords)
             
             isLoading = false
         }
