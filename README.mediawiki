@@ -24,6 +24,7 @@ This application has only been tested on macOS 12 and iOS 15.
 <p>Minor patch</p>
 <p>Categories that users add when selecting a category 
 are now automatically selected.</p>
+<p>Released July 31, 2022</p>
 </dd>
 <dt style="font-weight:bold">2.0 (macOS)</dt>
 <dd>
