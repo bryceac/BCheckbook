@@ -14,7 +14,7 @@
 
 ==Notes==
 
-This application has only been tested on macOS 12 and iOS 15.
+This application has only been tested on macOS 12 and iOS 16.
 
 ===Version History===
 
@@ -23,6 +23,7 @@ This application has only been tested on macOS 12 and iOS 15.
 <dd>
 <p>Minor Patch</p>
 <p>Fix decrepated code and have main view on iPad display transactions.</p>
+<p>This update is only available on iOS 16.</p>
 </dd>
 <dt style="font-weight:bold">1.2.4 (iOS)</dt>
 <dd>
@@ -362,9 +363,9 @@ Submissions will be tested by me before they will be merged.
 
 ===Other===
 
-Version 1.1 and later only works on iOS 15 and later and macOS 12 and later.
+Starting with iOS app version 1.2.5, the app only works on iOS 16 and later.
 
-If you have iOS 14 or macOS 11, version 1.0 is the last version available.
+If you have iOS 16, version 1.2.4 is the last version available.
 
 ===Projects Used===
 
