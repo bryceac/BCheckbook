@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''iOS Version:''' 1.2.4
+'''iOS Version:''' 1.2.5
 
 '''macOS Version:''' 2.0
 
@@ -19,6 +19,11 @@ This application has only been tested on macOS 12 and iOS 15.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.2.5 (iOS)</dt>
+<dd>
+<p>Minor Patch</p>
+<p>Fix decrepated code and have main view on iPad display transactions.</p>
+</dd>
 <dt style="font-weight:bold">1.2.4 (iOS)</dt>
 <dd>
 <p>Minor patch</p>
