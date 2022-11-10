@@ -56,7 +56,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollViewReader { proxy in
                 List {
                     ForEach(filteredRecords) { record in
