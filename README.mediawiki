@@ -24,6 +24,7 @@ This application has only been tested on macOS 12 and iOS 16.
 <p>Minor Patch</p>
 <p>Fix decrepated code and have main view on iPad display transactions.</p>
 <p>This update is only available on iOS 16.</p>
+<p>Released November 11, 2022</p>
 </dd>
 <dt style="font-weight:bold">1.2.4 (iOS)</dt>
 <dd>
