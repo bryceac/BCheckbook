@@ -239,18 +239,18 @@ Records can also be removed from the ledger in search results in the same fashio
 
 ====Setting Categories====
 
-Setting categories, like removing records, is a little different, 
-depending on your platform.
+<p>Setting categories, like removing records, is a little different, 
+depending on your platform.</p>
 
-On iOS, after telling it to set a category, 
+<p>On iOS, after telling it to set a category, 
 you can select a category from a list or filter the list and 
 add new new categories via the filter field that is 
-presented via a custom picker view.
+presented via a custom picker view.</p>
 
-On macOS, a combo box with autocompletion is used 
+<p>On macOS, a combo box with autocompletion is used 
 and if you type in a category that does not exist in the database, 
 it <strong>should</strong> add it upon pressing enter, 
-otherwise autocompletion will try to guess what you want.
+otherwise autocompletion will try to guess what you want.</p>
 
 ===Saving & Loading===
 
