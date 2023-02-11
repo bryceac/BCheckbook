@@ -381,7 +381,7 @@ Submissions will be tested by me before they will be merged.
 
 Starting with iOS app version 1.2.5, the app only works on iOS 16 and later.
 
-If you have iOS 16, version 1.2.4 is the last version available.
+If you have iOS 15, version 1.2.4 is the last version available.
 
 ===Projects Used===
 
