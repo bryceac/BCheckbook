@@ -16,6 +16,23 @@
 
 This application has only been tested on macOS 12 and iOS 16.
 
+===Known issues===
+
+<dl>
+<dt style="font-weight:bold">Exports from macOS not getting imported on iOS</dt>
+<dd>
+<p>Status is currently unknown, but has been recently brought to my attention.</p>
+<p>When doing a normal export or QIF export on macOS 13.2, 
+data is exported as expected, but iOS does not reflect new data.</p>
+<p>However, data exported from iOS 16.3 successfully imports to the macOS app.</p>
+<p>Until either I can look into it further or fix it, 
+which I will be if I can setup a macOS 13 VM or feasibly upgrade to macOS 13, 
+it is recommended to primarily use the iOS app.</p>
+<p>At the time this README was updated, 
+I have been collecting what information I can.</p>
+</dd>
+</dl>
+
 ===Version History===
 
 <dl>
@@ -373,7 +390,7 @@ with the email you used.
 ===Contributing===
 
 If you are familiar with Swift and SwiftUI and want to help make things 
-work even better, feel free to fork this project and submit a pull request.
+work even better by fixing issues or adding things, feel free to fork this project and submit a pull request.
 
 Submissions will be tested by me before they will be merged.
 
