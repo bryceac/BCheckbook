@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import UniformTypeIdentifiers
 import IdentifiedCollections
+import CoreTransferable
 
 class Records: ObservableObject {
     @Published var items: IdentifiedArrayOf<Record> {
@@ -101,5 +102,15 @@ class Records: ObservableObject {
         }
         
         return filteredRecords
+    }
+}
+
+extension Records: Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        FileRepresentation(exportedContentType: .bcheckFile) { store in
+            let temporaryFile = FileManager.default.temporaryDirectory.appendingPathComponent("transactions").appendingPathExtension("bcheck")
+            
+            try? store.sortedRecords.save(to: temporaryFile)
+        }
     }
 }
