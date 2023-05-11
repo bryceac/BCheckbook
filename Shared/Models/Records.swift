@@ -107,8 +107,8 @@ class Records: ObservableObject {
 
 extension Records: Transferable {
     static var transferRepresentation: some TransferRepresentation {
-        FileRepresentation(exportedContentType: .bcheckFile) { store in
-            let temporaryFile = FileManager.default.temporaryDirectory.appendingPathComponent("transactions").appendingPathExtension("bcheck")
+        FileRepresentation(exportedContentType: .text) { store in
+            let temporaryFile = FileManager.default.temporaryDirectory.appendingPathComponent("transactions").appendingPathExtension("json")
             
             try? store.sortedRecords.save(to: temporaryFile)
             
