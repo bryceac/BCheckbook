@@ -111,6 +111,8 @@ extension Records: Transferable {
             let temporaryFile = FileManager.default.temporaryDirectory.appendingPathComponent("transactions").appendingPathExtension("bcheck")
             
             try? store.sortedRecords.save(to: temporaryFile)
+            
+            return SentTransferredFile(temporaryFile)
         }
     }
 }
