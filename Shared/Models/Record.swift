@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import CoreTransferable
+import UniformTypeIdentifiers
 
 /// Type that represents a record in the ledger.
 class Record: Identifiable, ObservableObject, Codable {
@@ -120,5 +122,17 @@ extension Array where Element == Record {
         let NEXT_INDEX = self.index(after: INDEX)
         
         return self[NEXT_INDEX]
+    }
+}
+
+extension Record: Transferable {
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .json)
+    }
+}
+
+extension UTType {
+    static var record: UTType {
+        return UTType(exportedAs: "me.brycecambell.record")
     }
 }
