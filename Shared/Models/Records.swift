@@ -107,12 +107,15 @@ class Records: ObservableObject {
 
 extension Records: Transferable {
     static var transferRepresentation: some TransferRepresentation {
-        FileRepresentation(exportedContentType: .bcheckFile) { store in
+        /* FileRepresentation(exportedContentType: .bcheckFile) { store in
             let temporaryFile = FileManager.default.temporaryDirectory.appendingPathComponent("transactions").appendingPathExtension("bcheck")
             
             try? store.sortedRecords.save(to: temporaryFile)
             
             return SentTransferredFile(temporaryFile)
+        } */
+        DataRepresentation(exportedContentType: .json) { store in
+            return store.sortedRecords.data!
         }
     }
 }
