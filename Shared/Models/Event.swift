@@ -162,3 +162,25 @@ extension Event: Comparable {
 }
 
 extension Event: Hashable {}
+
+extension Event: CustomStringConvertible {
+    var description: String {
+        var content = "\(date)"
+        
+        switch (category, checkNumber) {
+            case let (.some(category), .some(checkNumber)): content += "\t\(checkNumber) \t\(category)"
+            case let (.some(category), .none): content += "\t\t\(category)"
+            case let (.none, .some(checkNumber)): content += "\t\(checkNumber)\t"
+            default: content += "\t\t"
+        }
+        
+        switch (vendor, memo) {
+            case let (vendor, memo) where !vendor.isEmpty && !memo.isEmpty: content += "\t\(vendor)\t\(memo)"
+            case let (vendor, memo) where vendor.isEmpty: content += "\t\t\(memo)"
+            case let (vendor, memo) where memo.isEmpty: content += "\t\(vendor)\t"
+            default: content += "\t\t"
+        }
+    }
+    
+    
+}
