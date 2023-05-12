@@ -131,6 +131,12 @@ extension Record: Transferable {
     }
 }
 
+extension Record: CustomStringConvertible {
+    var description: String {
+        return "\(id)\t\(event)"
+    }
+}
+
 extension UTType {
     static var record: UTType {
         return UTType(exportedAs: "me.brycecambell.record")
