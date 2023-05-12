@@ -193,6 +193,4 @@ extension Event: CustomStringConvertible {
             }
         }
     }
-    
-    
 }
