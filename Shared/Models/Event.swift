@@ -171,7 +171,7 @@ extension Event: CustomStringConvertible {
         case let (.some(category), .some(checkNumber)): content += "\t\(checkNumber) \t\(isReconciled ? "Y" : "N")\t\(category)"
             case let (.some(category), .none): content += "\t\\t\(isReconciled ? "Y" : "N")\t\(category)"
             case let (.none, .some(checkNumber)): content += "\t\(checkNumber)\t\(isReconciled ? "Y" : "N")\t"
-            default: content += "\t\t\(isReconciled ? "Y" : "N")\t\t"
+            default: content += "\t\t\(isReconciled ? "Y" : "N")\t"
         }
         
         switch (vendor, memo) {
