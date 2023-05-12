@@ -114,8 +114,8 @@ extension Records: Transferable {
             
             return SentTransferredFile(temporaryFile)
         } */
-        DataRepresentation(exportedContentType: .data) { store in
+        /* DataRepresentation(exportedContentType: .data) { store in
             return store.sortedRecords.data!
-        }
+        } */
     }
 }
