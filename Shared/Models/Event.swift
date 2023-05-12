@@ -165,7 +165,7 @@ extension Event: Hashable {}
 
 extension Event: CustomStringConvertible {
     var description: String {
-        var content = "\(date)"
+        var content = "\(Event.DF.string(from: date))"
         
         switch (category, checkNumber) {
         case let (.some(category), .some(checkNumber)): content += "\t\(checkNumber) \t\(isReconciled ? "Y" : "N")\t\(category)"
