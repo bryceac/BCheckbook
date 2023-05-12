@@ -127,7 +127,7 @@ extension Array where Element == Record {
 
 extension Record: Transferable {
     static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation(contentType: .json)
+        CodableRepresentation(contentType: .record)
     }
 }
 
