@@ -192,5 +192,7 @@ extension Event: CustomStringConvertible {
                 content += "\t\(dollarAmount)"
             }
         }
+        
+        return content
     }
 }
