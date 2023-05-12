@@ -180,6 +180,18 @@ extension Event: CustomStringConvertible {
             case let (vendor, memo) where memo.isEmpty: content += "\t\(vendor)\t"
             default: content += "\t\t"
         }
+        
+        if case .withdrawal = type {
+            if amount > 0, let dollarAmount = Event.CURRENCY_FORMAT.string(from: NSNumber(value: -1.0*amount)) {
+                content += "\t\(dollarAmount)"
+            } else if let dollarAmount = Event.CURRENCY_FORMAT.string(from: NSNumber(value: amount)) {
+                content += "\t\(dollarAmount)"
+            }
+        } else {
+            if let dollarAmount = Event.CURRENCY_FORMAT.string(from: NSNumber(value: amount)) {
+                content += "\t\(dollarAmount)"
+            }
+        }
     }
     
     
