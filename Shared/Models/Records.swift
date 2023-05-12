@@ -114,7 +114,7 @@ extension Records: Transferable {
             
             return SentTransferredFile(temporaryFile)
         } */
-        DataRepresentation(exportedContentType: .json) { store in
+        DataRepresentation(exportedContentType: .data) { store in
             return store.sortedRecords.data!
         }
     }
