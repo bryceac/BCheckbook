@@ -168,10 +168,10 @@ extension Event: CustomStringConvertible {
         var content = "\(date)"
         
         switch (category, checkNumber) {
-            case let (.some(category), .some(checkNumber)): content += "\t\(checkNumber) \t\(category)"
-            case let (.some(category), .none): content += "\t\t\(category)"
-            case let (.none, .some(checkNumber)): content += "\t\(checkNumber)\t"
-            default: content += "\t\t"
+        case let (.some(category), .some(checkNumber)): content += "\t\(checkNumber) \t\(isReconciled ? "Y" : "N")\t\(category)"
+            case let (.some(category), .none): content += "\t\\t\(isReconciled ? "Y" : "N")t\(category)"
+            case let (.none, .some(checkNumber)): content += "\t\(checkNumber)\t\(isReconciled ? "Y" : "N")\t"
+            default: content += "\t\t\(isReconciled ? "Y" : "N")\t\t"
         }
         
         switch (vendor, memo) {
