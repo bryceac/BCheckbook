@@ -215,6 +215,14 @@ extension Event: LosslessStringConvertible {
         let eventVendor = eventComponents[4]
         let eventMemo = eventComponents[5]
         
+        guard let eventAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.number(from: eventComponents[6]) else { return nil }
         
+        self.init(date: eventDate,
+                  checkNumber: eventCheck,
+                  category: eventCategory,
+                  vendor: eventVendor,
+                  memo: eventMemo,
+                  amount: Double(truncating: eventAmount),
+                  andIsReconciled: eventIsReconciled)
     }
 }
