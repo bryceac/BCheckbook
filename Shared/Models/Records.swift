@@ -48,6 +48,12 @@ class Records: ObservableObject, Codable {
         self.init(withRecords: STORED_RECORDS)
     }
     
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        
+        try container.encode(sortedRecords)
+    }
+    
     func balance(for record: Record) -> Double {
         guard let databaseManager = DB.shared.manager, let balance = try? databaseManager.balance(for: record) else { return 0 }
         
