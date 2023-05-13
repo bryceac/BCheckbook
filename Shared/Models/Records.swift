@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 import IdentifiedCollections
 import CoreTransferable
 
-class Records: ObservableObject {
+class Records: ObservableObject, Codable {
     @Published var items: IdentifiedArrayOf<Record> {
         didSet {
             cancellables = []
@@ -38,6 +38,14 @@ class Records: ObservableObject {
     
     init(withRecords records: [Record] = []) {
         items = IdentifiedArrayOf(uniqueElements: records)
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        let CONTAINER = try decoder.singleValueContainer()
+        
+        let STORED_RECORDS = try CONTAINER.decode([Record].self)
+        
+        self.init(withRecords: STORED_RECORDS)
     }
     
     func balance(for record: Record) -> Double {
