@@ -143,7 +143,7 @@ extension Records: Transferable {
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .bcheckFile)
         ProxyRepresentation { store in
-            return "\(self)"
+            return "\(store)"
         }
     }
 }
