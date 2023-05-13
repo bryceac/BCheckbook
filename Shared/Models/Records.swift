@@ -55,6 +55,8 @@ class Records: ObservableObject, Codable, LosslessStringConvertible {
             Record(line)
         }
         
+        guard !RETRIEVED_RECORDS.isEmpty else { return nil }
+        
         self.init(withRecords: RETRIEVED_RECORDS)
     }
     
