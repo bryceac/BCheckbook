@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import QIF
 
 struct Event {
     var date: Date = Date()
@@ -182,17 +183,38 @@ extension Event: CustomStringConvertible {
         }
         
         if case .withdrawal = type {
-            if amount > 0, let dollarAmount = Event.CURRENCY_FORMAT.string(from: NSNumber(value: -1.0*amount)) {
+            if amount > 0, let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: -1.0*amount)) {
                 content += "\t\(dollarAmount)"
-            } else if let dollarAmount = Event.CURRENCY_FORMAT.string(from: NSNumber(value: amount)) {
+            } else if let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: amount)) {
                 content += "\t\(dollarAmount)"
             }
         } else {
-            if let dollarAmount = Event.CURRENCY_FORMAT.string(from: NSNumber(value: amount)) {
+            if let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: amount)) {
                 content += "\t\(dollarAmount)"
             }
         }
         
         return content
+    }
+}
+
+extension Event: LosslessStringConvertible {
+    init?(_ description: String) {
+        let eventComponents = description.components(separatedBy: "\t")
+        
+        guard let eventDate = Event.DF.date(from: eventComponents[0]) else { return nil }
+        
+        let eventCheck = Int(eventComponents[1])
+        
+        guard !eventComponents[2].isEmpty && (eventComponents[2] == "Y" || eventComponents[2] == "N") else { return nil }
+        
+        let eventIsReconciled = eventComponents[2] == "Y"
+        
+        let eventCategory = !eventComponents[3].isEmpty ? eventComponents[3] : nil
+        
+        let eventVendor = eventComponents[4]
+        let eventMemo = eventComponents[5]
+        
+        
     }
 }
