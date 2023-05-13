@@ -222,7 +222,7 @@ extension Event: LosslessStringConvertible {
                   category: eventCategory,
                   vendor: eventVendor,
                   memo: eventMemo,
-                  amount: Double(truncating: eventAmount),
+                  amount: eventAmount.doubleValue,
                   andIsReconciled: eventIsReconciled)
     }
 }
