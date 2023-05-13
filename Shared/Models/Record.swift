@@ -11,7 +11,7 @@ import CoreTransferable
 import UniformTypeIdentifiers
 
 /// Type that represents a record in the ledger.
-class Record: Identifiable, ObservableObject, Codable {
+class Record: Identifiable, ObservableObject, Codable, LosslessStringConvertible {
     
     /// the record's identifier
     let id: String
@@ -29,6 +29,16 @@ class Record: Identifiable, ObservableObject, Codable {
     
     init(withID id: String = UUID().uuidString, transaction: Event = Event()) {
         (self.id, self.event) = (id, transaction)
+    }
+    
+    required convenience init?(_ description: String) {
+        let transactionComponents = description.components(separatedBy: "\t")
+        
+        let transactionEventString = Array(transactionComponents.dropFirst()).joined(separator: "\t")
+        
+        guard let transactionEvent = Event(transactionEventString) else { return nil }
+        
+        self.init(withID: transactionComponents[0], transaction: transactionEvent)
     }
     
     required convenience init(from decoder: Decoder) throws {
