@@ -119,18 +119,15 @@ class Records: ObservableObject, Codable {
     }
 }
 
+extension UTType {
+    static var store: UTType {
+        UTType(exportedAs: "me.brycecampbell.store")
+    }
+}
+
 extension Records: Transferable {
     static var transferRepresentation: some TransferRepresentation {
-        /* FileRepresentation(exportedContentType: .bcheckFile) { store in
-            let temporaryFile = FileManager.default.temporaryDirectory.appendingPathComponent("transactions").appendingPathExtension("bcheck")
-            
-            try? store.sortedRecords.save(to: temporaryFile)
-            
-            return SentTransferredFile(temporaryFile)
-        } */
-        DataRepresentation(exportedContentType: .data) { store in
-            return store.sortedRecords.data!
-        }
+        CodableRepresentation(contentType: .store)
         ProxyRepresentation { store in
             store.sortedRecords.map { record in
                 "\(record)"
