@@ -131,12 +131,6 @@ class Records: ObservableObject, Codable, LosslessStringConvertible {
     }
 }
 
-extension UTType {
-    static var store: UTType {
-        UTType(exportedAs: "me.brycecampbell.store")
-    }
-}
-
 extension Records: CustomStringConvertible {
     var description: String {
         sortedRecords.map { record in
@@ -147,7 +141,7 @@ extension Records: CustomStringConvertible {
 
 extension Records: Transferable {
     static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation(contentType: .store)
+        CodableRepresentation(contentType: .bcheckFile)
         ProxyRepresentation { store in
             return "\(self)"
         }
