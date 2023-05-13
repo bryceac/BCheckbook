@@ -34,11 +34,13 @@ class Record: Identifiable, ObservableObject, Codable, LosslessStringConvertible
     required convenience init?(_ description: String) {
         let transactionComponents = description.components(separatedBy: "\t")
         
+        let transactionID = transactionComponents[0].isEmpty ? UUID().uuidString : transactionComponents[0]
+        
         let transactionEventString = Array(transactionComponents.dropFirst()).joined(separator: "\t")
         
         guard let transactionEvent = Event(transactionEventString) else { return nil }
         
-        self.init(withID: transactionComponents[0], transaction: transactionEvent)
+        self.init(withID: transactionID, transaction: transactionEvent)
     }
     
     required convenience init(from decoder: Decoder) throws {
