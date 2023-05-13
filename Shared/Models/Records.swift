@@ -137,13 +137,19 @@ extension UTType {
     }
 }
 
+extension Records: CustomStringConvertible {
+    var description: String {
+        sortedRecords.map { record in
+            "\(record)"
+        }.joined(separator: "\r\n")
+    }
+}
+
 extension Records: Transferable {
     static var transferRepresentation: some TransferRepresentation {
         CodableRepresentation(contentType: .store)
         ProxyRepresentation { store in
-            store.sortedRecords.map { record in
-                "\(record)"
-            }.joined(separator: "\r\n")
+            return "\(self)"
         }
     }
 }
