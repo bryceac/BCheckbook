@@ -87,7 +87,7 @@ struct ContentView: View {
                                 isExporting = true
                             }
                             
-                            ShareLink(item: records, preview: SharePreview(Text("Transactions"), image: Image(UIImage: UIImage(named: "AppIcon")!)))
+                            ShareLink(item: records, preview: SharePreview(Text("Transactions"), image: Image(uiImage: UIImage(named: "AppIcon")!)))
                             
                             Button("Import Transactions") {
                                 isImporting = true
