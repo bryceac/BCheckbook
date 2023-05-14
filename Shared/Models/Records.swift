@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 import IdentifiedCollections
 import CoreTransferable
 
-class Records: ObservableObject LosslessStringConvertible {
+class Records: ObservableObject, LosslessStringConvertible {
     @Published var items: IdentifiedArrayOf<Record> {
         didSet {
             cancellables = []
