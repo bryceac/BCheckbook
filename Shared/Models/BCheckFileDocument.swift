@@ -71,6 +71,12 @@ class BCheckFileDocument: ReferenceFileDocument {
         return QIF(sections: [section.type.rawValue: section])
     }
     
+    func generateTSV() -> String {
+        return records.sortedRecords.map { record in
+            "\(record)"
+        }.joined(separator: "\r\n")
+    }
+    
     func fileWrapper(snapshot: [Record], configuration: WriteConfiguration) throws -> FileWrapper {
         
         var fileWrapper = FileWrapper()
@@ -85,6 +91,10 @@ class BCheckFileDocument: ReferenceFileDocument {
             
             if let qifData = "\(qif)".data(using: .utf8) {
                 fileWrapper = FileWrapper(regularFileWithContents: qifData)
+            }
+        case .tsv:
+            let content = records.sortedRecords.map { record in
+                "\(record)"
             }
         default: ()
         }
