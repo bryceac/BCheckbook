@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 import IdentifiedCollections
 import CoreTransferable
 
-class Records: ObservableObject, Codable, LosslessStringConvertible {
+class Records: ObservableObject LosslessStringConvertible {
     @Published var items: IdentifiedArrayOf<Record> {
         didSet {
             cancellables = []
@@ -40,14 +40,6 @@ class Records: ObservableObject, Codable, LosslessStringConvertible {
         items = IdentifiedArrayOf(uniqueElements: records)
     }
     
-    required convenience init(from decoder: Decoder) throws {
-        let CONTAINER = try decoder.singleValueContainer()
-        
-        let STORED_RECORDS = try CONTAINER.decode([Record].self)
-        
-        self.init(withRecords: STORED_RECORDS)
-    }
-    
     required convenience init?(_ description: String) {
         let STORED_RECORDS = description.components(separatedBy: "\r\n")
         
@@ -58,12 +50,6 @@ class Records: ObservableObject, Codable, LosslessStringConvertible {
         guard !RETRIEVED_RECORDS.isEmpty else { return nil }
         
         self.init(withRecords: RETRIEVED_RECORDS)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        
-        try container.encode(sortedRecords)
     }
     
     func balance(for record: Record) -> Double {
