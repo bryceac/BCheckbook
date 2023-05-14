@@ -184,11 +184,11 @@ extension Event: CustomStringConvertible {
         
         if case .withdrawal = type {
             if amount > 0, let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: amount)) {
-                content += "\t\(dollarAmount)\t"
+                content += "\t\t\(dollarAmount)"
             }
         } else {
             if let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: amount)) {
-                content += "\t\t\(dollarAmount)"
+                content += "\t\(dollarAmount)\t"
             }
         }
         
