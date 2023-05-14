@@ -93,8 +93,10 @@ class BCheckFileDocument: ReferenceFileDocument {
                 fileWrapper = FileWrapper(regularFileWithContents: qifData)
             }
         case .tsv:
-            let content = records.sortedRecords.map { record in
-                "\(record)"
+            let content = generateTSV()
+            
+            if let tsvData = content.data(using: .utf8) {
+                fileWrapper = FileWrapper(regularFileWithContents: tsvData)
             }
         default: ()
         }
