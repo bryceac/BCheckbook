@@ -19,6 +19,10 @@ extension UTType {
     static var quickenInterchangeFormat: UTType {
         UTType(importedAs: "me.brycecampbell.qif")
     }
+    
+    static var tsv: UTType {
+        UTType(importedAs: "me.brycecampbell.tsv")
+    }
 }
 
 class BCheckFileDocument: ReferenceFileDocument {
