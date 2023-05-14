@@ -28,7 +28,7 @@
 		</dict>
 		<dict>
 			<key>CFBundleTypeName</key>
-			<string>TSV</string>
+			<string>TSV File</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
