@@ -183,14 +183,12 @@ extension Event: CustomStringConvertible {
         }
         
         if case .withdrawal = type {
-            if amount > 0, let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: -1.0*amount)) {
-                content += "\t\(dollarAmount)"
-            } else if let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: amount)) {
-                content += "\t\(dollarAmount)"
+            if amount > 0, let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: amount)) {
+                content += "\t\(dollarAmount)\t"
             }
         } else {
             if let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: amount)) {
-                content += "\t\(dollarAmount)"
+                content += "\t\t\(dollarAmount)"
             }
         }
         
@@ -215,14 +213,18 @@ extension Event: LosslessStringConvertible {
         let eventVendor = eventComponents[4]
         let eventMemo = eventComponents[5]
         
-        guard let eventAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.number(from: eventComponents[6]) else { return nil }
+        let eventCreditAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.number(from: eventComponents[6])?.doubleValue
+        
+        let eventWithdrawalAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.number(from: eventComponents[7])?.doubleValue
+        
+        guard (eventCreditAmount != nil || eventWithdrawalAmount != nil) && (eventCreditAmount != nil && eventWithdrawalAmount != nil) else { return nil }
         
         self.init(date: eventDate,
                   checkNumber: eventCheck,
                   category: eventCategory,
                   vendor: eventVendor,
                   memo: eventMemo,
-                  amount: eventAmount.doubleValue,
-                  andIsReconciled: eventIsReconciled)
+                  amount: eventCreditAmount != nil ? eventCreditAmount! : eventWithdrawalAmount!,
+                  type: eventCreditAmount != nil ? .deposit : .withdrawal, isReconciled: eventIsReconciled)
     }
 }
