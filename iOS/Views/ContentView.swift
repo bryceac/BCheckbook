@@ -213,7 +213,7 @@ struct ContentView: View {
     }
     
     func records(fromTSV file: URL) async -> [Record] {
-        guard let fileData = try? Data(contentsOf: file), let content = String(bytes: fileData, encoding: .utf8) else { return [Record]() }
+        guard let fileData = try? Data(contentsOf: file), let content = String(data: fileData, encoding: .utf8) else { return [Record]() }
         
         let lines = content.components(separatedBy: .newlines)
         
