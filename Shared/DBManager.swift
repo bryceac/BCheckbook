@@ -163,6 +163,14 @@ class DBManager {
         return records
     }
     
+    func record(withID id: String) -> Record? {
+        guard let record = try? records(inRange: .all).first(where: { dbRecord in
+            dbRecord.id.caseInsensitiveCompare(id) == .orderedSame
+        }) else { return nil }
+        
+        return record
+    }
+    
     private func retrieveCategories() throws -> [String] {
         var categories: [String] = []
         
