@@ -40,8 +40,7 @@ class BCheckFileDocument: ReferenceFileDocument {
         var records = Records()
         
         if let fileData = configuration.file.regularFileContents {
-            
-            if let fileName = configuration.file.filename, fileName.hasSuffix(".bcheck") {
+            /* if let fileName = configuration.file.filename, fileName.hasSuffix(".bcheck") {
                 let SAVED_RECORDS = try Record.load(from: fileData)
                 
                 records = Records(withRecords: SAVED_RECORDS)
@@ -55,6 +54,32 @@ class BCheckFileDocument: ReferenceFileDocument {
                     
                     records = Records(withRecords: SAVED_RECORDS)
                 }
+            } */
+            
+            switch configuration.file.filename {
+            case let .some(fileName) where fileName?.hasSuffix("bcheck"):
+                let SAVED_RECORDS = try Record.load(from: fileData)
+                
+                records = Records(withRecords: SAVED_RECORDS)
+            case let .some(fileName) where fileName?.hasSuffix("tsv"):
+                if let content = String(data: fileData, encoding: .utf8) {
+                    let lines = content.components(separatedBy: .newlines)
+                    
+                    
+                }
+            case let .some(fileName):
+                if let content = String(data: fileData, encoding: .utf8) {
+                    let qif = try QIF(content)
+                    
+                    if let bank = qif.sections[QIFType.bank.rawValue] {
+                        let SAVED_RECORDS = bank.transactions.map { transaction in
+                            Record(transaction: Event(transaction))
+                        }
+                        
+                        records = Records(withRecords: SAVED_RECORDS)
+                    }
+                }
+            default: ()
             }
         }
         
