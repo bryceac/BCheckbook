@@ -292,6 +292,10 @@ class DBManager {
         
         let TRSNSACTION_RECORD = TRABSACTION_TABLE.filter(ID_FIELD == record.id)
         
+        guard let storedRecord = self.record(withID: record.id) else { return }
+        guard record.event != storedRecord.event else { return }
+        
+        
         var update: Update!
         
         if let category = record.event.category {
