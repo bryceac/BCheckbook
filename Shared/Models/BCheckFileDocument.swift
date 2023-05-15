@@ -28,7 +28,9 @@ extension UTType {
 class BCheckFileDocument: ReferenceFileDocument {
     
     
-    static var readableContentTypes: [UTType] = [.bcheckFile, .quickenInterchangeFormat]
+    static var readableContentTypes: [UTType] = [.bcheckFile,
+        .quickenInterchangeFormat,
+        .tsv]
     
     var records: Records = Records()
     
