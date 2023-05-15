@@ -121,7 +121,7 @@ extension Records: CustomStringConvertible {
     var description: String {
         sortedRecords.map { record in
             "\(record)"
-        }.joined(separator: "\r\n")
+        }.joined(separator: "\n")
     }
 }
 
