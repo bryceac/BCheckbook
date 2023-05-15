@@ -215,13 +215,15 @@ struct ContentView: View {
                     showSuccessfulExportAlert = true
                 }
             }
-        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFile, .quickenInterchangeFormat], allowsMultipleSelection: false) { result in
+        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFile, .quickenInterchangeFormat, .tsv], allowsMultipleSelection: false) { result in
             if case .success = result {
                 if let file = try? result.get().first {
                     
                     switch file.pathExtension {
                     case "bcheck":
                         loadRecords(fromBCheck: file)
+                    case "tsv":
+                        loadRecords(fromTSV: file)
                     default:
                         loadRecords(fromQIF: file)
                     }
