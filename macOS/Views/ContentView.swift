@@ -147,6 +147,13 @@ struct ContentView: View {
                         isExporting = true
                     }
                     
+                    Button("Export Transactions to TSV") {
+                        
+                        records.exportFormat = .tsv
+                        
+                        isExporting = true
+                    }
+                    
                     /* ShareLink(item: records, preview: SharePreview(Text("Transactions"), image: Image(nsImage: NSImage(named: "AppIcon")!))) */
 
                     Button("View Summary") {
@@ -280,6 +287,29 @@ struct ContentView: View {
             
             try? await add(records: loadedRecords)
             
+            loadRecords()
+        }
+    }
+    
+    func records(fromTSV file: URL) async -> [Record] {
+        guard let fileData = try? Data(contentsOf: file), let content = String(data: fileData, encoding: .utf8) else { return [Record]() }
+        
+        let lines = content.components(separatedBy: .newlines)
+        
+        let loadedRecords = lines.compactMap { line in
+            Record(line)
+        }
+        
+        return loadedRecords
+    }
+    
+    func loadRecords(fromTSV file: URL) {
+        
+        isLoading = true
+        Task {
+            let loadedRecords = await records(fromTSV: file)
+            
+            try? await add(records: loadedRecords)
             loadRecords()
         }
     }
