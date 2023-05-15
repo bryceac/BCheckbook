@@ -87,6 +87,13 @@ struct ContentView: View {
                                 isExporting = true
                             }
                             
+                            Button("Export Transactions to TSV") {
+                                
+                                records.exportFormat = .tsv
+                                
+                                isExporting = true
+                            }
+                            
                             ShareLink(item: records, preview: SharePreview(Text("Transactions"), image: Image(uiImage: UIImage(named: "AppIcon")!)))
                             
                             Button("Import Transactions") {
