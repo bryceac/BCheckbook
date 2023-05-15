@@ -208,6 +208,18 @@ struct ContentView: View {
         }
     }
     
+    func records(fromTSV file: URL) async -> [Record] {
+        guard let fileData = try? Data(contentsOf: file), let content = String(bytes: fileData, encoding: .utf8) else { return [Record]() }
+        
+        let lines = content.components(separatedBy: .newlines)
+        
+        let loadedRecords = lines.compactMap { line in
+            Record(line)
+        }
+        
+        return loadedRecords
+    }
+    
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
             guard let databaseManager = DB.shared.manager else { return }
