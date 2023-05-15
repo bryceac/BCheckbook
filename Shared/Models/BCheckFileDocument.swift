@@ -105,7 +105,7 @@ class BCheckFileDocument: ReferenceFileDocument {
     func generateTSV() -> String {
         return records.sortedRecords.map { record in
             "\(record)"
-        }.joined(separator: "\r\n")
+        }.joined(separator: "\n")
     }
     
     func fileWrapper(snapshot: [Record], configuration: WriteConfiguration) throws -> FileWrapper {
