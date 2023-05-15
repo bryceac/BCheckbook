@@ -220,6 +220,17 @@ struct ContentView: View {
         return loadedRecords
     }
     
+    func loadRecords(fromTSV file: URL) {
+        
+        isLoading = true
+        Task {
+            let loadedRecords = await records(fromTSV: file)
+            
+            try? addRecords(loadedRecords)
+            loadRecords()
+        }
+    }
+    
     func delete(at offsets: IndexSet) {
         offsets.forEach { index in
             guard let databaseManager = DB.shared.manager else { return }
