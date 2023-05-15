@@ -57,17 +57,21 @@ class BCheckFileDocument: ReferenceFileDocument {
             } */
             
             switch configuration.file.filename {
-            case let .some(fileName) where fileName?.hasSuffix("bcheck"):
+            case let .some(fileName) where fileName.hasSuffix("bcheck"):
                 let SAVED_RECORDS = try Record.load(from: fileData)
                 
                 records = Records(withRecords: SAVED_RECORDS)
-            case let .some(fileName) where fileName?.hasSuffix("tsv"):
+            case let .some(fileName) where fileName.hasSuffix("tsv"):
                 if let content = String(data: fileData, encoding: .utf8) {
                     let lines = content.components(separatedBy: .newlines)
                     
+                    let RETRIEVED_RECORDS = lines.compactMap { line in
+                        Record(line)
+                    }
                     
+                    records = Records(withRecords: RETRIEVED_RECORDS)
                 }
-            case let .some(fileName):
+            case .some(_):
                 if let content = String(data: fileData, encoding: .utf8) {
                     let qif = try QIF(content)
                     
