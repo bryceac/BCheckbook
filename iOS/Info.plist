@@ -133,9 +133,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.utf8PlainText</string>
-				<string>public.content</string>
-				<string>public.data</string>
+				<string>public.tab-separated-values-text</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>TSV File</string>
