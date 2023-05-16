@@ -152,7 +152,7 @@ struct ContentView: View {
             switch fileURL.pathExtension {
             case "bcheck":
                 loadRecords(fromBCheck: fileURL)
-            case "tsv":
+            case "tsv", "txt":
                 loadRecords(fromTSV: fileURL)
             default:
                 loadRecords(fromQIF: fileURL)
