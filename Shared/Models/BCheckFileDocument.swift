@@ -119,7 +119,7 @@ class BCheckFileDocument: ReferenceFileDocument {
             if let qifData = "\(qif)".data(using: .utf8) {
                 fileWrapper = FileWrapper(regularFileWithContents: qifData)
             }
-        case .tsv:
+        case .utf8TabSeparatedText:
             let content = generateTSV()
             
             if let tsvData = content.data(using: .utf8) {
