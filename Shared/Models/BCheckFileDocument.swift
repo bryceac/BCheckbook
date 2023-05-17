@@ -19,10 +19,6 @@ extension UTType {
     static var quickenInterchangeFormat: UTType {
         UTType(importedAs: "me.brycecampbell.qif")
     }
-    
-    static var tsv: UTType {
-        UTType(importedAs: "me.brycecampbell.tsv")
-    }
 }
 
 class BCheckFileDocument: ReferenceFileDocument {
@@ -30,7 +26,7 @@ class BCheckFileDocument: ReferenceFileDocument {
     
     static var readableContentTypes: [UTType] = [.bcheckFile,
         .quickenInterchangeFormat,
-        .tsv]
+        .utf8TabSeparatedText]
     
     var records: Records = Records()
     
