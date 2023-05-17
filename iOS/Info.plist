@@ -33,7 +33,7 @@
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.utf8-tab-separated-text</string>
+				<string>public.utf8-tab-separated-values-text</string>
 			</array>
 		</dict>
 	</array>
