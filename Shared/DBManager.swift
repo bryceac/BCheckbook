@@ -163,14 +163,6 @@ class DBManager {
         return records
     }
     
-    func record(withID id: String) -> Record? {
-        guard let record = try? records(inRange: .all).first(where: { dbRecord in
-            dbRecord.id.caseInsensitiveCompare(id) == .orderedSame
-        }) else { return nil }
-        
-        return record
-    }
-    
     private func retrieveCategories() throws -> [String] {
         var categories: [String] = []
         
@@ -291,10 +283,6 @@ class DBManager {
         guard try databaseHas(record: record) else { return }
         
         let TRSNSACTION_RECORD = TRABSACTION_TABLE.filter(ID_FIELD == record.id)
-        
-        guard let storedRecord = self.record(withID: record.id) else { return }
-        guard record.event != storedRecord.event else { return }
-        
         
         var update: Update!
         
