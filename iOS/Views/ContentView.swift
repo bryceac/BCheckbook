@@ -89,7 +89,7 @@ struct ContentView: View {
                             
                             Button("Export Transactions to TSV") {
                                 
-                                records.exportFormat = .utf8TabSeparatedText
+                                records.exportFormat = .bcheckTSV
                                 
                                 isExporting = true
                             }
@@ -134,7 +134,7 @@ struct ContentView: View {
             if case .success = result {
                 showSaveSuccessfulAlert = true
             }
-        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFile, .quickenInterchangeFormat, .utf8TabSeparatedText], allowsMultipleSelection: false) { result in
+        }.fileImporter(isPresented: $isImporting, allowedContentTypes: [.bcheckFile, .quickenInterchangeFormat, .bcheckTSV], allowsMultipleSelection: false) { result in
             if case .success = result {
                 if let file = try? result.get().first {
                     
