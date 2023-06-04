@@ -33,7 +33,7 @@
 			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.utf8-tab-separated-values-text</string>
+				<string>me.brycecampbell.tsv</string>
 			</array>
 		</dict>
 	</array>
