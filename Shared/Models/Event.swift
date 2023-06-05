@@ -200,7 +200,7 @@ extension Event: LosslessStringConvertible {
     init?(_ description: String) {
         let eventComponents = description.components(separatedBy: "\t")
         
-        guard eventComponents.count == 8 else { return nil }
+        guard case 7...8 = eventComponents.count else { return nil }
         
         guard let eventDate = Event.DF.date(from: eventComponents[0]) else { return nil }
         

@@ -34,7 +34,7 @@ class Record: Identifiable, ObservableObject, Codable, LosslessStringConvertible
     required convenience init?(_ description: String) {
         let transactionComponents = description.components(separatedBy: "\t")
         
-        guard transactionComponents.count == 9 else { return nil }
+        guard case 8...9 = transactionComponents.count else { return nil }
         
         let transactionID = transactionComponents[0].isEmpty ? UUID().uuidString : transactionComponents[0]
         
