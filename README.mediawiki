@@ -313,7 +313,7 @@ thus will not be imported into the application.
 ====Importing TSV Files====
 
 Although this app supports TSV files, the items in the TSV file 
-are expected to have <strong>9</strong> columns, which are read like this:
+are expected to have no less than <strong>8</strong> columns and no more than <strong>9</strong> columns, which are read like this:
 
 <dl>
 <dt style="font-weight:bold">Column 1</dt>
