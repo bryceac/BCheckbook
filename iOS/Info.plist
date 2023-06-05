@@ -213,7 +213,6 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>tsv</string>
-					<string>txt</string>
 				</array>
 			</dict>
 		</dict>
