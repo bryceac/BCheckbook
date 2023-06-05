@@ -217,7 +217,7 @@ extension Event: LosslessStringConvertible {
         
         let eventCreditAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.number(from: eventComponents[6])?.doubleValue
         
-        let eventWithdrawalAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.number(from: eventComponents[7])?.doubleValue
+        let eventWithdrawalAmount = eventComponents.indices.contains(7) ? QIFTransaction.TRANSACTION_AMOUNT_FORMAT.number(from: eventComponents[7])?.doubleValue : nil
         
         guard (eventCreditAmount != nil && .none ~= eventWithdrawalAmount) || (eventWithdrawalAmount != nil && .none ~= eventCreditAmount) else { return nil }
         
