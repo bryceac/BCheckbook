@@ -310,6 +310,57 @@ and is the only format I chose to accept.
 Any transactions not in MM/DD/YYYY format will not be seen,
 thus will not be imported into the application.
 
+====Importing TSV Files====
+
+Although this app supports TSV files, the items in the TSV file 
+are expected to have <strong>9</strong> columns, which are read like this:
+
+<dl>
+<dt style="font-weight:bold">Column 1</dt>
+<dd>Identifier</dd>
+<dt style="font-weight:bold">Column 2</dt>
+<dd>Date</dd>
+<dt style="font-weight:bold">Column 3</dt>
+<dd>Check Number</dd>
+<dt style="font-weight:bold">Column 4</dt>
+<dd>Reconciled</dd>
+<dt style="font-weight:bold">Column 5</dt>
+<dd>Category</dd>
+<dt style="font-weight:bold">Column 6</dt>
+<dd>Vendor</dd>
+<dt style="font-weight:bold">Column 7</dt>
+<dd>Memo</dd>
+<dt style="font-weight:bold">Column 8</dt>
+<dd>Credit Amount</dd>
+<dt style="font-weight:bold">Column 9</dt>
+<dd>Withdrawal Amount</dd>
+</dl>
+
+<p>The date must be in YYY-MM-DD format to register correctly 
+and the Reconciled column can only have either an <strong>N</strong> 
+or <strong>Y</strong>. Failure to follow 
+these rules will result in the record not being loaded.</p>
+
+<p>Also, only one of the final two columns is allowed to have a value 
+and both are expected to be formatted 
+like your typical currency <strong>without</strong> any currency symbol.</p>
+
+<p>The contents of your TSV file should ultimately look similiar to this:</p>
+
+<pre>
+FF04C3DC-F0FE-472E-8737-0F4034C049F0	2021-07-08	1260 	Y	Opening Balance	Sam Hill Credit Union	Open Account	500.00	
+1422CBC6-7B0B-4584-B7AB-35167CC5647B	2021-07-08		N	Gifts	Fake Street Electronics	Head set		200.00
+BB22187E-0BD3-41E8-B3D8-8136BD700865	2021-07-08		N		Velociraptor Entertainment	Pay Day	50,000.00	
+</pre>
+
+<p>While all three records have identifiers, 
+no value is required to be in that column.</p>
+
+<p>To make this easier, it is recommended to use either 
+Microsoft Excel or LibreOffice Calc or something like those two programs 
+to create or edit TSV (aka. tab separated value) 
+files, rather than do it by hand.</p>
+
 ===Backing up Data===
 
 <p>Due to the iOS app and the Mac app being a bit more similiar, 
@@ -319,11 +370,14 @@ with the recent changes, there are two ways to back up data.</p>
 <li>backup the database file</li>
 <li>export transactions to a bcheck file</li>
 <li>export transactions to QIF (starting with version 1.2)</li>
+<li>export transactions to 
+<abbr title="tab separated values">TSV</abbr> (starting with 
+version 1.3 on iOS and 2.0.1 on macOS)</li>
 </ul>
 
-<p>Of the three options, the latter two are recommended for most people, as the 
+<p>Of the four options, the latter three are recommended for most people, as the 
 database structure might change in the future, 
-and the latter most 
+and the latter most two 
 <strong>should</strong> allow you to migrate to other applications if desired.</p>
 
 <p>However, if you wish to back up the database or access it, 
@@ -336,10 +390,10 @@ somewhere in your user&#39;s Library folder (macOS app)</li>
 </ul>
 
 <p>Of the two most recommended options, 
-<strong>bcheck</strong> will provide the best experience, 
+<strong>bcheck</strong> and <strong>TSV</abbr> will provide the best experience, 
 because everything is <strong>always</strong> imported with QIF 
 and there is no way to use them to update existing records, whereas 
-<strong>bcheck</strong> files provide enough 
+<strong>bcheck</strong> and <strong>TSV</strong> files provide enough 
 data to update existing transactions.</p> 
 
 
