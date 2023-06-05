@@ -127,9 +127,6 @@ extension Records: CustomStringConvertible {
 
 extension Records: Transferable {
     static var transferRepresentation: some TransferRepresentation {
-        /* ProxyRepresentation { store in
-            return "\(store)"
-        } */
         ProxyRepresentation { store in
             return "\(store)"
         } importing: { retrievedData in
