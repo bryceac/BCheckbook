@@ -41,7 +41,7 @@ class Records: ObservableObject, LosslessStringConvertible {
     }
     
     required convenience init?(_ description: String) {
-        let STORED_RECORDS = description.components(separatedBy: "\r\n")
+        let STORED_RECORDS = description.components(separatedBy: .newlines)
         
         let RETRIEVED_RECORDS = STORED_RECORDS.compactMap { line in
             Record(line)
@@ -127,8 +127,16 @@ extension Records: CustomStringConvertible {
 
 extension Records: Transferable {
     static var transferRepresentation: some TransferRepresentation {
+        /* ProxyRepresentation { store in
+            return "\(store)"
+        } */
         ProxyRepresentation { store in
             return "\(store)"
+        } importing: { retrievedData in
+            guard let store = Records(retrievedData) else { return Records() }
+            
+            return store
         }
+
     }
 }
