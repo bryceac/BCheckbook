@@ -153,8 +153,6 @@ struct ContentView: View {
                         
                         isExporting = true
                     }
-                    
-                    /* ShareLink(item: records, preview: SharePreview(Text("Transactions"), image: Image(nsImage: NSImage(named: "AppIcon")!))) */
 
                     Button("View Summary") {
                         let summaryURL = URL(string: "bcheckbook://summary")!
