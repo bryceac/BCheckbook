@@ -1,8 +1,8 @@
 =BCheckbook=
 
-'''iOS Version:''' 1.2.5
+'''iOS Version:''' 1.2.6
 
-'''macOS Version:''' 2.0
+'''macOS Version:''' 2.0.1
 
 '''Author:''' Bryce Campbell
 
@@ -31,6 +31,17 @@ This application has only been tested on macOS 12 and iOS 16.
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">2.0.1 (macOS)</dt>
+<dd>
+<p>Add TSV support to app.</p>
+</dd>
+<dt style="font-weight:bold">1.3 (iOS)</dt>
+<dd>
+<p>Minor Update</p>
+<p>Add support for TSV and the capability of sharing data directly from app.</p>
+<p>With the implementation of that latter, 
+it is no longer necessary to use the Files app to transfer data.</p>
+</dd>
 <dt style="font-weight:bold">1.2.5 (iOS)</dt>
 <dd>
 <p>Minor Patch</p>
