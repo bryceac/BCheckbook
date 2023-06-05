@@ -134,6 +134,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.utf8-tab-separated-values-text</string>
+				<string>public.utf8-plain-text</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>TSV file</string>
@@ -146,6 +147,7 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>tsv</string>
+					<string>txt</string>
 				</array>
 			</dict>
 		</dict>
@@ -198,6 +200,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.utf8-tab-separated-values-text</string>
+				<string>public.utf8-plain-text</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>TSV file</string>
@@ -210,6 +213,7 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>tsv</string>
+					<string>txt</string>
 				</array>
 			</dict>
 		</dict>
