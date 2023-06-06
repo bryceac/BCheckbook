@@ -47,6 +47,7 @@ although functionality has not changed.</p>
 <p>Add support for TSV and the capability of sharing data directly from app.</p>
 <p>With the implementation of that latter, 
 it is no longer necessary to use the Files app to transfer data.</p>
+<p>Released June 6, 2023.</p>
 </dd>
 <dt style="font-weight:bold">1.2.5 (iOS)</dt>
 <dd>
