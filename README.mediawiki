@@ -14,7 +14,7 @@
 
 ==Notes==
 
-This application has only been tested on macOS 12 and iOS 16.
+This application has only been tested on macOS 13 and iOS 16.
 
 ===Known issues===
 
@@ -35,6 +35,11 @@ This application has only been tested on macOS 12 and iOS 16.
 <dd>
 <p>Minor Update.</p>
 <p>Add TSV support to app.</p>
+<p>Please note that this version requires macOS 13 or later 
+due to underlying code that 
+uses stuff only available in that version and later, 
+although functionality has not changed.</p>
+<p>Released June, 6, 2023.</p>
 </dd>
 <dt style="font-weight:bold">1.3 (iOS)</dt>
 <dd>
