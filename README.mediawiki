@@ -343,7 +343,7 @@ are expected to have no less than <strong>8</strong> columns and no more than <s
 <dd>Withdrawal Amount</dd>
 </dl>
 
-<p>The date must be in YYY-MM-DD format to register correctly 
+<p>The date must be in YYYY-MM-DD format to register correctly 
 and the Reconciled column can only have either an <strong>N</strong> 
 or <strong>Y</strong>. Failure to follow 
 these rules will result in the record not being loaded.</p>
