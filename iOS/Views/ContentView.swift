@@ -118,7 +118,7 @@ struct ContentView: View {
                             Image(systemName: "plus")
                         }
                     }
-                }).onChange(of: newestRecord) { record in
+                }).onChange(of: newestRecord) { 
                     proxy.scrollTo(newestRecord)
                 }
             }
