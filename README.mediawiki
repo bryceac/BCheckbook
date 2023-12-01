@@ -26,6 +26,15 @@ This application has only been tested on macOS 13 and iOS 16.
 <p>With this possibility in mind, try either downloading a copy of the database from the repository, located in the Shared folder, or copy your database from the location specified in this README over to the iOS app's Documents folder.</p>
 <p>I cannot guarantee it will fix things completely, but it should tide things over for a bit.</p>
 </dd>
+<dt style="font-weight:bold">Issues importing on iOS 17</dt>
+<dd>
+<p>After updating to iOS 17, the app is no longer recognized as an app that can read data whenn using Air Drop.</p>
+<p>As this was self discovered, I need time to determine if it is only Air Drop or on device, before I can work on this.</p>
+<p>For now, I recommend placing a copy of the database with the most up to date version of the data 
+until I can find out what has changed.</p>
+<p>However, if you have the tools and know how, feel free fix it and 
+issue a pull request.</p>
+</dd>
 </dl>
 
 ===Version History===
