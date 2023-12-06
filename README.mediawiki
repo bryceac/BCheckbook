@@ -52,6 +52,7 @@ so TSV files that the app creates when using the share button
 <dd>
 <p>Minor Update</p>
 <p>Update UI code to remove deprecated code on iOS 17.</p>
+<p>Released December, 6, 2023.</p>
 </dd>
 <dt style="font-weight:bold">2.0.1 (macOS)</dt>
 <dd>
