@@ -709,7 +709,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = me.brycecampbell.bcheckbook;
 				PRODUCT_NAME = BCheckbook;
 				SDKROOT = iphoneos;
@@ -733,7 +733,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = me.brycecampbell.bcheckbook;
 				PRODUCT_NAME = BCheckbook;
 				SDKROOT = iphoneos;
