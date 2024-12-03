@@ -28,23 +28,23 @@ class DBManager {
      */
     
     // ledger fields
-    private let ID_FIELD = Expression<String>("id")
-    private let DATE_FIELD = Expression<String>("date")
-    private let CHECK_NUMBER_FIELD = Expression<Int?>("check_number")
-    private let RECONCILED_FIELD = Expression<String>("reconciled")
-    private let VENDOR_FIELD = Expression<String>("vendor")
-    private let MEMO_FIELD = Expression<String>("memo")
-    private let AMOUNT_FIELD = Expression<Double>("amount")
-    private let CATEGORY_FIELD = Expression<String?>("category")
-    private let BALANCE_FIELD = Expression<Double>("balance")
+    private let ID_FIELD = SQLite.Expression<String>("id")
+    private let DATE_FIELD = SQLite.Expression<String>("date")
+    private let CHECK_NUMBER_FIELD = SQLite.Expression<Int?>("check_number")
+    private let RECONCILED_FIELD = SQLite.Expression<String>("reconciled")
+    private let VENDOR_FIELD = SQLite.Expression<String>("vendor")
+    private let MEMO_FIELD = SQLite.Expression<String>("memo")
+    private let AMOUNT_FIELD = SQLite.Expression<Double>("amount")
+    private let CATEGORY_FIELD = SQLite.Expression<String?>("category")
+    private let BALANCE_FIELD = SQLite.Expression<Double>("balance")
     
     
     // Transaction Fields
-    private let TRANSACTION_CATEGORY_ID_FIELD = Expression<Int?>("category")
-    private let TRANSACTION_RECONCILED_FIELD = Expression<Int>("reconciled")
+    private let TRANSACTION_CATEGORY_ID_FIELD = SQLite.Expression<Int?>("category")
+    private let TRANSACTION_RECONCILED_FIELD = SQLite.Expression<Int>("reconciled")
     
     // Category Fields
-    private let CATEGORY_ID_FIELD = Expression<Int>("id")
+    private let CATEGORY_ID_FIELD = SQLite.Expression<Int>("id")
     
     
     /**
