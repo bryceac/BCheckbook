@@ -90,10 +90,10 @@ class DBManager {
                 
                 guard let categoryID = try? id(ofCategory: category) else { return }
             
-                insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
+                insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id.uppercased(), DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, TRANSACTION_CATEGORY_ID_FIELD <- categoryID, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
             }
         } else {
-            insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id, DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
+            insert = TRABSACTION_TABLE.insert(ID_FIELD <- record.id.uppercased(), DATE_FIELD <- Event.DF.string(from: record.event.date), CHECK_NUMBER_FIELD <- record.event.checkNumber, VENDOR_FIELD <- record.event.vendor, MEMO_FIELD <- record.event.memo, AMOUNT_FIELD <- EventType.withdrawal ~= record.event.type ? record.event.amount * -1.0 : record.event.amount, TRANSACTION_RECONCILED_FIELD <- record.event.isReconciled ? 1 : 0)
         }
         
         try db.run(insert)
