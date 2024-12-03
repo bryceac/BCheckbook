@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''iOS Version:''' 1.2.6
+'''iOS Version:''' 1.3.2
 
 '''macOS Version:''' 2.0.1
 
@@ -48,6 +48,13 @@ so TSV files that the app creates when using the share button
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.3.2 (iOS)</dt>
+<dd>
+<p>Minor Update</p>
+<p>Update code to make sure UUIDs are case insensitive.</p>
+<p>This should help make exchanging data between <a href="https://github.com/bryceac/rcheckbook">rcheckbook</a>
+and this application less of a hassle.</p>
+</dd>
 <dt style="font-weight:bold">1.3.1 (iOS)</dt>
 <dd>
 <p>Minor Update</p>
