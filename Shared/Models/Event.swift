@@ -183,13 +183,11 @@ extension Event: CustomStringConvertible {
         }
         
         if case .withdrawal = type {
-            if amount > 0, let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: amount)) {
-                content += "\t\t\(dollarAmount)"
+            if amount > 0 {
+                content += "\t\t\(Double(amount))"
             }
         } else {
-            if let dollarAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.string(from: NSNumber(value: amount)) {
-                content += "\t\(dollarAmount)\t"
-            }
+            content += "\tDouble(amount)\t"
         }
         
         return content
@@ -215,9 +213,9 @@ extension Event: LosslessStringConvertible {
         let eventVendor = eventComponents[4]
         let eventMemo = eventComponents[5]
         
-        let eventCreditAmount = QIFTransaction.TRANSACTION_AMOUNT_FORMAT.number(from: eventComponents[6])?.doubleValue
+        let eventCreditAmount = !eventComponents[6].isEmpty ? Double(eventComponents[6]) : nil
         
-        let eventWithdrawalAmount = eventComponents.indices.contains(7) ? QIFTransaction.TRANSACTION_AMOUNT_FORMAT.number(from: eventComponents[7])?.doubleValue : nil
+        let eventWithdrawalAmount = eventComponents.indices.contains(7) ? Double(eventComponents[7]) : nil
         
         guard (eventCreditAmount != nil && .none ~= eventWithdrawalAmount) || (eventWithdrawalAmount != nil && .none ~= eventCreditAmount) else { return nil }
         
