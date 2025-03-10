@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bryceac/QIF",
       "state" : {
-        "revision" : "0f43d5aaed50b2e64cab7068efb7aba31399a1fc",
-        "version" : "0.1.2"
+        "revision" : "bd58f29ab57d9af0e192d5af25c579a81906d88b",
+        "version" : "0.2.0"
       }
     },
     {

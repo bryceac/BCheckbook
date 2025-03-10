@@ -411,7 +411,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					02A2AD932660A02E00774151 = {
 						CreatedOnToolsVersion = 12.5;
@@ -952,7 +952,7 @@
 			repositoryURL = "https://github.com/bryceac/QIF";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.1.0;
+				minimumVersion = 0.2.0;
 			};
 		};
 		026E6A6D276D200A00ED3E36 /* XCRemoteSwiftPackageReference "SQLite" */ = {
