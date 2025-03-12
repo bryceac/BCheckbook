@@ -960,7 +960,7 @@
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.13.1;
+				minimumVersion = 0.15.3;
 			};
 		};
 		0297EDE827712710007B3E99 /* XCRemoteSwiftPackageReference "ComboBox" */ = {
