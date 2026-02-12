@@ -387,7 +387,7 @@ struct ContentView: View {
             
             Task {
                 try? await remove(records: records)
-                await loadRecords()
+                loadRecords()
             }
             
         })
@@ -399,7 +399,7 @@ struct ContentView: View {
             Task {
                 try? await add(records: records)
                 
-                await loadRecords()
+                loadRecords()
                 
             }
             
