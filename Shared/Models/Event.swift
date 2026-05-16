@@ -138,7 +138,9 @@ extension Event: Codable {
         
         try container.encode(amount, forKey: .amount)
         
-        try container.encode(type, forKey: .type)
+        if case EventType.deposit = type {
+            try container.encode(type, forKey: .type)
+        }
         
         if isReconciled {
             try container.encode(isReconciled, forKey: .isReconciled)
