@@ -108,7 +108,9 @@ extension Event: Codable {
         
         amount = try CONTAINER.decode(Double.self, forKey: .amount)
         
-        type = try CONTAINER.decode(EventType.self, forKey: .type)
+        if CONTAINER.contains(.type) {
+            type = try CONTAINER.decode(EventType.self, forKey: .type)
+        }
         
         if CONTAINER.contains(.isReconciled) {
             isReconciled = try CONTAINER.decode(Bool.self, forKey: .isReconciled)
