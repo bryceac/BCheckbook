@@ -1,6 +1,6 @@
 =BCheckbook=
 
-'''iOS Version:''' 1.4
+'''iOS Version:''' 1.4.1
 
 '''macOS Version:''' 2.0.1
 
@@ -48,6 +48,22 @@ so TSV files that the app creates when using the share button
 ===Version History===
 
 <dl>
+<dt style="font-weight:bold">1.4.1 (iOS)</dt>
+<dd>
+<p>Minor Update</p>
+<p>Make changes to how JSON (bcheck) files are encoded 
+and decoded, by making type field optional and is only present
+when the transaction is a deposit.</p>
+<p>Because of difficulties with updating the macOS app, 
+due mostly to database interactions not working 
+when building the Mac app these days, this change breaks compatibility
+with the macOS app.</p>
+<p>If you want to exchange data between iOS and Mac, 
+either use TSV exports, add the optional field back in yourself,
+or use <a href="https://github.com/bryceac/rcheckbook">rcheckbook</a>, 
+a CLI version I made to handle this data on platforms other than Apple.
+The Mac version is distributed as a universal binary in a pkg.</p>
+</dd>
 <dt style="font-weight:bold">1.4 (iOS)</dt>
 <dd>
 <p>Minor Update</p>
