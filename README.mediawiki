@@ -63,6 +63,7 @@ either use TSV exports, add the optional field back in yourself,
 or use <a href="https://github.com/bryceac/rcheckbook">rcheckbook</a>, 
 a CLI version I made to handle this data on platforms other than Apple.
 The Mac version is distributed as a universal binary in a pkg.</p>
+<p>Released May 17, 2026</p>
 </dd>
 <dt style="font-weight:bold">1.4 (iOS)</dt>
 <dd>
